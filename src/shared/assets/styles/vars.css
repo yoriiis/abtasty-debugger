@@ -1,5 +1,10 @@
 :root {
 	--containerMaxWidth: 1000px;
+	--black: #03071e;
+	--gray: #f8f9fa;
+	--green: #90be6d;
+	--red: #f3722c;
+	--transition: 0.3s ease;
 }
 
 @custom-media --media-mobile only screen and (max-width: 749px);

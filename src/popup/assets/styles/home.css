@@ -1,32 +1,127 @@
 #app {
-	width: 400px;
-	padding: 15px;
+	width: 450px;
+	height: auto;
+	padding: 10px;
+	overflow-y: auto;
 }
 
 .resultsList {
+	&-itemDetails {
+		display: none;
+		padding: 0 15px 15px;
+		font-size: 14px;
+	}
+
+	&-itemStatus {
+		background-color: var(--red);
+		color: #fff;
+		padding: 5px;
+		border-radius: 10px;
+	}
+
+	&-itemIcons {
+		position: absolute;
+		top: 50%;
+		right: 10px;
+		transform: translateY(-50%);
+
+		svg {
+			display: block;
+			width: 20px;
+			height: 20px;
+			fill: var(--black);
+			transition: transform var(--transition);
+		}
+	}
+
 	&-item {
 		margin-bottom: 10px;
 		list-style-type: none;
+		box-shadow: inset rgb(0 0 0 / 11%) 0 0 0 1px;
+		border-radius: 10px;
+
+		&.live {
+			.resultsList-itemStatus {
+				background-color: var(--green);
+			}
+		}
+
+		&.active {
+			.resultsList-itemIcons svg {
+				transform: rotate(180deg);
+			}
+
+			.resultsList-itemDetails {
+				display: block;
+			}
+		}
 	}
 
-	&-itemDetails {
-		transition: height 0.3s ease;
+	&-itemKey {
+		font-weight: 700;
 	}
 
-	&-item:not(:first-child) &-itemDetails {
-		display: none;
+	&-itemName {
+		margin-left: 5px;
+		line-height: 20px;
 	}
 
 	&-itemButton {
-		display: block;
+		display: flex;
 		width: 100%;
 		text-align: left;
-		padding: 15px 0;
+		padding: 15px 35px 15px 15px;
 		cursor: pointer;
+		position: relative;
+		font-size: 14px;
+		align-items: center;
+		font-family: inherit;
+
+		* {
+			pointer-events: none;
+		}
 	}
 
-	&-itemTextarea {
+	&-itemDetailsField {
+		margin-bottom: 15px;
+		display: block;
+
+		&.last {
+			margin-bottom: 10px;
+			padding-bottom: 10px;
+			border-bottom: 1px solid var(--gray);
+		}
+	}
+}
+
+.scope {
+	&:not(:last-child) {
+		padding-bottom: 15px;
+		border-bottom: 1px solid var(--gray);
+	}
+
+	&-name {
+		display: block;
+		font-weight: 500;
+	}
+
+	&-table {
 		width: 100%;
-		height: 100px;
+		margin-top: 10px;
+
+		td,
+		th {
+			padding: 5px;
+		}
+
+		th {
+			background-color: var(--gray);
+		}
+
+		th:first-child,
+		td:first-child {
+			width: 50px;
+			vertical-align: middle;
+		}
 	}
 }

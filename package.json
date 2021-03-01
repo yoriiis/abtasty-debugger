@@ -11,9 +11,11 @@
 		"build": "rm -rf ./web/dist/ && webpack --mode=production --config=webpack.config.js",
 		"inspect": "node --inspect node_modules/webpack/bin/webpack.js --config webpack.config.js --mode=development",
 		"start": "rm -rf ./web/dist/ && webpack --mode=development --config=webpack.config.js",
+		"release": "node scripts/release.js",
 		"test": "jest",
 		"test:coverage": "jest --coverage",
 		"test:eslint": "eslint . --ignore-pattern dist",
+		"test:eslint:fix": "eslint . --ignore-pattern dist --fix",
 		"test:markdown": "markdownlint '**/*.md' --ignore node_modules",
 		"test:stylelint": "stylelint './src/**/*.css'",
 		"test:watch": "jest --watchAll --coverage"

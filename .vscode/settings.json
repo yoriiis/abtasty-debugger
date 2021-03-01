@@ -1,10 +1,10 @@
 {
 	"[javascript]": {
-        "editor.formatOnSave": true
-    },
-    "[postcss]": {
-        "editor.formatOnSave": true
-    },
+		"editor.formatOnSave": true
+	},
+	"[postcss]": {
+		"editor.formatOnSave": true
+	},
 	"[html]": {
 		"editor.formatOnSave": true
 	},
@@ -13,6 +13,10 @@
 	},
 	"[json]": {
 		"editor.formatOnSave": true
+	},
+	"editor.codeActionsOnSave": {
+		"source.fixAll.eslint": true,
+		"source.fixAll.stylelint": true
 	},
 	"editor.formatOnSave": false,
 	"editor.tabSize": 4,

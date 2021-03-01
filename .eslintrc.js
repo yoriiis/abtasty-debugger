@@ -23,6 +23,7 @@ module.exports = {
 	rules: {
 		indent: ['error', 'tab', { ignoredNodes: ['TemplateLiteral *'] }],
 		'no-tabs': 0,
+		'multiline-ternary': 0,
 		'space-before-function-paren': [
 			'error',
 			{ anonymous: 'always', named: 'never', asyncArrow: 'always' }

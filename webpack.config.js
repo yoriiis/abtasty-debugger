@@ -4,17 +4,12 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
-const ChunksWebpackPlugin = require('chunks-webpack-plugin')
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin')
 const SvgChunkWebpackPlugin = require('svg-chunk-webpack-plugin')
 
 module.exports = (env, argv) => {
 	const isProduction = argv.mode === 'production'
 	const suffixHash = isProduction ? '.[contenthash]' : ''
-	const splitChunks = {
-		chunks: 'all',
-		minSize: 0
-	}
 
 	return {
 		entry: {
@@ -92,10 +87,6 @@ module.exports = (env, argv) => {
 				chunkFilename: `styles/[name]${suffixHash}.css`
 			}),
 			new webpack.optimize.ModuleConcatenationPlugin(),
-			new ChunksWebpackPlugin({
-				filename: 'templates/[name]-[type].html',
-				templateScript: '<script defer src="{{chunk}}"></script>'
-			}),
 			new SvgChunkWebpackPlugin({
 				filename: `sprites/[name]${suffixHash}.svg`
 			})
@@ -121,7 +112,7 @@ module.exports = (env, argv) => {
 			removeEmptyChunks: true,
 			mergeDuplicateChunks: true,
 			providedExports: false,
-			splitChunks: isProduction ? splitChunks : false
+			splitChunks: false
 		}
 	}
 }

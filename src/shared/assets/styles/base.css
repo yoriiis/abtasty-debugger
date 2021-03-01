@@ -1,7 +1,19 @@
 body {
-	overflow: inherit;
+	font-family: 'Ubuntu', sans-serif;
 }
 
 #app {
 	max-width: var(----containerMaxWidth);
+}
+
+.textarea {
+	width: 100%;
+	height: 100px;
+	font-family: inherit;
+}
+
+.input {
+	width: 100%;
+	height: 25px;
+	font-family: inherit;
 }

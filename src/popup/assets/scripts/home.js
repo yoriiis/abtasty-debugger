@@ -1,7 +1,6 @@
 import { createElement } from 'jsx-dom'
 import TemplatePopup from './templates/popup'
 import validateTarget from 'validate-target'
-import slideToggle from 'shared/utils/slide-toggle'
 
 export default class Popup {
 	constructor() {
@@ -10,8 +9,7 @@ export default class Popup {
 	}
 
 	init() {
-		const results = window.ABTasty.results
-		document.querySelector('#app').appendChild(<TemplatePopup results={results} />)
+		document.querySelector('#app').appendChild(<TemplatePopup data={window.ABTasty} />)
 
 		this.addEvents()
 	}
@@ -35,6 +33,6 @@ export default class Popup {
 
 	viewAbtest(e) {
 		const target = e.target
-		slideToggle(target.parentNode.querySelector('.resultsList-itemDetails'))
+		target.parentNode.classList.toggle('active')
 	}
 }

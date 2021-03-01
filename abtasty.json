@@ -1,0 +1,156 @@
+{
+	"accountData": {
+		"accountSettings": {
+			"id": 123456,
+			"identifier": "8e04732adf",
+			"accountName": "ABTasty",
+			"region": "europe",
+			"frameworkVersion": "latest"
+		},
+		"tests": {
+			"600419": {
+				"id": 600419,
+				"name": "Test 1",
+				"type": "ab",
+				"scopes": {
+					"urlScope": [
+						{
+							"include": true,
+							"condition": 10,
+							"value": "sample-url.html"
+						}
+					],
+					"codeScope": [],
+					"selectorScope": [],
+					"cookieScope": [],
+					"ipScope": [],
+					"favoriteUrlScopeConditions": [],
+					"favoriteUrlScope": []
+				},
+				"status": "target_pages_rejected"
+			},
+			"684240": {
+				"id": 684240,
+				"name": "Test 2",
+				"type": "ab",
+				"scopes": {
+					"urlScope": [
+						{
+							"include": false,
+							"condition": 10,
+							"value": "https://www.google.fr"
+						}
+					],
+					"codeScope": [
+						{
+							"value": "var hourStart = 18;\nvar hourEnd = 4;\nvar hourGranted = new Date().getHours() >= hourStart || new Date().getHours() <= hourEnd;\n\nif (hourGranted) {\n    return true;\n} else {\n    return false;\n}"
+						}
+					],
+					"selectorScope": [],
+					"cookieScope": [],
+					"ipScope": [
+						{
+							"include": true,
+							"to": 0,
+							"range": false,
+							"from": "123456789"
+						}
+					],
+					"favoriteUrlScopeConditions": [],
+					"favoriteUrlScope": []
+				},
+				"status": "accepted"
+			}
+		}
+	},
+	"results": {
+		"600419": {
+			"name": "Test 1",
+			"type": "ab",
+			"status": "target_pages_rejected",
+			"targetings": {
+				"targetPages": {
+					"url_scope": {
+						"conditions": [
+							{
+								"include": true,
+								"condition": 10,
+								"value": "sample-url.html"
+							}
+						],
+						"success": false
+					}
+				},
+				"qaParameters": {}
+			}
+		},
+		"684240": {
+			"name": "Test 2",
+			"type": "ab",
+			"status": "accepted",
+			"targetings": {
+				"targetPages": {
+					"url_scope": {
+						"conditions": [
+							{
+								"include": false,
+								"condition": 10,
+								"value": "https://www.google.fr"
+							},
+							{
+								"include": true,
+								"condition": 11,
+								"value": "https://www.google.fr/news"
+							}
+						],
+						"success": true
+					},
+					"code_scope": {
+						"conditions": [
+							{
+								"value": "var hourStart = 18;\nvar hourEnd = 4;\nvar hourGranted = new Date().getHours() >= hourStart || new Date().getHours() <= hourEnd;\n\nif (hourGranted) {\n    return true;\n} else {\n    return false;\n}"
+							}
+						],
+						"success": true
+					},
+					"selector_scope": {
+						"conditions": [
+							{
+								"include": true,
+								"condition": 44,
+								"value": ".header"
+							}
+						],
+						"success": true
+					}
+				},
+				"qaParameters": {
+					"cookie_scope": {
+						"conditions": [
+							{
+								"include": true,
+								"value": "abtastu",
+								"name": "my-cookie"
+							}
+						],
+						"success": false
+					},
+					"ip_scope": {
+						"conditions": [
+							{
+								"include": true,
+								"to": 0,
+								"range": false,
+								"from": "1555592406"
+							}
+						],
+						"success": true
+					}
+				}
+			}
+		}
+	},
+	"visitor": {
+		"id": "f7c3bc1d80"
+	}
+}
