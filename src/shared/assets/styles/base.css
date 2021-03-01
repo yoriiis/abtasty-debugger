@@ -1,0 +1,7 @@
+body {
+	overflow: inherit;
+}
+
+#app {
+	max-width: var(----containerMaxWidth);
+}

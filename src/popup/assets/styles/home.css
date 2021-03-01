@@ -1,0 +1,32 @@
+#app {
+	width: 400px;
+	padding: 15px;
+}
+
+.resultsList {
+	&-item {
+		margin-bottom: 10px;
+		list-style-type: none;
+	}
+
+	&-itemDetails {
+		transition: height 0.3s ease;
+	}
+
+	&-item:not(:first-child) &-itemDetails {
+		display: none;
+	}
+
+	&-itemButton {
+		display: block;
+		width: 100%;
+		text-align: left;
+		padding: 15px 0;
+		cursor: pointer;
+	}
+
+	&-itemTextarea {
+		width: 100%;
+		height: 100px;
+	}
+}

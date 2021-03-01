@@ -1,0 +1,7 @@
+:root {
+	--containerMaxWidth: 1000px;
+}
+
+@custom-media --media-mobile only screen and (max-width: 749px);
+@custom-media --media-tablet only screen and (min-width: 750px);
+@custom-media --media-desktop only screen and (min-width: 1024px);
