@@ -1,9 +1,7 @@
-import Home from './home'
-import abtasty from '../../../../abtasty.json'
+import Popup from './popup'
+import abtasty from '../../../../abtasty-fixtures.json'
 
-window.ABTasty = abtasty
+// window.ABTasty = abtasty
 
-if (typeof window.ABTasty !== 'undefined') {
-	const home = new Home()
-	home.init()
-}
+const popup = new Popup()
+popup.init()

@@ -8,9 +8,9 @@
 			"frameworkVersion": "latest"
 		},
 		"tests": {
-			"600419": {
-				"id": 600419,
-				"name": "Test 1",
+			"000001": {
+				"id": "000001",
+				"name": "Test with the menu button on the left",
 				"type": "ab",
 				"scopes": {
 					"urlScope": [
@@ -29,9 +29,9 @@
 				},
 				"status": "target_pages_rejected"
 			},
-			"684240": {
-				"id": 684240,
-				"name": "Test 2",
+			"000002": {
+				"id": "000002",
+				"name": "Test with darkmode sticky banner on the header",
 				"type": "ab",
 				"scopes": {
 					"urlScope": [
@@ -64,8 +64,8 @@
 		}
 	},
 	"results": {
-		"600419": {
-			"name": "Test 1",
+		"000001": {
+			"name": "Test with the menu button on the left",
 			"type": "ab",
 			"status": "target_pages_rejected",
 			"targetings": {
@@ -84,8 +84,8 @@
 				"qaParameters": {}
 			}
 		},
-		"684240": {
-			"name": "Test 2",
+		"000002": {
+			"name": "Test with darkmode sticky banner on the header",
 			"type": "ab",
 			"status": "accepted",
 			"targetings": {
@@ -129,11 +129,11 @@
 						"conditions": [
 							{
 								"include": true,
-								"value": "abtastu",
+								"value": "abtasty",
 								"name": "my-cookie"
 							}
 						],
-						"success": false
+						"success": true
 					},
 					"ip_scope": {
 						"conditions": [

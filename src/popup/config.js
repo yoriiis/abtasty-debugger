@@ -2,10 +2,13 @@
 import '../index.js'
 
 // import CSS
-import './assets/styles/home.css'
+import './assets/styles/popup.css'
 
 // import JS
 import './assets/scripts/main.js'
 
-// import SVG
-import 'shared/assets/svgs/arrow-bottom.svg'
+// import JSON
+import './views/manifest.json'
+
+// import Images
+import './assets/images/icon-128x128.png'

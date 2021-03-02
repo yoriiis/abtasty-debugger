@@ -1,5 +1,5 @@
 import { createElement, Fragment } from 'jsx-dom'
-import svg from 'shared/utils/svg'
+import arrowBottom from 'shared/assets/svgs/arrow-bottom.svg'
 import scope from './scope'
 
 export default function ({ data }) {
@@ -27,18 +27,16 @@ export default function ({ data }) {
 										{isLive ? 'Live' : 'Paused'}
 									</span>
 									<span className="resultsList-itemName">{result.name}</span>
-									<div className="resultsList-itemIcons">
-										{svg('arrow-bottom')}
-									</div>
+									<div
+										className="resultsList-itemIcons"
+										innerHTML={arrowBottom}
+									></div>
 								</button>
 								<div className="resultsList-itemDetails">
-									<span className="resultsList-itemDetailsField">Id: {key}</span>
-									<span className="resultsList-itemDetailsField">
-										Type: {result.type}
-									</span>
-									<span className="resultsList-itemDetailsField last">
-										Visitor id: {data.visitor.id}
-									</span>
+									<ul className="resultsList-itemDetailList">
+										<li>Id: {key}</li>
+										<li>Type: {result.type}</li>
+									</ul>
 									{urlScope && scope('Url', urlScope)}
 									{selectorScope && scope('Selector', selectorScope)}
 									{codeScope && scope('Code', codeScope)}

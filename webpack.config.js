@@ -4,8 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
-const { WebpackManifestPlugin } = require('webpack-manifest-plugin')
-const SvgChunkWebpackPlugin = require('svg-chunk-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = (env, argv) => {
 	const isProduction = argv.mode === 'production'
@@ -64,12 +63,16 @@ module.exports = (env, argv) => {
 					}
 				},
 				{
+					test: /\.(json)$/i,
+					include: path.resolve(__dirname, './src/'),
+					type: 'asset/resource',
+					generator: {
+						filename: '[name][ext]'
+					}
+				},
+				{
 					test: /\.svg$/,
-					use: [
-						{
-							loader: SvgChunkWebpackPlugin.loader
-						}
-					]
+					loader: 'svg-inline-loader'
 				}
 			]
 		},
@@ -81,15 +84,16 @@ module.exports = (env, argv) => {
 		},
 		plugins: [
 			new ProgressBarPlugin(),
-			new WebpackManifestPlugin(),
 			new MiniCssExtractPlugin({
 				filename: `styles/[name]${suffixHash}.css`,
 				chunkFilename: `styles/[name]${suffixHash}.css`
 			}),
-			new webpack.optimize.ModuleConcatenationPlugin(),
-			new SvgChunkWebpackPlugin({
-				filename: `sprites/[name]${suffixHash}.svg`
-			})
+			new HtmlWebpackPlugin({
+				filename: 'popup.html',
+				template: path.resolve(__dirname, './src/popup/views/popup.html'),
+				publicPath: ''
+			}),
+			new webpack.optimize.ModuleConcatenationPlugin()
 		],
 		stats: {
 			colors: true,

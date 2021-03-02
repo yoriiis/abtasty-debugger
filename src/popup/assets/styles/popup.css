@@ -1,3 +1,7 @@
+body {
+	background-color: var(--canvas);
+}
+
 #app {
 	width: 450px;
 	height: auto;
@@ -8,15 +12,27 @@
 .resultsList {
 	&-itemDetails {
 		display: none;
-		padding: 0 15px 15px;
+		padding: 15px;
 		font-size: 14px;
+	}
+
+	&-itemDetailList {
+		list-style-type: disc;
+		padding-left: 24px;
+		margin-bottom: 15px;
+		font-size: 12px;
+
+		li:not(:last-child) {
+			margin-bottom: 8px;
+		}
 	}
 
 	&-itemStatus {
 		background-color: var(--red);
 		color: #fff;
-		padding: 5px;
-		border-radius: 10px;
+		padding: 5px 7px;
+		border-radius: var(--radius);
+		font-size: 12px;
 	}
 
 	&-itemIcons {
@@ -29,7 +45,7 @@
 			display: block;
 			width: 20px;
 			height: 20px;
-			fill: var(--black);
+			fill: var(--colorTextSecondary);
 			transition: transform var(--transition);
 		}
 	}
@@ -37,8 +53,8 @@
 	&-item {
 		margin-bottom: 10px;
 		list-style-type: none;
-		box-shadow: inset rgb(0 0 0 / 11%) 0 0 0 1px;
-		border-radius: 10px;
+		border: 1px solid var(--colorBorderPrimary);
+		border-radius: var(--radius);
 
 		&.live {
 			.resultsList-itemStatus {
@@ -64,6 +80,7 @@
 	&-itemName {
 		margin-left: 5px;
 		line-height: 20px;
+		font-size: 14px;
 	}
 
 	&-itemButton {
@@ -73,9 +90,9 @@
 		padding: 15px 35px 15px 15px;
 		cursor: pointer;
 		position: relative;
-		font-size: 14px;
 		align-items: center;
 		font-family: inherit;
+		color: inherit;
 
 		* {
 			pointer-events: none;
@@ -89,25 +106,46 @@
 		&.last {
 			margin-bottom: 10px;
 			padding-bottom: 10px;
-			border-bottom: 1px solid var(--gray);
 		}
 	}
 }
 
 .scope {
+	font-size: 14px;
+
 	&:not(:last-child) {
 		padding-bottom: 15px;
-		border-bottom: 1px solid var(--gray);
+	}
+
+	&-header {
+		padding: 15px;
+		border: 1px solid var(--colorBorderPrimary);
+		border-top-left-radius: var(--radius);
+		border-top-right-radius: var(--radius);
+		background-color: var(--colorBgSecondary);
+		display: flex;
+		justify-content: space-between;
+	}
+
+	&-content {
+		padding: 15px;
+		border: 1px solid var(--colorBorderPrimary);
+		border-bottom-left-radius: var(--radius);
+		border-bottom-right-radius: var(--radius);
+		margin-top: -1px;
 	}
 
 	&-name {
-		display: block;
-		font-weight: 500;
+		font-weight: 600;
+	}
+
+	&-status {
+		font-size: 12px;
+		color: var(--colorTextTertiary);
 	}
 
 	&-table {
 		width: 100%;
-		margin-top: 10px;
 
 		td,
 		th {
@@ -115,7 +153,10 @@
 		}
 
 		th {
-			background-color: var(--gray);
+			color: var(--colorTextTertiary);
+			font-weight: 600;
+			text-align: center;
+			font-size: 12px;
 		}
 
 		th:first-child,
@@ -124,4 +165,11 @@
 			vertical-align: middle;
 		}
 	}
+}
+
+.empty {
+	min-height: 400px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }

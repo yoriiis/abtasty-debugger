@@ -1,12 +1,23 @@
 :root {
 	--containerMaxWidth: 1000px;
-	--black: #03071e;
-	--gray: #f8f9fa;
-	--green: #90be6d;
-	--red: #f3722c;
+	--canvas: #fff;
+	--colorBgSecondary: #fafbfc;
+	--colorTextPrimary: #24292e;
+	--colorTextSecondary: #586069;
+	--colorTextTertiary: #6a737d;
+	--colorBorderPrimary: #e1e4e8;
+	--green: #4dac49;
+	--red: #dc2f02;
+	--radius: 6px;
 	--transition: 0.3s ease;
 }
 
-@custom-media --media-mobile only screen and (max-width: 749px);
-@custom-media --media-tablet only screen and (min-width: 750px);
-@custom-media --media-desktop only screen and (min-width: 1024px);
+@media (prefers-color-scheme: dark) {
+	:root {
+		--canvas: #0d1117;
+		--colorBgSecondary: #0d1117;
+		--colorTextPrimary: #c9d1d9;
+		--colorTextSecondary: #8b949e;
+		--colorBorderPrimary: #30363d;
+	}
+}
