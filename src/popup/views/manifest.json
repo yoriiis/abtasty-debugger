@@ -3,11 +3,21 @@
 	"name": "ABTasty debug",
 	"description": "Debugger ab-tests",
 	"version": "1.0",
-	"permissions": ["http://*/*", "https://*/*", "activeTab"],
-	"browser_action": {
-		"default_popup": "popup.html"
-	},
+	"permissions": ["http://*/*", "https://*/*", "activeTab", "tabs", "storage"],
 	"icons": {
 		"128": "images/icon-128x128.png"
+	},
+	"content_scripts": [
+		{
+			"matches": ["http://*/*", "https://*/*"],
+			"js": ["static/contentscript.js"]
+		}
+	],
+	"background": {
+		"scripts": ["static/background.js"]
+	},
+	"web_accessible_resources": ["static/pagescript.js"],
+	"browser_action": {
+		"default_popup": "popup.html"
 	}
 }

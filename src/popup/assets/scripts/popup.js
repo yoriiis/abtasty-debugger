@@ -4,29 +4,20 @@ import TemplateNoResults from './templates/no-results'
 import validateTarget from 'validate-target'
 
 export default class Popup {
-	constructor() {
+	constructor({ data = null }) {
+		this.data = data
 		this.app = document.querySelector('#app')
 		this.onClickOnApp = this.onClickOnApp.bind(this)
 	}
 
 	init() {
-		if (this.isDataAvailable()) {
-			document
-				.querySelector('#app')
-				.appendChild(<TemplateListResults data={window.ABTasty} />)
+		if (this.data) {
+			document.querySelector('#app').appendChild(<TemplateListResults data={this.data} />)
 		} else {
 			document.querySelector('#app').appendChild(<TemplateNoResults />)
 		}
 
 		this.addEvents()
-	}
-
-	isDataAvailable() {
-		return (
-			typeof window.ABTasty !== 'undefined' &&
-			typeof window.ABTasty.results !== 'undefined' &&
-			Object.keys(window.ABTasty.results).length
-		)
 	}
 
 	addEvents() {

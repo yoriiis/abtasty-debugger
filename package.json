@@ -30,6 +30,7 @@
 		"babel-loader": "^8.2.2",
 		"babel-plugin-dynamic-import-node": "^2.3.3",
 		"chunks-webpack-plugin": "^7.0.1",
+		"copy-webpack-plugin": "^7.0.0",
 		"css-loader": "^5.0.2",
 		"css-minimizer-webpack-plugin": "^1.2.0",
 		"eslint": "^7.20.0",

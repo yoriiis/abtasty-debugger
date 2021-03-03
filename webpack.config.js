@@ -5,6 +5,7 @@ const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CopyPlugin = require('copy-webpack-plugin')
 
 module.exports = (env, argv) => {
 	const isProduction = argv.mode === 'production'
@@ -93,7 +94,15 @@ module.exports = (env, argv) => {
 				template: path.resolve(__dirname, './src/popup/views/popup.html'),
 				publicPath: ''
 			}),
-			new webpack.optimize.ModuleConcatenationPlugin()
+			new webpack.optimize.ModuleConcatenationPlugin(),
+			new CopyPlugin({
+				patterns: [
+					{
+						from: path.resolve(__dirname, './src/shared/static'),
+						to: path.resolve(__dirname, './web/dist/static')
+					}
+				]
+			})
 		],
 		stats: {
 			colors: true,
