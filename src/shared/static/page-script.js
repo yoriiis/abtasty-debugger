@@ -5,7 +5,7 @@ const TIME_OUT_IN_MS = INTERVAL_IN_MS * 60
 // Search in interval to find the data
 // Interval is automatically clear when the data is found
 const interval = setInterval(() => {
-	console.log('window.ABTasty', window.ABTasty)
+	// console.log('window.ABTasty', window.ABTasty)
 	if (typeof window[ABTASTY_NAME] !== 'undefined') {
 		document.dispatchEvent(
 			new window.CustomEvent('sendABTastyObject', {

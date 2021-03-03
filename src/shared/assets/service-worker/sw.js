@@ -4,7 +4,7 @@ chrome.runtime.onConnect.addListener(function (portFrom) {
 	if (portFrom.name === 'abtastyExtention') {
 		// Listen for postMessage send by the content script
 		portFrom.onMessage.addListener(function (message) {
-			console.log('background', JSON.parse(message.ABTastyData))
+			// console.log('sw.js', JSON.parse(message.ABTastyData))
 
 			// Get the current tab data
 			chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {

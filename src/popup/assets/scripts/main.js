@@ -11,7 +11,6 @@ if (isExtensionMode) {
 		if (currentTab) {
 			const storageKey = `tab-${currentTab.id}-ABTastyData`
 			chrome.storage.local.get([storageKey], function (response) {
-				console.log(response)
 				const popup = new Popup({ data: response[storageKey] })
 				popup.init()
 			})

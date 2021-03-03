@@ -100,6 +100,14 @@ module.exports = (env, argv) => {
 					{
 						from: path.resolve(__dirname, './src/shared/static'),
 						to: path.resolve(__dirname, './web/dist/static')
+					},
+					{
+						from: path.resolve(__dirname, './src/shared/assets/manifest'),
+						to: path.resolve(__dirname, './web/dist')
+					},
+					{
+						from: path.resolve(__dirname, './src/shared/assets/service-worker'),
+						to: path.resolve(__dirname, './web/dist')
 					}
 				]
 			})
