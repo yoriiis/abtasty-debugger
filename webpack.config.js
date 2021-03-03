@@ -60,7 +60,7 @@ module.exports = (env, argv) => {
 					include: path.resolve(__dirname, './src/'),
 					type: 'asset/resource',
 					generator: {
-						filename: `images/[name]${suffixHash}[ext]`
+						filename: 'images/[name][ext]'
 					}
 				},
 				{
