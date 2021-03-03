@@ -1,28 +1,28 @@
 import { createElement, Fragment } from 'jsx-dom'
 
-export default function (name, scope) {
+export default function ({ title, data, statusOnly }) {
 	return (
 		<>
 			<section className="scope">
 				<div className="scope-header">
-					<span className="scope-name">Targetting: {name}</span>
-					<span className="scope-status">Status: {scope.success ? 'TRUE' : 'FALSE'}</span>
+					<span className="scope-title">{title} targeting</span>
+					<span className="scope-status">Success: {data.success ? 'TRUE' : 'FALSE'}</span>
 				</div>
-				<div className="scope-content">
-					{name !== 'Ip' && (
+				{!statusOnly && (
+					<div className="scope-content">
 						<table className="scope-table">
 							<thead>
 								<tr>
-									<th>Status</th>
+									<th>Success</th>
 									<th>Value</th>
 								</tr>
 							</thead>
 							<tbody>
-								{scope.conditions.map((item) => {
+								{data.conditions.map((item) => {
 									return (
 										<>
 											<tr>
-												<td>{item.include ? 'true' : 'false'}</td>
+												<td>{item.include ? 'TRUE' : 'FALSE'}</td>
 												<td>
 													{name === 'Code' ? (
 														<textarea className="textarea" disabled>
@@ -43,8 +43,8 @@ export default function (name, scope) {
 								})}
 							</tbody>
 						</table>
-					)}
-				</div>
+					</div>
+				)}
 			</section>
 		</>
 	)

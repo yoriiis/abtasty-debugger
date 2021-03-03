@@ -135,7 +135,7 @@ body {
 		margin-top: -1px;
 	}
 
-	&-name {
+	&-title {
 		font-weight: 600;
 	}
 
@@ -157,6 +157,11 @@ body {
 			font-weight: 600;
 			text-align: center;
 			font-size: 12px;
+		}
+
+		td:first-child {
+			font-size: 12px;
+			text-align: center;
 		}
 
 		th:first-child,

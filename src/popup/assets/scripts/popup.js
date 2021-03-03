@@ -1,6 +1,5 @@
 import { createElement } from 'jsx-dom'
-import TemplateListResults from './templates/list-results'
-import TemplateNoResults from './templates/no-results'
+import TemplatePopup from './templates/popup'
 import validateTarget from 'validate-target'
 
 export default class Popup {
@@ -11,13 +10,12 @@ export default class Popup {
 	}
 
 	init() {
-		if (this.data) {
-			document.querySelector('#app').appendChild(<TemplateListResults data={this.data} />)
-		} else {
-			document.querySelector('#app').appendChild(<TemplateNoResults />)
-		}
-
+		this.buildDom()
 		this.addEvents()
+	}
+
+	buildDom() {
+		document.querySelector('#app').appendChild(<TemplatePopup data={this.data} />)
 	}
 
 	addEvents() {

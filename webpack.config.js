@@ -105,6 +105,7 @@ module.exports = (env, argv) => {
 			})
 		],
 		stats: {
+			assets: true,
 			colors: true,
 			hash: false,
 			timings: true,

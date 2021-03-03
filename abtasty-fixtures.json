@@ -6,61 +6,6 @@
 			"accountName": "ABTasty",
 			"region": "europe",
 			"frameworkVersion": "latest"
-		},
-		"tests": {
-			"000001": {
-				"id": "000001",
-				"name": "Test with the menu button on the left",
-				"type": "ab",
-				"scopes": {
-					"urlScope": [
-						{
-							"include": true,
-							"condition": 10,
-							"value": "sample-url.html"
-						}
-					],
-					"codeScope": [],
-					"selectorScope": [],
-					"cookieScope": [],
-					"ipScope": [],
-					"favoriteUrlScopeConditions": [],
-					"favoriteUrlScope": []
-				},
-				"status": "target_pages_rejected"
-			},
-			"000002": {
-				"id": "000002",
-				"name": "Test with darkmode sticky banner on the header",
-				"type": "ab",
-				"scopes": {
-					"urlScope": [
-						{
-							"include": false,
-							"condition": 10,
-							"value": "https://www.google.fr"
-						}
-					],
-					"codeScope": [
-						{
-							"value": "var hourStart = 18;\nvar hourEnd = 4;\nvar hourGranted = new Date().getHours() >= hourStart || new Date().getHours() <= hourEnd;\n\nif (hourGranted) {\n    return true;\n} else {\n    return false;\n}"
-						}
-					],
-					"selectorScope": [],
-					"cookieScope": [],
-					"ipScope": [
-						{
-							"include": true,
-							"to": 0,
-							"range": false,
-							"from": "123456789"
-						}
-					],
-					"favoriteUrlScopeConditions": [],
-					"favoriteUrlScope": []
-				},
-				"status": "accepted"
-			}
 		}
 	},
 	"results": {

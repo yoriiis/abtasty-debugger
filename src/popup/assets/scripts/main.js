@@ -1,16 +1,20 @@
 import Popup from './popup'
 
-console.log('popup.js')
+const isExtensionMode =
+	typeof chrome !== 'undefined' &&
+	typeof chrome.tabs !== 'undefined' &&
+	typeof chrome.storage !== 'undefined'
 
-chrome.tabs.query({ active: true, currentWindow: true }, function (response) {
-	console.log(response)
-	chrome.runtime.sendMessage({ method: 'get', tabId: response[0].id })
-})
-
-chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
-	console.log('popup received', message)
-
-	document.querySelector('#app').innerHTML = ''
-	const popup = new Popup({ data: message.data })
-	popup.init()
-})
+if (isExtensionMode) {
+	chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+		const currentTab = tabs[0]
+		if (currentTab) {
+			const storageKey = `tab-${currentTab.id}-ABTastyData`
+			chrome.storage.local.get([storageKey], function (response) {
+				console.log(response)
+				const popup = new Popup({ data: response[storageKey] })
+				popup.init()
+			})
+		}
+	})
+}
