@@ -1,31 +1,6 @@
 .targeting {
 	font-size: 14px;
 
-	&.active {
-		.targeting-headerIcon svg {
-			transform: rotate(180deg);
-		}
-
-		.targeting-content {
-			display: block;
-		}
-	}
-
-	&:not(:last-child) {
-		padding-bottom: 15px;
-	}
-
-	&.headerOnly &-headerButton {
-		padding-right: 15px;
-	}
-
-	&-header {
-		border: 1px solid var(--colorBorderPrimary);
-		border-top-left-radius: var(--radius);
-		border-top-right-radius: var(--radius);
-		background-color: var(--colorBgSecondary);
-	}
-
 	&-headerButton {
 		padding: 15px 45px 15px 15px;
 		display: flex;
@@ -61,6 +36,31 @@
 		&.active {
 			display: block;
 		}
+	}
+
+	&.active {
+		.targeting-headerIcon svg {
+			transform: rotate(180deg);
+		}
+
+		.targeting-content {
+			display: block;
+		}
+	}
+
+	&:not(:last-child) {
+		padding-bottom: 15px;
+	}
+
+	&.headerOnly &-headerButton {
+		padding-right: 15px;
+	}
+
+	&-header {
+		border: 1px solid var(--colorBorderPrimary);
+		border-top-left-radius: var(--radius);
+		border-top-right-radius: var(--radius);
+		background-color: var(--colorBgSecondary);
 	}
 
 	&-title {

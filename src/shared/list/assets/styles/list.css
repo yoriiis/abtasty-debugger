@@ -6,6 +6,22 @@
 		border-radius: var(--radius);
 	}
 
+	&-icon {
+		position: absolute;
+		top: 50%;
+		right: 10px;
+		transform: translateY(-50%);
+
+		svg {
+			display: block;
+			width: 20px;
+			height: 20px;
+			fill: var(--colorTextSecondary);
+			transition: transform var(--transition);
+			transform: rotate(-90deg);
+		}
+	}
+
 	&-link {
 		display: flex;
 		flex-direction: column;
@@ -21,22 +37,6 @@
 
 		&:hover .list-icon svg {
 			transform: translateX(5px) rotate(-90deg);
-		}
-	}
-
-	&-icon {
-		position: absolute;
-		top: 50%;
-		right: 10px;
-		transform: translateY(-50%);
-
-		svg {
-			display: block;
-			width: 20px;
-			height: 20px;
-			fill: var(--colorTextSecondary);
-			transition: transform var(--transition);
-			transform: rotate(-90deg);
 		}
 	}
 
