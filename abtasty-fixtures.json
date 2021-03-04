@@ -74,8 +74,13 @@
 						"conditions": [
 							{
 								"include": true,
-								"value": "abtasty",
-								"name": "my-cookie"
+								"value": "1",
+								"name": "Test cookie 1"
+							},
+							{
+								"include": false,
+								"value": "2",
+								"name": "Test cookie 2"
 							}
 						],
 						"success": true

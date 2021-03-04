@@ -151,3 +151,10 @@ button {
 strong {
 	font-weight: bold;
 }
+
+a,
+button {
+	font-family: inherit;
+	color: inherit;
+	cursor: pointer;
+}

@@ -1,0 +1,62 @@
+.list {
+	&-item {
+		margin-bottom: 10px;
+		list-style-type: none;
+		border: 1px solid var(--colorBorderPrimary);
+		border-radius: var(--radius);
+	}
+
+	&-link {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		padding: 15px 35px 15px 15px;
+		cursor: pointer;
+		position: relative;
+		text-decoration: none;
+
+		* {
+			pointer-events: none;
+		}
+
+		&:hover .list-icon svg {
+			transform: translateX(5px) rotate(-90deg);
+		}
+	}
+
+	&-icon {
+		position: absolute;
+		top: 50%;
+		right: 10px;
+		transform: translateY(-50%);
+
+		svg {
+			display: block;
+			width: 20px;
+			height: 20px;
+			fill: var(--colorTextSecondary);
+			transition: transform var(--transition);
+			transform: rotate(-90deg);
+		}
+	}
+
+	&-name {
+		margin-bottom: 10px;
+		line-height: 20px;
+		font-size: 14px;
+	}
+
+	&-itemKey {
+		font-weight: 700;
+	}
+
+	&-itemDetailsField {
+		margin-bottom: 15px;
+		display: block;
+
+		&.last {
+			margin-bottom: 10px;
+			padding-bottom: 10px;
+		}
+	}
+}

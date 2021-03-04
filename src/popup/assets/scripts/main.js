@@ -1,4 +1,5 @@
 import Popup from './popup'
+import fixtures from '../../../../abtasty-fixtures.json'
 
 const isExtensionMode =
 	typeof chrome !== 'undefined' &&
@@ -16,4 +17,7 @@ if (isExtensionMode) {
 			})
 		}
 	})
+} else {
+	const popup = new Popup({ data: fixtures })
+	popup.init()
 }

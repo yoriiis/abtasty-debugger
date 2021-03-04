@@ -17,7 +17,7 @@ body {
 	font-size: 14px;
 	color: inherit;
 	background-color: transparent;
-	border: 1px solid var(--colorBorderPrimary);
+	border: none;
 }
 
 .input {
@@ -29,5 +29,36 @@ body {
 	font-size: 14px;
 	color: inherit;
 	background-color: transparent;
-	border: 1px solid var(--colorBorderPrimary);
+	border: none;
+}
+
+.linkWithIcon {
+	padding: 5px;
+	align-items: center;
+	font-size: 12px;
+	text-decoration: none;
+	width: fit-content;
+	position: relative;
+	display: flex;
+
+	&:hover {
+		text-decoration: underline;
+	}
+
+	svg {
+		display: block;
+		width: 10px;
+		height: 10px;
+		fill: var(--colorTextSecondary);
+		transition: transform var(--transition);
+		position: relative;
+	}
+
+	&.iconLeft svg {
+		margin-right: 3px;
+	}
+
+	&.iconRight svg {
+		margin-left: 3px;
+	}
 }

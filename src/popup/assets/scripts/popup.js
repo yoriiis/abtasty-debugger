@@ -1,42 +1,135 @@
 import { createElement } from 'jsx-dom'
-import TemplatePopup from './templates/popup'
+import List from 'shared/list/assets/scripts/list'
+import View from 'shared/view/assets/scripts/view'
 import validateTarget from 'validate-target'
 
 export default class Popup {
 	constructor({ data = null }) {
 		this.data = data
+		this.defaultRoute = 'list'
 		this.app = document.querySelector('#app')
+		this.hashChanged = this.hashChanged.bind(this)
 		this.onClickOnApp = this.onClickOnApp.bind(this)
+		{
+			/* <div className="empty">No tests available on this page</div> */
+		}
+		this.templates = {
+			list: () => <List data={data.results} />,
+			view: (id) => <View data={data.results[id]} />
+		}
 	}
 
 	init() {
-		this.buildDom()
-		this.addEvents()
-	}
+		// Get current route
+		const route = this.getRoute()
 
-	buildDom() {
-		document.querySelector('#app').appendChild(<TemplatePopup data={this.data} />)
+		// Declare the default route
+		// If route exist, keep it, else set it to the default route
+		this.currentRoute = route === '' ? this.defaultRoute : route
+
+		// Init the router with the default route
+		if (route === '') {
+			this.setRoute(this.currentRoute)
+		} else {
+			// Page started with a route, trigger hash changed
+			this.hashChanged()
+		}
+
+		// this.buildDom()
+		this.addEvents()
 	}
 
 	addEvents() {
 		this.app.addEventListener('click', this.onClickOnApp)
+		window.addEventListener('hashchange', this.hashChanged, false)
+	}
+
+	hashChanged(e) {
+		this.currentRoute = this.getRoute()
+
+		if (e) {
+			this.previousRoute = this.getPreviousRoute(e)
+
+			if (this.previousRoute) {
+				// Destroy the previous step
+				this.destroyStep(this.previousRoute)
+
+				// Create the new step on destruction callback
+				this.createStep(this.currentRoute)
+
+				this.stepCreated = true
+			}
+		}
+
+		// If destroy method was not called, create the step now
+		if (!this.stepCreated) {
+			this.createStep(this.currentRoute)
+		}
+	}
+
+	createStep(route) {
+		const viewId = this.getIdFromRoute(this.currentRoute) || null
+		const routeSection = this.getRouteSection(route)
+		document.querySelector('#app').appendChild(this.templates[routeSection](viewId))
+	}
+
+	destroyStep(route) {
+		const routeSection = this.getRouteSection(route)
+		this.app.querySelector(`[data-route-id="${routeSection}"]`).remove()
+	}
+
+	/**
+	 * Get the current route
+	 *
+	 * @returns {Array} Current route
+	 */
+	getRoute() {
+		return window.location.hash.substr(1)
+	}
+
+	getRouteSection(route) {
+		return route.split('/')[0]
+	}
+
+	/**
+	 * Get the previous route
+	 *
+	 * @param {Object} event Event listener datas
+	 *
+	 * @returns {String} Previous route
+	 */
+	getPreviousRoute(e) {
+		return e && e.oldURL ? e.oldURL.split('#')[1] : null
+	}
+
+	getIdFromRoute(route) {
+		return route.split('view/')[1]
+	}
+
+	/**
+	 * Set the route
+	 *
+	 * @returns {String} route New value for the route
+	 */
+	setRoute(route) {
+		window.location.hash = route
 	}
 
 	onClickOnApp(e) {
 		const target = e.target
-		const validateTargetAbtestView = validateTarget({
+		const validateTargetTargetingButton = validateTarget({
 			target: target,
-			selectorString: '.resultsList-itemButton',
+			selectorString: '.targeting-headerButton',
 			nodeName: ['button']
 		})
 
-		if (validateTargetAbtestView) {
-			this.viewAbtest(e)
+		if (validateTargetTargetingButton) {
+			this.toggleTageting(e)
 		}
 	}
 
-	viewAbtest(e) {
+	toggleTageting(e) {
 		const target = e.target
-		target.parentNode.classList.toggle('active')
+		target.closest('.targeting').classList.toggle('active')
 	}
 }

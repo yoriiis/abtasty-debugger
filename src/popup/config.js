@@ -12,3 +12,9 @@ import 'shared/assets/images/icon-16x16.png'
 import 'shared/assets/images/icon-32x32.png'
 import 'shared/assets/images/icon-48x48.png'
 import 'shared/assets/images/icon-128x128.png'
+
+// import shared components
+import 'shared/badge/config'
+import 'shared/targeting/config'
+import 'shared/list/config'
+import 'shared/view/config'

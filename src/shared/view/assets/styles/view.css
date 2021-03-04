@@ -1,0 +1,21 @@
+.view {
+	padding: 5px ​15px 15px;
+	font-size: 14px;
+
+	&-list {
+		list-style-type: disc;
+		padding-left: 24px;
+		margin-bottom: 15px;
+		font-size: 12px;
+
+		li:not(:last-child) {
+			margin-bottom: 8px;
+		}
+	}
+
+	&-backLinkIcon {
+		svg {
+			transform: rotate(90deg);
+		}
+	}
+}

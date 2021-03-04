@@ -1,0 +1,21 @@
+.badge {
+	color: #fff;
+	padding: 5px 7px;
+	border-radius: var(--radius);
+	font-size: 12px;
+	width: fit-content;
+
+	&.accepted {
+		background-color: var(--green);
+	}
+
+	&.rejected {
+		background-color: var(--red);
+	}
+
+	&.small {
+		padding: 0;
+		width: 10px;
+		height: 10px;
+	}
+}
