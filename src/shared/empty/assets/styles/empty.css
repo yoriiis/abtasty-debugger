@@ -1,0 +1,32 @@
+.empty {
+	min-height: 400px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+
+	&-icon {
+		margin-bottom: 10px;
+		width: 50px;
+		height: 50px;
+
+		svg {
+			fill: var(--colorTextSecondary);
+		}
+	}
+
+	&-text {
+		text-align: center;
+		font-size: 14px;
+		line-height: 22px;
+		margin-bottom: 15px;
+	}
+
+	&-reloadButton {
+		text-decoration: none;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+}

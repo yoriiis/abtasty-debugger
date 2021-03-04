@@ -13,6 +13,11 @@
 		}
 	}
 
+	&-backLink,
+	&-linkDashboard {
+		margin-bottom: 10px;
+	}
+
 	&-backLinkIcon {
 		svg {
 			transform: rotate(90deg);

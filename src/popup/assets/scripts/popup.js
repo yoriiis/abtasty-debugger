@@ -1,27 +1,31 @@
 import { createElement } from 'jsx-dom'
 import List from 'shared/list/assets/scripts/list'
 import View from 'shared/view/assets/scripts/view'
+import Empty from 'shared/empty/assets/scripts/empty'
 import validateTarget from 'validate-target'
 
 export default class Popup {
-	constructor({ data = null }) {
+	constructor({ data = null } = {}) {
 		this.data = data
 		this.defaultRoute = 'list'
 		this.app = document.querySelector('#app')
 		this.hashChanged = this.hashChanged.bind(this)
 		this.onClickOnApp = this.onClickOnApp.bind(this)
-		{
-			/* <div className="empty">No tests available on this page</div> */
-		}
+
 		this.templates = {
+			empty: () => <Empty />,
 			list: () => <List data={data.results} />,
-			view: (id) => <View data={data.results[id]} />
+			view: (id) => <View data={data.results[id]} id={id} />
 		}
 	}
 
 	init() {
 		// Get current route
 		const route = this.getRoute()
+
+		if (this.data === null) {
+			this.defaultRoute = 'empty'
+		}
 
 		// Declare the default route
 		// If route exist, keep it, else set it to the default route
@@ -46,6 +50,10 @@ export default class Popup {
 
 	hashChanged(e) {
 		this.currentRoute = this.getRoute()
+
+		if (this.data === null) {
+			this.setRoute('empty')
+		}
 
 		if (e) {
 			this.previousRoute = this.getPreviousRoute(e)

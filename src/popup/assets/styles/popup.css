@@ -9,10 +9,3 @@ body {
 	padding: 10px;
 	overflow-y: auto;
 }
-
-.empty {
-	min-height: 400px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
