@@ -2,14 +2,9 @@ import { createElement, Fragment } from 'jsx-dom'
 import externalLink from 'shared/assets/svgs/external-link.svg'
 import arrowBottom from 'shared/assets/svgs/arrow-bottom.svg'
 import Targeting from 'shared/targeting/assets/scripts/targeting'
+import wording from 'shared/utils/wording'
 
-export default function ({ id, result, test }) {
-	const {
-		url_scope: urlScope,
-		code_scope: codeScope,
-		selector_scope: selectorScope
-	} = result.targetings.targetPages
-	const { cookie_scope: cookieScope, ip_scope: ipScope } = result.targetings.qaParameters
+export default function ({ id, result, targetingSorted, targetingMode }) {
 	return (
 		<div data-route-id="view">
 			<div className="view">
@@ -45,31 +40,27 @@ export default function ({ id, result, test }) {
 							{result.variationID && <>({result.variationID})</>}
 						</li>
 					)}
-					<li>Ajax targeting: {test.targetingMode === 'waituntil' ? 'on' : 'off'}</li>
+					<li>Ajax targeting: {targetingMode === 'waituntil' ? 'on' : 'off'}</li>
 				</ul>
-				{urlScope && <Targeting mainStatus={result.status} name="URL" data={urlScope} />}
-				{selectorScope && (
-					<Targeting mainStatus={result.status} name="Selector" data={selectorScope} />
-				)}
-				{codeScope && (
+
+				{targetingSorted.rejected.map((item) => (
 					<Targeting
 						mainStatus={result.status}
-						name="Code"
-						data={codeScope}
-						textarea={true}
+						name={wording(item.key)}
+						data={item}
+						textarea={item.key === 'code_scope'}
+						headerOnly={item.key === 'ip_scope'}
 					/>
-				)}
-				{cookieScope && (
-					<Targeting mainStatus={result.status} name="Cookie" data={cookieScope} />
-				)}
-				{ipScope && (
+				))}
+				{targetingSorted.accepted.map((item) => (
 					<Targeting
 						mainStatus={result.status}
-						name="Ip"
-						data={ipScope}
-						headerOnly={true}
+						name={wording(item.key)}
+						data={item}
+						textarea={item.key === 'code_scope'}
+						headerOnly={item.key === 'ip_scope'}
 					/>
-				)}
+				))}
 			</div>
 		</div>
 	)

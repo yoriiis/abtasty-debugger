@@ -3,6 +3,7 @@ import List from '../../components/list/assets/scripts/list'
 import View from '../../components/view/assets/scripts/view'
 import Empty from 'shared/empty/assets/scripts/empty'
 import validateTarget from 'validate-target'
+import DataManager from 'shared/utils/data-manager'
 
 export default class Popup {
 	constructor({ data = null } = {}) {
@@ -11,12 +12,19 @@ export default class Popup {
 		this.app = document.querySelector('#app')
 		this.hashChanged = this.hashChanged.bind(this)
 		this.onClickOnApp = this.onClickOnApp.bind(this)
-		console.log(data)
+
+		this.dataManager = new DataManager({ data })
+
 		this.templates = {
 			empty: () => <Empty />,
-			list: () => <List data={data} />,
+			list: () => <List data={this.dataManager.resultsSortedByReject} />,
 			view: (id) => (
-				<View id={id} result={data.results[id]} test={data.accountData.tests[id]} />
+				<View
+					id={id}
+					result={this.data.results[id]}
+					targetingSorted={this.dataManager.targetingsSortedByReject[id]}
+					targetingMode={this.data.accountData.tests[id].targetingMode}
+				/>
 			)
 		}
 	}
