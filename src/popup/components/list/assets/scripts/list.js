@@ -2,6 +2,12 @@ import { createElement } from 'jsx-dom'
 import arrowBottom from 'shared/assets/svgs/arrow-bottom.svg'
 import Badge from 'shared/badge/assets/scripts/badge'
 
+/**
+ * List template
+ * @param {Object} options
+ * @param {Object} options.data List data
+ * @returns {HTMLElement} Generated HTML
+ */
 export default function ({ data }) {
 	return (
 		<div data-route-id="list">
@@ -17,6 +23,12 @@ export default function ({ data }) {
 	)
 }
 
+/**
+ * List item template
+ * @param {Object} options
+ * @param {Object} options.data List item data
+ * @returns {HTMLElement} Generated HTML
+ */
 function List({ data }) {
 	return (
 		<li className="list-item">

@@ -1,3 +1,4 @@
+// Zip the directory build by webpack
 const chalk = require('chalk')
 const fs = require('fs')
 const archiver = require('archiver')

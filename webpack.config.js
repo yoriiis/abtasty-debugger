@@ -102,7 +102,7 @@ module.exports = (env, argv) => {
 			new CopyPlugin({
 				patterns: [
 					{
-						from: path.resolve(__dirname, './src/shared/static'),
+						from: path.resolve(__dirname, './src/shared/assets/static'),
 						to: path.resolve(__dirname, './web/dist/static')
 					},
 					{

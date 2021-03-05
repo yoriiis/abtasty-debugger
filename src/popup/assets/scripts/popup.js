@@ -17,22 +17,26 @@ export default class Popup {
 
 		this.templates = {
 			empty: () => <Empty />,
-			list: () => <List data={this.dataManager.resultsSortedByReject} />,
+			list: () => <List data={this.dataManager.testsSortedByStatus} />,
 			view: (id) => (
 				<View
 					id={id}
 					result={this.data.results[id]}
-					targetingSorted={this.dataManager.targetingsSortedByReject[id]}
+					targetingSorted={this.dataManager.targetingsSortedByStatus[id]}
 					targetingMode={this.data.accountData.tests[id].targetingMode}
 				/>
 			)
 		}
 	}
 
+	/**
+	 * Initialize the popup
+	 */
 	init() {
 		// Get current route
 		const route = this.getRoute()
 
+		// Redirect to the empty route if no data
 		if (this.data === null) {
 			this.defaultRoute = 'empty'
 		}
@@ -53,11 +57,26 @@ export default class Popup {
 		this.addEvents()
 	}
 
-	addEvents() {
-		this.app.addEventListener('click', this.onClickOnApp)
-		window.addEventListener('hashchange', this.hashChanged, false)
+	/**
+	 * Get the current route
+	 * @returns {String} Current route
+	 */
+	getRoute() {
+		return window.location.hash.substr(1)
 	}
 
+	/**
+	 * Set the route
+	 * @returns {String} route New value for the route
+	 */
+	setRoute(route) {
+		window.location.hash = route
+	}
+
+	/**
+	 * On hash change event listener
+	 * @param {Obhect} e Event data
+	 */
 	hashChanged(e) {
 		this.currentRoute = this.getRoute()
 
@@ -85,54 +104,64 @@ export default class Popup {
 		}
 	}
 
-	createStep(route) {
-		const viewId = this.getIdFromRoute(this.currentRoute) || null
-		const routeSection = this.getRouteSection(route)
-		document.querySelector('#app').appendChild(this.templates[routeSection](viewId))
-	}
-
-	destroyStep(route) {
-		const routeSection = this.getRouteSection(route)
-		this.app.querySelector(`[data-route-id="${routeSection}"]`).remove()
-	}
-
-	/**
-	 * Get the current route
-	 *
-	 * @returns {Array} Current route
-	 */
-	getRoute() {
-		return window.location.hash.substr(1)
-	}
-
-	getRouteSection(route) {
-		return route.split('/')[0]
-	}
-
 	/**
 	 * Get the previous route
-	 *
 	 * @param {Object} event Event listener datas
-	 *
 	 * @returns {String} Previous route
 	 */
 	getPreviousRoute(e) {
 		return e && e.oldURL ? e.oldURL.split('#')[1] : null
 	}
 
+	/**
+	 * Destroy step
+	 * @param {String} route Route of the step to destroy
+	 */
+	destroyStep(route) {
+		const routeSection = this.getRouteSection(route)
+		this.app.querySelector(`[data-route-id="${routeSection}"]`).remove()
+	}
+
+	/**
+	 * Create step
+	 * @param {String} route Route of the step to create
+	 */
+	createStep(route) {
+		const viewId = this.getIdFromRoute(this.currentRoute) || null
+		const routeSection = this.getRouteSection(route)
+		document.querySelector('#app').appendChild(this.templates[routeSection](viewId))
+	}
+
+	/**
+	 * Get the current route section (view/000001 => view)
+	 * @param {String} route Route
+	 * @returns {String} Current route section
+	 */
+	getRouteSection(route) {
+		return route.split('/')[0]
+	}
+
+	/**
+	 * Get id from route
+	 * @param {String} route  Route
+	 * @returns {String} View id
+	 */
 	getIdFromRoute(route) {
 		return route.split('view/')[1]
 	}
 
 	/**
-	 * Set the route
-	 *
-	 * @returns {String} route New value for the route
+	 * Add event listeners
 	 */
-	setRoute(route) {
-		window.location.hash = route
+	addEvents() {
+		this.app.addEventListener('click', this.onClickOnApp)
+		window.addEventListener('hashchange', this.hashChanged, false)
 	}
 
+	/**
+	 * On click event listener on the app
+	 * @param {Object} e Event data
+	 */
 	onClickOnApp(e) {
 		const target = e.target
 		const validateTargetTargetingButton = validateTarget({
@@ -146,6 +175,10 @@ export default class Popup {
 		}
 	}
 
+	/**
+	 * Toggle targeting content
+	 * @param {Object} e Event data
+	 */
 	toggleTageting(e) {
 		const target = e.target
 		target.closest('.targeting').classList.toggle('active')

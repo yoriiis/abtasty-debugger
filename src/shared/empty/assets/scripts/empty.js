@@ -1,6 +1,10 @@
 import { createElement } from 'jsx-dom'
 import info from 'shared/assets/svgs/info.svg'
 
+/**
+ * Empty template
+ * @returns {HTMLElement} Generated HTML
+ */
 export default function () {
 	return (
 		<div className="empty">

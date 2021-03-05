@@ -2,8 +2,16 @@ import { createElement, Fragment } from 'jsx-dom'
 import externalLink from 'shared/assets/svgs/external-link.svg'
 import arrowBottom from 'shared/assets/svgs/arrow-bottom.svg'
 import Targeting from 'shared/targeting/assets/scripts/targeting'
-import wording from 'shared/utils/wording'
 
+/**
+ * View template
+ * @param {Object} options
+ * @param {String} options.id Test id
+ * @param {StriObjectng} options.result Test data
+ * @param {Object} options.targetingSorted Test data sorted by accepted and
+ * @param {String} options.targetingMode Targeting mode (fastest|waituntil)
+ * @returns {HTMLElement} Generated HTML
+ */
 export default function ({ id, result, targetingSorted, targetingMode }) {
 	return (
 		<div data-route-id="view">
@@ -45,8 +53,8 @@ export default function ({ id, result, targetingSorted, targetingMode }) {
 
 				{targetingSorted.rejected.map((item) => (
 					<Targeting
-						mainStatus={result.status}
-						name={wording(item.key)}
+						testStatus={result.status}
+						key={item.key}
 						data={item}
 						textarea={item.key === 'code_scope'}
 						headerOnly={item.key === 'ip_scope'}
@@ -54,8 +62,8 @@ export default function ({ id, result, targetingSorted, targetingMode }) {
 				))}
 				{targetingSorted.accepted.map((item) => (
 					<Targeting
-						mainStatus={result.status}
-						name={wording(item.key)}
+						testStatus={result.status}
+						key={item.key}
 						data={item}
 						textarea={item.key === 'code_scope'}
 						headerOnly={item.key === 'ip_scope'}

@@ -1,11 +1,18 @@
+/**
+ * Data manager for ABTasty data
+ */
 export default class DataManager {
 	constructor({ data }) {
 		this.data = data
-		this.resultsSortedByReject = this.getResultsSortedByReject()
-		this.targetingsSortedByReject = this.getTargetingsSortedByReject()
+		this.testsSortedByStatus = this.getTestsSortedByStatus()
+		this.targetingsSortedByStatus = this.getTargetingsSortedByStatus()
 	}
 
-	getResultsSortedByReject() {
+	/**
+	 * Get tests sorted by status (accepted or not)
+	 * @returns {Object} Sorted tests
+	 */
+	getTestsSortedByStatus() {
 		return {
 			accepted: Object.keys(this.data.results)
 				.filter((id) => this.data.results[id].status === 'accepted')
@@ -22,7 +29,11 @@ export default class DataManager {
 		}
 	}
 
-	getTargetingsSortedByReject() {
+	/**
+	 * Get targetings sorted by status (success or not)
+	 * @returns {Object} Sorted targetings
+	 */
+	getTargetingsSortedByStatus() {
 		const data = {}
 		Object.keys(this.data.results).forEach((id) => {
 			const targetings = this.data.results[id].targetings

@@ -1,14 +1,25 @@
 import { createElement } from 'jsx-dom'
 import Badge from 'shared/badge/assets/scripts/badge'
 import arrowBottom from 'shared/assets/svgs/arrow-bottom.svg'
+import wording from 'shared/utils/wording'
 
-export default function ({ name, mainStatus, data, headerOnly = false, textarea = false }) {
+/**
+ * Targeting template
+ * @param {Object} options
+ * @param {Object} options.key Targeting key (url_scope|code_scope|selector_scope|cookie_scope|ip_scope)
+ * @param {Object} options.testStatus Status of the test
+ * @param {Object} options.data Targeting data
+ * @param {Object} options.headerOnly Display the header only, without content
+ * @param {Object} options.textarea Use textarea instead of input field
+ * @returns {HTMLElement} Generated HTML
+ */
+export default function ({ key, testStatus, data, headerOnly = false, textarea = false }) {
 	return (
 		<section className={`targeting${headerOnly ? ' headerOnly' : ''}`}>
 			<div className="targeting-header">
 				<button className="targeting-headerButton">
-					<span className="targeting-name">{name} targeting</span>
-					<Badge status={data.success ? 'accepted' : mainStatus} />
+					<span className="targeting-name">{wording(key)} targeting</span>
+					<Badge status={data.success ? 'accepted' : testStatus} />
 					{!headerOnly && (
 						<div className="targeting-headerIcon" innerHTML={arrowBottom}></div>
 					)}
