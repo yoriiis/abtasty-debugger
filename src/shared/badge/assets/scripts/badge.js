@@ -1,10 +1,10 @@
 import { createElement, Fragment } from 'jsx-dom'
 
-export default function ({ status, small = false }) {
+export default function ({ status }) {
 	const statusClass = status === 'accepted' ? 'accepted' : 'rejected'
 	return (
 		<>
-			<div className={`badge ${statusClass}${small ? ' small' : ''}`}>{!small && status}</div>
+			<div className={`badge ${statusClass}`}>{status}</div>
 		</>
 	)
 }

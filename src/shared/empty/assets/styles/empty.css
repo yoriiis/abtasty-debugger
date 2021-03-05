@@ -17,7 +17,7 @@
 
 	&-text {
 		text-align: center;
-		font-size: 14px;
+		font-size: var(--fontSizeSecondary);
 		line-height: 22px;
 		margin-bottom: 15px;
 	}

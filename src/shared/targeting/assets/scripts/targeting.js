@@ -19,21 +19,20 @@ export default function ({ name, mainStatus, data, headerOnly = false, textarea 
 					<table className="targeting-table">
 						<tbody>
 							{data.conditions.map((item) => {
-								const value = item.name ? `${item.name}=${item.value}` : item.value
+								let value = item.value
+								if (data.key === 'cookie_scope') {
+									value = `${item.name}=${item.value}`
+								}
+
 								return (
 									<tr>
 										{typeof item.include !== 'undefined' && (
-											<td>
-												<Badge
-													status={item.include ? 'accepted' : 'rejected'}
-													small={true}
-												/>
-											</td>
+											<td>{item.include ? 'Include' : 'Exclude'}</td>
 										)}
 										<td>
 											{textarea ? (
 												<textarea className="textarea" disabled>
-													{item.value}
+													{value}
 												</textarea>
 											) : (
 												<input

@@ -1,6 +1,5 @@
 .view {
 	padding: 5px ​15px 15px;
-	font-size: 14px;
 
 	&-header {
 		display: flex;
