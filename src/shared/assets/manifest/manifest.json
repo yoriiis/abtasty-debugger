@@ -26,6 +26,7 @@
 		}
 	],
 	"action": {
+		"default_title": "AB Tasty Debugger",
 		"default_popup": "popup.html",
 		"default_icon": "images/icon-32x32.png"
 	}

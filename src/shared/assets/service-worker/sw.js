@@ -4,7 +4,12 @@ chrome.runtime.onConnect.addListener(function (portFrom) {
 	if (portFrom.name === 'abtastyExtention') {
 		// Listen for postMessage send by the content script
 		portFrom.onMessage.addListener(function (message) {
-			// console.log('sw.js', JSON.parse(message.ABTastyData))
+			const data = JSON.parse(message.ABTastyData)
+			console.log('sw.js', data)
+
+			// Set the badge with the number of results found
+			chrome.action.setBadgeText({ text: `${Object.keys(data.results).length}` })
+			chrome.action.setBadgeBackgroundColor({ color: '#054c5d' })
 
 			// Get the current tab data
 			chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
@@ -12,9 +17,7 @@ chrome.runtime.onConnect.addListener(function (portFrom) {
 				if (currentTab) {
 					// Build the storage data with the tab id as the key
 					const storageData = {}
-					storageData[`tab-${currentTab.id}-ABTastyData`] = JSON.parse(
-						message.ABTastyData
-					)
+					storageData[`tab-${currentTab.id}-ABTastyData`] = data
 
 					// Set data to the storage
 					chrome.storage.local.set(storageData)

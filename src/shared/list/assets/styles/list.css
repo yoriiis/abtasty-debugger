@@ -6,22 +6,6 @@
 		border-radius: var(--radius);
 	}
 
-	&-icon {
-		position: absolute;
-		top: 50%;
-		right: 10px;
-		transform: translateY(-50%);
-
-		svg {
-			display: block;
-			width: 20px;
-			height: 20px;
-			fill: var(--colorTextSecondary);
-			transition: transform var(--transition);
-			transform: rotate(-90deg);
-		}
-	}
-
 	&-link {
 		display: flex;
 		flex-direction: column;
@@ -43,20 +27,22 @@
 	&-name {
 		margin-bottom: 10px;
 		line-height: 20px;
-		font-size: 14px;
+		font-size: var(--fontSizePrimary);
 	}
 
-	&-itemKey {
-		font-weight: 700;
-	}
+	&-icon {
+		position: absolute;
+		top: 50%;
+		right: 10px;
+		transform: translateY(-50%);
 
-	&-itemDetailsField {
-		margin-bottom: 15px;
-		display: block;
-
-		&.last {
-			margin-bottom: 10px;
-			padding-bottom: 10px;
+		svg {
+			display: block;
+			width: 20px;
+			height: 20px;
+			fill: var(--colorTextSecondary);
+			transition: transform var(--transition);
+			transform: rotate(-90deg);
 		}
 	}
 }

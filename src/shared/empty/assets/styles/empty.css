@@ -21,12 +21,4 @@
 		line-height: 22px;
 		margin-bottom: 15px;
 	}
-
-	&-reloadButton {
-		text-decoration: none;
-
-		&:hover {
-			text-decoration: underline;
-		}
-	}
 }

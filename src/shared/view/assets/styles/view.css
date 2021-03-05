@@ -2,25 +2,61 @@
 	padding: 5px ​15px 15px;
 	font-size: 14px;
 
-	&-list {
-		list-style-type: disc;
-		padding-left: 24px;
-		margin-bottom: 15px;
-		font-size: 12px;
-
-		li:not(:last-child) {
-			margin-bottom: 8px;
-		}
-	}
-
-	&-backLink,
-	&-linkDashboard {
+	&-backLink {
+		font-size: var(--fontSizePrimary);
 		margin-bottom: 10px;
+
+		.view-backLinkIcon {
+			margin-right: 4px;
+		}
 	}
 
 	&-backLinkIcon {
 		svg {
 			transform: rotate(90deg);
+		}
+	}
+
+	&-list {
+		list-style-type: disc;
+		padding-left: 24px;
+		margin-bottom: 15px;
+		font-size: var(--fontSizeSecondary);
+
+		li:not(:last-child) {
+			margin-bottom: 12px;
+		}
+	}
+
+	&-linkDashboard {
+		font-size: var(--fontSizeSecondary);
+		margin-bottom: 10px;
+
+		.view-linkDashboardIcon {
+			margin-left: 7px;
+		}
+	}
+
+	&-backLink,
+	&-linkDashboard {
+		padding: 5px;
+		align-items: center;
+		text-decoration: none;
+		width: fit-content;
+		position: relative;
+		display: flex;
+
+		&:hover {
+			text-decoration: underline;
+		}
+
+		svg {
+			display: block;
+			width: 18px;
+			height: 18px;
+			fill: var(--colorTextSecondary);
+			transition: transform var(--transition);
+			position: relative;
 		}
 	}
 }

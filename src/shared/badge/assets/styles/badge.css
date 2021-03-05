@@ -1,8 +1,8 @@
 .badge {
-	color: #fff;
+	color: var(--white);
 	padding: 5px 7px;
 	border-radius: var(--radius);
-	font-size: 12px;
+	font-size: var(--fontSizeSecondary);
 	width: fit-content;
 
 	&.accepted {

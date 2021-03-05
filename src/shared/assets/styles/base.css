@@ -14,7 +14,7 @@ body {
 	font-family: inherit;
 	padding: 8px 12px 6px 12px;
 	border-radius: 6px;
-	font-size: 14px;
+	font-size: var(--fontSizeSecondary);
 	color: inherit;
 	background-color: transparent;
 	border: none;
@@ -26,39 +26,8 @@ body {
 	font-family: inherit;
 	padding: 6px 12px;
 	border-radius: 6px;
-	font-size: 14px;
+	font-size: var(--fontSizeSecondary);
 	color: inherit;
 	background-color: transparent;
 	border: none;
-}
-
-.linkWithIcon {
-	padding: 5px;
-	align-items: center;
-	font-size: 12px;
-	text-decoration: none;
-	width: fit-content;
-	position: relative;
-	display: flex;
-
-	&:hover {
-		text-decoration: underline;
-	}
-
-	svg {
-		display: block;
-		width: 10px;
-		height: 10px;
-		fill: var(--colorTextSecondary);
-		transition: transform var(--transition);
-		position: relative;
-	}
-
-	&.iconLeft svg {
-		margin-right: 3px;
-	}
-
-	&.iconRight svg {
-		margin-left: 3px;
-	}
 }

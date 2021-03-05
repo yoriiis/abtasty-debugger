@@ -14,8 +14,8 @@ export default class Popup {
 
 		this.templates = {
 			empty: () => <Empty />,
-			list: () => <List data={data.results} />,
-			view: (id) => <View data={data.results[id]} id={id} />
+			list: () => <List data={data} />,
+			view: (id) => <View id={id} result={data.results[id]} test={data.tests[id]} />
 		}
 	}
 

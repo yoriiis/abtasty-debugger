@@ -1,5 +1,6 @@
 :root {
 	--containerMaxWidth: 1000px;
+	--white: #fff;
 	--canvas: #fff;
 	--colorBgSecondary: #fafbfc;
 	--colorTextPrimary: #24292e;
@@ -10,6 +11,8 @@
 	--red: #dc2f02;
 	--radius: 6px;
 	--transition: 0.3s ease;
+	--fontSizePrimary: 16px;
+	--fontSizeSecondary: 14px;
 }
 
 @media (prefers-color-scheme: dark) {
