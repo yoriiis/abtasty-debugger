@@ -1,6 +1,6 @@
 import { createElement } from 'jsx-dom'
-import List from 'shared/list/assets/scripts/list'
-import View from 'shared/view/assets/scripts/view'
+import List from '../../components/list/assets/scripts/list'
+import View from '../../components/view/assets/scripts/view'
 import Empty from 'shared/empty/assets/scripts/empty'
 import validateTarget from 'validate-target'
 
