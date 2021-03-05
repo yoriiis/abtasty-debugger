@@ -57,7 +57,10 @@ module.exports = (env, argv) => {
 				},
 				{
 					test: /\.(jpe?g|png|gif)$/i,
-					include: path.resolve(__dirname, './src/'),
+					include: [
+						path.resolve(__dirname, './assets/'),
+						path.resolve(__dirname, './src/')
+					],
 					type: 'asset/resource',
 					generator: {
 						filename: 'images/[name][ext]'
@@ -80,7 +83,8 @@ module.exports = (env, argv) => {
 		resolve: {
 			extensions: ['.js', '.css'],
 			alias: {
-				shared: path.resolve(__dirname, './src/shared')
+				shared: path.resolve(__dirname, './src/shared'),
+				globalAssets: path.resolve(__dirname, './assets')
 			}
 		},
 		plugins: [

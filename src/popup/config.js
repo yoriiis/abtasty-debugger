@@ -17,7 +17,7 @@ import 'shared/targeting/config'
 import 'shared/empty/config'
 
 // import Images
-import 'shared/assets/images/icon-16x16.png'
-import 'shared/assets/images/icon-32x32.png'
-import 'shared/assets/images/icon-48x48.png'
-import 'shared/assets/images/icon-128x128.png'
+import 'globalAssets/icon-16x16.png'
+import 'globalAssets/icon-32x32.png'
+import 'globalAssets/icon-48x48.png'
+import 'globalAssets/icon-128x128.png'

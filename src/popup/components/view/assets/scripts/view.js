@@ -1,4 +1,4 @@
-import { createElement } from 'jsx-dom'
+import { createElement, Fragment } from 'jsx-dom'
 import externalLink from 'shared/assets/svgs/external-link.svg'
 import arrowBottom from 'shared/assets/svgs/arrow-bottom.svg'
 import Targeting from 'shared/targeting/assets/scripts/targeting'
@@ -28,7 +28,7 @@ export default function ({ id, result, test }) {
 							rel="noreferrer"
 							className="view-headerDashboard"
 						>
-							Edit on AB Tasty dashboard
+							Edit on AB Tasty
 							<div
 								className="view-headerDashboardIcon"
 								innerHTML={externalLink}
@@ -37,10 +37,14 @@ export default function ({ id, result, test }) {
 					</li>
 				</ul>
 				<ul className="view-list">
-					<li>Test ID: {id}</li>
-					<li>Test type: {result.type}</li>
-					{result.variationID && <li>Variation ID: {result.variationID}</li>}
-					{result.variationName && <li>Variation name: {result.variationName}</li>}
+					<li>ID: {id}</li>
+					<li>Type: {result.type}</li>
+					{result.variationName && (
+						<li>
+							Variation: {result.variationName}{' '}
+							{result.variationID && <>({result.variationID})</>}
+						</li>
+					)}
 					<li>Ajax targeting: {test.targetingMode === 'waituntil' ? 'on' : 'off'}</li>
 				</ul>
 				{urlScope && <Targeting mainStatus={result.status} name="URL" data={urlScope} />}

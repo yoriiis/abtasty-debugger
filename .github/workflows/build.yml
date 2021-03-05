@@ -42,6 +42,6 @@ jobs:
       # - name: Test Jest
       #   run: npm run test
 
-      - name: Build
+      - name: Release
         run: |
-          npm run build
+          npm run release

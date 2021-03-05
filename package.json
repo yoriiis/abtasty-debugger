@@ -1,5 +1,5 @@
 {
-	"name": "abtasty-extension-debugger",
+	"name": "abtasty-debugger",
 	"version": "1.0.0",
 	"description": "",
 	"homepage": "https://github.com/yoriiis/abtasty-extension-debugger",
@@ -10,7 +10,7 @@
 	"scripts": {
 		"build": "rm -rf ./web/dist/ && webpack --mode=production --config=webpack.config.js",
 		"inspect": "node --inspect node_modules/webpack/bin/webpack.js --config webpack.config.js --mode=development",
-		"release": "npm run build && node scripts/release.js",
+		"release": "npm run build && node ./src/shared/utils/zip-release.js",
 		"start": "rm -rf ./web/dist/ && webpack --mode=development --config=webpack.config.js",
 		"test": "jest",
 		"test:coverage": "jest --coverage",
