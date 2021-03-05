@@ -19,9 +19,9 @@ export default function ({ id, result, test }) {
 				<ul className="view-list">
 					<li>Test ID: {id}</li>
 					<li>Test type: {result.type}</li>
-					<li>Variation ID: {result.variationID}</li>
-					<li>Variation name: {result.variationName}</li>
-					<li>Targeting mode: {test.targetingMode}</li>
+					{result.variationID && <li>Variation ID: {result.variationID}</li>}
+					{result.variationName && <li>Variation name: {result.variationName}</li>}
+					<li>Ajax targeting: {test.targetingMode === 'waituntil' ? 'on' : 'off'}</li>
 				</ul>
 				<a
 					href={`https://app2.abtasty.com/edit/test/${id}/audience`}
@@ -30,7 +30,7 @@ export default function ({ id, result, test }) {
 					rel="noreferrer"
 					className="view-linkDashboard"
 				>
-					Edit the test on AB Tasty dashboard
+					Edit on AB Tasty dashboard
 					<div className="view-linkDashboardIcon" innerHTML={externalLink}></div>
 				</a>
 				{urlScope && <Targeting mainStatus={result.status} name="URL" data={urlScope} />}

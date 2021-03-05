@@ -11,11 +11,13 @@ export default class Popup {
 		this.app = document.querySelector('#app')
 		this.hashChanged = this.hashChanged.bind(this)
 		this.onClickOnApp = this.onClickOnApp.bind(this)
-
+		console.log(data)
 		this.templates = {
 			empty: () => <Empty />,
 			list: () => <List data={data} />,
-			view: (id) => <View id={id} result={data.results[id]} test={data.tests[id]} />
+			view: (id) => (
+				<View id={id} result={data.results[id]} test={data.accountData.tests[id]} />
+			)
 		}
 	}
 
