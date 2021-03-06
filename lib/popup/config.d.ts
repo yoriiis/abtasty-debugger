@@ -1,0 +1,12 @@
+import '../index';
+import './assets/styles/popup.css';
+import './assets/scripts/main';
+import './components/list/config';
+import './components/detail/config';
+import 'shared/badge/config';
+import 'shared/targeting/config';
+import 'shared/empty/config';
+import 'globalAssets/images/icon-16x16.png';
+import 'globalAssets/images/icon-32x32.png';
+import 'globalAssets/images/icon-48x48.png';
+import 'globalAssets/images/icon-128x128.png';

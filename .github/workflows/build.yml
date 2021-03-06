@@ -36,6 +36,9 @@ jobs:
       - name: Test Stylelint
         run: npm run test:stylelint
 
+      - name: Test Typescript
+        run: npm run test:type-check
+
       - name: Test Markdown
         run: npm run test:markdown
 
