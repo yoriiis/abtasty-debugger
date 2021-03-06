@@ -4,7 +4,7 @@ import arrowBottom from 'shared/assets/svgs/arrow-bottom.svg'
 import Targeting from 'shared/targeting/assets/scripts/targeting'
 
 /**
- * View template
+ * Detail template
  * @param {Object} options
  * @param {String} options.id Test id
  * @param {StriObjectng} options.result Test data
@@ -14,12 +14,12 @@ import Targeting from 'shared/targeting/assets/scripts/targeting'
  */
 export default function ({ id, result, targetingSorted, targetingMode }) {
 	return (
-		<div data-route-id="view">
-			<div className="view">
-				<ul className="view-header">
+		<div data-route-id="detail">
+			<div className="detail">
+				<ul className="detail-header">
 					<li>
-						<a href="#list" className="view-headerBack">
-							<div className="view-headerBackIcon" innerHTML={arrowBottom}></div>
+						<a href="#list" className="detail-headerBack">
+							<div className="detail-headerBackIcon" innerHTML={arrowBottom}></div>
 							Back
 						</a>
 					</li>
@@ -29,17 +29,17 @@ export default function ({ id, result, targetingSorted, targetingMode }) {
 							target="_blank"
 							without
 							rel="noreferrer"
-							className="view-headerDashboard"
+							className="detail-headerDashboard"
 						>
 							Edit on AB Tasty
 							<div
-								className="view-headerDashboardIcon"
+								className="detail-headerDashboardIcon"
 								innerHTML={externalLink}
 							></div>
 						</a>
 					</li>
 				</ul>
-				<ul className="view-list">
+				<ul className="detail-list">
 					<li>ID: {id}</li>
 					<li>Type: {result.type}</li>
 					{result.variationName && (

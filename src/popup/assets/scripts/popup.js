@@ -1,6 +1,6 @@
 import { createElement } from 'jsx-dom'
 import List from '../../components/list/assets/scripts/list'
-import View from '../../components/view/assets/scripts/view'
+import Detail from '../../components/detail/assets/scripts/detail'
 import Empty from 'shared/empty/assets/scripts/empty'
 import validateTarget from 'validate-target'
 import DataManager from 'shared/utils/data-manager'
@@ -18,8 +18,8 @@ export default class Popup {
 		this.templates = {
 			empty: () => <Empty />,
 			list: () => <List data={this.dataManager.testsSortedByStatus} />,
-			view: (id) => (
-				<View
+			detail: (id) => (
+				<Detail
 					id={id}
 					result={this.data.results[id]}
 					targetingSorted={this.dataManager.targetingsSortedByStatus[id]}
@@ -144,10 +144,10 @@ export default class Popup {
 	/**
 	 * Get id from route
 	 * @param {String} route  Route
-	 * @returns {String} View id
+	 * @returns {String} Detail id
 	 */
 	getIdFromRoute(route) {
-		return route.split('view/')[1]
+		return route.split('detail/')[1]
 	}
 
 	/**

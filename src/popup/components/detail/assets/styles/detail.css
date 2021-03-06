@@ -1,4 +1,4 @@
-.view {
+.detail {
 	padding: 5px ​15px 15px;
 
 	&-header {
@@ -7,15 +7,19 @@
 		margin-bottom: 15px;
 	}
 
-	&-headerBack {
-		font-size: var(--fontSizePrimary);
-	}
-
 	&-headerBackIcon {
 		margin-right: 4px;
 
 		svg {
 			transform: rotate(90deg);
+		}
+	}
+
+	&-headerBack {
+		font-size: var(--fontSizePrimary);
+
+		&:hover svg {
+			transform: translateX(-5px) rotate(90deg);
 		}
 	}
 

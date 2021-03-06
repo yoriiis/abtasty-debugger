@@ -32,7 +32,7 @@ export default function ({ data }) {
 function List({ data }) {
 	return (
 		<li className="list-item">
-			<a href={`#view/${data.key}`} className="list-link">
+			<a href={`#detail/${data.key}`} className="list-link">
 				<span className="list-name">{data.name}</span>
 				<Badge status={data.status} />
 				<div className="list-icon" innerHTML={arrowBottom}></div>

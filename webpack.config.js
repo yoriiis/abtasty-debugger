@@ -69,7 +69,7 @@ module.exports = (env, argv) => {
 				{
 					test: /\.(json)$/i,
 					include: path.resolve(__dirname, './src/'),
-					type: 'asset/resource',
+					type: 'asset/source',
 					generator: {
 						filename: '[name][ext]'
 					}
