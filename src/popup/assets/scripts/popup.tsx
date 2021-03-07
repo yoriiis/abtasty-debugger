@@ -135,9 +135,15 @@ export default class Popup {
 	destroyStep(route: string) {
 		const routeSection = this.getRouteSection(route)
 		const step = this.app.querySelector(`[data-route-id="${routeSection}"]`)
-		if (step) {
-			step.remove()
-		}
+		step && this.removeElement(step)
+	}
+
+	/**
+     * Remove HTML Element
+     * @param {HTMLElement} element
+     */
+	removeElement(element: Element) {
+		element.remove()
 	}
 
 	/**
@@ -145,7 +151,7 @@ export default class Popup {
 	 * @param {String} route Route of the step to create
 	 */
 	createStep(route: string) {
-		const viewId = this.getIdFromRoute(this.currentRoute)
+		const viewId = this.getIdFromRoute(route)
 		const routeSection = this.getRouteSection(route)
 		this.app.appendChild(this.templates[routeSection](viewId))
 	}
@@ -173,7 +179,7 @@ export default class Popup {
 	 */
 	addEvents() {
 		this.app.addEventListener('click', this.onClickOnApp)
-		window.addEventListener('hashchange', this.hashChanged, false)
+		window.addEventListener('hashchange', this.hashChanged)
 	}
 
 	/**

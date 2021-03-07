@@ -12,7 +12,7 @@
 		"inspect": "node --inspect node_modules/webpack/bin/webpack.js --config webpack.config.js --mode=development",
 		"release": "npm run build && node ./src/shared/utils/zip-release.js",
 		"start": "rm -rf ./web/dist/ && webpack --mode=development --config=webpack.config.js",
-		"test": "jest",
+		"test": "jest --verbose --coverage",
 		"test:coverage": "jest --coverage",
 		"test:eslint": "eslint . --ignore-pattern dist --ignore-pattern lib",
 		"test:eslint:fix": "eslint . --ignore-pattern dist --fix",
