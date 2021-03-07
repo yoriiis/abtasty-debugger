@@ -24,7 +24,8 @@ export default class Popup {
 		this.previousRoute = null
 		this.defaultRoute = 'list'
 		this.stepCreated = false
-		this.app = document.querySelector('#app')!
+		// @ts-ignore
+		this.app = document.querySelector('#app')
 		this.hashChanged = this.hashChanged.bind(this)
 		this.onClickOnApp = this.onClickOnApp.bind(this)
 
@@ -133,10 +134,10 @@ export default class Popup {
 	 */
 	destroyStep(route: string) {
 		const routeSection = this.getRouteSection(route)
-        const step = this.app.querySelector(`[data-route-id="${routeSection}"]`)
-        if(step){
-            step.remove()
-        }
+		const step = this.app.querySelector(`[data-route-id="${routeSection}"]`)
+		if (step) {
+			step.remove()
+		}
 	}
 
 	/**
@@ -198,6 +199,7 @@ export default class Popup {
 	 */
 	toggleTageting(e: Event) {
 		const target = e.target
-		// target.closest('.targeting').classList.toggle('active')
+		// @ts-ignore
+		target.closest('.targeting').classList.toggle('active')
 	}
 }

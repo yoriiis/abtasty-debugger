@@ -32,6 +32,7 @@
 	"files.trimTrailingWhitespace": true,
 	"javascript.format.enable": false,
 	"javascript.validate.enable": false,
+	"typescript.validate.enable": false,
 	"search.exclude": {
 		"**/node_modules": true
 	},

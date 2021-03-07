@@ -2,7 +2,7 @@ import { createElement, Fragment } from 'jsx-dom'
 import externalLink from 'shared/assets/svgs/external-link.svg'
 import arrowBottom from 'shared/assets/svgs/arrow-bottom.svg'
 import TargetingTemplate from 'shared/targeting/assets/scripts/targeting'
-import { Test, TargetingItemSortedByStatus, Targeting } from 'shared/assets/interfaces/interfaces'
+import { Result, TargetingItemSortedByStatus, Targeting } from 'shared/assets/interfaces/interfaces'
 
 /**
  * Detail template
@@ -13,7 +13,7 @@ import { Test, TargetingItemSortedByStatus, Targeting } from 'shared/assets/inte
  * @param {String} options.targetingMode Targeting mode (fastest|waituntil)
  * @returns {HTMLElement} Generated HTML
  */
-export default function ({ id, result, targetingSorted, targetingMode }: { id: string, result: Test, targetingSorted: TargetingItemSortedByStatus, targetingMode: string }) {
+export default function ({ id, result, targetingSorted, targetingMode }: { id: string, result: Result, targetingSorted: TargetingItemSortedByStatus, targetingMode: string }) {
 	return (
 		<div data-route-id="detail">
 			<div className="detail">

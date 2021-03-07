@@ -1,5 +1,5 @@
 export interface Condition {
-    name: string;
+    name?: string;
     value: string;
     include: Boolean;
     condition: Number;
@@ -10,7 +10,7 @@ export interface Targeting {
 	success: Boolean;
 	conditions: Array<Condition>;
 }
-export interface Test {
+export interface Result {
 	key: string;
 	name: string;
 	type: string;
@@ -31,17 +31,19 @@ export interface Test {
 export interface Data {
     accountData: {
         tests:{
-            [key: string]: Test;
+            [key: string]: {
+                targetingMode: string;
+            };
         }
     };
 	results: {
-		[key: string]: Test
+		[key: string]: Result;
 	}
 }
 
 export interface TestsSortedByStatus {
-	accepted: Array<Test>;
-	rejected: Array<Test>;
+	accepted: Array<Result>;
+	rejected: Array<Result>;
 }
 
 export interface TargetingItemSortedByStatus {

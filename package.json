@@ -18,6 +18,7 @@
 		"test:eslint:fix": "eslint . --ignore-pattern dist --fix",
 		"test:markdown": "markdownlint '**/*.md' --ignore node_modules",
 		"test:stylelint": "stylelint './src/**/*.css'",
+		"test:type-check": "tsc --noEmit",
 		"test:watch": "jest --watchAll --coverage"
 	},
 	"dependencies": {

@@ -1,7 +1,7 @@
 import { createElement } from 'jsx-dom'
 import arrowBottom from 'shared/assets/svgs/arrow-bottom.svg'
 import BadgeTemplate from 'shared/badge/assets/scripts/badge'
-import { TestsSortedByStatus, Test } from 'shared/assets/interfaces/interfaces'
+import { TestsSortedByStatus, Result } from 'shared/assets/interfaces/interfaces'
 
 /**
  * List template
@@ -13,10 +13,10 @@ export default function ({ data }: {data: TestsSortedByStatus}) {
 	return (
 		<div data-route-id="list">
 			<ul className="list" data-route-id="list">
-				{data.accepted.map((item: Test) => (
+				{data.accepted.map((item: Result) => (
 					<List data={item} />
 				))}
-				{data.rejected.map((item: Test) => (
+				{data.rejected.map((item: Result) => (
 					<List data={item} />
 				))}
 			</ul>
@@ -30,7 +30,7 @@ export default function ({ data }: {data: TestsSortedByStatus}) {
  * @param {Object} options.data List item data
  * @returns {HTMLElement} Generated HTML
  */
-function List({ data }: {data: Test}) {
+function List({ data }: {data: Result}) {
 	return (
 		<li className="list-item">
 			<a href={`#detail/${data.key}`} className="list-link">

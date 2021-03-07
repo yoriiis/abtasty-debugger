@@ -5,6 +5,15 @@
 		display: flex;
 		justify-content: space-between;
 		margin-bottom: 15px;
+
+		svg {
+			display: block;
+			width: 18px;
+			height: 18px;
+			fill: var(--colorTextSecondary);
+			transition: transform var(--transition);
+			position: relative;
+		}
 	}
 
 	&-headerBackIcon {
@@ -42,15 +51,6 @@
 
 		&:hover {
 			text-decoration: underline;
-		}
-
-		svg {
-			display: block;
-			width: 18px;
-			height: 18px;
-			fill: var(--colorTextSecondary);
-			transition: transform var(--transition);
-			position: relative;
 		}
 	}
 

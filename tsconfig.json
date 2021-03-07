@@ -6,18 +6,18 @@
 		"checkJs": true,
 		"target": "es2017",
 		"lib": ["es2017", "dom"],
-		"strict": false,
+		"strict": true,
 		"esModuleInterop": true,
 		"declaration": true,
 		"skipLibCheck": true,
 		"allowSyntheticDefaultImports": true,
-		"module": "commonjs",
+		"module": "amd",
 		"jsx": "react",
 		"jsxFactory": "createElement",
 		"jsxFragmentFactory": "Fragment",
 		"baseUrl": "./src",
 		"paths": {
-			"shared": ["src/shared"]
+			"shared": ["./shared"]
 		},
 		"resolveJsonModule": true
 	},

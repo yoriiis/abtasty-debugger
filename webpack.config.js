@@ -29,7 +29,16 @@ module.exports = (env, argv) => {
 		module: {
 			rules: [
 				{
-					test: /\.(js|ts|tsx)$/,
+					test: /\.(js)$/,
+					include: path.resolve(__dirname, './src'),
+					use: [
+						{
+							loader: 'babel-loader'
+						}
+					]
+				},
+				{
+					test: /\.(ts|tsx)$/,
 					include: path.resolve(__dirname, './src'),
 					use: [
 						{
@@ -67,6 +76,14 @@ module.exports = (env, argv) => {
 					type: 'asset/resource',
 					generator: {
 						filename: 'images/[name][ext]'
+					}
+				},
+				{
+					test: /\.(json)$/i,
+					include: path.resolve(__dirname, './src/'),
+					type: 'asset/source',
+					generator: {
+						filename: '[name][ext]'
 					}
 				},
 				{

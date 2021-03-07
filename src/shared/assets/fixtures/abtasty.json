@@ -1,0 +1,106 @@
+{
+	"accountData": {
+		"tests": {
+			"000001": {
+				"targetingMode": "waituntil"
+			},
+			"000002": {
+				"targetingMode": "fastest"
+			}
+		}
+	},
+	"results": {
+		"000001": {
+			"name": "Test with the menu button on the left",
+			"type": "ab",
+			"status": "target_pages_rejected",
+			"variationID": null,
+			"variationName": null,
+			"targetings": {
+				"targetPages": {
+					"url_scope": {
+						"conditions": [
+							{
+								"include": true,
+								"condition": 10,
+								"value": "https://www.google.fr"
+							}
+						],
+						"success": false
+					}
+				},
+				"qaParameters": {}
+			}
+		},
+		"000002": {
+			"name": "Test with darkmode sticky banner on the header",
+			"type": "ab",
+			"status": "rejected",
+			"variationID": "001001",
+			"variationName": "header-darkmode-cta",
+			"targetings": {
+				"targetPages": {
+					"url_scope": {
+						"conditions": [
+							{
+								"include": false,
+								"condition": 10,
+								"value": "https://www.google.fr"
+							},
+							{
+								"include": true,
+								"condition": 11,
+								"value": "https://www.google.fr/news"
+							}
+						],
+						"success": true
+					},
+					"code_scope": {
+						"conditions": [
+							{
+								"value": "var hourStart = 18;\nvar hourEnd = 4;\nvar hourGranted = new Date().getHours() >= hourStart || new Date().getHours() <= hourEnd;\n\nif (hourGranted) {\n    return true;\n} else {\n    return false;\n}"
+							}
+						],
+						"success": true
+					},
+					"selector_scope": {
+						"conditions": [
+							{
+								"include": true,
+								"condition": 44,
+								"value": ".header"
+							}
+						],
+						"success": false
+					}
+				},
+				"qaParameters": {
+					"cookie_scope": {
+						"conditions": [
+							{
+								"include": false,
+								"value": "true",
+								"name": "sampleCookie"
+							}
+						],
+						"success": false
+					},
+					"ip_scope": {
+						"conditions": [
+							{
+								"include": true,
+								"to": 0,
+								"range": false,
+								"from": "1555592406"
+							}
+						],
+						"success": true
+					}
+				}
+			}
+		}
+	},
+	"visitor": {
+		"id": "f7c3bc1d80"
+	}
+}
