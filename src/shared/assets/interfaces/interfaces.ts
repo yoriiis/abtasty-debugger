@@ -55,6 +55,11 @@ export interface TargetingsSortedByStatus {
 	[key: string]: TargetingItemSortedByStatus
 }
 
+export interface SortedData {
+    testsSortedByStatus: TestsSortedByStatus;
+    targetingsSortedByStatus: TargetingsSortedByStatus;
+}
+
 export interface CustomEvent {
     detail: Object;
 }

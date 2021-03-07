@@ -5,15 +5,30 @@ import fixturesAbtasty from '../../shared/assets/fixtures/abtasty.json'
 import DataManager from 'shared/utils/data-manager'
 
 jest.mock('validate-target')
-jest.mock('../components/list/assets/scripts/list')
-jest.mock('../components/detail/assets/scripts/detail')
-jest.mock('../../shared/assets/fixtures/abtasty.json')
-jest.mock('../../shared/assets/svgs/arrow-bottom.svg')
+jest.mock('../components/list/assets/scripts/list', () => {
+	return jest.fn().mockImplementation(() => {
+		return <div data-route-id="list"></div>
+	})
+})
+jest.mock('shared/empty/assets/scripts/empty', () => {
+	return jest.fn().mockImplementation(() => {
+		return <div data-route-id="empty"></div>
+	})
+})
+jest.mock('../components/detail/assets/scripts/detail', () => {
+	return jest.fn().mockImplementation(() => {
+		return <div data-route-id="detail"></div>
+	})
+})
 jest.mock('shared/utils/data-manager', () => {
 	return jest.fn().mockImplementation(() => {
 		return {
-			testsSortedByStatus: '',
-			targetingsSortedByStatus: '',
+			getSortedData: jest.fn().mockReturnValue({
+				testsSortedByStatus: {},
+				targetingsSortedByStatus: {
+					foo: true
+				}
+			}),
 			getTestsSortedByStatus: jest.fn(),
 			getTargetingsSortedByStatus: jest.fn()
 		}
@@ -61,6 +76,7 @@ describe('Popup constructor', () => {
 		expect(popup.stepCreated).toBe(false)
 		expect(popup.app).toBe(document.querySelector('#app'))
 		expect(DataManager).toHaveBeenCalled()
+		expect(popup.dataManager.getSortedData).toHaveBeenCalled()
 		// expect(popup.templates).toMatchObject({
 		// 	empty: expect.any(Function),
 		// 	list: expect.any(Function),
@@ -129,6 +145,53 @@ describe('Popup setRoute', () => {
 	})
 })
 
+describe('Popup hashChanged', () => {
+	it('Should call the hashChanged function', () => {
+		popup.getRoute = jest.fn().mockReturnValue('detail/000001')
+		popup.getPreviousRoute = jest.fn().mockReturnValue('list')
+		popup.destroyStep = jest.fn()
+		popup.createStep = jest.fn()
+
+		popup.hashChanged(event)
+
+		expect(popup.currentRoute).toBe('detail/000001')
+		expect(popup.getPreviousRoute).toHaveBeenCalledWith(event)
+		expect(popup.destroyStep).toHaveBeenCalledWith('list')
+		expect(popup.createStep).toHaveBeenCalledWith('detail/000001')
+		expect(popup.stepCreated).toBe(true)
+	})
+
+	it('Should call the hashChanged function with no previous route', () => {
+		popup.getRoute = jest.fn().mockReturnValue('list')
+		popup.getPreviousRoute = jest.fn().mockReturnValue(null)
+		popup.destroyStep = jest.fn()
+		popup.createStep = jest.fn()
+
+		popup.hashChanged({})
+
+		expect(popup.currentRoute).toBe('list')
+		expect(popup.getPreviousRoute).not.toHaveBeenCalledWith(event)
+		expect(popup.destroyStep).not.toHaveBeenCalled()
+		expect(popup.createStep).toHaveBeenCalledWith('list')
+		expect(popup.stepCreated).toBe(false)
+	})
+
+	it('Should call the hashChanged function with no event', () => {
+		popup.getRoute = jest.fn().mockReturnValue('detail/000001')
+		popup.getPreviousRoute = jest.fn().mockReturnValue('list')
+		popup.destroyStep = jest.fn()
+		popup.createStep = jest.fn()
+
+		popup.hashChanged()
+
+		expect(popup.currentRoute).toBe('detail/000001')
+		expect(popup.getPreviousRoute).not.toHaveBeenCalledWith(event)
+		expect(popup.destroyStep).not.toHaveBeenCalledWith('list')
+		expect(popup.createStep).toHaveBeenCalledWith('detail/000001')
+		expect(popup.stepCreated).toBe(false)
+	})
+})
+
 describe('Popup getPreviousRoute', () => {
 	it('Should call the getPreviousRoute function', () => {
 		const result = popup.getPreviousRoute(event)
@@ -181,18 +244,42 @@ describe('Popup removeElement', () => {
 	})
 })
 
-// describe('Popup createStep', () => {
-// 	it('Should call the createStep function', () => {
-// 		popup.getIdFromRoute = jest.fn().mockReturnValue('000001')
-// 		popup.getRouteSection = jest.fn().mockReturnValue('detail')
+describe('Popup createStep', () => {
+	it('Should call the createStep function', () => {
+		popup.getTestIdFromRoute = jest.fn().mockReturnValue('000001')
+		popup.getRouteSection = jest.fn().mockReturnValue('detail')
+		popup.getTemplate = jest.fn().mockReturnValue(<div></div>)
+		popup.app.appendChild = jest.fn()
 
-// 		const route = 'detail/000001'
-// 		popup.createStep(route)
+		const route = 'detail/000001'
+		popup.createStep(route)
 
-// 		expect(popup.getIdFromRoute).toHaveBeenCalledWith(route)
-// 		expect(popup.getRouteSection).toHaveBeenCalledWith(route)
-// 	})
-// })
+		expect(popup.getTestIdFromRoute).toHaveBeenCalledWith(route)
+		expect(popup.getRouteSection).toHaveBeenCalledWith(route)
+		expect(popup.getTemplate).toHaveBeenCalledWith({ routeSection: 'detail', testId: '000001' })
+		expect(popup.app.appendChild).toHaveBeenCalledWith(<div></div>)
+	})
+})
+
+describe('Popup getTemplate', () => {
+	it('Should call the getTemplate function with list', () => {
+		const result = popup.getTemplate({ routeSection: 'list' })
+
+		expect(result).toStrictEqual(<div data-route-id="list"></div>)
+	})
+
+	it('Should call the getTemplate function with detail', () => {
+		const result = popup.getTemplate({ routeSection: 'detail', testId: '000001' })
+
+		expect(result).toStrictEqual(<div data-route-id="detail"></div>)
+	})
+
+	it('Should call the getTemplate function with empty', () => {
+		const result = popup.getTemplate({ routeSection: 'empty' })
+
+		expect(result).toStrictEqual(<div data-route-id="empty"></div>)
+	})
+})
 
 describe('Popup getRouteSection', () => {
 	it('Should call the getRouteSection function', () => {
@@ -202,15 +289,15 @@ describe('Popup getRouteSection', () => {
 	})
 })
 
-describe('Popup getIdFromRoute', () => {
-	it('Should call the getIdFromRoute function', () => {
-		const result = popup.getIdFromRoute('detail/000001')
+describe('Popup getTestIdFromRoute', () => {
+	it('Should call the getTestIdFromRoute function', () => {
+		const result = popup.getTestIdFromRoute('detail/000001')
 
 		expect(result).toBe('000001')
 	})
 
-	it('Should call the getIdFromRoute function with no id', () => {
-		const result = popup.getIdFromRoute()
+	it('Should call the getTestIdFromRoute function with no id', () => {
+		const result = popup.getTestIdFromRoute()
 
 		expect(result).toBe(null)
 	})

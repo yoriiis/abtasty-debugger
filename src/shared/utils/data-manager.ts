@@ -2,17 +2,20 @@
  * Data manager for ABTasty data
  */
 
-import { Data, TestsSortedByStatus, TargetingsSortedByStatus } from 'shared/assets/interfaces/interfaces'
+import { Data, SortedData, TestsSortedByStatus, TargetingsSortedByStatus } from 'shared/assets/interfaces/interfaces'
 
 export default class DataManager {
 	data: Data;
-	testsSortedByStatus: TestsSortedByStatus;
-	targetingsSortedByStatus: TargetingsSortedByStatus;
 
 	constructor({ data }: {data: Data}) {
 		this.data = data
-		this.testsSortedByStatus = this.getTestsSortedByStatus()
-		this.targetingsSortedByStatus = this.getTargetingsSortedByStatus()
+	}
+
+	getSortedData(): SortedData {
+		return {
+			testsSortedByStatus: this.getTestsSortedByStatus(),
+			targetingsSortedByStatus: this.getTargetingsSortedByStatus()
+		}
 	}
 
 	/**

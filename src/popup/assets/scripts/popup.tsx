@@ -4,7 +4,7 @@ import DetailTemplate from '../../components/detail/assets/scripts/detail'
 import Empty from 'shared/empty/assets/scripts/empty'
 import validateTarget from 'validate-target'
 import DataManager from 'shared/utils/data-manager'
-import { Data } from 'shared/assets/interfaces/interfaces'
+import { Data, SortedData } from 'shared/assets/interfaces/interfaces'
 
 export default class Popup {
 	data: Data;
@@ -14,6 +14,8 @@ export default class Popup {
 	stepCreated: Boolean;
 	app: Element;
 	dataManager: any;
+    sortedData: SortedData;
+
 	templates: {
 		[key: string]: Function;
 	}
@@ -30,18 +32,19 @@ export default class Popup {
 		this.onClickOnApp = this.onClickOnApp.bind(this)
 
 		this.dataManager = new DataManager({ data })
+		this.sortedData = this.dataManager.getSortedData()
 
 		this.templates = {
-			empty: () => <Empty />,
-			list: () => <ListTemplate data={this.dataManager.testsSortedByStatus} />,
-			detail: (id: string) => (
+			list: () => <ListTemplate data={this.sortedData.testsSortedByStatus} />,
+			detail: (id: string) =>
 				<DetailTemplate
 					id={id}
 					result={this.data.results[id]}
-					targetingSorted={this.dataManager.targetingsSortedByStatus[id]}
+					targetingSorted={this.sortedData.targetingsSortedByStatus[id]}
 					targetingMode={this.data.accountData.tests[id].targetingMode}
-				/>
-			)
+				/>,
+			empty: () => <Empty />
+
 		}
 	}
 
@@ -95,10 +98,6 @@ export default class Popup {
 	hashChanged(e?: HashChangeEvent): void {
 		this.currentRoute = this.getRoute()
 
-		if (this.data === null) {
-			this.setRoute('empty')
-		}
-
 		if (e) {
 			this.previousRoute = this.getPreviousRoute(e)
 
@@ -151,9 +150,20 @@ export default class Popup {
 	 * @param {String} route Route of the step to create
 	 */
 	createStep(route: string) {
-		const viewId = this.getIdFromRoute(route)
+		const testId = this.getTestIdFromRoute(route)
 		const routeSection = this.getRouteSection(route)
-		this.app.appendChild(this.templates[routeSection](viewId))
+		this.app.appendChild(this.getTemplate({ routeSection, testId }))
+	}
+
+	/**
+     * Get template according to the route
+     * @param {Object} options
+     * @param {Object} options.routeSection Route section
+     * @param {Object} options.testId View ID
+     * @returns {HTMLElement} Route template
+     */
+	getTemplate({ routeSection, testId }: {routeSection: string, testId: string|null }): Element {
+		return this.templates[routeSection](testId)
 	}
 
 	/**
@@ -170,7 +180,7 @@ export default class Popup {
 	 * @param {String} route  Route
 	 * @returns {String} Detail id
 	 */
-	getIdFromRoute(route: string|null): string|null {
+	getTestIdFromRoute(route: string|null): string|null {
 		return route ? route.split('detail/')[1] : null
 	}
 
