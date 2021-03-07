@@ -10,11 +10,57 @@ const CopyPlugin = require('copy-webpack-plugin')
 module.exports = (env, argv) => {
 	const isProduction = argv.mode === 'production'
 	const suffixHash = isProduction ? '.[contenthash]' : ''
+	const isReleaseMode = env.release || false
+
+	const entries = {
+		popup: './src/popup/config'
+	}
+	const plugins = [
+		new ProgressBarPlugin(),
+		new MiniCssExtractPlugin({
+			filename: `styles/[name]${suffixHash}.css`,
+			chunkFilename: `styles/[name]${suffixHash}.css`
+		}),
+		new HtmlWebpackPlugin({
+			filename: 'popup.html',
+			template: path.resolve(__dirname, './src/popup/views/popup.html'),
+			publicPath: '',
+			chunks: ['popup']
+		}),
+		new webpack.optimize.ModuleConcatenationPlugin(),
+		new CopyPlugin({
+			patterns: [
+				{
+					from: path.resolve(__dirname, './src/shared/assets/static'),
+					to: path.resolve(__dirname, './web/dist/static')
+				},
+				{
+					from: path.resolve(__dirname, './src/shared/assets/manifest'),
+					to: path.resolve(__dirname, './web/dist')
+				},
+				{
+					from: path.resolve(__dirname, './src/shared/assets/service-worker'),
+					to: path.resolve(__dirname, './web/dist')
+				}
+			]
+		})
+	]
+
+	// On release mode disabled, add the debug entry point and plugin
+	if (!isReleaseMode) {
+		entries['popup-debug'] = './src/popup-debug/config'
+		plugins.push(
+			new HtmlWebpackPlugin({
+				filename: 'popup-debug.html',
+				template: path.resolve(__dirname, './src/popup/views/popup.html'),
+				publicPath: '',
+				chunks: ['popup-debug']
+			})
+		)
+	}
 
 	return {
-		entry: {
-			popup: './src/popup/config'
-		},
+		entry: entries,
 		watch: !isProduction,
 		watchOptions: {
 			ignored: /node_modules/
@@ -95,35 +141,7 @@ module.exports = (env, argv) => {
 				globalAssets: path.resolve(__dirname, './assets')
 			}
 		},
-		plugins: [
-			new ProgressBarPlugin(),
-			new MiniCssExtractPlugin({
-				filename: `styles/[name]${suffixHash}.css`,
-				chunkFilename: `styles/[name]${suffixHash}.css`
-			}),
-			new HtmlWebpackPlugin({
-				filename: 'popup.html',
-				template: path.resolve(__dirname, './src/popup/views/popup.html'),
-				publicPath: ''
-			}),
-			new webpack.optimize.ModuleConcatenationPlugin(),
-			new CopyPlugin({
-				patterns: [
-					{
-						from: path.resolve(__dirname, './src/shared/assets/static'),
-						to: path.resolve(__dirname, './web/dist/static')
-					},
-					{
-						from: path.resolve(__dirname, './src/shared/assets/manifest'),
-						to: path.resolve(__dirname, './web/dist')
-					},
-					{
-						from: path.resolve(__dirname, './src/shared/assets/service-worker'),
-						to: path.resolve(__dirname, './web/dist')
-					}
-				]
-			})
-		],
+		plugins,
 		stats: {
 			assets: true,
 			colors: true,
