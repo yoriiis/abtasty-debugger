@@ -1,7 +1,7 @@
 {
 	"name": "abtasty-debugger",
 	"version": "1.0.0",
-	"description": "",
+	"description": "Browser extension that simplifies the debugging of A/B Tests from AB Tasty and adds useful informations",
 	"homepage": "https://github.com/yoriiis/abtasty-debugger",
 	"bugs": "https://github.com/yoriiis/abtasty-debugger/issues",
 	"repository": "https://github.com/yoriiis/abtasty-debugger.git",

@@ -77,11 +77,11 @@ describe('Popup constructor', () => {
 		expect(popup.app).toBe(document.querySelector('#app'))
 		expect(DataManager).toHaveBeenCalled()
 		expect(popup.dataManager.getSortedData).toHaveBeenCalled()
-		// expect(popup.templates).toMatchObject({
-		// 	empty: expect.any(Function),
-		// 	list: expect.any(Function),
-		// 	detail: jest.fn().mockReturnValue(expect.any(HTMLElement))
-		// })
+		expect(popup.templates).toMatchObject({
+			empty: expect.any(Function),
+			list: expect.any(Function),
+			detail: expect.any(Function)
+		})
 	})
 })
 
