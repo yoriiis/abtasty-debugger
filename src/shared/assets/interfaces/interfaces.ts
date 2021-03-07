@@ -53,10 +53,8 @@ export interface TargetingsSortedByStatus {
 	[key: string]: TargetingItemSortedByStatus
 }
 
-export interface Event {
-    target: Element;
+export interface CustomEvent {
     detail: Object;
-    oldURL: string;
 }
 
 export interface Wording {

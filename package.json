@@ -14,7 +14,7 @@
 		"start": "rm -rf ./web/dist/ && webpack --mode=development --config=webpack.config.js",
 		"test": "jest",
 		"test:coverage": "jest --coverage",
-		"test:eslint": "eslint . --ignore-pattern dist",
+		"test:eslint": "eslint . --ignore-pattern dist --ignore-pattern lib",
 		"test:eslint:fix": "eslint . --ignore-pattern dist --fix",
 		"test:markdown": "markdownlint '**/*.md' --ignore node_modules",
 		"test:stylelint": "stylelint './src/**/*.css'",

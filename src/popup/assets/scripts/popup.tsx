@@ -4,7 +4,7 @@ import DetailTemplate from '../../components/detail/assets/scripts/detail'
 import Empty from 'shared/empty/assets/scripts/empty'
 import validateTarget from 'validate-target'
 import DataManager from 'shared/utils/data-manager'
-import { Event, Data } from 'shared/assets/interfaces/interfaces'
+import { Data } from 'shared/assets/interfaces/interfaces'
 
 export default class Popup {
 	data: Data | null;
@@ -12,7 +12,7 @@ export default class Popup {
 	previousRoute: null | string;
 	defaultRoute: string;
 	stepCreated: Boolean;
-	app: Element;
+	// app: Element;
 	dataManager: any;
 	templates: {
 		empty: Function;
@@ -26,7 +26,8 @@ export default class Popup {
 		this.previousRoute = null
 		this.defaultRoute = 'list'
 		this.stepCreated = false
-		this.app = document.querySelector('#app')
+		const app = document.querySelector('#app') as Element
+		app.classList.add('red')
 		this.hashChanged = this.hashChanged.bind(this)
 		this.onClickOnApp = this.onClickOnApp.bind(this)
 
@@ -125,7 +126,7 @@ export default class Popup {
 	 * @param {Object} event Event listener datas
 	 * @returns {String} Previous route
 	 */
-	getPreviousRoute(e: Event): string|null {
+	getPreviousRoute(e: HashChangeEvent): string|null {
 		return e && e.oldURL ? e.oldURL.split('#')[1] : null
 	}
 

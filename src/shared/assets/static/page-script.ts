@@ -1,8 +1,16 @@
 import { Data } from 'shared/assets/interfaces/interfaces'
 
+// declare const window: any;
+declare global {
+    interface Window {
+        ABTasty:any;
+    }
+}
+
 const ABTASTY_NAME = 'ABTasty'
 const INTERVAL_IN_MS = 1000
 const TIME_OUT_IN_MS = INTERVAL_IN_MS * 60
+
 
 // Search the ABTasty object in interval
 // Interval is automatically clear when the data is found
