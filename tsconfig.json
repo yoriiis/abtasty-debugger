@@ -22,5 +22,5 @@
 		"resolveJsonModule": true
 	},
 	"include": ["./src/**/*.ts", "src/shared/assets/definitions/decs.d.ts"],
-	"exclude": ["./src/__tests__", "./src/__mocks__"]
+	"exclude": ["./src/**/__tests__"]
 }
