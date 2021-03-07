@@ -77,5 +77,6 @@
 
 	&.headerOnly &-headerButton {
 		padding-right: 15px;
+		cursor: default;
 	}
 }
