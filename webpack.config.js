@@ -79,16 +79,12 @@ module.exports = (env, argv) => {
 					}
 				},
 				{
-					test: /\.(json)$/i,
+					test: /\.(json|svg)$/i,
 					include: path.resolve(__dirname, './src/'),
 					type: 'asset/source',
 					generator: {
 						filename: '[name][ext]'
 					}
-				},
-				{
-					test: /\.svg$/,
-					loader: 'svg-inline-loader'
 				}
 			]
 		},
