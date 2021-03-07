@@ -7,17 +7,15 @@ import DataManager from 'shared/utils/data-manager'
 import { Data } from 'shared/assets/interfaces/interfaces'
 
 export default class Popup {
-	data: Data | null;
+	data: Data;
 	currentRoute: null | string;
 	previousRoute: null | string;
 	defaultRoute: string;
 	stepCreated: Boolean;
-	// app: Element;
+	app: Element;
 	dataManager: any;
 	templates: {
-		empty: Function;
-		list: Function;
-		detail: Function;
+		[key: string]: Function;
 	}
 
 	constructor({ data }: {data: Data}) {
@@ -26,8 +24,7 @@ export default class Popup {
 		this.previousRoute = null
 		this.defaultRoute = 'list'
 		this.stepCreated = false
-		const app = document.querySelector('#app') as Element
-		app.classList.add('red')
+		this.app = document.querySelector('#app')!
 		this.hashChanged = this.hashChanged.bind(this)
 		this.onClickOnApp = this.onClickOnApp.bind(this)
 
@@ -94,7 +91,7 @@ export default class Popup {
 	 * On hash change event listener
 	 * @param {Obhect} e Event data
 	 */
-	hashChanged(e?: Event): void {
+	hashChanged(e?: HashChangeEvent): void {
 		this.currentRoute = this.getRoute()
 
 		if (this.data === null) {
@@ -136,7 +133,10 @@ export default class Popup {
 	 */
 	destroyStep(route: string) {
 		const routeSection = this.getRouteSection(route)
-		this.app.querySelector(`[data-route-id="${routeSection}"]`).remove()
+        const step = this.app.querySelector(`[data-route-id="${routeSection}"]`)
+        if(step){
+            step.remove()
+        }
 	}
 
 	/**
@@ -146,7 +146,7 @@ export default class Popup {
 	createStep(route: string) {
 		const viewId = this.getIdFromRoute(this.currentRoute)
 		const routeSection = this.getRouteSection(route)
-		document.querySelector('#app').appendChild(this.templates[routeSection](viewId))
+		this.app.appendChild(this.templates[routeSection](viewId))
 	}
 
 	/**
@@ -154,7 +154,7 @@ export default class Popup {
 	 * @param {String} route Route
 	 * @returns {String} Current route section
 	 */
-	getRouteSection(route: string) {
+	getRouteSection(route: string):string {
 		return route.split('/')[0]
 	}
 
@@ -198,6 +198,6 @@ export default class Popup {
 	 */
 	toggleTageting(e: Event) {
 		const target = e.target
-		target.closest('.targeting').classList.toggle('active')
+		// target.closest('.targeting').classList.toggle('active')
 	}
 }

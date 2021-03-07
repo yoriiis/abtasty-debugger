@@ -13,7 +13,7 @@ module.exports = (env, argv) => {
 
 	return {
 		entry: {
-			popup: './src/popup/config.ts'
+			popup: './src/popup/config'
 		},
 		watch: !isProduction,
 		watchOptions: {
@@ -29,7 +29,7 @@ module.exports = (env, argv) => {
 		module: {
 			rules: [
 				{
-					test: /\.(js|ts)$/,
+					test: /\.(js|ts|tsx)$/,
 					include: path.resolve(__dirname, './src'),
 					use: [
 						{
@@ -70,21 +70,13 @@ module.exports = (env, argv) => {
 					}
 				},
 				{
-					test: /\.(json)$/i,
-					include: path.resolve(__dirname, './src/'),
-					type: 'asset/source',
-					generator: {
-						filename: '[name][ext]'
-					}
-				},
-				{
 					test: /\.svg$/,
 					loader: 'svg-inline-loader'
 				}
 			]
 		},
 		resolve: {
-			extensions: ['.js', '.css'],
+			extensions: ['.js', '.ts', '.tsx', '.css'],
 			alias: {
 				shared: path.resolve(__dirname, './src/shared'),
 				globalAssets: path.resolve(__dirname, './assets')

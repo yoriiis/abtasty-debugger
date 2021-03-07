@@ -60,24 +60,3 @@ export interface CustomEvent {
 export interface Wording {
     [key: string]: string;
 }
-
-export interface ChromePort {
-    name: string;
-    onMessage: {
-        addListener: Function
-    };
-}
-
-export interface ChromeMessage {
-    ABTastyData: string;
-}
-
-export interface ChromeTabs {
-    [index: number]: {
-        id?: Number;
-    };
-}
-
-export interface ChromeStorage {
-    [key: string]: any;
-}

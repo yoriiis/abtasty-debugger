@@ -1,5 +1,5 @@
 import Popup from './popup'
-import fixturesAbtasty from 'shared/assets/fixtures/abtasty.json'
+import fixturesAbtasty from 'shared/assets/fixtures/abtasty'
 
 const isExtensionMode =
 	typeof chrome !== 'undefined' &&
@@ -24,6 +24,6 @@ if (isExtensionMode) {
 		}
 	})
 } else {
-	const popup = new Popup({ data: JSON.parse(fixturesAbtasty) })
+	const popup = new Popup({ data: fixturesAbtasty })
 	popup.init()
 }

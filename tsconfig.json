@@ -6,19 +6,21 @@
 		"checkJs": true,
 		"target": "es2017",
 		"lib": ["es2017", "dom"],
-		"strict": true,
+		"strict": false,
 		"esModuleInterop": true,
 		"declaration": true,
 		"skipLibCheck": true,
 		"allowSyntheticDefaultImports": true,
 		"module": "commonjs",
-		"jsx": "preserve",
+		"jsx": "react",
+		"jsxFactory": "createElement",
+		"jsxFragmentFactory": "Fragment",
 		"baseUrl": "./src",
 		"paths": {
 			"shared": ["src/shared"]
 		},
 		"resolveJsonModule": true
 	},
-	"include": ["./src/**/*", "src/shared/assets/definitions/decs.d.ts"],
+	"include": ["./src/**/*.ts", "src/shared/assets/definitions/decs.d.ts"],
 	"exclude": ["./src/__tests__", "./src/__mocks__"]
 }

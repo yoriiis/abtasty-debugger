@@ -1,16 +1,6 @@
-import { Data } from 'shared/assets/interfaces/interfaces'
-
-// declare const window: any;
-declare global {
-    interface Window {
-        ABTasty:any;
-    }
-}
-
 const ABTASTY_NAME = 'ABTasty'
 const INTERVAL_IN_MS = 1000
 const TIME_OUT_IN_MS = INTERVAL_IN_MS * 60
-
 
 // Search the ABTasty object in interval
 // Interval is automatically clear when the data is found
@@ -49,10 +39,10 @@ const timeout = setTimeout(() => {
  * @param {Object} data ABTasty object
  * @returns {Array} List of pending tests
  */
-function searchPendingTests(data: Data): Array<string> {
+function searchPendingTests(data) {
 	const tests = data.accountData.tests
 	return Object.keys(tests).filter(
-		(testId: string) =>
+		(testId) =>
 			tests[testId].targetingMode === 'waituntil' && tests[testId].status === 'pending'
 	)
 }
@@ -61,7 +51,7 @@ function searchPendingTests(data: Data): Array<string> {
  * Send data from the ABTasty object to the service worker
  * @param {Object} data ABTasty object
  */
-function sendData(data: Data): void {
+function sendData(data) {
 	document.dispatchEvent(
 		new window.CustomEvent('sendABTastyObject', {
 			detail: {

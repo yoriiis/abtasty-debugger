@@ -1,5 +1,3 @@
-// import { CustomEvent } from 'shared/assets/interfaces/interfaces'
-
 // Create the connection with a specific name (for scope)
 const port = chrome.runtime.connect({
 	name: 'abtastyExtention'
@@ -11,7 +9,7 @@ pageScript.src = chrome.runtime.getURL('static/page-script.ts')
 document.head.appendChild(pageScript)
 
 // Listen for dispatchEvent from the page script
-document.addEventListener('sendABTastyObject', (event: Event)  => {
+document.addEventListener('sendABTastyObject', (event) => {
 	// Send data to the background
-	port.postMessage({ ABTastyData: (event as CustomEvent).detail.ABTastyData })
+	port.postMessage({ ABTastyData: event.detail.ABTastyData })
 })
