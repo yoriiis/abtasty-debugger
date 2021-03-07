@@ -35,11 +35,7 @@ module.exports = (env, argv) => {
 					to: path.resolve(__dirname, './web/dist/static')
 				},
 				{
-					from: path.resolve(__dirname, './src/shared/assets/manifest'),
-					to: path.resolve(__dirname, './web/dist')
-				},
-				{
-					from: path.resolve(__dirname, './src/shared/assets/service-worker'),
+					from: path.resolve(__dirname, './src/shared/assets/static-root'),
 					to: path.resolve(__dirname, './web/dist')
 				}
 			]
