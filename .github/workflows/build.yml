@@ -45,7 +45,8 @@ jobs:
       - name: Validate manifest.json schema
         uses: docker://orrosenblatt/validate-json-action:latest
         env:
-          INPUT_SCHEMA: ./manifest-schema.json
+          INPUT_SCHEMA: manifest-schema.json
+          INPUT_JSONS: ../../src/shared/assets/static-root/manifest.json
 
       - name: Test Jest
         run: npm run test
