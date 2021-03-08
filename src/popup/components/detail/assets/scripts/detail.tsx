@@ -40,6 +40,7 @@ export default function ({ id, result, targetingSorted, targetingMode }: { id: s
 					</li>
 				</ul>
 				<ul className="detail-list">
+					<li>Name: {result.name}</li>
 					<li>ID: {id}</li>
 					<li>Type: {result.type}</li>
 					{result.variationName && (

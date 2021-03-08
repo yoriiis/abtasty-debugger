@@ -13,7 +13,7 @@
 		"000001": {
 			"name": "Test with the menu button on the left",
 			"type": "ab",
-			"status": "target_pages_rejected",
+			"status": "accepted",
 			"variationID": null,
 			"variationName": null,
 			"targetings": {
@@ -23,7 +23,7 @@
 							{
 								"include": true,
 								"condition": 10,
-								"value": "https://www.google.fr"
+								"value": "https://www.programme-tv.net"
 							}
 						],
 						"success": false
@@ -45,12 +45,12 @@
 							{
 								"include": false,
 								"condition": 10,
-								"value": "https://www.google.fr"
+								"value": "https://www.programme-tv.net"
 							},
 							{
 								"include": true,
 								"condition": 11,
-								"value": "https://www.google.fr/news"
+								"value": "https://www.programme-tv.net/news"
 							}
 						],
 						"success": true

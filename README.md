@@ -4,9 +4,24 @@
 
 `ABTastyDebugger` is a browser extension that simplifies the debugging of A/B Tests from AB Tasty and adds useful informations.
 
+Display A/B tests available on the current page and debug targeting informations. For example, if a test is not displaying, the extension display which targetings are not valid.
+
 ## Installation
 
-Soon available on the Chrome Web Store.
+Install the `AB Tasty Debugger` browser extension from the Chrome Web Store (Coming soon).
+
+![Chrome](assets/images/chrome.png 'Chrome')
+
+## Features
+
+- Displays a badge with the number of A / B tests found on the current page
+- Displays a list of all A/B tests available on the current page with their status.
+- The list of A/B tests is sorted to show the accepted tests at the top of the list.
+- Displays a detail view of each tests with their general informations (ID, name, ajax targeting).
+- Displays a link to edit the test on the AB Tasty editor.
+- List all targeting informations of the test (URL, code, selector, cookie, IP) with their status.
+- The list targetings is sorted to show the rejected targeting at the top of the list.
+- Collapse/expand all targeting informations
 
 ## Licence
 
