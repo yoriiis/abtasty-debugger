@@ -43,9 +43,9 @@ jobs:
         run: npm run test:markdown
 
       - name: Validate manifest.json schema
-        uses: OrRosenblatt/validate-json-action@0.1.0
+        uses: docker://orrosenblatt/validate-json-action:latest
         env:
-          INPUT_SCHEMA: ../../src/shared/assets/schema/manifest-schema.json
+          INPUT_SCHEMA: ./manifest-schema.json
 
       - name: Test Jest
         run: npm run test
