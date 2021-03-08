@@ -1,13 +1,16 @@
 name: Build
 
 on:
-  - push
-  - pull_request
+  push:
+    tags:
+      - '*'
+    branches:
+      - '*'
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v2
 
@@ -42,12 +45,6 @@ jobs:
       - name: Test Markdown
         run: npm run test:markdown
 
-      - name: Validate manifest.json schema
-        uses: docker://orrosenblatt/validate-json-action:latest
-        env:
-          INPUT_SCHEMA: manifest-schema.json
-          INPUT_JSONS: ../../src/shared/assets/static-root/manifest.json
-
       - name: Test Jest
         run: npm run test
 
@@ -60,9 +57,18 @@ jobs:
           name: coverage
           path: coverage
 
-      - name: Release
+      - name: Build Release
         run: |
           npm run release
+
+      - name: Upload release artifacts
+        uses: actions/upload-artifact@v1
+        if: github.ref == 'refs/heads/master' &&
+            github.repository == 'yoriiis/abtasty-debugger' &&
+            github.event_name != 'pull_request'
+        with:
+          name: release
+          path: abtasty-debugger.zip
 
   deploy-coverage:
     runs-on: ubuntu-latest
@@ -88,3 +94,19 @@ jobs:
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
+
+  deploy-store:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: build
+    # if: success() &&
+    #     github.ref == 'refs/tags/v' &&
+    #     github.repository == 'yoriiis/abtasty-debugger' &&
+    #     github.event_name != 'pull_request'
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Download release artifacts
+        uses: actions/download-artifact@v1
+        with:
+          name: release
