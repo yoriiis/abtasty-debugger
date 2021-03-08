@@ -33,29 +33,29 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # - name: Test ESLint
-      #   run: npm run test:eslint
+      - name: Test ESLint
+        run: npm run test:eslint
 
-      # - name: Test Stylelint
-      #   run: npm run test:stylelint
+      - name: Test Stylelint
+        run: npm run test:stylelint
 
-      # - name: Test Typescript
-      #   run: npm run test:type-check
+      - name: Test Typescript
+        run: npm run test:type-check
 
-      # - name: Test Markdown
-      #   run: npm run test:markdown
+      - name: Test Markdown
+        run: npm run test:markdown
 
-      # - name: Test Jest
-      #   run: npm run test
+      - name: Test Jest
+        run: npm run test
 
-      # - name: Upload coverage artifacts
-      #   uses: actions/upload-artifact@v2
-      #   if: github.ref == 'refs/heads/master' &&
-      #       github.repository == 'yoriiis/abtasty-debugger' &&
-      #       github.event_name != 'pull_request'
-      #   with:
-      #     name: coverage
-      #     path: coverage
+      - name: Upload coverage artifacts
+        uses: actions/upload-artifact@v2
+        if: github.ref == 'refs/heads/master' &&
+            github.repository == 'yoriiis/abtasty-debugger' &&
+            github.event_name != 'pull_request'
+        with:
+          name: coverage
+          path: coverage
 
       - name: Build Release
         run: |
@@ -70,53 +70,53 @@ jobs:
           name: release
           path: abtasty-debugger.zip
 
-  # deploy-coverage:
-  #   runs-on: ubuntu-latest
-  #   timeout-minutes: 10
-  #   needs: build
-  #   if: success() &&
-  #       github.ref == 'refs/heads/master' &&
-  #       github.repository == 'yoriiis/abtasty-debugger' &&
-  #       github.event_name != 'pull_request'
-  #   steps:
-  #     - uses: actions/checkout@v2
-
-  #     - name: Download coverage artifacts
-  #       uses: actions/download-artifact@v2
-  #       with:
-  #         name: coverage
-
-  #     - uses: actions/setup-node@v1
-  #       with:
-  #         node-version: 12.14.0
-
-  #     - name: Coveralls
-  #       uses: coverallsapp/github-action@master
-  #       with:
-  #         github-token: ${{ secrets.GITHUB_TOKEN }}
-
-  deploy-store:
+  deploy-coverage:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     needs: build
+    if: success() &&
+        github.ref == 'refs/heads/master' &&
+        github.repository == 'yoriiis/abtasty-debugger' &&
+        github.event_name != 'pull_request'
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Download coverage artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: coverage
+
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12.14.0
+
+      - name: Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+  # deploy-store:
+  #   runs-on: ubuntu-latest
+  #   timeout-minutes: 10
+  #   needs: build
     # if: success() &&
     #     github.ref == 'refs/tags/v' &&
     #     github.repository == 'yoriiis/abtasty-debugger' &&
     #     github.event_name != 'pull_request'
-    steps:
-      - uses: actions/checkout@v2
+    # steps:
+    #   - uses: actions/checkout@v2
 
-      - name: Download release artifacts
-        uses: actions/download-artifact@v2
-        with:
-          name: release
+    #   - name: Download release artifacts
+    #     uses: actions/download-artifact@v2
+    #     with:
+    #       name: release
 
-      - name: Chrome Extension upload & publish
-        uses: Passiverecords/chrome-extension-upload-action@1.4.1
-        with:
-          refresh-token: ${{ secrets.CHROME_REFRESH_TOKEN }}
-          client-id: ${{ secrets.CHROME_CLIENT_ID }}
-          client-secret: ${{ secrets.CHROME_CLIENT_SECRET}}
-          file-name: 'abtasty-debugger.zip'
-          app-id: ${{ secrets.CHROME_APP_ID }}
-          publish: false
+    #   - name: Chrome Extension upload & publish
+    #     uses: Passiverecords/chrome-extension-upload-action@1.4.1
+    #     with:
+    #       refresh-token: ${{ secrets.CHROME_REFRESH_TOKEN }}
+    #       client-id: ${{ secrets.CHROME_CLIENT_ID }}
+    #       client-secret: ${{ secrets.CHROME_CLIENT_SECRET}}
+    #       file-name: 'abtasty-debugger.zip'
+    #       app-id: ${{ secrets.CHROME_APP_ID }}
+    #       publish: false
