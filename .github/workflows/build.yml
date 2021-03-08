@@ -42,6 +42,11 @@ jobs:
       - name: Test Markdown
         run: npm run test:markdown
 
+      - name: Validate manifest.json schema
+        uses: OrRosenblatt/validate-json-action@0.1.0
+        env:
+          INPUT_SCHEMA: https://json.schemastore.org/chrome-manifest
+
       - name: Test Jest
         run: npm run test
 
