@@ -99,10 +99,10 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     needs: build
-    # if: success() &&
-    #     github.ref == 'refs/tags/v' &&
-    #     github.repository == 'yoriiis/abtasty-debugger' &&
-    #     github.event_name != 'pull_request'
+    if: success() &&
+        github.ref == 'refs/tags/v' &&
+        github.repository == 'yoriiis/abtasty-debugger' &&
+        github.event_name != 'pull_request'
     steps:
       - uses: actions/checkout@v2
 
