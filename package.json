@@ -13,7 +13,6 @@
 		"release": "rm -rf ./web/dist/ && webpack --mode=production --config=webpack.config.js --env release=true && node ./src/shared/utils/zip-release.js",
 		"start": "rm -rf ./web/dist/ && webpack --mode=development --config=webpack.config.js",
 		"test": "jest --verbose --coverage",
-		"test:coverage": "jest --coverage",
 		"test:eslint": "eslint . --ignore-pattern dist --ignore-pattern lib",
 		"test:eslint:fix": "eslint . --ignore-pattern dist --fix",
 		"test:markdown": "markdownlint '**/*.md' --ignore node_modules",
