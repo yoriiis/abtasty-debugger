@@ -45,7 +45,7 @@ jobs:
       - name: Validate manifest.json schema
         uses: OrRosenblatt/validate-json-action@0.1.0
         env:
-          INPUT_SCHEMA: https://json.schemastore.org/chrome-manifest
+          INPUT_SCHEMA: ../../src/shared/assets/schema/manifest-schema.json
 
       - name: Test Jest
         run: npm run test
