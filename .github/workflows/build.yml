@@ -48,53 +48,59 @@ jobs:
       - name: Test Jest
         run: npm run test
 
-      - name: Upload coverage artifacts
-        uses: actions/upload-artifact@v2
+      # - name: Upload coverage artifacts
+      #   uses: actions/upload-artifact@v2
         # if: github.ref == 'refs/heads/master' &&
         #     github.repository == 'yoriiis/abtasty-debugger' &&
         #     github.event_name != 'pull_request'
-        with:
-          name: coverage
-          path: coverage
-
-      - name: Build Release
-        run: |
-          npm run release
-
-      - name: Upload release artifacts
-        uses: actions/upload-artifact@v2
-        if: github.ref == 'refs/heads/master' &&
-            github.repository == 'yoriiis/abtasty-debugger' &&
-            github.event_name != 'pull_request'
-        with:
-          name: release
-          path: abtasty-debugger.zip
-
-  deploy-coverage:
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    needs: build
-    # if: success() &&
-    #     github.ref == 'refs/heads/master' &&
-    #     github.repository == 'yoriiis/abtasty-debugger' &&
-    #     github.event_name != 'pull_request'
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Download coverage artifacts
-        uses: actions/download-artifact@v2
-        with:
-          name: coverage
-
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 12.14.0
+        # with:
+        #   name: coverage
+        #   path: coverage
 
       - name: Coveralls
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          path-to-lcov: './coverage/lcov.info'
+          # path-to-lcov: './coverage/lcov.info'
+
+      # - name: Build Release
+      #   run: |
+      #     npm run release
+
+      # - name: Upload release artifacts
+      #   uses: actions/upload-artifact@v2
+      #   if: github.ref == 'refs/heads/master' &&
+      #       github.repository == 'yoriiis/abtasty-debugger' &&
+      #       github.event_name != 'pull_request'
+      #   with:
+      #     name: release
+      #     path: abtasty-debugger.zip
+
+  # deploy-coverage:
+  #   runs-on: ubuntu-latest
+  #   timeout-minutes: 10
+  #   needs: build
+    # if: success() &&
+    #     github.ref == 'refs/heads/master' &&
+    #     github.repository == 'yoriiis/abtasty-debugger' &&
+    #     github.event_name != 'pull_request'
+    # steps:
+    #   - uses: actions/checkout@v2
+
+    #   - name: Download coverage artifacts
+    #     uses: actions/download-artifact@v2
+    #     with:
+    #       name: coverage
+
+    #   - uses: actions/setup-node@v1
+    #     with:
+    #       node-version: 12.14.0
+
+    #   - name: Coveralls
+    #     uses: coverallsapp/github-action@master
+    #     with:
+    #       github-token: ${{ secrets.GITHUB_TOKEN }}
+    #       path-to-lcov: './coverage/lcov.info'
 
   # deploy-store:
   #   runs-on: ubuntu-latest
