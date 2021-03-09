@@ -33,17 +33,17 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Test ESLint
-        run: npm run test:eslint
+      # - name: Test ESLint
+      #   run: npm run test:eslint
 
-      - name: Test Stylelint
-        run: npm run test:stylelint
+      # - name: Test Stylelint
+      #   run: npm run test:stylelint
 
-      - name: Test Typescript
-        run: npm run test:type-check
+      # - name: Test Typescript
+      #   run: npm run test:type-check
 
-      - name: Test Markdown
-        run: npm run test:markdown
+      # - name: Test Markdown
+      #   run: npm run test:markdown
 
       - name: Test Jest
         run: npm run test
@@ -88,17 +88,22 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: coverage
+          path: coverage
+
+      - name: Display structure of downloaded files
+        run: ls -R
+        # working-directory: coverage
 
     #   - uses: actions/setup-node@v1
     #     with:
     #       node-version: 12.14.0
 
     #     run: npm run coveralls
-      - name: Coveralls
-        uses: coverallsapp/github-action@master
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          path-to-lcov: ${{ github.workspace }}/abtasty-debugger/coverage/lcov.info
+      # - name: Coveralls
+      #   uses: coverallsapp/github-action@master
+      #   with:
+      #     github-token: ${{ secrets.GITHUB_TOKEN }}
+      #     path-to-lcov: ${{ github.workspace }}/abtasty-debugger/coverage/lcov.info
           # path-to-lcov: 'coverage/lcov.info'
 
 
