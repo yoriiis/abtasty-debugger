@@ -45,17 +45,17 @@ jobs:
       # - name: Test Markdown
       #   run: npm run test:markdown
 
-      - name: Test Jest
-        run: npm run test
+      # - name: Test Jest
+      #   run: npm run test
 
-      - name: Upload coverage artifacts
-        uses: actions/upload-artifact@v2
-        # if: github.ref == 'refs/heads/master' &&
-        #     github.repository == 'yoriiis/abtasty-debugger' &&
-        #     github.event_name != 'pull_request'
-        with:
-          name: coverage
-          path: coverage
+      # - name: Upload coverage artifacts
+      #   uses: actions/upload-artifact@v2
+      #   if: github.ref == 'refs/heads/master' &&
+      #       github.repository == 'yoriiis/abtasty-debugger' &&
+      #       github.event_name != 'pull_request'
+      #   with:
+      #     name: coverage
+      #     path: coverage
 
       - name: Build Release
         run: |
@@ -63,9 +63,9 @@ jobs:
 
       - name: Upload release artifacts
         uses: actions/upload-artifact@v2
-        if: github.ref == 'refs/heads/master' &&
-            github.repository == 'yoriiis/abtasty-debugger' &&
-            github.event_name != 'pull_request'
+        # if: github.ref == 'refs/heads/master' &&
+        #     github.repository == 'yoriiis/abtasty-debugger' &&
+        #     github.event_name != 'pull_request'
         with:
           name: release
           path: abtasty-debugger.zip
@@ -74,10 +74,10 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     needs: build
-    # if: success() &&
-    #     github.ref == 'refs/heads/master' &&
-    #     github.repository == 'yoriiis/abtasty-debugger' &&
-    #     github.event_name != 'pull_request'
+    if: success() &&
+        github.ref == 'refs/heads/master' &&
+        github.repository == 'yoriiis/abtasty-debugger' &&
+        github.event_name != 'pull_request'
     steps:
       - uses: actions/checkout@v2
 
@@ -96,28 +96,28 @@ jobs:
           path-to-lcov: 'coverage/lcov.info'
 
 
-  # deploy-store:
-  #   runs-on: ubuntu-latest
-  #   timeout-minutes: 10
-  #   needs: build
+  deploy-store:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: build
     # if: success() &&
     #     github.ref == 'refs/tags/v' &&
     #     github.repository == 'yoriiis/abtasty-debugger' &&
     #     github.event_name != 'pull_request'
-    # steps:
-    #   - uses: actions/checkout@v2
+    steps:
+      - uses: actions/checkout@v2
 
-    #   - name: Download release artifacts
-    #     uses: actions/download-artifact@v2
-    #     with:
-    #       name: release
+      - name: Download release artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: release
 
-    #   - name: Chrome Extension upload & publish
-    #     uses: Passiverecords/chrome-extension-upload-action@1.4.1
-    #     with:
-    #       refresh-token: ${{ secrets.CHROME_REFRESH_TOKEN }}
-    #       client-id: ${{ secrets.CHROME_CLIENT_ID }}
-    #       client-secret: ${{ secrets.CHROME_CLIENT_SECRET}}
-    #       file-name: 'abtasty-debugger.zip'
-    #       app-id: ${{ secrets.CHROME_APP_ID }}
-    #       publish: false
+      - name: Chrome Extension upload & publish
+        uses: Passiverecords/chrome-extension-upload-action@1.4.1
+        with:
+          refresh-token: ${{ secrets.CHROME_REFRESH_TOKEN }}
+          client-id: ${{ secrets.CHROME_CLIENT_ID }}
+          client-secret: ${{ secrets.CHROME_CLIENT_SECRET}}
+          file-name: 'abtasty-debugger.zip'
+          app-id: ${{ secrets.CHROME_APP_ID }}
+          publish: false
