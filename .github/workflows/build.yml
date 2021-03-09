@@ -49,10 +49,10 @@ jobs:
         run: npm run test
 
       - name: Upload coverage artifacts
-        uses: actions/upload-artifact@v1
-        if: github.ref == 'refs/heads/master' &&
-            github.repository == 'yoriiis/abtasty-debugger' &&
-            github.event_name != 'pull_request'
+        uses: actions/upload-artifact@v2
+        # if: github.ref == 'refs/heads/master' &&
+        #     github.repository == 'yoriiis/abtasty-debugger' &&
+        #     github.event_name != 'pull_request'
         with:
           name: coverage
           path: coverage
@@ -62,7 +62,7 @@ jobs:
           npm run release
 
       - name: Upload release artifacts
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v2
         if: github.ref == 'refs/heads/master' &&
             github.repository == 'yoriiis/abtasty-debugger' &&
             github.event_name != 'pull_request'
@@ -74,15 +74,15 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     needs: build
-    if: success() &&
-        github.ref == 'refs/heads/master' &&
-        github.repository == 'yoriiis/abtasty-debugger' &&
-        github.event_name != 'pull_request'
+    # if: success() &&
+    #     github.ref == 'refs/heads/master' &&
+    #     github.repository == 'yoriiis/abtasty-debugger' &&
+    #     github.event_name != 'pull_request'
     steps:
       - uses: actions/checkout@v2
 
       - name: Download coverage artifacts
-        uses: actions/download-artifact@v1
+        uses: actions/download-artifact@v2
         with:
           name: coverage
 
@@ -107,7 +107,7 @@ jobs:
     #   - uses: actions/checkout@v2
 
     #   - name: Download release artifacts
-    #     uses: actions/download-artifact@v1
+    #     uses: actions/download-artifact@v2
     #     with:
     #       name: release
 
