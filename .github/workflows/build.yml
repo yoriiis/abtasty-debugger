@@ -57,21 +57,18 @@ jobs:
           name: coverage
           path: coverage
 
-      # - name: Coveralls
-      #   run: npm run coveralls
+      - name: Build Release
+        run: |
+          npm run release
 
-      # - name: Build Release
-      #   run: |
-      #     npm run release
-
-      # - name: Upload release artifacts
-      #   uses: actions/upload-artifact@v2
-      #   if: github.ref == 'refs/heads/master' &&
-      #       github.repository == 'yoriiis/abtasty-debugger' &&
-      #       github.event_name != 'pull_request'
-      #   with:
-      #     name: release
-      #     path: abtasty-debugger.zip
+      - name: Upload release artifacts
+        uses: actions/upload-artifact@v2
+        if: github.ref == 'refs/heads/master' &&
+            github.repository == 'yoriiis/abtasty-debugger' &&
+            github.event_name != 'pull_request'
+        with:
+          name: release
+          path: abtasty-debugger.zip
 
   deploy-coverage:
     runs-on: ubuntu-latest
@@ -88,23 +85,15 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: coverage
+          # The path is mandatory with actions/download-artifact@v2
+          # https://github.com/actions/download-artifact#compatibility-between-v1-and-v2
           path: coverage
 
-      - name: Display structure of downloaded files
-        run: ls -R
-        # working-directory: coverage
-
-    #   - uses: actions/setup-node@v1
-    #     with:
-    #       node-version: 12.14.0
-
-    #     run: npm run coveralls
-      # - name: Coveralls
-      #   uses: coverallsapp/github-action@master
-      #   with:
-      #     github-token: ${{ secrets.GITHUB_TOKEN }}
-      #     path-to-lcov: ${{ github.workspace }}/abtasty-debugger/coverage/lcov.info
-          # path-to-lcov: 'coverage/lcov.info'
+      - name: Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: 'coverage/lcov.info'
 
 
   # deploy-store:
