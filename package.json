@@ -9,6 +9,7 @@
 	"author": "Yoriiis aka Joris DANIEL",
 	"scripts": {
 		"build": "rm -rf ./web/dist/ && webpack --mode=production --config=webpack.config.js",
+		"coveralls": "cat ./coverage/lcov.info | coveralls",
 		"inspect": "node --inspect node_modules/webpack/bin/webpack.js --config webpack.config.js --mode=development",
 		"release": "rm -rf ./web/dist/ && webpack --mode=production --config=webpack.config.js --env release=true && node ./src/shared/utils/zip-release.js",
 		"start": "rm -rf ./web/dist/ && webpack --mode=development --config=webpack.config.js",
@@ -37,6 +38,7 @@
 		"chalk": "^4.1.0",
 		"chunks-webpack-plugin": "^7.0.1",
 		"copy-webpack-plugin": "^7.0.0",
+		"coveralls": "^3.1.0",
 		"css-loader": "^5.0.2",
 		"css-minimizer-webpack-plugin": "^1.2.0",
 		"eslint": "^7.20.0",
