@@ -63,7 +63,7 @@ jobs:
 
       - name: Upload release artifacts
         uses: actions/upload-artifact@v2
-        if: github.ref == 'refs/heads/master' &&
+        if: github.ref == 'refs/tags/v' &&
             github.repository == 'yoriiis/abtasty-debugger' &&
             github.event_name != 'pull_request'
         with:
@@ -94,7 +94,6 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           path-to-lcov: 'coverage/lcov.info'
-
 
   deploy-store:
     runs-on: ubuntu-latest
