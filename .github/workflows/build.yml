@@ -2,10 +2,10 @@ name: Build
 
 on:
   push:
-    tags:
-      - '*'
     branches:
-      - '*'
+    pull_request:
+  release:
+    types: [published]
 
 jobs:
   build:
