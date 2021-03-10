@@ -64,7 +64,7 @@ jobs:
       - name: Upload release artifacts
         uses: actions/upload-artifact@v2
         if: github.event_name == 'release' &&
-            github.event.action == 'created' &&
+            github.event.action == 'published' &&
             github.repository == 'yoriiis/abtasty-debugger'
         with:
           name: release
@@ -101,7 +101,7 @@ jobs:
     needs: build
     if: success() &&
         github.event_name == 'release' &&
-        github.event.action == 'created' &&
+        github.event.action == 'published' &&
         github.repository == 'yoriiis/abtasty-debugger'
     steps:
       - uses: actions/checkout@v2
