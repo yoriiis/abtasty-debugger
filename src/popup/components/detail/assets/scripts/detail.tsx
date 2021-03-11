@@ -19,7 +19,7 @@ export default function ({ id, result, targetingSorted, targetingMode }: { id: s
 			<div className="detail">
 				<ul className="detail-header">
 					<li>
-						<a href="#list" className="detail-headerBack">
+						<a href="#/" className="detail-headerBack">
 							<div className="detail-headerBackIcon" innerHTML={arrowBottom}></div>
 							Back
 						</a>

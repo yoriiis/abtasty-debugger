@@ -11,7 +11,7 @@ import { TestsSortedByStatus, Result } from 'shared/assets/interfaces/interfaces
  */
 export default function ({ data }: {data: TestsSortedByStatus}) {
 	return (
-		<div data-route-id="list">
+		<div data-route-id="home">
 			<ul className="list" data-route-id="list">
 				{data.accepted.map((item: Result) => (
 					<List data={item} />
@@ -33,7 +33,7 @@ export default function ({ data }: {data: TestsSortedByStatus}) {
 function List({ data }: {data: Result}) {
 	return (
 		<li className="list-item">
-			<a href={`#detail/${data.key}`} className="list-link">
+			<a href={`#/detail/${data.key}`} className="list-link">
 				<span className="list-name">{data.name}</span>
 				<BadgeTemplate status={data.status} />
 				<div className="list-icon" innerHTML={arrowBottom}></div>

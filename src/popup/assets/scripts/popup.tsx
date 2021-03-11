@@ -14,37 +14,50 @@ export default class Popup {
 	stepCreated: Boolean;
 	app: Element;
 	dataManager: any;
-    sortedData: SortedData;
+	sortedData: SortedData;
 
-	templates: {
-		[key: string]: Function;
-	}
+	routes: {
+		[key: string]: {
+			path: string;
+			template: Function;
+		};
+	} | undefined;
 
 	constructor({ data }: {data: Data}) {
 		this.data = data
 		this.currentRoute = null
 		this.previousRoute = null
-		this.defaultRoute = 'list'
+		this.defaultRoute = '/'
 		this.stepCreated = false
 		// @ts-ignore
 		this.app = document.querySelector('#app')
 		this.hashChanged = this.hashChanged.bind(this)
 		this.onClickOnApp = this.onClickOnApp.bind(this)
 
-		this.dataManager = new DataManager({ data })
-		this.sortedData = this.dataManager.getSortedData()
+		if (this.data) {
+			this.dataManager = new DataManager({ data })
+			this.sortedData = this.dataManager.getSortedData()
 
-		this.templates = {
-			list: () => <ListTemplate data={this.sortedData.testsSortedByStatus} />,
-			detail: (id: string) =>
-				<DetailTemplate
-					id={id}
-					result={this.data.results[id]}
-					targetingSorted={this.sortedData.targetingsSortedByStatus[id]}
-					targetingMode={this.data.accountData.tests[id].targetingMode}
-				/>,
-			empty: () => <Empty />
+			this.routes = {
+				home: {
+					path: '/',
+					template: () => <ListTemplate data={this.sortedData.testsSortedByStatus} />
+				},
+				detail: {
+					path: '/detail/:id',
+					template: (dynamicData: any) => <DetailTemplate
+						id={dynamicData[':id']}
+						result={this.data.results[dynamicData[':id']]}
+						targetingSorted={this.sortedData.targetingsSortedByStatus[dynamicData[':id']]}
+						targetingMode={this.data.accountData.tests[dynamicData[':id']].targetingMode}
+					/>
+				},
+				empty: {
+					path: '/empty',
+					template: () => <Empty />
+				}
 
+			}
 		}
 	}
 
@@ -132,15 +145,15 @@ export default class Popup {
 	 * @param {String} route Route of the step to destroy
 	 */
 	destroyStep(route: string) {
-		const routeSection = this.getRouteSection(route)
-		const step = this.app.querySelector(`[data-route-id="${routeSection}"]`)
+		const routeKey = this.getRouteDataFromUrl(route)
+		const step = this.app.querySelector(`[data-route-id="${routeKey}"]`)
 		step && this.removeElement(step)
 	}
 
 	/**
-     * Remove HTML Element
-     * @param {HTMLElement} element
-     */
+	 * Remove HTML Element
+	 * @param {HTMLElement} element
+	 */
 	removeElement(element: Element) {
 		element.remove()
 	}
@@ -150,38 +163,51 @@ export default class Popup {
 	 * @param {String} route Route of the step to create
 	 */
 	createStep(route: string) {
-		const testId = this.getTestIdFromRoute(route)
-		const routeSection = this.getRouteSection(route)
-		this.app.appendChild(this.getTemplate({ routeSection, testId }))
+		this.app.appendChild(this.getTemplate({ route }))
 	}
 
 	/**
-     * Get template according to the route
-     * @param {Object} options
-     * @param {Object} options.routeSection Route section
-     * @param {Object} options.testId View ID
-     * @returns {HTMLElement} Route template
-     */
-	getTemplate({ routeSection, testId }: {routeSection: string, testId: string|null }): Element {
-		return this.templates[routeSection](testId)
-	}
-
-	/**
-	 * Get the current route section (view/000001 => view)
-	 * @param {String} route Route
-	 * @returns {String} Current route section
+	 * Get template according to the route
+	 * @param {Object} options
+	 * @param {Object} options.route Route
+	 * @returns {HTMLElement} Route template
 	 */
-	getRouteSection(route: string):string {
-		return route.split('/')[0]
+	getTemplate({ route }: {route: string }): Element {
+		const routeKey = this.getRouteDataFromUrl(route)
+		const dynamicParameter = routeKey ? this.getDynamicParameter({ routeKey, route }) : {}
+		console.log(routeKey)
+		console.log(dynamicParameter)
+		return this.routes[routeKey || 'empty'].template(dynamicParameter)
 	}
 
-	/**
-	 * Get id from route
-	 * @param {String} route  Route
-	 * @returns {String} Detail id
-	 */
-	getTestIdFromRoute(route: string|null): string|null {
-		return route ? route.split('detail/')[1] : null
+	getRouteDataFromUrl(route: string): string | undefined {
+		const routeFromUrlSplit = this.getRouteInArray(route)
+		return Object.keys(this.routes).find((routeKey: string) => {
+			const routeFromAppSplit = this.getRouteInArray(this.routes[routeKey].path)
+			return routeFromAppSplit.find((routeChunk: string, index: number) => !routeChunk.startsWith(':') && routeFromUrlSplit[index] === routeChunk)
+		})
+	}
+
+	getRouteInArray(route: string): Array<string> {
+		if (route === '/') {
+			return [route]
+		} else {
+			const routeSplit = route.split('/')
+			routeSplit.shift()
+			return routeSplit
+		}
+	}
+
+	getDynamicParameter({ routeKey, route }: {routeKey: string, route: string}) {
+		const routeFromUrlSplit = this.getRouteInArray(route)
+		const routeFromAppSplit = this.getRouteInArray(this.routes[routeKey].path)
+		const data:any = {}
+		routeFromAppSplit.forEach((route: string, index: number) => {
+			if (route.startsWith(':')) {
+				data[route] = routeFromUrlSplit[index]
+			}
+		})
+		return data
 	}
 
 	/**
