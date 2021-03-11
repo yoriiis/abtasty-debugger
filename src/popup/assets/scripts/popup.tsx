@@ -1,20 +1,18 @@
 import { createElement } from 'jsx-dom'
-import ListTemplate from '../../components/list/assets/scripts/list'
-import DetailTemplate from '../../components/detail/assets/scripts/detail'
+import List from '../../components/list/assets/scripts/list'
+import Detail from '../../components/detail/assets/scripts/detail'
 import Empty from 'shared/empty/assets/scripts/empty'
 import validateTarget from 'validate-target'
+import Router from 'shared/utils/router'
 import DataManager from 'shared/utils/data-manager'
 import { Data, SortedData } from 'shared/assets/interfaces/interfaces'
 
 export default class Popup {
 	data: Data;
-	currentRoute: null | string;
-	previousRoute: null | string;
-	defaultRoute: string;
-	stepCreated: Boolean;
 	app: Element;
 	dataManager: any;
-	sortedData: SortedData;
+	router: any;
+    instancesResult: Array<any>;
 
 	routes: {
 		[key: string]: {
@@ -25,129 +23,52 @@ export default class Popup {
 
 	constructor({ data }: {data: Data}) {
 		this.data = data
-		this.currentRoute = null
-		this.previousRoute = null
-		this.defaultRoute = '/'
-		this.stepCreated = false
+
 		// @ts-ignore
 		this.app = document.querySelector('#app')
-		this.hashChanged = this.hashChanged.bind(this)
+
+		this.onDestroy = this.onDestroy.bind(this)
+		this.onCreate = this.onCreate.bind(this)
 		this.onClickOnApp = this.onClickOnApp.bind(this)
 
-		if (this.data) {
-			this.dataManager = new DataManager({ data })
-			this.sortedData = this.dataManager.getSortedData()
+		this.dataManager = new DataManager()
+		this.router = new Router({
+			is404: !this.data,
+			onDestroy: this.onDestroy,
+			onCreate: this.onCreate
+		})
 
-			this.routes = {
-				home: {
-					path: '/',
-					template: () => <ListTemplate data={this.sortedData.testsSortedByStatus} />
-				},
-				detail: {
-					path: '/detail/:id',
-					template: (dynamicData: any) => <DetailTemplate
-						id={dynamicData[':id']}
-						result={this.data.results[dynamicData[':id']]}
-						targetingSorted={this.sortedData.targetingsSortedByStatus[dynamicData[':id']]}
-						targetingMode={this.data.accountData.tests[dynamicData[':id']].targetingMode}
-					/>
-				},
-				empty: {
-					path: '/empty',
-					template: () => <Empty />
-				}
+		const instances = [List, Detail, Empty]
+		// const instances = [Detail]
+		this.instancesResult = this.analyzeInstance(instances)
+	}
 
-			}
-		}
+	analyzeInstance(instances: Array<any>): Array<any> {
+		return instances.map(Instance => {
+			const instance = new Instance()
+			instance.requestDynamicParameter = (route: string) => this.router.getDynamicParameter(route)
+			instance.requestData = () => this.data
+			instance.requestDataManager = () => this.dataManager
+			return instance
+		})
 	}
 
 	/**
 	 * Initialize the popup
 	 */
 	init() {
-		// Get current route
-		const route = this.getRoute()
-
-		// Redirect to the empty route if no data
-		if (this.data === null) {
-			this.defaultRoute = 'empty'
-		}
-
-		// Declare the default route
-		// If route exist, keep it, else set it to the default route
-		this.currentRoute = route === '' ? this.defaultRoute : route
-
-		// Init the router with the default route
-		if (route === '') {
-			this.setRoute(this.currentRoute)
-		} else {
-			// Page started with a route, trigger hash changed
-			this.hashChanged()
-		}
-
-		// this.buildDom()
+		this.router.init()
 		this.addEvents()
-	}
-
-	/**
-	 * Get the current route
-	 * @returns {String} Current route
-	 */
-	getRoute():string {
-		return window.location.hash.substr(1)
-	}
-
-	/**
-	 * Set the route
-	 */
-	setRoute(route: string) {
-		window.location.hash = route
-	}
-
-	/**
-	 * On hash change event listener
-	 * @param {Obhect} e Event data
-	 */
-	hashChanged(e?: HashChangeEvent): void {
-		this.currentRoute = this.getRoute()
-
-		if (e) {
-			this.previousRoute = this.getPreviousRoute(e)
-
-			if (this.previousRoute) {
-				// Destroy the previous step
-				this.destroyStep(this.previousRoute)
-
-				// Create the new step on destruction callback
-				this.createStep(this.currentRoute)
-
-				this.stepCreated = true
-			}
-		}
-
-		// If destroy method was not called, create the step now
-		if (!this.stepCreated) {
-			this.createStep(this.currentRoute)
-		}
-	}
-
-	/**
-	 * Get the previous route
-	 * @param {Object} event Event listener datas
-	 * @returns {String} Previous route
-	 */
-	getPreviousRoute(e: HashChangeEvent): string|null {
-		return e && e.oldURL ? e.oldURL.split('#')[1] : null
 	}
 
 	/**
 	 * Destroy step
 	 * @param {String} route Route of the step to destroy
 	 */
-	destroyStep(route: string) {
-		const routeKey = this.getRouteDataFromUrl(route)
-		const step = this.app.querySelector(`[data-route-id="${routeKey}"]`)
-		step && this.removeElement(step)
+	onDestroy(route: string) {
+		const instance = this.getInstanceFromRoute(route)
+		const element = this.app.querySelector(instance.selector)
+		element && this.removeElement(element)
 	}
 
 	/**
@@ -162,28 +83,15 @@ export default class Popup {
 	 * Create step
 	 * @param {String} route Route of the step to create
 	 */
-	createStep(route: string) {
-		this.app.appendChild(this.getTemplate({ route }))
+	onCreate(route: string) {
+		const instance = this.getInstanceFromRoute(route)
+		this.app.appendChild(instance.render())
 	}
 
-	/**
-	 * Get template according to the route
-	 * @param {Object} options
-	 * @param {Object} options.route Route
-	 * @returns {HTMLElement} Route template
-	 */
-	getTemplate({ route }: {route: string }): Element {
-		const routeKey = this.getRouteDataFromUrl(route)
-		const dynamicParameter = routeKey ? this.getDynamicParameter({ routeKey, route }) : {}
-		console.log(routeKey)
-		console.log(dynamicParameter)
-		return this.routes[routeKey || 'empty'].template(dynamicParameter)
-	}
-
-	getRouteDataFromUrl(route: string): string | undefined {
+	getInstanceFromRoute(route: string) {
 		const routeFromUrlSplit = this.getRouteInArray(route)
-		return Object.keys(this.routes).find((routeKey: string) => {
-			const routeFromAppSplit = this.getRouteInArray(this.routes[routeKey].path)
+		return this.instancesResult.find(instance => {
+			const routeFromAppSplit = this.getRouteInArray(instance.route)
 			return routeFromAppSplit.find((routeChunk: string, index: number) => !routeChunk.startsWith(':') && routeFromUrlSplit[index] === routeChunk)
 		})
 	}
@@ -198,24 +106,11 @@ export default class Popup {
 		}
 	}
 
-	getDynamicParameter({ routeKey, route }: {routeKey: string, route: string}) {
-		const routeFromUrlSplit = this.getRouteInArray(route)
-		const routeFromAppSplit = this.getRouteInArray(this.routes[routeKey].path)
-		const data:any = {}
-		routeFromAppSplit.forEach((route: string, index: number) => {
-			if (route.startsWith(':')) {
-				data[route] = routeFromUrlSplit[index]
-			}
-		})
-		return data
-	}
-
 	/**
 	 * Add event listeners
 	 */
 	addEvents() {
 		this.app.addEventListener('click', this.onClickOnApp)
-		window.addEventListener('hashchange', this.hashChanged)
 	}
 
 	/**

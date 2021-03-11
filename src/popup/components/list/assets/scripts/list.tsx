@@ -1,43 +1,34 @@
 import { createElement } from 'jsx-dom'
-import arrowBottom from 'shared/assets/svgs/arrow-bottom.svg'
-import BadgeTemplate from 'shared/badge/assets/scripts/badge'
-import { TestsSortedByStatus, Result } from 'shared/assets/interfaces/interfaces'
+import Template from './templates/list'
+import { TestsSortedByStatus } from 'shared/assets/interfaces/interfaces'
 
-/**
- * List template
- * @param {Object} options
- * @param {Object} options.data List data
- * @returns {HTMLElement} Generated HTML
- */
-export default function ({ data }: {data: TestsSortedByStatus}) {
-	return (
-		<div data-route-id="home">
-			<ul className="list" data-route-id="list">
-				{data.accepted.map((item: Result) => (
-					<List data={item} />
-				))}
-				{data.rejected.map((item: Result) => (
-					<List data={item} />
-				))}
-			</ul>
-		</div>
-	)
+interface ListData {
+    testsSortedByStatus: TestsSortedByStatus;
 }
 
-/**
- * List item template
- * @param {Object} options
- * @param {Object} options.data List item data
- * @returns {HTMLElement} Generated HTML
- */
-function List({ data }: {data: Result}) {
-	return (
-		<li className="list-item">
-			<a href={`#/detail/${data.key}`} className="list-link">
-				<span className="list-name">{data.name}</span>
-				<BadgeTemplate status={data.status} />
-				<div className="list-icon" innerHTML={arrowBottom}></div>
-			</a>
-		</li>
-	)
+export default class List {
+    // @ts-ignore
+    requestDataManager: Function;
+    // @ts-ignore
+    requestData: Function;
+
+    id = 'list';
+	route = '/';
+	selector = '.list';
+
+	render() {
+		return this.getTemplate(this.getData())
+	}
+
+	getData(): ListData {
+		const dataManager = this.requestDataManager()
+		const data = this.requestData()
+		return {
+			testsSortedByStatus: dataManager.getTestsSortedByStatus(data)
+		}
+	}
+
+	getTemplate(data: ListData) {
+		return <Template data={data} />
+	}
 }

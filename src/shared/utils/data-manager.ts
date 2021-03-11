@@ -2,39 +2,26 @@
  * Data manager for ABTasty data
  */
 
-import { Data, SortedData, TestsSortedByStatus, TargetingsSortedByStatus } from 'shared/assets/interfaces/interfaces'
+import { Data, TestsSortedByStatus, TargetingsSortedByStatus } from 'shared/assets/interfaces/interfaces'
 
 export default class DataManager {
-	data: Data;
-
-	constructor({ data }: {data: Data}) {
-		this.data = data
-	}
-
-	getSortedData(): SortedData {
-		return {
-			testsSortedByStatus: this.getTestsSortedByStatus(),
-			targetingsSortedByStatus: this.getTargetingsSortedByStatus()
-		}
-	}
-
 	/**
 	 * Get tests sorted by status (accepted or not)
 	 * @returns {Object} Sorted tests
 	 */
-	getTestsSortedByStatus(): TestsSortedByStatus {
+	getTestsSortedByStatus(data: Data): TestsSortedByStatus {
 		return {
-			accepted: Object.keys(this.data.results)
-				.filter((id: string) => this.data.results[id].status === 'accepted')
+			accepted: Object.keys(data.results)
+				.filter((id: string) => data.results[id].status === 'accepted')
 				.map((id: string) => {
-					this.data.results[id].key = id
-					return this.data.results[id]
+					data.results[id].key = id
+					return data.results[id]
 				}),
-			rejected: Object.keys(this.data.results)
-				.filter((id: string) => this.data.results[id].status !== 'accepted')
+			rejected: Object.keys(data.results)
+				.filter((id: string) => data.results[id].status !== 'accepted')
 				.map((id: string) => {
-					this.data.results[id].key = id
-					return this.data.results[id]
+					data.results[id].key = id
+					return data.results[id]
 				})
 		}
 	}
@@ -43,10 +30,10 @@ export default class DataManager {
 	 * Get targetings sorted by status (success or not)
 	 * @returns {Object} Sorted targetings
 	 */
-	getTargetingsSortedByStatus(): TargetingsSortedByStatus {
-		const data:TargetingsSortedByStatus = {}
-		Object.keys(this.data.results).forEach((id: string) => {
-			const targetings = this.data.results[id].targetings
+	getTargetingsSortedByStatus(data: Data): TargetingsSortedByStatus {
+		const outputData:TargetingsSortedByStatus = {}
+		Object.keys(data.results).forEach((id: string) => {
+			const targetings = data.results[id].targetings
 			const acceptedTargetPages = Object.keys(targetings.targetPages)
 				.filter((targetingKey: string) => targetings.targetPages[targetingKey].success === true)
 				.map((targetingKey) => {
@@ -72,12 +59,12 @@ export default class DataManager {
 					return targetings.qaParameters[targetingKey]
 				})
 
-			data[id] = {
+			outputData[id] = {
 				accepted: [...acceptedTargetPages, ...acceptedQaParameters],
 				rejected: [...rejectedTargetPages, ...rejectedQaParameters]
 			}
 		})
 
-		return data
+		return outputData
 	}
 }
