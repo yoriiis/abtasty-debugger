@@ -1,19 +1,17 @@
-import { createElement } from 'jsx-dom'
 import List from '../../components/list/assets/scripts/list'
 import Detail from '../../components/detail/assets/scripts/detail'
 import Empty from 'shared/empty/assets/scripts/empty'
 import validateTarget from 'validate-target'
 import Router from 'shared/utils/router'
 import DataManager from 'shared/utils/data-manager'
-import { Data, SortedData } from 'shared/assets/interfaces/interfaces'
+import { Data } from 'shared/assets/interfaces/interfaces'
 
 export default class Popup {
 	data: Data;
 	app: Element;
 	dataManager: any;
 	router: any;
-    instancesResult: Array<any>;
-
+	instancesResult: Array<any>;
 	routes: {
 		[key: string]: {
 			path: string;
@@ -39,14 +37,19 @@ export default class Popup {
 		})
 
 		const instances = [List, Detail, Empty]
-		// const instances = [Detail]
 		this.instancesResult = this.analyzeInstance(instances)
 	}
 
+	/**
+	 * Analyze all instances and initialize them
+	 * Exposes additionnals functions
+	 * @param {Array} instances List of instances
+	 * @returns {Array} List of instances initialized and updated
+	 */
 	analyzeInstance(instances: Array<any>): Array<any> {
-		return instances.map(Instance => {
+		return instances.map((Instance: any) => {
 			const instance = new Instance()
-			instance.requestDynamicParameter = (route: string) => this.router.getDynamicParameter(route)
+			instance.requestDynamicParameter = (route: string) => this.router.getDynamicSegments(route)
 			instance.requestData = () => this.data
 			instance.requestDataManager = () => this.dataManager
 			return instance
@@ -59,51 +62,6 @@ export default class Popup {
 	init() {
 		this.router.init()
 		this.addEvents()
-	}
-
-	/**
-	 * Destroy step
-	 * @param {String} route Route of the step to destroy
-	 */
-	onDestroy(route: string) {
-		const instance = this.getInstanceFromRoute(route)
-		const element = this.app.querySelector(instance.selector)
-		element && this.removeElement(element)
-	}
-
-	/**
-	 * Remove HTML Element
-	 * @param {HTMLElement} element
-	 */
-	removeElement(element: Element) {
-		element.remove()
-	}
-
-	/**
-	 * Create step
-	 * @param {String} route Route of the step to create
-	 */
-	onCreate(route: string) {
-		const instance = this.getInstanceFromRoute(route)
-		this.app.appendChild(instance.render())
-	}
-
-	getInstanceFromRoute(route: string) {
-		const routeFromUrlSplit = this.getRouteInArray(route)
-		return this.instancesResult.find(instance => {
-			const routeFromAppSplit = this.getRouteInArray(instance.route)
-			return routeFromAppSplit.find((routeChunk: string, index: number) => !routeChunk.startsWith(':') && routeFromUrlSplit[index] === routeChunk)
-		})
-	}
-
-	getRouteInArray(route: string): Array<string> {
-		if (route === '/') {
-			return [route]
-		} else {
-			const routeSplit = route.split('/')
-			routeSplit.shift()
-			return routeSplit
-		}
 	}
 
 	/**
@@ -138,5 +96,55 @@ export default class Popup {
 		const target = e.target
 		// @ts-ignore
 		target.closest('.targeting').classList.toggle('active')
+	}
+
+	/**
+	 * Destroy step
+	 * @param {String} route Route of the step to destroy
+	 */
+	onDestroy(route: string) {
+		const instance = this.getInstanceFromRoute(route)
+		if (instance) {
+			const element = this.app.querySelector(instance.selector)
+			element && this.removeElement(element)
+		}
+	}
+
+	/**
+	 * Remove HTML Element
+	 * @param {HTMLElement} element
+	 */
+	removeElement(element: Element) {
+		element.remove()
+	}
+
+	/**
+	 * Create step
+	 * @param {String} route Route of the step to create
+	 */
+	onCreate(route: string) {
+		const instance = this.getInstanceFromRoute(route)
+		instance && this.app.appendChild(instance.render())
+	}
+
+	/**
+	 * Get instance from the route
+	 * @param {String} route Route
+	 * @returns {(Class|undefined)} Correpsonding instance or undefined if no result
+	 */
+	getInstanceFromRoute(route: string): any | undefined {
+		const routeFromUrlSplit = this.router.transformRouteInArray(route)
+		return this.instancesResult.find((instance: any) => {
+			const routeFromAppSplit = this.router.transformRouteInArray(instance.route)
+			return routeFromAppSplit.find((routeChunk: string, index: number) => !routeChunk.startsWith(':') && routeFromUrlSplit[index] === routeChunk)
+		}) || this.get404Instance()
+	}
+
+	/**
+	 * Get the 404 instance in case of no instance found
+	 * @returns {Class} 404 instance
+	 */
+	get404Instance() {
+		return this.instancesResult.find((instance: any) => instance.route === '/empty')
 	}
 }

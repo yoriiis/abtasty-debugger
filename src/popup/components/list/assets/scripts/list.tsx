@@ -1,10 +1,6 @@
 import { createElement } from 'jsx-dom'
 import Template from './templates/list'
-import { TestsSortedByStatus } from 'shared/assets/interfaces/interfaces'
-
-interface ListData {
-    testsSortedByStatus: TestsSortedByStatus;
-}
+import { ListData } from 'shared/assets/interfaces/interfaces'
 
 export default class List {
     // @ts-ignore

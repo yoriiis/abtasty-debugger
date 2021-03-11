@@ -1,19 +1,13 @@
 import { createElement } from 'jsx-dom'
 import arrowBottom from 'shared/assets/svgs/arrow-bottom.svg'
 import BadgeTemplate from 'shared/badge/assets/scripts/badge'
-import { TestsSortedByStatus, Result } from 'shared/assets/interfaces/interfaces'
+import { ListData, Result } from 'shared/assets/interfaces/interfaces'
 
 /**
  * List template
  * @param {Object} options
- * @param {Object} options.data List data
  * @returns {HTMLElement} Generated HTML
  */
-
-interface ListData {
-    testsSortedByStatus: TestsSortedByStatus;
-}
-
 export default function ({ data }: {data: ListData}) {
 	return (
 		<ul className="list" data-route-id="list">

@@ -1,17 +1,6 @@
 import { createElement } from 'jsx-dom'
 import Template from './templates/detail'
-import { TargetingItemSortedByStatus, Result } from 'shared/assets/interfaces/interfaces'
-
-interface DetailData {
-    id: string;
-    result: Result;
-    targetingSorted: TargetingItemSortedByStatus;
-    targetingMode: string
-}
-
-interface DynamicParameter {
-    [key: string]: string;
-}
+import { DynamicParameter, DetailData } from 'shared/assets/interfaces/interfaces'
 
 export default class Detail {
     // @ts-ignore

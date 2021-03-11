@@ -47,10 +47,18 @@ export default class Router {
 	}
 
 	/**
-	 * Add event listeners
+	 * Get the current route
+	 * @returns {String} Current route
 	 */
-	addEvents() {
-		window.addEventListener('hashchange', this.onHashChange)
+	getRoute(): string {
+		return window.location.hash.substr(1)
+	}
+
+	/**
+	 * Set the route
+	 */
+	setRoute(route: string) {
+		window.location.hash = route
 	}
 
 	/**
@@ -81,21 +89,6 @@ export default class Router {
 	}
 
 	/**
-	 * Get the current route
-	 * @returns {String} Current route
-	 */
-	getRoute(): string {
-		return window.location.hash.substr(1)
-	}
-
-	/**
-	 * Set the route
-	 */
-	setRoute(route: string) {
-		window.location.hash = route
-	}
-
-	/**
 	 * Get the previous route
 	 * @param {Object} event Event listener datas
 	 * @returns {String} Previous route
@@ -104,10 +97,15 @@ export default class Router {
 		return e && e.oldURL ? e.oldURL.split('#')[1] : null
 	}
 
-	getDynamicParameter(route: string) {
+	/**
+	 * Get dynamic segments
+	 * @param {String} route Instance route
+	 * @returns {Object} Corresponding table with dynamic segments and values
+	 */
+	getDynamicSegments(route: string) {
 		if (route && this.currentRoute) {
-			const routeFromUrlSplit = this.getRouteInArray(this.currentRoute)
-			const routeFromAppSplit = this.getRouteInArray(route)
+			const routeFromUrlSplit = this.transformRouteInArray(this.currentRoute)
+			const routeFromAppSplit = this.transformRouteInArray(route)
 			const data: any = {}
 			routeFromAppSplit.forEach((route: string, index: number) => {
 				if (route.startsWith(':')) {
@@ -118,7 +116,12 @@ export default class Router {
 		}
 	}
 
-	getRouteInArray(route: string): Array<string> {
+	/**
+	 * Transform route in array (split with slash)
+	 * @param {String} route Route
+	 * @returns {Array} Array with route segment
+	 */
+	transformRouteInArray(route: string): Array<string> {
 		if (route === '/') {
 			return [route]
 		} else {
@@ -126,5 +129,12 @@ export default class Router {
 			routeSplit.shift()
 			return routeSplit
 		}
+	}
+
+	/**
+	 * Add event listeners
+	 */
+	addEvents() {
+		window.addEventListener('hashchange', this.onHashChange)
 	}
 }

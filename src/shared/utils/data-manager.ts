@@ -1,9 +1,8 @@
+import { Data, TestsSortedByStatus, TargetingsSortedByStatus } from 'shared/assets/interfaces/interfaces'
+
 /**
  * Data manager for ABTasty data
  */
-
-import { Data, TestsSortedByStatus, TargetingsSortedByStatus } from 'shared/assets/interfaces/interfaces'
-
 export default class DataManager {
 	/**
 	 * Get tests sorted by status (accepted or not)

@@ -55,15 +55,25 @@ export interface TargetingsSortedByStatus {
 	[key: string]: TargetingItemSortedByStatus
 }
 
-export interface SortedData {
-    testsSortedByStatus: TestsSortedByStatus;
-    targetingsSortedByStatus: TargetingsSortedByStatus;
-}
-
 export interface CustomEvent {
     detail: Object;
 }
 
 export interface Wording {
     [key: string]: string;
+}
+
+export interface DetailData {
+    id: string;
+    result: Result;
+    targetingSorted: TargetingItemSortedByStatus;
+    targetingMode: string
+}
+
+export interface DynamicParameter {
+    [key: string]: string;
+}
+
+export interface ListData {
+    testsSortedByStatus: TestsSortedByStatus;
 }
