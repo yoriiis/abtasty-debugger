@@ -3,13 +3,11 @@
 	"name": "AB Tasty Debugger",
 	"description": "Browser extension that simplifies the debugging of A/B tests from AB Tasty and adds useful informations",
 	"version": "1.0.0",
-	"permissions": ["activeTab", "storage"],
 	"icons": {
 		"16": "images/icon-16x16.png",
 		"48": "images/icon-48x48.png",
 		"128": "images/icon-128x128.png"
 	},
-	"host_permissions": ["*://*/*"],
 	"content_scripts": [
 		{
 			"matches": ["http://*/*", "https://*/*"],
