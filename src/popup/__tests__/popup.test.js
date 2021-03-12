@@ -63,7 +63,6 @@ class Empty {
 }
 
 let popup
-let event
 const routeDetail = 'detail/000001'
 let instanceDetail
 const instancesResult = [new Detail(), new Empty()]
@@ -103,7 +102,7 @@ describe('Popup constructor', () => {
 		expect(popup.app).toBe(document.querySelector('#app'))
 		expect(DataManager).toHaveBeenCalled()
 		expect(Router).toHaveBeenCalledWith({
-			isNoudFound: false,
+			isNotFound: false,
 			onDestroy: popup.onDestroy,
 			onCreate: popup.onCreate
 		})

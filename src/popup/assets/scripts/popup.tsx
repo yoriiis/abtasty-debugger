@@ -31,7 +31,7 @@ export default class Popup {
 
 		this.dataManager = new DataManager()
 		this.router = new Router({
-			isNoudFound: !this.data,
+			isNotFound: !this.data,
 			onDestroy: this.onDestroy,
 			onCreate: this.onCreate
 		})
@@ -137,7 +137,6 @@ export default class Popup {
 		const routeFromUrlSplit = this.router.transformRouteInArray(route)
 		return this.instancesResult.find((instance: any) => {
 			const routeFromAppSplit = this.router.transformRouteInArray(instance.route)
-			console.log(routeFromAppSplit)
 			return routeFromAppSplit.find((routeChunk: string, index: number) => !routeChunk.startsWith(':') && routeFromUrlSplit[index] === routeChunk)
 		}) || this.getNotFoundInstance()
 	}

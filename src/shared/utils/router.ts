@@ -1,5 +1,7 @@
+import { DynamicSegments } from 'shared/assets/interfaces/interfaces'
+
 export default class Router {
-	isNoudFound: Boolean;
+	isNotFound: Boolean;
 	onDestroy: Function;
 	onCreate: Function;
 	isReady: Boolean;
@@ -8,8 +10,8 @@ export default class Router {
 	currentRoute: null | string;
 	previousRoute: null | string;
 
-	constructor({ isNoudFound, onDestroy, onCreate }: { isNoudFound: Boolean, onDestroy: Function, onCreate: Function}) {
-		this.isNoudFound = isNoudFound
+	constructor({ isNotFound, onDestroy, onCreate }: { isNotFound: Boolean, onDestroy: Function, onCreate: Function}) {
+		this.isNotFound = isNotFound
 		this.onDestroy = onDestroy
 		this.onCreate = onCreate
 
@@ -30,7 +32,7 @@ export default class Router {
 		const route = this.getRoute()
 
 		// Redirect to the empty route if no data
-		if (this.isNoudFound) {
+		if (this.isNotFound) {
 			this.defaultRoute = this.notFoundRoute
 		}
 
@@ -105,7 +107,7 @@ export default class Router {
 	 * @param {String} route Instance route
 	 * @returns {Object} Corresponding table with dynamic segments and values
 	 */
-	getDynamicSegments(route: string) {
+	getDynamicSegments(route: string): DynamicSegments | null {
 		if (route && this.currentRoute) {
 			const routeFromUrlSplit = this.transformRouteInArray(this.currentRoute)
 			const routeFromAppSplit = this.transformRouteInArray(route)
@@ -117,6 +119,8 @@ export default class Router {
 			})
 			return data
 		}
+
+		return null
 	}
 
 	/**
