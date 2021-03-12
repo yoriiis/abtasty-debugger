@@ -25,8 +25,8 @@ export default class Router {
 	}
 
 	/**
-     * Initialize the router
-     */
+	 * Initialize the router
+	 */
 	init() {
 		// Get current route
 		const route = this.getRoute()

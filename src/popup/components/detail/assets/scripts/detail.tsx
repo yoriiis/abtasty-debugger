@@ -3,31 +3,31 @@ import Template from './templates/detail'
 import { DynamicSegments, DetailData } from 'shared/assets/interfaces/interfaces'
 
 export default class Detail {
-    // @ts-ignore
-    requestDynamicSegments: Function;
-    // @ts-ignore
-    requestDataManager: Function;
-    // @ts-ignore
-    requestData: Function;
+	// @ts-ignore
+	requestDynamicSegments: Function;
+	// @ts-ignore
+	requestDataManager: Function;
+	// @ts-ignore
+	requestData: Function;
 
 	id = 'detail'
 	route = '/detail/:testId'
 	selector = '.detail'
 
 	/**
-     * Render the template
-     * @returns {HTMLElement} Template
-     */
+	 * Render the template
+	 * @returns {HTMLElement} Template
+	 */
 	render(): Element {
 		const dynamicSegments = this.requestDynamicSegments(this.route)
 		return this.getTemplate(this.getData(dynamicSegments))
 	}
 
 	/**
-     * Get data for the template
-     * @param dynamicSegments
-     * @returns {Object} Template's data
-     */
+	 * Get data for the template
+	 * @param dynamicSegments
+	 * @returns {Object} Template's data
+	 */
 	getData(dynamicSegments: DynamicSegments): DetailData {
 		const dataManager = this.requestDataManager()
 		const data = this.requestData()
@@ -42,10 +42,10 @@ export default class Detail {
 	}
 
 	/**
-     * Get template
-     * @param {Object} data Template's data
-     * @returns {HTMLElement} Template
-     */
+	 * Get template
+	 * @param {Object} data Template's data
+	 * @returns {HTMLElement} Template
+	 */
 	getTemplate(data: DetailData): Element {
 		return <Template data={data} />
 	}

@@ -3,28 +3,28 @@ import Template from './templates/list'
 import { ListData } from 'shared/assets/interfaces/interfaces'
 
 export default class List {
-    // @ts-ignore
-    requestDataManager: Function;
-    // @ts-ignore
-    requestData: Function;
+	// @ts-ignore
+	requestDataManager: Function;
+	// @ts-ignore
+	requestData: Function;
 
-    id = 'list';
+	id = 'list';
 	route = '/';
 	selector = '.list';
 
 	/**
-     * Render the template
-     * @returns {HTMLElement} Template
-     */
+	 * Render the template
+	 * @returns {HTMLElement} Template
+	 */
 	render() : Element {
 		return this.getTemplate(this.getData())
 	}
 
 	/**
-     * Get data for the template
-     * @param dynamicSegments
-     * @returns {Object} Template's data
-     */
+	 * Get data for the template
+	 * @param dynamicSegments
+	 * @returns {Object} Template's data
+	 */
 	getData(): ListData {
 		const dataManager = this.requestDataManager()
 		const data = this.requestData()
@@ -35,10 +35,10 @@ export default class List {
 	}
 
 	/**
-     * Get template
-     * @param {Object} data Template's data
-     * @returns {HTMLElement} Template
-     */
+	 * Get template
+	 * @param {Object} data Template's data
+	 * @returns {HTMLElement} Template
+	 */
 	getTemplate(data: ListData): Element {
 		return <Template data={data} />
 	}
