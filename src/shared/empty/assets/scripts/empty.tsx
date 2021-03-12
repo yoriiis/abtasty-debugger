@@ -1,17 +1,25 @@
 import { createElement } from 'jsx-dom'
-import info from 'shared/assets/svgs/info.svg'
+import Template from './templates/empty'
 
-/**
- * Empty template
- * @returns {HTMLElement} Generated HTML
- */
-export default function () {
-	return (
-		<div data-route-id="empty">
-			<div className="empty">
-				<div className="empty-icon" innerHTML={info}></div>
-				<p className="empty-text">No tests available on the current page.</p>
-			</div>
-		</div>
-	)
+export default class Empty {
+	id = 'empty';
+	route = '/empty';
+	selector = '.empty';
+
+	/**
+	 * Render the template
+	 * @returns {HTMLElement} Template
+	 */
+	render(): Element {
+		return this.getTemplate()
+	}
+
+	/**
+	 * Get template
+	 * @param {Object} data Template's data
+	 * @returns {HTMLElement} Template
+	 */
+	getTemplate(): Element {
+		return <Template />
+	}
 }

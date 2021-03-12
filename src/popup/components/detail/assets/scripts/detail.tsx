@@ -1,74 +1,52 @@
-import { createElement, Fragment } from 'jsx-dom'
-import externalLink from 'shared/assets/svgs/external-link.svg'
-import arrowBottom from 'shared/assets/svgs/arrow-bottom.svg'
-import TargetingTemplate from 'shared/targeting/assets/scripts/targeting'
-import { Result, TargetingItemSortedByStatus, Targeting } from 'shared/assets/interfaces/interfaces'
+import { createElement } from 'jsx-dom'
+import Template from './templates/detail'
+import { DynamicSegments, DetailData } from 'shared/assets/interfaces/interfaces'
 
-/**
- * Detail template
- * @param {Object} options
- * @param {String} options.id Test id
- * @param {StriObjectng} options.result Test data
- * @param {Object} options.targetingSorted Test data sorted by accepted and
- * @param {String} options.targetingMode Targeting mode (fastest|waituntil)
- * @returns {HTMLElement} Generated HTML
- */
-export default function ({ id, result, targetingSorted, targetingMode }: { id: string, result: Result, targetingSorted: TargetingItemSortedByStatus, targetingMode: string }) {
-	return (
-		<div data-route-id="detail">
-			<div className="detail">
-				<ul className="detail-header">
-					<li>
-						<a href="#list" className="detail-headerBack">
-							<div className="detail-headerBackIcon" innerHTML={arrowBottom}></div>
-							Back
-						</a>
-					</li>
-					<li>
-						<a
-							href={`https://app2.abtasty.com/edit/test/${id}/audience`}
-							target="_blank"
-							rel="noreferrer"
-							className="detail-headerDashboard"
-						>
-							Edit on AB Tasty
-							<div
-								className="detail-headerDashboardIcon"
-								innerHTML={externalLink}
-							></div>
-						</a>
-					</li>
-				</ul>
-				<ul className="detail-list">
-					<li>Name: {result.name}</li>
-					<li>ID: {id}</li>
-					<li>Type: {result.type}</li>
-					{result.variationName && (
-						<li>
-							Variation: {result.variationName}{' '}
-							{result.variationID && <>({result.variationID})</>}
-						</li>
-					)}
-					<li>Ajax targeting: {targetingMode === 'waituntil' ? 'on' : 'off'}</li>
-				</ul>
+export default class Detail {
+	// @ts-ignore
+	requestDynamicSegments: Function;
+	// @ts-ignore
+	requestDataManager: Function;
+	// @ts-ignore
+	requestData: Function;
 
-				{targetingSorted.rejected.map((item: Targeting) => (
-					<TargetingTemplate
-						testStatus={result.status}
-						data={item}
-						textarea={item.key === 'code_scope'}
-						headerOnly={item.key === 'ip_scope'}
-					/>
-				))}
-				{targetingSorted.accepted.map((item: Targeting) => (
-					<TargetingTemplate
-						testStatus={result.status}
-						data={item}
-						textarea={item.key === 'code_scope'}
-						headerOnly={item.key === 'ip_scope'}
-					/>
-				))}
-			</div>
-		</div>
-	)
+	id = 'detail'
+	route = '/detail/:testId'
+	selector = '.detail'
+
+	/**
+	 * Render the template
+	 * @returns {HTMLElement} Template
+	 */
+	render(): Element {
+		const dynamicSegments = this.requestDynamicSegments(this.route)
+		return this.getTemplate(this.getData(dynamicSegments))
+	}
+
+	/**
+	 * Get data for the template
+	 * @param dynamicSegments
+	 * @returns {Object} Template's data
+	 */
+	getData(dynamicSegments: DynamicSegments): DetailData {
+		const dataManager = this.requestDataManager()
+		const data = this.requestData()
+		const testId = dynamicSegments[':testId']
+
+		return {
+			testId,
+			result: data.results[testId],
+			targetingSorted: dataManager.getTargetingsSortedByStatus(data)[testId],
+			targetingMode: data.accountData.tests[testId].targetingMode
+		}
+	}
+
+	/**
+	 * Get template
+	 * @param {Object} data Template's data
+	 * @returns {HTMLElement} Template
+	 */
+	getTemplate(data: DetailData): Element {
+		return <Template data={data} />
+	}
 }

@@ -1,3 +1,6 @@
+import List from '../../components/list/assets/scripts/list'
+import Detail from '../../components/detail/assets/scripts/detail'
+import Empty from 'shared/empty/assets/scripts/empty'
 import Popup from './popup'
 
 const isExtensionMode =
@@ -12,7 +15,10 @@ if (isExtensionMode) {
 			const storageKey = `tab-${currentTab.id}-ABTastyData`
 			chrome.storage.local.get([storageKey], function (response) {
 				// Initialize the popup with data received from the storage
-				const popup = new Popup({ data: response[storageKey] })
+				const popup = new Popup({
+					data: response[storageKey],
+					instances: [List, Detail, Empty]
+				})
 				popup.init()
 
 				// Remove the badge when the popup is open
