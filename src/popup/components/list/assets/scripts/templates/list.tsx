@@ -5,17 +5,17 @@ import { ListData, Result } from 'shared/assets/interfaces/interfaces'
 
 /**
  * List template
- * @param {Object} options
+ * @param {Object} options Template options
  * @returns {HTMLElement} Generated HTML
  */
 export default function ({ data }: {data: ListData}) {
 	return (
 		<ul className="list" data-route-id="list">
 			{data.testsSortedByStatus.accepted.map((item: Result) => (
-				<List data={item} />
+				<ListItem data={item} />
 			))}
 			{data.testsSortedByStatus.rejected.map((item: Result) => (
-				<List data={item} />
+				<ListItem data={item} />
 			))}
 		</ul>
 	)
@@ -27,7 +27,7 @@ export default function ({ data }: {data: ListData}) {
  * @param {Object} options.data List item data
  * @returns {HTMLElement} Generated HTML
  */
-function List({ data }: {data: Result}) {
+function ListItem({ data }: {data: Result}) {
 	return (
 		<li className="list-item">
 			<a href={`#/detail/${data.key}`} className="list-link">

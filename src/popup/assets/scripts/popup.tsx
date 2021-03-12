@@ -1,6 +1,3 @@
-import List from '../../components/list/assets/scripts/list'
-import Detail from '../../components/detail/assets/scripts/detail'
-import Empty from 'shared/empty/assets/scripts/empty'
 import validateTarget from 'validate-target'
 import Router from 'shared/utils/router'
 import DataManager from 'shared/utils/data-manager'
@@ -11,6 +8,7 @@ export default class Popup {
 	app: Element;
 	dataManager: any;
 	router: any;
+	instances: Array<any>;
 	instancesResult: Array<any>;
 	routes: {
 		[key: string]: {
@@ -19,8 +17,10 @@ export default class Popup {
 		};
 	} | undefined;
 
-	constructor({ data }: {data: Data}) {
+	constructor({ data, instances }: {data: Data, instances: Array<any>}) {
 		this.data = data
+		this.instances = instances
+		this.instancesResult = []
 
 		// @ts-ignore
 		this.app = document.querySelector('#app')
@@ -31,13 +31,10 @@ export default class Popup {
 
 		this.dataManager = new DataManager()
 		this.router = new Router({
-			is404: !this.data,
+			isNoudFound: !this.data,
 			onDestroy: this.onDestroy,
 			onCreate: this.onCreate
 		})
-
-		const instances = [List, Detail, Empty]
-		this.instancesResult = this.analyzeInstance(instances)
 	}
 
 	/**
@@ -46,10 +43,10 @@ export default class Popup {
 	 * @param {Array} instances List of instances
 	 * @returns {Array} List of instances initialized and updated
 	 */
-	analyzeInstance(instances: Array<any>): Array<any> {
-		return instances.map((Instance: any) => {
+	analyzeInstance(): Array<any> {
+		return this.instances.map((Instance: any) => {
 			const instance = new Instance()
-			instance.requestDynamicParameter = (route: string) => this.router.getDynamicSegments(route)
+			instance.requestDynamicSegments = (route: string) => this.router.getDynamicSegments(route)
 			instance.requestData = () => this.data
 			instance.requestDataManager = () => this.dataManager
 			return instance
@@ -60,8 +57,12 @@ export default class Popup {
 	 * Initialize the popup
 	 */
 	init() {
-		this.router.init()
-		this.addEvents()
+		this.instancesResult = this.analyzeInstance()
+
+		if (this.instancesResult.length) {
+			this.router.init()
+			this.addEvents()
+		}
 	}
 
 	/**
@@ -136,15 +137,16 @@ export default class Popup {
 		const routeFromUrlSplit = this.router.transformRouteInArray(route)
 		return this.instancesResult.find((instance: any) => {
 			const routeFromAppSplit = this.router.transformRouteInArray(instance.route)
+			console.log(routeFromAppSplit)
 			return routeFromAppSplit.find((routeChunk: string, index: number) => !routeChunk.startsWith(':') && routeFromUrlSplit[index] === routeChunk)
-		}) || this.get404Instance()
+		}) || this.getNotFoundInstance()
 	}
 
 	/**
-	 * Get the 404 instance in case of no instance found
-	 * @returns {Class} 404 instance
+	 * Get the not found instance in case of no instance found
+	 * @returns {Class} Not found instance
 	 */
-	get404Instance() {
+	getNotFoundInstance(): any {
 		return this.instancesResult.find((instance: any) => instance.route === '/empty')
 	}
 }

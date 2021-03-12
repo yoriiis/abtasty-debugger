@@ -64,13 +64,13 @@ export interface Wording {
 }
 
 export interface DetailData {
-    id: string;
+    testId: string;
     result: Result;
     targetingSorted: TargetingItemSortedByStatus;
     targetingMode: string
 }
 
-export interface DynamicParameter {
+export interface DynamicSegments {
     [key: string]: string;
 }
 

@@ -6,7 +6,7 @@ import { Targeting, DetailData } from 'shared/assets/interfaces/interfaces'
 
 /**
  * Detail template
- * @param {Object} options
+ * @param {Object} options Template options
  * @returns {HTMLElement} Generated HTML
  */
 export default function ({ data }: {data: DetailData}) {
@@ -21,7 +21,7 @@ export default function ({ data }: {data: DetailData}) {
 				</li>
 				<li>
 					<a
-						href={`https://app2.abtasty.com/edit/test/${data.id}/audience`}
+						href={`https://app2.abtasty.com/edit/test/${data.testId}/audience`}
 						target="_blank"
 						rel="noreferrer"
 						className="detail-headerDashboard"
@@ -36,7 +36,7 @@ export default function ({ data }: {data: DetailData}) {
 			</ul>
 			<ul className="detail-list">
 				<li>Name: {data.result.name}</li>
-				<li>ID: {data.id}</li>
+				<li>ID: {data.testId}</li>
 				<li>Type: {data.result.type}</li>
 				{data.result.variationName && (
 					<li>

@@ -1,19 +1,19 @@
 export default class Router {
-	is404: Boolean;
+	isNoudFound: Boolean;
 	onDestroy: Function;
 	onCreate: Function;
-	stepCreated: Boolean;
+	isReady: Boolean;
 	defaultRoute: string;
 	notFoundRoute: string;
 	currentRoute: null | string;
 	previousRoute: null | string;
 
-	constructor({ is404, onDestroy, onCreate }: { is404: Boolean, onDestroy: Function, onCreate: Function}) {
-		this.is404 = is404
+	constructor({ isNoudFound, onDestroy, onCreate }: { isNoudFound: Boolean, onDestroy: Function, onCreate: Function}) {
+		this.isNoudFound = isNoudFound
 		this.onDestroy = onDestroy
 		this.onCreate = onCreate
 
-		this.stepCreated = false
+		this.isReady = false
 		this.defaultRoute = '/'
 		this.notFoundRoute = '/empty'
 		this.currentRoute = null
@@ -22,12 +22,15 @@ export default class Router {
 		this.onHashChange = this.onHashChange.bind(this)
 	}
 
+	/**
+     * Initialize the router
+     */
 	init() {
 		// Get current route
 		const route = this.getRoute()
 
 		// Redirect to the empty route if no data
-		if (this.is404) {
+		if (this.isNoudFound) {
 			this.defaultRoute = this.notFoundRoute
 		}
 
@@ -78,12 +81,12 @@ export default class Router {
 				// Create the new step on destruction callback
 				this.onCreate(this.currentRoute)
 
-				this.stepCreated = true
+				this.isReady = true
 			}
 		}
 
 		// If destroy method was not called, create the step now
-		if (!this.stepCreated) {
+		if (!this.isReady) {
 			this.onCreate(this.currentRoute)
 		}
 	}

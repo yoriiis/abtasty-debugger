@@ -12,19 +12,34 @@ export default class List {
 	route = '/';
 	selector = '.list';
 
-	render() {
+	/**
+     * Render the template
+     * @returns {HTMLElement} Template
+     */
+	render() : Element {
 		return this.getTemplate(this.getData())
 	}
 
+	/**
+     * Get data for the template
+     * @param dynamicSegments
+     * @returns {Object} Template's data
+     */
 	getData(): ListData {
 		const dataManager = this.requestDataManager()
 		const data = this.requestData()
+
 		return {
 			testsSortedByStatus: dataManager.getTestsSortedByStatus(data)
 		}
 	}
 
-	getTemplate(data: ListData) {
+	/**
+     * Get template
+     * @param {Object} data Template's data
+     * @returns {HTMLElement} Template
+     */
+	getTemplate(data: ListData): Element {
 		return <Template data={data} />
 	}
 }

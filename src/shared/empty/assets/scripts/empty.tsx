@@ -6,11 +6,20 @@ export default class Empty {
 	route = '/empty';
 	selector = '.empty';
 
-	render() {
+	/**
+     * Render the template
+     * @returns {HTMLElement} Template
+     */
+	render(): Element {
 		return this.getTemplate()
 	}
 
-	getTemplate() {
+	/**
+     * Get template
+     * @param {Object} data Template's data
+     * @returns {HTMLElement} Template
+     */
+	getTemplate(): Element {
 		return <Template />
 	}
 }
