@@ -1,5 +1,4 @@
 import Router from '../router'
-import fixturesAbtasty from '../../shared/assets/fixtures/abtasty.json'
 
 let router
 let event
