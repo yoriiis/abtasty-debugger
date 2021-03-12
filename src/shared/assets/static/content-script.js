@@ -9,7 +9,6 @@ let dataFromPage
 document.addEventListener('sendABTastyObject', (event) => {
 	const data = JSON.parse(event.detail.ABTastyData)
 
-	console.log(data)
 	dataFromPage = data
 
 	chrome.runtime.sendMessage({
@@ -21,6 +20,5 @@ document.addEventListener('sendABTastyObject', (event) => {
 
 // Listen for messages from the popup
 chrome.runtime.onMessage.addListener((message, sender, response) => {
-	console.log('popup open')
 	message.from === 'popup' && message.action === 'getData' && response(dataFromPage)
 })

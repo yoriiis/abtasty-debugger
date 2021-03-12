@@ -9,18 +9,24 @@ if (isExtensionMode) {
 	chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
 		const currentTab = tabs[0]
 
-		chrome.tabs.sendMessage(currentTab.id, { from: 'popup', action: 'getData' }, (response) => {
-			// Initialize the popup with data received from the page-script
-			const popup = new Popup({
-				data: response,
-				instances: [List, Detail, Empty]
-			})
-			popup.init()
+		if (currentTab) {
+			chrome.tabs.sendMessage(
+				currentTab.id,
+				{ from: 'popup', action: 'getData' },
+				(response) => {
+					// Initialize the popup with data received from the page-script
+					const popup = new Popup({
+						data: response,
+						instances: [List, Detail, Empty]
+					})
+					popup.init()
 
-			// Remove the badge when the popup is open
-			chrome.action.setBadgeText({
-				text: ''
-			})
-		})
+					// Remove the badge when the popup is open
+					chrome.action.setBadgeText({
+						text: ''
+					})
+				}
+			)
+		}
 	})
 }
