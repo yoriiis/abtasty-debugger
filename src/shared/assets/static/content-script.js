@@ -1,15 +1,24 @@
-// Create the connection with a specific name (for scope)
-const port = chrome.runtime.connect({
-	name: 'abtastyExtention'
-})
-
 // Inject the page script in the current web page
 const pageScript = document.createElement('script')
 pageScript.src = chrome.runtime.getURL('static/page-script.js')
 document.head.appendChild(pageScript)
 
-// Listen for dispatchEvent from the page script
+let dataFromPage
+
+// Listen for event from the page script
 document.addEventListener('sendABTastyObject', (event) => {
-	// Send data to the background
-	port.postMessage({ ABTastyData: event.detail.ABTastyData })
+	const data = JSON.parse(event.detail.ABTastyData)
+
+	dataFromPage = data
+
+	chrome.runtime.sendMessage({
+		from: 'contentScript',
+		action: 'updateBadge',
+		counter: Object.keys(data.results).length
+	})
+})
+
+// Listen for messages from the popup
+chrome.runtime.onMessage.addListener((message, sender, response) => {
+	message.from === 'popup' && message.action === 'getData' && response(dataFromPage)
 })
