@@ -61,7 +61,6 @@ export default class Popup {
 	init() {
 		if (this.data) {
 			this.formattedData = this.dataManager.getFormattedData(this.data)
-
 			this.instancesResult = this.analyzeInstance()
 
 			if (this.instancesResult.length) {
