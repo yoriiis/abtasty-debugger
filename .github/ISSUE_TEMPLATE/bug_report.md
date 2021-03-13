@@ -1,5 +1,5 @@
 ---
-name: "🐛 Bug report"
+name: '🐛 Bug report'
 about: Create a report to help us improve
 labels: bug
 ---
@@ -33,9 +33,9 @@ Please include any additional information necessary here. Including the followin
 
 ### versions
 
-#### WebpackBoilerplate
+#### ABTasty Debugger
 
-What version of `WebpackBoilerplate` does this occur with?
+What version of `ABTasty Debugger` does this occur with?
 
 #### Browsers
 

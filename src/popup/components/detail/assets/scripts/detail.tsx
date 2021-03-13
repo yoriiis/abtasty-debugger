@@ -6,7 +6,7 @@ export default class Detail {
 	// @ts-ignore
 	requestDynamicSegments: Function;
 	// @ts-ignore
-	requestDataManager: Function;
+	requestFormattedData: Function;
 	// @ts-ignore
 	requestData: Function;
 
@@ -29,14 +29,14 @@ export default class Detail {
 	 * @returns {Object} Template's data
 	 */
 	getData(dynamicSegments: DynamicSegments): DetailData {
-		const dataManager = this.requestDataManager()
+		const formattedData = this.requestFormattedData()
 		const data = this.requestData()
 		const testId = dynamicSegments[':testId']
 
 		return {
 			testId,
 			result: data.results[testId],
-			targetingSorted: dataManager.getTargetingsSortedByStatus(data)[testId],
+			targetingSorted: formattedData.targetingsSortedByStatus[testId],
 			targetingMode: data.accountData.tests[testId].targetingMode
 		}
 	}

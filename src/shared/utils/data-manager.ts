@@ -1,9 +1,21 @@
-import { Data, TestsSortedByStatus, TargetingsSortedByStatus } from 'shared/assets/interfaces/interfaces'
+import { Data, TestsSortedByStatus, TargetingsSortedByStatus, FormattedData } from 'shared/assets/interfaces/interfaces'
 
 /**
  * Data manager for ABTasty data
  */
 export default class DataManager {
+	/**
+     * Get formatted data
+     * @param {Object} data Data
+     * @returns {Object} Formatted data
+     */
+	getFormattedData(data: Data): FormattedData {
+		return {
+			testsSortedByStatus: this.getTestsSortedByStatus(data),
+			targetingsSortedByStatus: this.getTargetingsSortedByStatus(data)
+		}
+	}
+
 	/**
 	 * Get tests sorted by status (accepted or not)
 	 * @returns {Object} Sorted tests

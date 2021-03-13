@@ -77,3 +77,8 @@ export interface DynamicSegments {
 export interface ListData {
     testsSortedByStatus: TestsSortedByStatus;
 }
+
+export interface FormattedData {
+    testsSortedByStatus: TestsSortedByStatus;
+    targetingsSortedByStatus: TargetingsSortedByStatus;
+}

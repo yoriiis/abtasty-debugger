@@ -6,20 +6,7 @@ import DataManager from 'shared/utils/data-manager'
 import Router from 'shared/utils/router'
 
 jest.mock('validate-target')
-jest.mock('shared/utils/data-manager', () => {
-	return jest.fn().mockImplementation(() => {
-		return {
-			getSortedData: jest.fn().mockReturnValue({
-				testsSortedByStatus: {},
-				targetingsSortedByStatus: {
-					foo: true
-				}
-			}),
-			getTestsSortedByStatus: jest.fn(),
-			getTargetingsSortedByStatus: jest.fn()
-		}
-	})
-})
+jest.mock('shared/utils/data-manager')
 jest.mock('shared/utils/router')
 
 class Detail {
@@ -99,6 +86,9 @@ afterEach(() => {
 describe('Popup constructor', () => {
 	it('Should initialize the constructor', () => {
 		expect(popup.data).toStrictEqual(fixturesAbtasty)
+		expect(popup.instances).toStrictEqual([Detail, Empty])
+		expect(popup.instancesResult).toStrictEqual([])
+		expect(popup.formattedData).toBe(null)
 		expect(popup.app).toBe(document.querySelector('#app'))
 		expect(DataManager).toHaveBeenCalled()
 		expect(Router).toHaveBeenCalledWith({
@@ -117,7 +107,7 @@ describe('Popup analyzeInstance', () => {
 		expect(result[0]).toBeInstanceOf(Detail)
 		expect(result[0].requestDynamicSegments).toEqual(expect.any(Function))
 		expect(result[0].requestData).toEqual(expect.any(Function))
-		expect(result[0].requestDataManager).toEqual(expect.any(Function))
+		expect(result[0].requestFormattedData).toEqual(expect.any(Function))
 	})
 })
 
@@ -127,17 +117,28 @@ describe('Popup init', () => {
 		popup.addEvents = jest.fn()
 	})
 
-	afterEach(() => {
-		expect(popup.analyzeInstance).toHaveBeenCalled()
-	})
-
 	it('Should call the init function', () => {
 		popup.analyzeInstance = jest.fn().mockReturnValue(instancesResult)
+		popup.dataManager.getFormattedData = jest.fn()
 
 		popup.init()
 
+		expect(popup.dataManager.getFormattedData).toHaveBeenCalledWith(fixturesAbtasty)
+		expect(popup.analyzeInstance).toHaveBeenCalled()
 		expect(popup.router.init).toHaveBeenCalled()
 		expect(popup.addEvents).toHaveBeenCalled()
+	})
+
+	it('Should call the init function without data', () => {
+		popup.analyzeInstance = jest.fn().mockReturnValue([])
+
+		popup.data = null
+		popup.init()
+
+		expect(popup.dataManager.getFormattedData).not.toHaveBeenCalled()
+		expect(popup.analyzeInstance).not.toHaveBeenCalled()
+		expect(popup.router.init).not.toHaveBeenCalled()
+		expect(popup.addEvents).not.toHaveBeenCalled()
 	})
 
 	it('Should call the init function without instances result', () => {
@@ -145,6 +146,8 @@ describe('Popup init', () => {
 
 		popup.init()
 
+		expect(popup.dataManager.getFormattedData).toHaveBeenCalledWith(fixturesAbtasty)
+		expect(popup.analyzeInstance).toHaveBeenCalled()
 		expect(popup.router.init).not.toHaveBeenCalled()
 		expect(popup.addEvents).not.toHaveBeenCalled()
 	})

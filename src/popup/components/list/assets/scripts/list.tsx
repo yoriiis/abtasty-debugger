@@ -4,9 +4,7 @@ import { ListData } from 'shared/assets/interfaces/interfaces'
 
 export default class List {
 	// @ts-ignore
-	requestDataManager: Function;
-	// @ts-ignore
-	requestData: Function;
+	requestFormattedData: Function;
 
 	id = 'list';
 	route = '/';
@@ -26,11 +24,10 @@ export default class List {
 	 * @returns {Object} Template's data
 	 */
 	getData(): ListData {
-		const dataManager = this.requestDataManager()
-		const data = this.requestData()
+		const formattedData = this.requestFormattedData()
 
 		return {
-			testsSortedByStatus: dataManager.getTestsSortedByStatus(data)
+			testsSortedByStatus: formattedData.testsSortedByStatus
 		}
 	}
 
