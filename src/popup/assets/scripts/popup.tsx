@@ -1,7 +1,7 @@
 import validateTarget from 'validate-target'
 import Router from 'shared/utils/router'
 import DataManager from 'shared/utils/data-manager'
-import { Data } from 'shared/assets/interfaces/interfaces'
+import { Data, FormattedData } from 'shared/assets/interfaces/interfaces'
 
 export default class Popup {
 	data: Data;
@@ -10,6 +10,7 @@ export default class Popup {
 	router: any;
 	instances: Array<any>;
 	instancesResult: Array<any>;
+    formattedData: null | FormattedData;
 	routes: {
 		[key: string]: {
 			path: string;
@@ -21,6 +22,7 @@ export default class Popup {
 		this.data = data
 		this.instances = instances
 		this.instancesResult = []
+		this.formattedData = null
 
 		// @ts-ignore
 		this.app = document.querySelector('#app')
@@ -48,7 +50,7 @@ export default class Popup {
 			const instance = new Instance()
 			instance.requestDynamicSegments = (route: string) => this.router.getDynamicSegments(route)
 			instance.requestData = () => this.data
-			instance.requestDataManager = () => this.dataManager
+			instance.requestFormattedData = () => this.formattedData
 			return instance
 		})
 	}
@@ -57,11 +59,15 @@ export default class Popup {
 	 * Initialize the popup
 	 */
 	init() {
-		this.instancesResult = this.analyzeInstance()
+		if (this.data) {
+			this.formattedData = this.dataManager.getFormattedData(this.data)
 
-		if (this.instancesResult.length) {
-			this.router.init()
-			this.addEvents()
+			this.instancesResult = this.analyzeInstance()
+
+			if (this.instancesResult.length) {
+				this.router.init()
+				this.addEvents()
+			}
 		}
 	}
 
