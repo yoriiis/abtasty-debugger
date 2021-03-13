@@ -10,7 +10,7 @@
 	"scripts": {
 		"build": "rm -rf ./web/dist/ && webpack --mode=production --config=webpack.config.js",
 		"inspect": "node --inspect node_modules/webpack/bin/webpack.js --config webpack.config.js --mode=development",
-		"release": "rm -rf ./web/dist/ && webpack --mode=production --config=webpack.config.js --env release=true && node ./src/shared/utils/zip-release.js",
+		"release": "rm -rf ./web/dist/ && webpack --mode=production --config=webpack.config.js --env release=true",
 		"start": "rm -rf ./web/dist/ && webpack --mode=development --config=webpack.config.js",
 		"test": "jest --verbose --coverage",
 		"test:eslint": "eslint . --ignore-pattern dist --ignore-pattern lib",

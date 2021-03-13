@@ -59,7 +59,7 @@ jobs:
 
       - name: Build Release
         run: |
-          npm run release
+          make build-release
 
       - name: Upload release artifacts
         uses: actions/upload-artifact@v2
@@ -68,7 +68,7 @@ jobs:
             github.repository == 'yoriiis/abtasty-debugger'
         with:
           name: release
-          path: abtasty-debugger.zip
+          path: release-chrome.zip
 
   deploy-coverage:
     runs-on: ubuntu-latest
@@ -117,6 +117,6 @@ jobs:
           refresh-token: ${{ secrets.CHROME_REFRESH_TOKEN }}
           client-id: ${{ secrets.CHROME_CLIENT_ID }}
           client-secret: ${{ secrets.CHROME_CLIENT_SECRET}}
-          file-name: 'abtasty-debugger.zip'
+          file-name: 'release-chrome.zip'
           app-id: ${{ secrets.CHROME_APP_ID }}
           publish: false
