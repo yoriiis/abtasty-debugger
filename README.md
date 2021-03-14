@@ -8,9 +8,10 @@ Display A/B tests available on the current page and debug targeting informations
 
 ## Installation
 
-Install the `AB Tasty Debugger` browser extension from the Chrome Web Store (Coming soon).
+Install the `AB Tasty Debugger` browser extension from the Chrome Web Store and the Firefox Browser Add-ons (Coming soon).
 
-![Chrome](assets/images/chrome.png 'Chrome')
+<img src="./assets/svgs/chrome.svg" width="50" height="50" alt="Chrome" />
+<img src="./assets/svgs/firefox.svg" width="50" height="50" alt="Firefox" />
 
 ## Features
 
