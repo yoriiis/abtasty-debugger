@@ -3,14 +3,19 @@ import Detail from '../../components/detail/assets/scripts/detail'
 import Empty from 'shared/empty/assets/scripts/empty'
 import Popup from './popup'
 
-const isExtensionMode = typeof chrome !== 'undefined' && typeof chrome.tabs !== 'undefined'
+const namespace =
+	typeof browser !== 'undefined' ? browser : typeof chrome !== 'undefined' ? chrome : null
+const isExtensionMode = typeof namespace.tabs !== 'undefined'
 
 if (isExtensionMode) {
-	chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+	const manifestVersion = namespace.runtime.getManifest().manifest_version
+	const action = manifestVersion === 3 ? 'action' : 'browserAction'
+
+	namespace.tabs.query({ active: true, currentWindow: true }, function (tabs) {
 		const currentTab = tabs[0]
 
 		if (currentTab) {
-			chrome.tabs.sendMessage(
+			namespace.tabs.sendMessage(
 				currentTab.id,
 				{ from: 'popup', action: 'getData' },
 				(response) => {
@@ -22,7 +27,7 @@ if (isExtensionMode) {
 					popup.init()
 
 					// Remove the badge when the popup is open
-					chrome.action.setBadgeText({
+					namespace[action].setBadgeText({
 						text: ''
 					})
 				}

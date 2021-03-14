@@ -117,37 +117,46 @@ describe('Popup init', () => {
 		popup.addEvents = jest.fn()
 	})
 
+	afterEach(() => {
+		expect(popup.analyzeInstance).toHaveBeenCalled()
+	})
+
 	it('Should call the init function', () => {
+		popup.dataManager.getFormattedData = jest.fn().mockReturnValue({ dataFormatted: true })
 		popup.analyzeInstance = jest.fn().mockReturnValue(instancesResult)
-		popup.dataManager.getFormattedData = jest.fn()
 
 		popup.init()
 
 		expect(popup.dataManager.getFormattedData).toHaveBeenCalledWith(fixturesAbtasty)
-		expect(popup.analyzeInstance).toHaveBeenCalled()
+		expect(popup.formattedData).toStrictEqual({ dataFormatted: true })
+		expect(popup.instancesResult).toStrictEqual(instancesResult)
 		expect(popup.router.init).toHaveBeenCalled()
 		expect(popup.addEvents).toHaveBeenCalled()
 	})
 
 	it('Should call the init function without data', () => {
+		popup.dataManager.getFormattedData = jest.fn()
 		popup.analyzeInstance = jest.fn().mockReturnValue([])
 
 		popup.data = null
 		popup.init()
 
 		expect(popup.dataManager.getFormattedData).not.toHaveBeenCalled()
-		expect(popup.analyzeInstance).not.toHaveBeenCalled()
+		expect(popup.formattedData).toStrictEqual(null)
+		expect(popup.instancesResult).toStrictEqual([])
 		expect(popup.router.init).not.toHaveBeenCalled()
 		expect(popup.addEvents).not.toHaveBeenCalled()
 	})
 
 	it('Should call the init function without instances result', () => {
+		popup.dataManager.getFormattedData = jest.fn().mockReturnValue({ dataFormatted: true })
 		popup.analyzeInstance = jest.fn().mockReturnValue([])
 
 		popup.init()
 
 		expect(popup.dataManager.getFormattedData).toHaveBeenCalledWith(fixturesAbtasty)
-		expect(popup.analyzeInstance).toHaveBeenCalled()
+		expect(popup.formattedData).toStrictEqual({ dataFormatted: true })
+		expect(popup.instancesResult).toStrictEqual([])
 		expect(popup.router.init).not.toHaveBeenCalled()
 		expect(popup.addEvents).not.toHaveBeenCalled()
 	})

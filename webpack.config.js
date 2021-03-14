@@ -8,9 +8,11 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 
 module.exports = (env, argv) => {
+	const target = env.target
 	const isProduction = argv.mode === 'production'
 	const suffixHash = isProduction ? '.[contenthash]' : ''
 	const isReleaseMode = env.release || false
+	const manifestFilename = target === 'chrome' ? 'manifest-v3.json' : 'manifest-v2.json'
 
 	const entries = {
 		popup: './src/popup/config'
@@ -31,12 +33,19 @@ module.exports = (env, argv) => {
 		new CopyPlugin({
 			patterns: [
 				{
-					from: path.resolve(__dirname, './src/shared/assets/static'),
-					to: path.resolve(__dirname, './web/dist/static')
+					from: path.resolve(__dirname, './src/shared/assets/content-scripts'),
+					to: path.resolve(__dirname, './web/dist/scripts')
 				},
 				{
-					from: path.resolve(__dirname, './src/shared/assets/static-root'),
-					to: path.resolve(__dirname, './web/dist')
+					from: path.resolve(
+						__dirname,
+						`./src/shared/assets/manifests/${manifestFilename}`
+					),
+					to: path.resolve(__dirname, './web/dist/manifest.json')
+				},
+				{
+					from: path.resolve(__dirname, './src/shared/assets/background'),
+					to: path.resolve(__dirname, './web/dist/')
 				}
 			]
 		})
@@ -151,7 +160,16 @@ module.exports = (env, argv) => {
 		optimization: {
 			minimizer: [
 				new TerserPlugin({
-					extractComments: false
+					extractComments: false,
+					parallel: true,
+					terserOptions: {
+						compress: {
+							// Drop console.log|console.info|console.debug
+							// Keep console.warn|console.error
+							pure_funcs: ['console.log', 'console.info', 'console.debug']
+						},
+						mangle: true
+					}
 				}),
 				new CssMinimizerPlugin()
 			],
