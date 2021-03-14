@@ -15,7 +15,7 @@ module.exports = (env, argv) => {
 	const manifestFilename = target === 'chrome' ? 'manifest-v3.json' : 'manifest-v2.json'
 
 	const entries = {
-		popup: ['./src/popup/config']
+		popup: './src/popup/config'
 	}
 	const plugins = [
 		new ProgressBarPlugin(),
