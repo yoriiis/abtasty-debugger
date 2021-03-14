@@ -1,6 +1,6 @@
 // Inject the page script in the current web page
 const pageScript = document.createElement('script')
-pageScript.src = chrome.runtime.getURL('static/page-script.js')
+pageScript.src = chrome.runtime.getURL('scripts/page-script.js')
 document.head.appendChild(pageScript)
 
 let dataFromPage
@@ -11,7 +11,7 @@ document.addEventListener('sendABTastyObject', (event) => {
 
 	dataFromPage = data
 
-	chrome.runtime.sendMessage({
+	browser.runtime.sendMessage({
 		from: 'contentScript',
 		action: 'updateBadge',
 		counter: Object.keys(data.results).length
@@ -19,6 +19,6 @@ document.addEventListener('sendABTastyObject', (event) => {
 })
 
 // Listen for messages from the popup
-chrome.runtime.onMessage.addListener((message, sender, response) => {
+browser.runtime.onMessage.addListener((message, sender, response) => {
 	message.from === 'popup' && message.action === 'getData' && response(dataFromPage)
 })

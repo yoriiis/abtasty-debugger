@@ -11,7 +11,7 @@
 	"content_scripts": [
 		{
 			"matches": ["http://*/*", "https://*/*"],
-			"js": ["static/content-script.js"]
+			"js": ["scripts/content-script.js"]
 		}
 	],
 	"background": {
@@ -19,7 +19,7 @@
 	},
 	"web_accessible_resources": [
 		{
-			"resources": ["static/page-script.js"],
+			"resources": ["scripts/page-script.js"],
 			"matches": ["http://*/*", "https://*/*"]
 		}
 	],

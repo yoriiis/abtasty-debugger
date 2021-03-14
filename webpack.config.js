@@ -8,12 +8,17 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 
 module.exports = (env, argv) => {
+	const target = env.TARGET
 	const isProduction = argv.mode === 'production'
 	const suffixHash = isProduction ? '.[contenthash]' : ''
 	const isReleaseMode = env.release || false
 
+	const availableEntries = {
+		chrome: ['./src/chrome/config', './src/popup/config'],
+		firefox: ['./src/firefox/config', './src/popup/config']
+	}
 	const entries = {
-		popup: './src/popup/config'
+		[target]: availableEntries[target]
 	}
 	const plugins = [
 		new ProgressBarPlugin(),
@@ -25,18 +30,26 @@ module.exports = (env, argv) => {
 			filename: 'popup.html',
 			template: path.resolve(__dirname, './src/popup/views/popup.html'),
 			publicPath: '',
-			chunks: ['popup']
+			chunks: [target]
 		}),
 		new webpack.optimize.ModuleConcatenationPlugin(),
 		new CopyPlugin({
 			patterns: [
 				{
-					from: path.resolve(__dirname, './src/shared/assets/static'),
-					to: path.resolve(__dirname, './web/dist/static')
+					from: path.resolve(__dirname, `./src/${target}/assets/content-script`),
+					to: path.resolve(__dirname, `./web/dist/${target}/scripts`)
 				},
 				{
-					from: path.resolve(__dirname, './src/shared/assets/static-root'),
-					to: path.resolve(__dirname, './web/dist')
+					from: path.resolve(__dirname, './src/shared/utils/page-script.js'),
+					to: path.resolve(__dirname, `./web/dist/${target}/scripts`)
+				},
+				{
+					from: path.resolve(__dirname, `./src/${target}/assets/manifest`),
+					to: path.resolve(__dirname, `./web/dist/${target}/`)
+				},
+				{
+					from: path.resolve(__dirname, `./src/${target}/assets/background`),
+					to: path.resolve(__dirname, `./web/dist/${target}/`)
 				}
 			]
 		})
@@ -63,7 +76,7 @@ module.exports = (env, argv) => {
 		},
 		devtool: isProduction ? false : 'source-map',
 		output: {
-			path: path.resolve(__dirname, './web/dist'),
+			path: path.resolve(__dirname, `./web/dist/${target}`),
 			publicPath: 'dist/',
 			filename: `scripts/[name]${suffixHash}.js`,
 			chunkFilename: `scripts/[name]${suffixHash}.js`
@@ -151,7 +164,16 @@ module.exports = (env, argv) => {
 		optimization: {
 			minimizer: [
 				new TerserPlugin({
-					extractComments: false
+					extractComments: false,
+					parallel: true,
+					terserOptions: {
+						compress: {
+							// Drop console.log|console.info|console.debug
+							// Keep console.warn|console.error
+							pure_funcs: ['console.log', 'console.info', 'console.debug']
+						},
+						mangle: true
+					}
 				}),
 				new CssMinimizerPlugin()
 			],

@@ -37,7 +37,8 @@ module.exports = {
 		document: false,
 		window: false,
 		__webpack_public_path__: true,
-		chrome: true
+		chrome: true,
+		browser: true
 	},
 
 	settings: {

@@ -61,15 +61,6 @@ jobs:
         run: |
           make build-release
 
-      - name: Upload release artifacts
-        uses: actions/upload-artifact@v2
-        if: github.event_name == 'release' &&
-            github.event.action == 'published' &&
-            github.repository == 'yoriiis/abtasty-debugger'
-        with:
-          name: release
-          path: release-chrome.zip
-
   deploy-coverage:
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -94,29 +85,3 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           path-to-lcov: 'coverage/lcov.info'
-
-  deploy-store:
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    needs: build
-    if: success() &&
-        github.event_name == 'release' &&
-        github.event.action == 'published' &&
-        github.repository == 'yoriiis/abtasty-debugger'
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Download release artifacts
-        uses: actions/download-artifact@v2
-        with:
-          name: release
-
-      - name: Chrome Extension upload & publish
-        uses: Passiverecords/chrome-extension-upload-action@1.4.1
-        with:
-          refresh-token: ${{ secrets.CHROME_REFRESH_TOKEN }}
-          client-id: ${{ secrets.CHROME_CLIENT_ID }}
-          client-secret: ${{ secrets.CHROME_CLIENT_SECRET}}
-          file-name: 'release-chrome.zip'
-          app-id: ${{ secrets.CHROME_APP_ID }}
-          publish: false

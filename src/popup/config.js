@@ -4,9 +4,6 @@ import '../index'
 // import CSS
 import './assets/styles/popup.css'
 
-// import JS
-import './assets/scripts/main'
-
 // import popup components
 import './components/list/config'
 import './components/detail/config'
