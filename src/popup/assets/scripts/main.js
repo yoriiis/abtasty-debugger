@@ -1,7 +1,7 @@
-import List from '../../../popup/components/list/assets/scripts/list'
-import Detail from '../../../popup/components/detail/assets/scripts/detail'
+import List from '../../components/list/assets/scripts/list'
+import Detail from '../../components/detail/assets/scripts/detail'
 import Empty from 'shared/empty/assets/scripts/empty'
-import Popup from '../../../popup/assets/scripts/popup'
+import Popup from '../../assets/scripts/popup'
 
 const namespace =
 	typeof browser !== 'undefined' ? browser : typeof chrome !== 'undefined' ? chrome : null

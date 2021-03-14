@@ -8,11 +8,11 @@
 	"license": "MIT",
 	"author": "Yoriiis aka Joris DANIEL",
 	"scripts": {
-		"build:browser": "rm -rf ./web/dist/ && webpack --mode=production --config=webpack.config.js --env TARGET=browser",
-		"build:chrome": "rm -rf ./web/dist/ && webpack --mode=production --config=webpack.config.js --env TARGET=chrome",
+		"build:browser": "rm -rf ./web/dist/ && webpack --mode=production --config=webpack.config.js --env target=browser",
+		"build:chrome": "rm -rf ./web/dist/ && webpack --mode=production --config=webpack.config.js --env target=chrome",
 		"inspect": "node --inspect node_modules/webpack/bin/webpack.js --config webpack.config.js --mode=development",
-		"release:browser": "rm -rf ./web/dist/ && webpack --mode=production --config=webpack.config.js --env TARGET=browser --env release=true",
-		"release:chrome": "rm -rf ./web/dist/ && webpack --mode=production --config=webpack.config.js --env TARGET=chrome --env release=true",
+		"release:browser": "rm -rf ./web/dist/ && webpack --mode=production --config=webpack.config.js --env target=browser --env release=true",
+		"release:chrome": "rm -rf ./web/dist/ && webpack --mode=production --config=webpack.config.js --env target=chrome --env release=true",
 		"start:chrome": "web-ext run --target=chromium --source-dir ./web/dist",
 		"start:firefox": "web-ext run --source-dir ./web/dist",
 		"test": "jest --verbose --coverage",
@@ -22,8 +22,8 @@
 		"test:stylelint": "stylelint './src/**/*.css'",
 		"test:type-check": "tsc --noEmit",
 		"test:watch": "jest --watchAll --coverage",
-		"watch:browser": "rm -rf ./web/dist/ && webpack --mode=development --config=webpack.config.js --env TARGET=browser",
-		"watch:chrome": "rm -rf ./web/dist/ && webpack --mode=development --config=webpack.config.js --env TARGET=chrome",
+		"watch:browser": "rm -rf ./web/dist/ && webpack --mode=development --config=webpack.config.js --env target=browser",
+		"watch:chrome": "rm -rf ./web/dist/ && webpack --mode=development --config=webpack.config.js --env target=chrome",
 		"web-ext:lint": "web-ext lint --source-dir ./web/dist"
 	},
 	"dependencies": {

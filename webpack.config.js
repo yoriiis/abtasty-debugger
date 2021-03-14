@@ -8,7 +8,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 
 module.exports = (env, argv) => {
-	const target = env.TARGET
+	const target = env.target
 	const isProduction = argv.mode === 'production'
 	const suffixHash = isProduction ? '.[contenthash]' : ''
 	const isReleaseMode = env.release || false

@@ -16,7 +16,7 @@ Install the `AB Tasty Debugger` browser extension from the browsers stores (comi
 <a href="https://addons.mozilla.org" title="Firefox Browser Add-ons">
     <img src="./assets/svgs/firefox.svg" width="50" height="50" alt="Firefox" />
 </a>
-<a href="https://addons.opera.com" title="Firefox Browser Add-ons">
+<a href="https://addons.opera.com" title="Opera Add-ons">
     <img src="./assets/svgs/opera.svg" width="50" height="50" alt="Opera" />
 </a>
 <a href="https://microsoftedge.microsoft.com/addons" title="Microsoft Edge Add-ons">
