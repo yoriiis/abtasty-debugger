@@ -12,13 +12,10 @@ module.exports = (env, argv) => {
 	const isProduction = argv.mode === 'production'
 	const suffixHash = isProduction ? '.[contenthash]' : ''
 	const isReleaseMode = env.release || false
+	const manifestFilename = target === 'chrome' ? 'manifest-v3.json' : 'manifest-v2.json'
 
-	const availableEntries = {
-		chrome: ['./src/chrome/config', './src/popup/config'],
-		firefox: ['./src/firefox/config', './src/popup/config']
-	}
 	const entries = {
-		[target]: availableEntries[target]
+		popup: ['./src/popup/config']
 	}
 	const plugins = [
 		new ProgressBarPlugin(),
@@ -30,26 +27,25 @@ module.exports = (env, argv) => {
 			filename: 'popup.html',
 			template: path.resolve(__dirname, './src/popup/views/popup.html'),
 			publicPath: '',
-			chunks: [target]
+			chunks: ['popup']
 		}),
 		new webpack.optimize.ModuleConcatenationPlugin(),
 		new CopyPlugin({
 			patterns: [
 				{
-					from: path.resolve(__dirname, `./src/${target}/assets/content-script`),
-					to: path.resolve(__dirname, `./web/dist/${target}/scripts`)
+					from: path.resolve(__dirname, './src/shared/assets/content-scripts'),
+					to: path.resolve(__dirname, './web/dist/scripts')
 				},
 				{
-					from: path.resolve(__dirname, './src/shared/utils/page-script.js'),
-					to: path.resolve(__dirname, `./web/dist/${target}/scripts`)
+					from: path.resolve(
+						__dirname,
+						`./src/shared/assets/manifests/${manifestFilename}`
+					),
+					to: path.resolve(__dirname, './web/dist/manifest.json')
 				},
 				{
-					from: path.resolve(__dirname, `./src/${target}/assets/manifest`),
-					to: path.resolve(__dirname, `./web/dist/${target}/`)
-				},
-				{
-					from: path.resolve(__dirname, `./src/${target}/assets/background`),
-					to: path.resolve(__dirname, `./web/dist/${target}/`)
+					from: path.resolve(__dirname, './src/shared/assets/background'),
+					to: path.resolve(__dirname, './web/dist/')
 				}
 			]
 		})
@@ -76,7 +72,7 @@ module.exports = (env, argv) => {
 		},
 		devtool: isProduction ? false : 'source-map',
 		output: {
-			path: path.resolve(__dirname, `./web/dist/${target}`),
+			path: path.resolve(__dirname, './web/dist'),
 			publicPath: 'dist/',
 			filename: `scripts/[name]${suffixHash}.js`,
 			chunkFilename: `scripts/[name]${suffixHash}.js`

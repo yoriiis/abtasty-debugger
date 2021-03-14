@@ -15,7 +15,7 @@
 		}
 	],
 	"background": {
-		"service_worker": "sw.js"
+		"service_worker": "background.js"
 	},
 	"web_accessible_resources": [
 		{
