@@ -10,18 +10,12 @@ Display A/B tests available on the current page and debug targeting informations
 
 Install the `AB Tasty Debugger` browser extension from the browsers stores (coming soon).
 
-<a href="https://chrome.google.com/webstore" title="Chrome Web Store">
-    <img src="./assets/svgs/chrome.svg" width="50" height="50" alt="Chrome" />
-</a>
-<a href="https://addons.mozilla.org" title="Firefox Browser Add-ons">
-    <img src="./assets/svgs/firefox.svg" width="50" height="50" alt="Firefox" />
-</a>
-<a href="https://addons.opera.com" title="Opera Add-ons">
-    <img src="./assets/svgs/opera.svg" width="50" height="50" alt="Opera" />
-</a>
-<a href="https://microsoftedge.microsoft.com/addons" title="Microsoft Edge Add-ons">
-    <img src="./assets/svgs/edge.svg" width="50" height="50" alt="Edge" />
-</a>
+<p align="center">
+	<a href="https://chrome.google.com/webstore" title="Chrome Web Store"><img src="./assets/svgs/chrome.svg" width="50" height="50" alt="Chrome" /></a>
+	<a href="https://addons.mozilla.org" title="Firefox Browser Add-ons"><img src="./assets/svgs/firefox.svg" width="50" height="50" alt="Firefox" /></a>
+	<a href="https://addons.opera.com" title="Opera Add-ons"><img src="./assets/svgs/opera.svg" width="50" height="50" alt="Opera" /></a>
+	<a href="https://microsoftedge.microsoft.com/addons" title="Microsoft Edge Add-ons"><img src="./assets/svgs/edge.svg" width="50" height="50" alt="Edge" /></a>
+</p>
 
 ## Features
 
