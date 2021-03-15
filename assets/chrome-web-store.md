@@ -21,17 +21,3 @@ Features:
 ## Goal
 
 Simplifies the debugging of A/B tests from AB Tasty and adds useful informations. Display A/B tests available on the current page and debug targeting information.
-
-## Privacy
-
-### activeTab authorization
-
-The activeTab permission is used to get the ID of the current tab and generates a dynamic storage key with the following format `tab-<TAB_ID>-ABTastyData`. The generated key is used to store data specific to a tab.
-
-### storage authorization
-
-The storage permission is used to store data for the global object found on the page (`window.ABTasty`). The data is sent from the page to the service worker, which declare it in the storage. The pop-up retrieves the data of the current tab from storage to create a user interface. Storage data is unique to each tab that contains A/B tests on the page.
-
-### host authorization
-
-The host permission is used to inject a small script on the current page to retrieve a global `window.ABTasty` object. The object stores the data of the A/B tests and allows to create a user interface in the popup. The script searches for the object with an interval and sends it to the service worker when it is found. When no results are found after a timeout, the interval is destroyed

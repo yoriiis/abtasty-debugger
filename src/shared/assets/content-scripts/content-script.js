@@ -2,7 +2,7 @@ const namespace = typeof browser !== 'undefined' ? browser : chrome
 
 // Inject the page script in the current web page
 const pageScript = document.createElement('script')
-pageScript.src = chrome.runtime.getURL('scripts/page-script.js')
+pageScript.src = namespace.runtime.getURL('scripts/page-script.js')
 document.head.appendChild(pageScript)
 
 let dataFromPage

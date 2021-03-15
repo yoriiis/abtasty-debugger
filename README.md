@@ -17,14 +17,15 @@ The `AB Tasty Debugger` browser extension is available for:
 ## Features
 
 - Dark mode compatible (user preference media feature).
-- Displays a badge with the number of A / B tests found on the current page
+- Displays a badge with the number of A / B tests found on the current page.
 - Displays a list of all A/B tests available on the current page with their status.
 - The list of A/B tests is sorted to show the accepted tests at the top of the list.
 - Displays a detail view of each tests with their general informations (ID, name, ajax targeting).
 - Displays a link to edit the test on the AB Tasty editor.
 - List all targeting informations of the test (URL, code, selector, cookie, IP) with their status.
 - The list of targeting is sorted to show the invalid targets at the top of the list.
-- Collapse/expand all targeting informations
+- Collapse/expand all targeting informations.
+- No permissions requested and no data collected.
 
 ## Licence
 
