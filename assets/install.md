@@ -1,6 +1,6 @@
 # Project installation
 
-The project is open-source and available on the public repository, download the `v1.1.0` from the release page: [abtasty-debugger v1.1.0](https://github.com/yoriiis/abtasty-debugger/releases/tag/1.1.0).
+The project is open-source and available on the public repository, download the release `1.1.0` from the release page: [abtasty-debugger](https://github.com/yoriiis/abtasty-debugger/releases).
 
 ## Prerequisites
 
