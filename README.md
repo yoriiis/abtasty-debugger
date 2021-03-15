@@ -14,6 +14,8 @@ The `AB Tasty Debugger` browser extension is available for:
 | :--------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------: |
 |                                                     [Chrome](https://chrome.google.com/webstore)                                                     |                                                         [Firefox](https://addons.mozilla.org)                                                         |                                                   [Opera](https://addons.opera.com)                                                   |                                                       [Edge](https://microsoftedge.microsoft.com/addons)                                                       |
 
+---
+
 ## Features
 
 - Dark mode compatible (user preference media feature).
@@ -26,6 +28,41 @@ The `AB Tasty Debugger` browser extension is available for:
 - The list of targeting is sorted to show the invalid targets at the top of the list.
 - Collapse/expand all targeting informations.
 - No permissions requested and no data collected.
+
+<table>
+	<tr>
+		<td width="50%">
+			<p><strong>List A/B tests</strong></p>
+			<p><img src="./assets/images/screenshot-list.png" /></p>
+        </td>
+		<td width="50%">
+			<p><strong>List A/B tests in dark mode</strong></p>
+			<p><img src="./assets/images/screenshot-list-dark.png" /></p>
+        </td>
+    </tr>
+	<tr>
+		<td width="50%">
+			<p><strong>Detail of an A/B test</strong></p>
+			<p><img src="./assets/images/screenshot-detail.png" /></p>
+        </td>
+		<td width="50%">
+			<p><strong>Detail of an A/B test in dark mode</strong></p>
+			<p><img src="./assets/images/screenshot-detail-dark.png" /></p>
+        </td>
+    </tr>
+    <tr>
+		<td width="50%">
+			<p><strong>Detail opened of an A/B test</strong></p>
+			<p><img src="./assets/images/screenshot-detail-open.png" /></p>
+        </td>
+		<td width="50%">
+			<p><strong>Detail opened of an A/B test in dark mode</strong></p>
+			<p><img src="./assets/images/screenshot-detail-open-dark.png" /></p>
+        </td>
+    </tr>
+</table>
+
+---
 
 ## Licence
 

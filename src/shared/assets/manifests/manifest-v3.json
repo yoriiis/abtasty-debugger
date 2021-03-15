@@ -1,7 +1,7 @@
 {
 	"manifest_version": 3,
 	"name": "AB Tasty Debugger",
-	"description": "Browser extension that simplifies the debugging of A/B tests from AB Tasty and adds useful informations",
+	"description": "Debug A/B tests from AB Tasty. Open source.",
 	"version": "1.1.0",
 	"icons": {
 		"16": "images/icon-16x16.png",
