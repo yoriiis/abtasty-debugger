@@ -30,34 +30,34 @@ The `AB Tasty Debugger` browser extension is available for:
 - No permissions requested and no data collected.
 
 <table>
-	<tr>
-		<td width="50%">
-			<p><strong>List A/B tests</strong></p>
-			<p><img src="./assets/images/screenshot-list.png" /></p>
+    <tr>
+        <td width="50%">
+            <p><strong>List A/B tests</strong></p>
+            <p><img src="./assets/images/screenshot-list.png" /></p>
         </td>
-		<td width="50%">
-			<p><strong>List A/B tests in dark mode</strong></p>
-			<p><img src="./assets/images/screenshot-list-dark.png" /></p>
-        </td>
-    </tr>
-	<tr>
-		<td width="50%">
-			<p><strong>Detail of an A/B test</strong></p>
-			<p><img src="./assets/images/screenshot-detail.png" /></p>
-        </td>
-		<td width="50%">
-			<p><strong>Detail of an A/B test in dark mode</strong></p>
-			<p><img src="./assets/images/screenshot-detail-dark.png" /></p>
+        <td width="50%">
+            <p><strong>List A/B tests in dark mode</strong></p>
+            <p><img src="./assets/images/screenshot-list-dark.png" /></p>
         </td>
     </tr>
     <tr>
-		<td width="50%">
-			<p><strong>Detail opened of an A/B test</strong></p>
-			<p><img src="./assets/images/screenshot-detail-open.png" /></p>
+        <td width="50%">
+            <p><strong>Detail of an A/B test</strong></p>
+            <p><img src="./assets/images/screenshot-detail.png" /></p>
         </td>
-		<td width="50%">
-			<p><strong>Detail opened of an A/B test in dark mode</strong></p>
-			<p><img src="./assets/images/screenshot-detail-open-dark.png" /></p>
+        <td width="50%">
+            <p><strong>Detail of an A/B test in dark mode</strong></p>
+            <p><img src="./assets/images/screenshot-detail-dark.png" /></p>
+        </td>
+    </tr>
+    <tr>
+        <td width="50%">
+            <p><strong>Detail opened of an A/B test</strong></p>
+            <p><img src="./assets/images/screenshot-detail-open.png" /></p>
+        </td>
+        <td width="50%">
+            <p><strong>Detail opened of an A/B test in dark mode</strong></p>
+            <p><img src="./assets/images/screenshot-detail-open-dark.png" /></p>
         </td>
     </tr>
 </table>
