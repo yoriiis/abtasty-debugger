@@ -7,4 +7,4 @@ create-release-browser:
 	npm run release:browser && cd ./web/ && zip --recurse-paths ../release-firefox.zip ./dist && cd ../
 
 generate-zip:
-	cp ./release-chrome.zip ./release-opera.zip && cp ./release-firefox.zip ./release-edge.zip
+	cp ./release-firefox.zip ./release-opera.zip && cp ./release-firefox.zip ./release-edge.zip
