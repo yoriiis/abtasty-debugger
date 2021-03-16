@@ -35,7 +35,7 @@ Please include any additional information necessary here. Including the followin
 
 #### ABTasty Debugger
 
-What version of `ABTasty Debugger` does this occur with?
+What version of `AB Tasty Debugger` does this occur with?
 
 #### Browsers
 

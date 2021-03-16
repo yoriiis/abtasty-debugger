@@ -1,8 +1,8 @@
-# AB Tasty debugger
+# AB Tasty Debugger
 
 ![ABTastyDebugger](https://img.shields.io/badge/abtasty--debugger-v1.1.0-009CB2.svg?style=for-the-badge) ![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/yoriiis/abtasty-debugger/Build/master?style=for-the-badge) [![Coverage Status](https://img.shields.io/coveralls/github/yoriiis/abtasty-debugger?style=for-the-badge)](https://coveralls.io/github/yoriiis/abtasty-debugger?branch=master)
 
-`ABTastyDebugger` is a browser extension that simplifies the debugging of A/B Tests from AB Tasty and adds useful informations.
+`AB Tasty Debugger` is a browser extension that simplifies the debugging of A/B Tests from AB Tasty and adds useful informations.
 
 Display A/B tests available on the current page and debug targeting informations. For example, if a test is not displaying, the extension display which targetings are not valid.
 
@@ -66,6 +66,6 @@ The `AB Tasty Debugger` browser extension is available for:
 
 ## Licence
 
-`ABTastyDebugger` and its documentation are licensed under the [MIT License](http://opensource.org/licenses/MIT).
+`AB Tasty Debugger` and its documentation are licensed under the [MIT License](http://opensource.org/licenses/MIT).
 
 Created with ♥ by [@yoriiis](http://github.com/yoriiis).
