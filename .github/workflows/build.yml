@@ -48,7 +48,7 @@ jobs:
 
       - name: Upload coverage artifacts
         uses: actions/upload-artifact@v2
-        if: github.ref == 'refs/heads/master' &&
+        if: github.ref == 'refs/heads/main' &&
             github.repository == 'yoriiis/abtasty-debugger' &&
             github.event_name != 'pull_request'
         with:
@@ -67,7 +67,7 @@ jobs:
     timeout-minutes: 10
     needs: build
     if: success() &&
-        github.ref == 'refs/heads/master' &&
+        github.ref == 'refs/heads/main' &&
         github.repository == 'yoriiis/abtasty-debugger' &&
         github.event_name != 'pull_request'
     steps:
@@ -82,7 +82,7 @@ jobs:
           path: coverage
 
       - name: Coveralls
-        uses: coverallsapp/github-action@master
+        uses: coverallsapp/github-action@main
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           path-to-lcov: 'coverage/lcov.info'
