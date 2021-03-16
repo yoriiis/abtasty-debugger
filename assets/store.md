@@ -1,4 +1,4 @@
-# Play Store
+# Store
 
 ## Description
 
@@ -17,6 +17,10 @@ Features:
 - List all targeting informations of the test (URL, code, selector, cookie, IP) with their status.
 - The list of targeting is sorted to show the invalid targets at the top of the list.
 - Collapse/expand all targeting informations.
+
+## Labels
+
+abtasty, abtest, debugger, inspect
 
 ## Goal
 

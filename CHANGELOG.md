@@ -8,8 +8,8 @@
 - Add lint extension with the web-ext package
 - Add communication between the popup and the page script
 - Generate extension for Chrome, Firefox, Opera and Edge
-- Chrome and Opera uses the `manifest.json` version 3 and the `chrome` object
-- Firefox and Edge uses the `manifest.json` version 2 and the `browser` object
+- Chrome uses the `manifest.json` version 3 and the `chrome` object
+- Firefox, Opera and Edge uses the `manifest.json` version 2 and the `browser` object
 
 ### Updates
 
