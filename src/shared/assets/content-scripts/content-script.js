@@ -10,13 +10,17 @@ let dataFromPage
 // Listen for event from the page script
 document.addEventListener('sendABTastyObject', (event) => {
 	const data = JSON.parse(event.detail.ABTastyData)
-
 	dataFromPage = data
+
+	// Calculate the counter excluding "mastersegment" type tests
+	const counter = Object.keys(data.results).filter(
+		(key) => data.results[key].type !== 'mastersegment'
+	).length
 
 	namespace.runtime.sendMessage({
 		from: 'contentScript',
 		action: 'updateBadge',
-		counter: Object.keys(data.results).length
+		counter
 	})
 })
 
