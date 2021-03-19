@@ -36,12 +36,15 @@ export default function ({ data }: {data: DetailData}) {
 			</ul>
 			<ul className="detail-list">
 				<li>Name: {data.result.name}</li>
-				<li>ID: {data.testId}</li>
+				<li>
+					ID: {data.testId}
+					{data.test.parentID !== 0 && <> (parent ID: {data.test.parentID})</>}
+				</li>
 				<li>Type: {data.result.type}</li>
 				{data.result.variationName && (
 					<li>
-							Variation: {data.result.variationName}{' '}
-						{data.result.variationID && <>({data.result.variationID})</>}
+						Variation: {data.result.variationName}
+						{data.result.variationID && <> ({data.result.variationID})</>}
 					</li>
 				)}
 				<li>Ajax targeting: {data.targetingMode === 'waituntil' ? 'on' : 'off'}</li>

@@ -3,24 +3,35 @@ import fixturesAbtasty from '../../assets/fixtures/abtasty.json'
 
 let dataManager
 const testsSortedByStatus = {
-	accepted: [fixturesAbtasty.results['000001']],
-	rejected: [fixturesAbtasty.results['000002']]
+	accepted: [fixturesAbtasty.results[900001]],
+	rejected: [fixturesAbtasty.results[900002], fixturesAbtasty.results[900004]]
 }
 const targetingsSortedByStatus = {
-	'000001': {
+	900001: {
 		accepted: [],
-		rejected: [fixturesAbtasty.results['000001'].targetings.targetPages.url_scope]
+		rejected: [fixturesAbtasty.results[900001].targetings.targetPages.url_scope]
 	},
-	'000002': {
+	900002: {
 		accepted: [
-			fixturesAbtasty.results['000002'].targetings.targetPages.url_scope,
-			fixturesAbtasty.results['000002'].targetings.targetPages.code_scope,
-			fixturesAbtasty.results['000002'].targetings.qaParameters.ip_scope
+			fixturesAbtasty.results[900002].targetings.targetPages.url_scope,
+			fixturesAbtasty.results[900002].targetings.targetPages.code_scope,
+			fixturesAbtasty.results[900002].targetings.qaParameters.ip_scope
 		],
 		rejected: [
-			fixturesAbtasty.results['000002'].targetings.targetPages.selector_scope,
-			fixturesAbtasty.results['000002'].targetings.qaParameters.cookie_scope
+			fixturesAbtasty.results[900002].targetings.targetPages.selector_scope,
+			fixturesAbtasty.results[900002].targetings.qaParameters.cookie_scope
 		]
+	},
+	900003: {
+		accepted: [],
+		rejected: []
+	},
+	900004: {
+		accepted: [
+			fixturesAbtasty.results[900004].targetings.targetPages.url_scope,
+			fixturesAbtasty.results[900004].targetings.targetPages.code_scope
+		],
+		rejected: [fixturesAbtasty.results[900004].targetings.targetPages.selector_scope]
 	}
 }
 
@@ -30,7 +41,7 @@ beforeEach(() => {
 	dataManager = getInstance()
 })
 
-describe('Router getFormattedData', () => {
+describe('DataManager getFormattedData', () => {
 	it('Should call the getFormattedData function', () => {
 		const result = dataManager.getFormattedData(fixturesAbtasty)
 
@@ -41,7 +52,7 @@ describe('Router getFormattedData', () => {
 	})
 })
 
-describe('Router getTestsSortedByStatus', () => {
+describe('DataManager getTestsSortedByStatus', () => {
 	it('Should call the getTestsSortedByStatus function', () => {
 		const result = dataManager.getTestsSortedByStatus(fixturesAbtasty)
 
@@ -49,7 +60,7 @@ describe('Router getTestsSortedByStatus', () => {
 	})
 })
 
-describe('Router getTargetingsSortedByStatus', () => {
+describe('DataManager getTargetingsSortedByStatus', () => {
 	it('Should call the getTargetingsSortedByStatus function', () => {
 		const result = dataManager.getTargetingsSortedByStatus(fixturesAbtasty)
 

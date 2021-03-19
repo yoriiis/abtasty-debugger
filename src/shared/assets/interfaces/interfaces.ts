@@ -1,8 +1,8 @@
 export interface Condition {
-    name?: string;
-    value: string;
-    include: Boolean;
-    condition: Number;
+	name?: string;
+	value: string;
+	include: Boolean;
+	condition: Number;
 }
 
 export interface Targeting {
@@ -10,14 +10,15 @@ export interface Targeting {
 	success: Boolean;
 	conditions: Array<Condition>;
 }
+
 export interface Result {
 	key: string;
 	name: string;
 	type: string;
 	status: string;
-    targetingMode: string;
-    variationID: Number;
-    variationName: string;
+	targetingMode: string;
+	variationID: Number;
+	variationName: string;
 	targetings: {
 		targetPages: {
 			[key: string]: Targeting;
@@ -28,14 +29,20 @@ export interface Result {
 	}
 }
 
+export interface Test {
+	id: Number;
+	targetingMode: string;
+	parentID: Number;
+}
+
 export interface Data {
-    accountData: {
-        tests:{
-            [key: string]: {
-                targetingMode: string;
-            };
-        }
-    };
+	accountData: {
+		tests:{
+			[key: string]: {
+				targetingMode: string;
+			};
+		}
+	};
 	results: {
 		[key: string]: Result;
 	}
@@ -47,8 +54,8 @@ export interface TestsSortedByStatus {
 }
 
 export interface TargetingItemSortedByStatus {
-    accepted: Array<Targeting>;
-    rejected: Array<Targeting>;
+	accepted: Array<Targeting>;
+	rejected: Array<Targeting>;
 }
 
 export interface TargetingsSortedByStatus {
@@ -56,29 +63,30 @@ export interface TargetingsSortedByStatus {
 }
 
 export interface CustomEvent {
-    detail: Object;
+	detail: Object;
 }
 
 export interface Wording {
-    [key: string]: string;
+	[key: string]: string;
 }
 
 export interface DetailData {
-    testId: string;
-    result: Result;
-    targetingSorted: TargetingItemSortedByStatus;
-    targetingMode: string
+	testId: string;
+	test: Test;
+	result: Result;
+	targetingSorted: TargetingItemSortedByStatus;
+	targetingMode: string
 }
 
 export interface DynamicSegments {
-    [key: string]: string;
+	[key: string]: string;
 }
 
 export interface ListData {
-    testsSortedByStatus: TestsSortedByStatus;
+	testsSortedByStatus: TestsSortedByStatus;
 }
 
 export interface FormattedData {
-    testsSortedByStatus: TestsSortedByStatus;
-    targetingsSortedByStatus: TargetingsSortedByStatus;
+	testsSortedByStatus: TestsSortedByStatus;
+	targetingsSortedByStatus: TargetingsSortedByStatus;
 }
