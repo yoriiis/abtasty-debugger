@@ -23,13 +23,13 @@ export default class DataManager {
 	getTestsSortedByStatus(data: Data): TestsSortedByStatus {
 		return {
 			accepted: Object.keys(data.results)
-				.filter((id: string) => data.results[id].status === 'accepted')
+				.filter((id: string) => data.results[id].status === 'accepted' && data.results[id].type !== 'mastersegment')
 				.map((id: string) => {
 					data.results[id].key = id
 					return data.results[id]
 				}),
 			rejected: Object.keys(data.results)
-				.filter((id: string) => data.results[id].status !== 'accepted')
+				.filter((id: string) => data.results[id].status !== 'accepted' && data.results[id].type !== 'mastersegment')
 				.map((id: string) => {
 					data.results[id].key = id
 					return data.results[id]

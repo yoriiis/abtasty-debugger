@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## 1.1.1
+
+### New features
+
+- Add parent ID when test has one
+
+### Updates
+
+- Hide tests with type `mastersegment` in the list
+
 ## 1.1.0
 
 ### New features

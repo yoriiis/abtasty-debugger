@@ -10,6 +10,7 @@ export interface Targeting {
 	success: Boolean;
 	conditions: Array<Condition>;
 }
+
 export interface Result {
 	key: string;
 	name: string;
@@ -26,6 +27,12 @@ export interface Result {
 			[key: string]: Targeting;
 		};
 	}
+}
+
+export interface Test {
+	id: Number;
+    targetingMode: string;
+    parentID: Number;
 }
 
 export interface Data {
@@ -65,6 +72,7 @@ export interface Wording {
 
 export interface DetailData {
     testId: string;
+    test: Test;
     result: Result;
     targetingSorted: TargetingItemSortedByStatus;
     targetingMode: string

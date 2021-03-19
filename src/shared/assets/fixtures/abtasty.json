@@ -1,16 +1,30 @@
 {
 	"accountData": {
 		"tests": {
-			"000001": {
-				"targetingMode": "waituntil"
+			"900001": {
+				"id": 900001,
+				"targetingMode": "waituntil",
+				"parentID": 0
 			},
-			"000002": {
-				"targetingMode": "fastest"
+			"900002": {
+				"id": 900002,
+				"targetingMode": "fastest",
+				"parentID": 0
+			},
+			"900003": {
+				"id": 900003,
+				"targetingMode": "fastest",
+				"parentID": 0
+			},
+			"900004": {
+				"id": 900004,
+				"targetingMode": "fastest",
+				"parentID": 900003
 			}
 		}
 	},
 	"results": {
-		"000001": {
+		"900001": {
 			"name": "Test with the menu button on the left",
 			"type": "ab",
 			"status": "accepted",
@@ -32,11 +46,11 @@
 				"qaParameters": {}
 			}
 		},
-		"000002": {
+		"900002": {
 			"name": "Test with darkmode sticky banner on the header",
 			"type": "ab",
 			"status": "rejected",
-			"variationID": "001001",
+			"variationID": 901001,
 			"variationName": "header-darkmode-cta",
 			"targetings": {
 				"targetPages": {
@@ -97,6 +111,57 @@
 						"success": true
 					}
 				}
+			}
+		},
+		"900003": {
+			"name": "Satisfaction survey",
+			"type": "mastersegment",
+			"status": "master_campaign_not_checked",
+			"variationID": null,
+			"variationName": null,
+			"targetings": {
+				"targetPages": {},
+				"qaParameters": {}
+			}
+		},
+		"900004": {
+			"name": "Scenario satisfaction survey",
+			"type": "subsegment",
+			"status": "pending",
+			"variationID": null,
+			"variationName": null,
+			"targetings": {
+				"targetPages": {
+					"url_scope": {
+						"conditions": [
+							{
+								"include": false,
+								"condition": 10,
+								"value": "https://www.programme-tv.net"
+							}
+						],
+						"success": true
+					},
+					"code_scope": {
+						"conditions": [
+							{
+								"value": "var hourStart = 18;\nvar hourEnd = 4;\nvar hourGranted = new Date().getHours() >= hourStart || new Date().getHours() <= hourEnd;\n\nif (hourGranted) {\n    return true;\n} else {\n    return false;\n}"
+							}
+						],
+						"success": true
+					},
+					"selector_scope": {
+						"conditions": [
+							{
+								"include": true,
+								"condition": 44,
+								"value": ".footer"
+							}
+						],
+						"success": false
+					}
+				},
+				"qaParameters": {}
 			}
 		}
 	},
