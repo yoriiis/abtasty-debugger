@@ -8,7 +8,7 @@
 
 ### Updates
 
-- Hide tests with type `mastersegment` in the list
+- Hide tests with type `mastersegment` in the list and the badge counter
 
 ## 1.1.0
 
