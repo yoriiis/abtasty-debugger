@@ -5,10 +5,10 @@ import { Data, TestsSortedByStatus, TargetingsSortedByStatus, FormattedData } fr
  */
 export default class DataManager {
 	/**
-     * Get formatted data
-     * @param {Object} data Data
-     * @returns {Object} Formatted data
-     */
+	 * Get formatted data
+	 * @param {Object} data Data
+	 * @returns {Object} Formatted data
+	 */
 	getFormattedData(data: Data): FormattedData {
 		return {
 			testsSortedByStatus: this.getTestsSortedByStatus(data),

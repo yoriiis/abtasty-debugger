@@ -10,7 +10,7 @@ export default class Popup {
 	router: any;
 	instances: Array<any>;
 	instancesResult: Array<any>;
-    formattedData: null | FormattedData;
+	formattedData: null | FormattedData;
 	routes: {
 		[key: string]: {
 			path: string;

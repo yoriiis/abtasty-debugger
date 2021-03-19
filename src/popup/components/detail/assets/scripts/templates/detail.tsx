@@ -37,7 +37,7 @@ export default function ({ data }: {data: DetailData}) {
 			<ul className="detail-list">
 				<li>Name: {data.result.name}</li>
 				<li>
-                    ID: {data.testId}
+					ID: {data.testId}
 					{data.test.parentID !== 0 && <> (parent ID: {data.test.parentID})</>}
 				</li>
 				<li>Type: {data.result.type}</li>
