@@ -1,4 +1,4 @@
-import { createElement, Fragment } from 'jsx-dom'
+import { createElement } from 'jsx-dom'
 
 /**
  * Badge template
@@ -9,8 +9,6 @@ import { createElement, Fragment } from 'jsx-dom'
 export default function ({ status }: {status: string}) {
 	const statusClass = status === 'accepted' ? 'accepted' : 'rejected'
 	return (
-		<>
-			<div className={`badge ${statusClass}`}>{status}</div>
-		</>
+		<div className={`badge ${statusClass}`}>{status}</div>
 	)
 }

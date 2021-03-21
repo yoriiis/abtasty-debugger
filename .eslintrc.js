@@ -36,7 +36,6 @@ module.exports = {
 	globals: {
 		document: false,
 		window: false,
-		__webpack_public_path__: true,
 		chrome: true,
 		browser: true
 	},
