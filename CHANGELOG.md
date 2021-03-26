@@ -10,6 +10,10 @@
 
 - Hide tests with type `mastersegment` in the list and the badge counter
 
+### Fixes
+
+- Limit the badge counter with the tab ID
+
 ## 1.1.0
 
 ### New features
