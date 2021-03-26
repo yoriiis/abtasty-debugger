@@ -28,6 +28,7 @@ if (isExtensionMode) {
 
 					// Remove the badge when the popup is open
 					namespace[action].setBadgeText({
+						tabId: currentTab.id,
 						text: ''
 					})
 				}

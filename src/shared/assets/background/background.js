@@ -4,7 +4,18 @@ const action = manifestVersion === 3 ? 'action' : 'browserAction'
 
 namespace.runtime.onMessage.addListener((message, sender) => {
 	if (message.from === 'contentScript' && message.action === 'updateBadge') {
-		namespace[action].setBadgeText({ text: `${message.counter}` })
-		namespace[action].setBadgeBackgroundColor({ color: '#054c5d' })
+		namespace.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+			const currentTab = tabs[0]
+			if (currentTab) {
+				namespace[action].setBadgeText({
+					tabId: currentTab.id,
+					text: `${message.counter}`
+				})
+				namespace[action].setBadgeBackgroundColor({
+					tabId: currentTab.id,
+					color: '#054c5d'
+				})
+			}
+		})
 	}
 })
