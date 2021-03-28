@@ -8,7 +8,7 @@ import { ListData, Result } from 'shared/assets/interfaces/interfaces'
  * @param {Object} options Template options
  * @returns {HTMLElement} Generated HTML
  */
-export default function ({ data }: {data: ListData}) {
+export default function ({ data }: { data: ListData }) {
 	return (
 		<ul className="list" data-route-id="list">
 			{data.testsSortedByStatus.accepted.map((item: Result) => (
@@ -27,7 +27,7 @@ export default function ({ data }: {data: ListData}) {
  * @param {Object} options.data List item data
  * @returns {HTMLElement} Generated HTML
  */
-function ListItem({ data }: {data: Result}) {
+function ListItem({ data }: { data: Result }) {
 	return (
 		<li className="list-item">
 			<a href={`#/detail/${data.key}`} className="list-link">

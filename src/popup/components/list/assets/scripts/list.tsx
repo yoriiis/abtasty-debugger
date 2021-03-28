@@ -4,17 +4,17 @@ import { ListData } from 'shared/assets/interfaces/interfaces'
 
 export default class List {
 	// @ts-ignore
-	requestFormattedData: Function;
+	requestFormattedData: Function
 
-	id = 'list';
-	route = '/';
-	selector = '.list';
+	id = 'list'
+	route = '/'
+	selector = '.list'
 
 	/**
 	 * Render the template
 	 * @returns {HTMLElement} Template
 	 */
-	render() : Element {
+	render(): Element {
 		return this.getTemplate(this.getData())
 	}
 

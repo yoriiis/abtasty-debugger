@@ -4,11 +4,11 @@ import { DynamicSegments, DetailData } from 'shared/assets/interfaces/interfaces
 
 export default class Detail {
 	// @ts-ignore
-	requestDynamicSegments: Function;
+	requestDynamicSegments: Function
 	// @ts-ignore
-	requestFormattedData: Function;
+	requestFormattedData: Function
 	// @ts-ignore
-	requestData: Function;
+	requestData: Function
 
 	id = 'detail'
 	route = '/detail/:testId'

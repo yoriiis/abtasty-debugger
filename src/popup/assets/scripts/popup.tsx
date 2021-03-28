@@ -4,21 +4,15 @@ import DataManager from 'shared/utils/data-manager'
 import { Data, FormattedData } from 'shared/assets/interfaces/interfaces'
 
 export default class Popup {
-	data: Data;
-	app: Element;
-	dataManager: any;
-	router: any;
-	instances: Array<any>;
-	instancesResult: Array<any>;
-	formattedData: null | FormattedData;
-	routes: {
-		[key: string]: {
-			path: string;
-			template: Function;
-		};
-	} | undefined;
+	data: Data
+	app: Element
+	dataManager: any
+	router: any
+	instances: Array<any>
+	instancesResult: Array<any>
+	formattedData: null | FormattedData
 
-	constructor({ data, instances }: {data: Data, instances: Array<any>}) {
+	constructor({ data, instances }: { data: Data; instances: Array<any> }) {
 		this.data = data
 		this.instances = instances
 		this.instancesResult = []
@@ -48,7 +42,8 @@ export default class Popup {
 	analyzeInstance(): Array<any> {
 		return this.instances.map((Instance: any) => {
 			const instance = new Instance()
-			instance.requestDynamicSegments = (route: string) => this.router.getDynamicSegments(route)
+			instance.requestDynamicSegments = (route: string) =>
+				this.router.getDynamicSegments(route)
 			instance.requestData = () => this.data
 			instance.requestFormattedData = () => this.formattedData
 			return instance
@@ -141,10 +136,15 @@ export default class Popup {
 	 */
 	getInstanceFromRoute(route: string): any | undefined {
 		const routeFromUrlSplit = this.router.transformRouteInArray(route)
-		return this.instancesResult.find((instance: any) => {
-			const routeFromAppSplit = this.router.transformRouteInArray(instance.route)
-			return routeFromAppSplit.find((routeChunk: string, index: number) => !routeChunk.startsWith(':') && routeFromUrlSplit[index] === routeChunk)
-		}) || this.getNotFoundInstance()
+		return (
+			this.instancesResult.find((instance: any) => {
+				const routeFromAppSplit = this.router.transformRouteInArray(instance.route)
+				return routeFromAppSplit.find(
+					(routeChunk: string, index: number) =>
+						!routeChunk.startsWith(':') && routeFromUrlSplit[index] === routeChunk
+				)
+			}) || this.getNotFoundInstance()
+		)
 	}
 
 	/**

@@ -2,9 +2,9 @@ import { createElement } from 'jsx-dom'
 import Template from './templates/empty'
 
 export default class Empty {
-	id = 'empty';
-	route = '/empty';
-	selector = '.empty';
+	id = 'empty'
+	route = '/empty'
+	selector = '.empty'
 
 	/**
 	 * Render the template

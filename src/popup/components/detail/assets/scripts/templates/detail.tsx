@@ -9,14 +9,14 @@ import { Targeting, DetailData } from 'shared/assets/interfaces/interfaces'
  * @param {Object} options Template options
  * @returns {HTMLElement} Generated HTML
  */
-export default function ({ data }: {data: DetailData}) {
+export default function ({ data }: { data: DetailData }) {
 	return (
 		<div className="detail">
 			<ul className="detail-header">
 				<li>
 					<a href="#/" className="detail-headerBack">
 						<div className="detail-headerBackIcon" innerHTML={arrowBottom}></div>
-							Back
+						Back
 					</a>
 				</li>
 				<li>
@@ -26,11 +26,8 @@ export default function ({ data }: {data: DetailData}) {
 						rel="noreferrer"
 						className="detail-headerDashboard"
 					>
-							Edit on AB Tasty
-						<div
-							className="detail-headerDashboardIcon"
-							innerHTML={externalLink}
-						></div>
+						Edit on AB Tasty
+						<div className="detail-headerDashboardIcon" innerHTML={externalLink}></div>
 					</a>
 				</li>
 			</ul>

@@ -13,7 +13,17 @@ import { Targeting, Condition } from 'shared/assets/interfaces/interfaces'
  * @param {Object} options.textarea Use textarea instead of input field
  * @returns {HTMLElement} Generated HTML
  */
-export default function ({ testStatus, data, headerOnly = false, textarea = false }: { testStatus: string, data: Targeting, headerOnly: Boolean, textarea: Boolean}) {
+export default function ({
+	testStatus,
+	data,
+	headerOnly = false,
+	textarea = false
+}: {
+	testStatus: string
+	data: Targeting
+	headerOnly: Boolean
+	textarea: Boolean
+}) {
 	return (
 		<section className={`targeting${headerOnly ? ' headerOnly' : ''}`}>
 			<div className="targeting-header">
