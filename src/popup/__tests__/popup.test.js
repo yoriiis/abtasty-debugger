@@ -56,7 +56,7 @@ const instancesResult = [new Detail(), new Empty()]
 
 const getInstance = () =>
 	new Popup({
-		data: fixturesAbtasty,
+		data: { ...fixturesAbtasty }, // Clone the object to prevent conflict between tests with object reference
 		instances: [Detail, Empty]
 	})
 
@@ -80,6 +80,7 @@ beforeEach(() => {
 
 afterEach(() => {
 	document.body.innerHTML = ''
+	jest.resetAllMocks()
 	jest.clearAllMocks()
 })
 
@@ -92,10 +93,54 @@ describe('Popup constructor', () => {
 		expect(popup.app).toBe(document.querySelector('#app'))
 		expect(DataManager).toHaveBeenCalled()
 		expect(Router).toHaveBeenCalledWith({
-			isNotFound: false,
 			onDestroy: popup.onDestroy,
 			onCreate: popup.onCreate
 		})
+	})
+})
+
+describe('Popup init', () => {
+	beforeEach(() => {
+		popup.analyzeInstance = jest.fn().mockReturnValue(instancesResult)
+		popup.isNotFound = jest.fn().mockReturnValue(false)
+		popup.router.init = jest.fn()
+		popup.addEvents = jest.fn()
+	})
+
+	afterEach(() => {
+		expect(popup.analyzeInstance).toHaveBeenCalled()
+		expect(popup.instancesResult).toStrictEqual(instancesResult)
+		expect(popup.router.init).toHaveBeenCalledWith({ isNotFound: false })
+		expect(popup.addEvents).toHaveBeenCalled()
+	})
+
+	it('Should call the init function', () => {
+		popup.dataManager.getFormattedData = jest.fn().mockReturnValue({ dataFormatted: true })
+
+		popup.init()
+
+		expect(popup.dataManager.getFormattedData).toHaveBeenCalledWith(fixturesAbtasty)
+		expect(popup.formattedData).toStrictEqual({ dataFormatted: true })
+	})
+
+	it('Should call the init function without data', () => {
+		popup.dataManager.getFormattedData = jest.fn()
+
+		popup.data = null
+		popup.init()
+
+		expect(popup.dataManager.getFormattedData).not.toHaveBeenCalled()
+		expect(popup.formattedData).toBe(null)
+	})
+
+	it('Should call the init function without results inside data', () => {
+		popup.dataManager.getFormattedData = jest.fn()
+
+		popup.data.results = null
+		popup.init()
+
+		expect(popup.dataManager.getFormattedData).not.toHaveBeenCalled()
+		expect(popup.formattedData).toBe(null)
 	})
 })
 
@@ -111,54 +156,32 @@ describe('Popup analyzeInstance', () => {
 	})
 })
 
-describe('Popup init', () => {
-	beforeEach(() => {
-		popup.router.init = jest.fn()
-		popup.addEvents = jest.fn()
-	})
-
-	afterEach(() => {
-		expect(popup.analyzeInstance).toHaveBeenCalled()
-	})
-
-	it('Should call the init function', () => {
-		popup.dataManager.getFormattedData = jest.fn().mockReturnValue({ dataFormatted: true })
-		popup.analyzeInstance = jest.fn().mockReturnValue(instancesResult)
-
-		popup.init()
-
-		expect(popup.dataManager.getFormattedData).toHaveBeenCalledWith(fixturesAbtasty)
-		expect(popup.formattedData).toStrictEqual({ dataFormatted: true })
-		expect(popup.instancesResult).toStrictEqual(instancesResult)
-		expect(popup.router.init).toHaveBeenCalled()
-		expect(popup.addEvents).toHaveBeenCalled()
-	})
-
-	it('Should call the init function without data', () => {
-		popup.dataManager.getFormattedData = jest.fn()
-		popup.analyzeInstance = jest.fn().mockReturnValue([])
-
+describe('Popup isNotFound', () => {
+	it('Should call the isNotFound function with no data', () => {
 		popup.data = null
-		popup.init()
+		const result = popup.isNotFound()
 
-		expect(popup.dataManager.getFormattedData).not.toHaveBeenCalled()
-		expect(popup.formattedData).toStrictEqual(null)
-		expect(popup.instancesResult).toStrictEqual([])
-		expect(popup.router.init).not.toHaveBeenCalled()
-		expect(popup.addEvents).not.toHaveBeenCalled()
+		expect(result).toBe(true)
 	})
 
-	it('Should call the init function without instances result', () => {
-		popup.dataManager.getFormattedData = jest.fn().mockReturnValue({ dataFormatted: true })
-		popup.analyzeInstance = jest.fn().mockReturnValue([])
+	it('Should call the isNotFound function with no results key inside data', () => {
+		delete popup.data.results
+		const result = popup.isNotFound()
 
-		popup.init()
+		expect(result).toBe(true)
+	})
 
-		expect(popup.dataManager.getFormattedData).toHaveBeenCalledWith(fixturesAbtasty)
-		expect(popup.formattedData).toStrictEqual({ dataFormatted: true })
-		expect(popup.instancesResult).toStrictEqual([])
-		expect(popup.router.init).not.toHaveBeenCalled()
-		expect(popup.addEvents).not.toHaveBeenCalled()
+	it('Should call the isNotFound function with no results inside data', () => {
+		popup.data.results = null
+		const result = popup.isNotFound()
+
+		expect(result).toBe(true)
+	})
+
+	it('Should call the isNotFound function with all valid fields', () => {
+		const result = popup.isNotFound()
+
+		expect(result).toBe(false)
 	})
 })
 

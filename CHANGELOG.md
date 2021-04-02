@@ -1,5 +1,16 @@
 # CHANGELOG
 
+## 1.1.2
+
+### New features
+
+- Auto-redirect to the empty route when no data
+
+### Fixes
+
+- Display the badge only if the counter is greater than 0
+- Fix empty route not trigger when `ABTasty.results` empty
+
 ## 1.1.1
 
 ### New features

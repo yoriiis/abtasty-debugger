@@ -17,11 +17,14 @@ document.addEventListener('sendABTastyObject', (event) => {
 		(key) => data.results[key].type !== 'mastersegment'
 	).length
 
-	namespace.runtime.sendMessage({
-		from: 'contentScript',
-		action: 'updateBadge',
-		counter
-	})
+	// Update the badge only if the counter is greater than 0
+	if (counter) {
+		namespace.runtime.sendMessage({
+			from: 'contentScript',
+			action: 'updateBadge',
+			counter
+		})
+	}
 })
 
 // Listen for messages from the popup

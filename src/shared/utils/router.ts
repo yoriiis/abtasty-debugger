@@ -1,20 +1,20 @@
 import { DynamicSegments } from 'shared/assets/interfaces/interfaces'
 
 export default class Router {
-	isNotFound: Boolean;
-	onDestroy: Function;
-	onCreate: Function;
-	isReady: Boolean;
-	defaultRoute: string;
-	notFoundRoute: string;
-	currentRoute: null | string;
-	previousRoute: null | string;
+	isNotFound: null | Boolean
+	onDestroy: Function
+	onCreate: Function
+	isReady: Boolean
+	defaultRoute: string
+	notFoundRoute: string
+	currentRoute: null | string
+	previousRoute: null | string
 
-	constructor({ isNotFound, onDestroy, onCreate }: { isNotFound: Boolean, onDestroy: Function, onCreate: Function}) {
-		this.isNotFound = isNotFound
+	constructor({ onDestroy, onCreate }: { onDestroy: Function; onCreate: Function }) {
 		this.onDestroy = onDestroy
 		this.onCreate = onCreate
 
+		this.isNotFound = null
 		this.isReady = false
 		this.defaultRoute = '/'
 		this.notFoundRoute = '/empty'
@@ -27,21 +27,26 @@ export default class Router {
 	/**
 	 * Initialize the router
 	 */
-	init() {
+	init({ isNotFound }: { isNotFound: Boolean }) {
+		this.isNotFound = isNotFound
+
 		// Get current route
 		const route = this.getRoute()
 
-		// Redirect to the empty route if no data
-		if (this.isNotFound) {
-			this.defaultRoute = this.notFoundRoute
+		// Detect if the router need to redirect to the not found or the default route
+		let newRoute = null
+		if (isNotFound && route !== this.notFoundRoute) {
+			newRoute = this.notFoundRoute
+		} else if (route === '' || (route === this.notFoundRoute && !isNotFound)) {
+			newRoute = this.defaultRoute
 		}
 
 		// Declare the default route
 		// If route exist, keep it, else set it to the default route
-		this.currentRoute = route === '' ? this.defaultRoute : route
+		this.currentRoute = newRoute || route
 
 		// Init the router with the default route
-		if (route === '') {
+		if (newRoute) {
 			this.setRoute(this.currentRoute)
 		} else {
 			// Page started with a route, trigger hash changed
@@ -72,6 +77,12 @@ export default class Router {
 	 */
 	onHashChange(e?: HashChangeEvent): void {
 		this.currentRoute = this.getRoute()
+
+		// Redirect to the not found route if necessary
+		if (this.isNotFound && this.currentRoute !== this.notFoundRoute) {
+			this.setRoute(this.notFoundRoute)
+			return
+		}
 
 		if (e) {
 			this.previousRoute = this.getPreviousRoute(e)

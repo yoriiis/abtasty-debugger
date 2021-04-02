@@ -1,4 +1,9 @@
-import { Data, TestsSortedByStatus, TargetingsSortedByStatus, FormattedData } from 'shared/assets/interfaces/interfaces'
+import {
+	Data,
+	TestsSortedByStatus,
+	TargetingsSortedByStatus,
+	FormattedData
+} from 'shared/assets/interfaces/interfaces'
 
 /**
  * Data manager for ABTasty data
@@ -23,13 +28,21 @@ export default class DataManager {
 	getTestsSortedByStatus(data: Data): TestsSortedByStatus {
 		return {
 			accepted: Object.keys(data.results)
-				.filter((id: string) => data.results[id].status === 'accepted' && data.results[id].type !== 'mastersegment')
+				.filter(
+					(id: string) =>
+						data.results[id].status === 'accepted' &&
+						data.results[id].type !== 'mastersegment'
+				)
 				.map((id: string) => {
 					data.results[id].key = id
 					return data.results[id]
 				}),
 			rejected: Object.keys(data.results)
-				.filter((id: string) => data.results[id].status !== 'accepted' && data.results[id].type !== 'mastersegment')
+				.filter(
+					(id: string) =>
+						data.results[id].status !== 'accepted' &&
+						data.results[id].type !== 'mastersegment'
+				)
 				.map((id: string) => {
 					data.results[id].key = id
 					return data.results[id]
@@ -42,29 +55,38 @@ export default class DataManager {
 	 * @returns {Object} Sorted targetings
 	 */
 	getTargetingsSortedByStatus(data: Data): TargetingsSortedByStatus {
-		const outputData:TargetingsSortedByStatus = {}
+		const outputData: TargetingsSortedByStatus = {}
 		Object.keys(data.results).forEach((id: string) => {
 			const targetings = data.results[id].targetings
 			const acceptedTargetPages = Object.keys(targetings.targetPages)
-				.filter((targetingKey: string) => targetings.targetPages[targetingKey].success === true)
+				.filter(
+					(targetingKey: string) => targetings.targetPages[targetingKey].success === true
+				)
 				.map((targetingKey) => {
 					targetings.targetPages[targetingKey].key = targetingKey
 					return targetings.targetPages[targetingKey]
 				})
 			const acceptedQaParameters = Object.keys(targetings.qaParameters)
-				.filter((targetingKey: string) => targetings.qaParameters[targetingKey].success === true)
+				.filter(
+					(targetingKey: string) => targetings.qaParameters[targetingKey].success === true
+				)
 				.map((targetingKey) => {
 					targetings.qaParameters[targetingKey].key = targetingKey
 					return targetings.qaParameters[targetingKey]
 				})
 			const rejectedTargetPages = Object.keys(targetings.targetPages)
-				.filter((targetingKey: string) => targetings.targetPages[targetingKey].success === false)
+				.filter(
+					(targetingKey: string) => targetings.targetPages[targetingKey].success === false
+				)
 				.map((targetingKey) => {
 					targetings.targetPages[targetingKey].key = targetingKey
 					return targetings.targetPages[targetingKey]
 				})
 			const rejectedQaParameters = Object.keys(targetings.qaParameters)
-				.filter((targetingKey: string) => targetings.qaParameters[targetingKey].success === false)
+				.filter(
+					(targetingKey: string) =>
+						targetings.qaParameters[targetingKey].success === false
+				)
 				.map((targetingKey) => {
 					targetings.qaParameters[targetingKey].key = targetingKey
 					return targetings.qaParameters[targetingKey]

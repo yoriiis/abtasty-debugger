@@ -4,7 +4,6 @@ let router
 let event
 const getInstance = () =>
 	new Router({
-		isNotFound: false,
 		onDestroy: () => {},
 		onCreate: () => {}
 	})
@@ -19,7 +18,7 @@ beforeEach(() => {
 
 describe('Router constructor', () => {
 	it('Should initialize the constructor', () => {
-		expect(router.isNotFound).toBe(false)
+		expect(router.isNotFound).toBe(null)
 		expect(router.onDestroy).toStrictEqual(expect.any(Function))
 		expect(router.onCreate).toStrictEqual(expect.any(Function))
 		expect(router.isReady).toBe(false)
@@ -44,9 +43,8 @@ describe('Router init', () => {
 	it('Should call the init function with the default route', () => {
 		router.getRoute = jest.fn().mockReturnValue('')
 
-		router.init()
+		router.init({ isNotFound: false })
 
-		expect(router.defaultRoute).toBe('/')
 		expect(router.currentRoute).toBe('/')
 		expect(router.setRoute).toHaveBeenCalledWith('/')
 		expect(router.onHashChange).not.toHaveBeenCalled()
@@ -55,21 +53,39 @@ describe('Router init', () => {
 	it('Should call the init function with already a route', () => {
 		router.getRoute = jest.fn().mockReturnValue('detail/000001')
 
-		router.init()
+		router.init({ isNotFound: false })
 
-		expect(router.defaultRoute).toBe('/')
 		expect(router.currentRoute).toBe('detail/000001')
-		expect(router.setRoute).not.toHaveBeenCalledWith()
+		expect(router.setRoute).not.toHaveBeenCalled()
 		expect(router.onHashChange).toHaveBeenCalled()
 	})
 
-	it('Should call the init function with no data', () => {
+	it('Should call the init function with already the not found route and the not found parameter false', () => {
+		router.getRoute = jest.fn().mockReturnValue('/empty')
+
+		router.init({ isNotFound: false })
+
+		expect(router.currentRoute).toBe('/')
+		expect(router.setRoute).toHaveBeenCalledWith('/')
+		expect(router.onHashChange).not.toHaveBeenCalled()
+	})
+
+	it('Should call the init function with the not found parameter', () => {
 		router.getRoute = jest.fn()
 
-		router.isNotFound = true
-		router.init()
+		router.init({ isNotFound: true })
 
-		expect(router.defaultRoute).toBe('/empty')
+		expect(router.currentRoute).toBe('/empty')
+		expect(router.setRoute).toHaveBeenCalledWith('/empty')
+	})
+
+	it('Should call the init function with the not found parameter', () => {
+		router.getRoute = jest.fn().mockReturnValue('/empty')
+
+		router.init({ isNotFound: true })
+
+		expect(router.currentRoute).toBe('/empty')
+		expect(router.onHashChange).toHaveBeenCalled()
 	})
 })
 
@@ -92,6 +108,7 @@ describe('Popup setRoute', () => {
 describe('Popup onHashChange', () => {
 	it('Should call the onHashChange function', () => {
 		router.getRoute = jest.fn().mockReturnValue('detail/000001')
+		router.setRoute = jest.fn()
 		router.getPreviousRoute = jest.fn().mockReturnValue('list')
 		router.onDestroy = jest.fn()
 		router.onCreate = jest.fn()
@@ -99,6 +116,7 @@ describe('Popup onHashChange', () => {
 		router.onHashChange(event)
 
 		expect(router.currentRoute).toBe('detail/000001')
+		expect(router.setRoute).not.toHaveBeenCalled()
 		expect(router.getPreviousRoute).toHaveBeenCalledWith(event)
 		expect(router.onDestroy).toHaveBeenCalledWith('list')
 		expect(router.onCreate).toHaveBeenCalledWith('detail/000001')
@@ -107,6 +125,7 @@ describe('Popup onHashChange', () => {
 
 	it('Should call the onHashChange function with no previous route', () => {
 		router.getRoute = jest.fn().mockReturnValue('list')
+		router.setRoute = jest.fn()
 		router.getPreviousRoute = jest.fn().mockReturnValue(null)
 		router.onDestroy = jest.fn()
 		router.onCreate = jest.fn()
@@ -114,6 +133,7 @@ describe('Popup onHashChange', () => {
 		router.onHashChange({})
 
 		expect(router.currentRoute).toBe('list')
+		expect(router.setRoute).not.toHaveBeenCalled()
 		expect(router.getPreviousRoute).not.toHaveBeenCalledWith(event)
 		expect(router.onDestroy).not.toHaveBeenCalled()
 		expect(router.onCreate).toHaveBeenCalledWith('list')
@@ -122,6 +142,7 @@ describe('Popup onHashChange', () => {
 
 	it('Should call the onHashChange function with no event', () => {
 		router.getRoute = jest.fn().mockReturnValue('detail/000001')
+		router.setRoute = jest.fn()
 		router.getPreviousRoute = jest.fn().mockReturnValue('list')
 		router.onDestroy = jest.fn()
 		router.onCreate = jest.fn()
@@ -129,10 +150,28 @@ describe('Popup onHashChange', () => {
 		router.onHashChange()
 
 		expect(router.currentRoute).toBe('detail/000001')
+		expect(router.setRoute).not.toHaveBeenCalled()
 		expect(router.getPreviousRoute).not.toHaveBeenCalledWith(event)
 		expect(router.onDestroy).not.toHaveBeenCalledWith('list')
 		expect(router.onCreate).toHaveBeenCalledWith('detail/000001')
 		expect(router.isReady).toBe(false)
+	})
+
+	it('Should call the onHashChange function with no data', () => {
+		router.getRoute = jest.fn().mockReturnValue('detail/000001')
+		router.setRoute = jest.fn()
+		router.getPreviousRoute = jest.fn()
+		router.onDestroy = jest.fn()
+		router.onCreate = jest.fn()
+
+		router.isNotFound = true
+		router.onHashChange()
+
+		expect(router.currentRoute).toBe('detail/000001')
+		expect(router.setRoute).toHaveBeenCalledWith('/empty')
+		expect(router.getPreviousRoute).not.toHaveBeenCalled()
+		expect(router.onDestroy).not.toHaveBeenCalled()
+		expect(router.onCreate).not.toHaveBeenCalled()
 	})
 })
 

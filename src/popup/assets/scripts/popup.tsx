@@ -27,10 +27,22 @@ export default class Popup {
 
 		this.dataManager = new DataManager()
 		this.router = new Router({
-			isNotFound: !this.data,
 			onDestroy: this.onDestroy,
 			onCreate: this.onCreate
 		})
+	}
+
+	/**
+	 * Initialize the popup
+	 */
+	init() {
+		if (this.data && this.data.results) {
+			this.formattedData = this.dataManager.getFormattedData(this.data)
+		}
+
+		this.instancesResult = this.analyzeInstance()
+		this.router.init({ isNotFound: this.isNotFound() })
+		this.addEvents()
 	}
 
 	/**
@@ -51,19 +63,11 @@ export default class Popup {
 	}
 
 	/**
-	 * Initialize the popup
+	 * Check if the not found route need to be display
+	 * @returns {Boolean} Display the not found route
 	 */
-	init() {
-		if (this.data) {
-			this.formattedData = this.dataManager.getFormattedData(this.data)
-		}
-
-		this.instancesResult = this.analyzeInstance()
-
-		if (this.instancesResult.length) {
-			this.router.init()
-			this.addEvents()
-		}
+	isNotFound() {
+		return !this.data || !this.data.results || Object.keys(this.data.results).length === 0
 	}
 
 	/**
