@@ -18,7 +18,7 @@ document.addEventListener('sendABTastyObject', (event) => {
 	).length
 
 	// Update the badge only if the counter is greater than 0
-	if (counter) {
+	if (counter > 0) {
 		namespace.runtime.sendMessage({
 			from: 'contentScript',
 			action: 'updateBadge',

@@ -12,7 +12,7 @@ export default class Popup {
 	instancesResult: Array<any>
 	formattedData: null | FormattedData
 
-	constructor({ data, instances }: { data: Data; instances: Array<any> }) {
+	constructor({ data, instances = [] }: { data: Data; instances: Array<any> }) {
 		this.data = data
 		this.instances = instances
 		this.instancesResult = []
