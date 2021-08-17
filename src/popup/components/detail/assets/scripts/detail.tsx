@@ -37,8 +37,7 @@ export default class Detail {
 			testId,
 			test: data.accountData.tests[testId],
 			result: data.results[testId],
-			targetingSorted: formattedData.targetingsSortedByStatus[testId],
-			targetingMode: data.accountData.tests[testId].targetingMode
+			targetingSorted: formattedData.targetingsSortedByStatus[testId]
 		}
 	}
 

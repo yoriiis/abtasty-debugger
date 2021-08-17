@@ -1,5 +1,16 @@
 # CHANGELOG
 
+## 1.1.3
+
+### New features
+
+- Add `isAsync` value on the detail view
+- Asynchronous tests with an `undefined` status are updated as long as the status does not change for a maximum duration of 60s
+
+### Fixes
+
+- Restrict status badge to string type
+
 ## 1.1.2
 
 ### New features

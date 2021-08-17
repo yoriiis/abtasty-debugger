@@ -44,7 +44,8 @@ export default function ({ data }: { data: DetailData }) {
 						{data.result.variationID && <> ({data.result.variationID})</>}
 					</li>
 				)}
-				<li>Ajax targeting: {data.targetingMode === 'waituntil' ? 'on' : 'off'}</li>
+				<li>Targeting mode: {data.test.targetingMode}</li>
+				<li>Async: {data.test.isAsync ? 'true' : 'false'}</li>
 			</ul>
 
 			{data.targetingSorted.rejected.map((item: Targeting) => (

@@ -32,7 +32,7 @@ function ListItem({ data }: { data: Result }) {
 		<li className="list-item">
 			<a href={`#/detail/${data.key}`} className="list-link">
 				<span className="list-name">{data.name}</span>
-				<BadgeTemplate status={data.status} />
+				{typeof data.status === 'string' && <BadgeTemplate status={data.status} />}
 				<div className="list-icon" innerHTML={arrowBottom}></div>
 			</a>
 		</li>

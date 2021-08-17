@@ -24,12 +24,15 @@ export default function ({
 	headerOnly: Boolean
 	textarea: Boolean
 }) {
+	const displayBadge = data.success || (!data.success && typeof testStatus === 'string')
 	return (
 		<section className={`targeting${headerOnly ? ' headerOnly' : ''}`}>
 			<div className="targeting-header">
 				<button className="targeting-headerButton">
 					<span className="targeting-name">{wording(data.key)} targeting</span>
-					<BadgeTemplate status={data.success ? 'accepted' : testStatus} />
+					{displayBadge && (
+						<BadgeTemplate status={data.success ? 'accepted' : testStatus} />
+					)}
 					{!headerOnly && (
 						<div className="targeting-headerIcon" innerHTML={arrowBottom}></div>
 					)}
