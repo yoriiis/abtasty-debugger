@@ -40,9 +40,11 @@ const timeout = setTimeout(() => {
  */
 function searchPendingTests(data) {
 	const tests = data.accountData.tests
+	const results = data.results
 	return Object.keys(tests).filter(
 		(testId) =>
-			tests[testId].targetingMode === 'waituntil' && tests[testId].status === 'pending'
+			(tests[testId].targetingMode === 'waituntil' && tests[testId].status === 'pending') ||
+			(tests[testId].isAsync && results[testId].status === undefined)
 	)
 }
 

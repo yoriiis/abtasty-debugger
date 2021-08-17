@@ -1,61 +1,62 @@
 export interface Condition {
-	name?: string;
-	value: string;
-	include: Boolean;
-	condition: Number;
+	name?: string
+	value: string
+	include: Boolean
+	condition: number
 }
 
 export interface Targeting {
-	key: string;
-	success: Boolean;
-	conditions: Array<Condition>;
+	key: string
+	success: Boolean
+	conditions: Array<Condition>
 }
 
 export interface Result {
-	key: string;
-	name: string;
-	type: string;
-	status: string;
-	targetingMode: string;
-	variationID: Number;
-	variationName: string;
+	key: string
+	name: string
+	type: string
+	status: string
+	targetingMode: string
+	variationID: number
+	variationName: string
 	targetings: {
 		targetPages: {
-			[key: string]: Targeting;
-		};
+			[key: string]: Targeting
+		}
 		qaParameters: {
-			[key: string]: Targeting;
-		};
+			[key: string]: Targeting
+		}
 	}
 }
 
 export interface Test {
-	id: Number;
-	targetingMode: string;
-	parentID: Number;
+	id: number
+	targetingMode: string
+	isAsync: string
+	parentID: number
 }
 
 export interface Data {
 	accountData: {
-		tests:{
+		tests: {
 			[key: string]: {
-				targetingMode: string;
-			};
+				targetingMode: string
+			}
 		}
-	};
+	}
 	results: {
-		[key: string]: Result;
+		[key: string]: Result
 	}
 }
 
 export interface TestsSortedByStatus {
-	accepted: Array<Result>;
-	rejected: Array<Result>;
+	accepted: Array<Result>
+	rejected: Array<Result>
 }
 
 export interface TargetingItemSortedByStatus {
-	accepted: Array<Targeting>;
-	rejected: Array<Targeting>;
+	accepted: Array<Targeting>
+	rejected: Array<Targeting>
 }
 
 export interface TargetingsSortedByStatus {
@@ -63,30 +64,29 @@ export interface TargetingsSortedByStatus {
 }
 
 export interface CustomEvent {
-	detail: Object;
+	detail: object
 }
 
 export interface Wording {
-	[key: string]: string;
+	[key: string]: string
 }
 
 export interface DetailData {
-	testId: string;
-	test: Test;
-	result: Result;
-	targetingSorted: TargetingItemSortedByStatus;
-	targetingMode: string
+	testId: string
+	test: Test
+	result: Result
+	targetingSorted: TargetingItemSortedByStatus
 }
 
 export interface DynamicSegments {
-	[key: string]: string;
+	[key: string]: string
 }
 
 export interface ListData {
-	testsSortedByStatus: TestsSortedByStatus;
+	testsSortedByStatus: TestsSortedByStatus
 }
 
 export interface FormattedData {
-	testsSortedByStatus: TestsSortedByStatus;
-	targetingsSortedByStatus: TargetingsSortedByStatus;
+	testsSortedByStatus: TestsSortedByStatus
+	targetingsSortedByStatus: TargetingsSortedByStatus
 }
