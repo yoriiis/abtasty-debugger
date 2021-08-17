@@ -9,19 +9,19 @@
 			"900002": {
 				"id": 900002,
 				"targetingMode": "fastest",
-                "isAsync": true,
+				"isAsync": true,
 				"parentID": 0
 			},
 			"900003": {
 				"id": 900003,
 				"targetingMode": "fastest",
-                "isAsync": false,
+				"isAsync": false,
 				"parentID": 0
 			},
 			"900004": {
 				"id": 900004,
 				"targetingMode": "fastest",
-                "isAsync": false,
+				"isAsync": false,
 				"parentID": 900003
 			}
 		}

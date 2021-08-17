@@ -24,7 +24,7 @@ export default function ({
 	headerOnly: Boolean
 	textarea: Boolean
 }) {
-	const displayBadge = data.success || (!data.success && typeof testStatus !== 'undefined')
+	const displayBadge = data.success || (!data.success && typeof testStatus === 'string')
 	return (
 		<section className={`targeting${headerOnly ? ' headerOnly' : ''}`}>
 			<div className="targeting-header">
