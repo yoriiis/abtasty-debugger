@@ -41,8 +41,11 @@
 
 	&-name {
 		display: block;
-		margin-bottom: 10px;
 		line-height: 20px;
 		font-size: var(--fontSizePrimary);
+
+		& + .badge {
+			margin-top: 10px;
+		}
 	}
 }
