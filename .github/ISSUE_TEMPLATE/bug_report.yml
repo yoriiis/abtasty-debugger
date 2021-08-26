@@ -38,7 +38,7 @@ body:
       label: AB Tasty Debugger
       description: What version of the plugin are you using?
       placeholder: e.g. 1.1.3
-   - type: input
+  - type: input
     validations:
       required: true
     attributes:
