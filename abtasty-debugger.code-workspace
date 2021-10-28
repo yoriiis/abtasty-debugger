@@ -1,0 +1,58 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"[javascript]": {
+			"editor.formatOnSave": true
+		},
+		"[typescript]": {
+			"editor.formatOnSave": true
+		},
+		"[postcss]": {
+			"editor.formatOnSave": true
+		},
+		"[html]": {
+			"editor.formatOnSave": true
+		},
+		"[markdown]": {
+			"editor.formatOnSave": true
+		},
+		"[json]": {
+			"editor.formatOnSave": true
+		},
+		"editor.formatOnSave": false,
+		"editor.codeActionsOnSave": {
+			"source.fixAll.eslint": true,
+			"source.fixAll.stylelint": true
+		},
+		"editor.rulers": [100],
+		"editor.tabSize": 4,
+		"emmet.includeLanguages": {
+			"postcss": "css",
+			"twig": "html"
+		},
+		"emmet.syntaxProfiles": {
+			"postcss": "css"
+		},
+		"files.associations": {
+			"*.css": "postcss",
+			"*.html": "twig"
+		},
+		"files.trimTrailingWhitespace": true,
+		"search.exclude": {
+			"**/node_modules": true
+		}
+	},
+	"extensions": {
+		"recommendations": [
+			"esbenp.prettier-vscode",
+			"dbaeumer.vscode-eslint",
+			"stylelint.vscode-stylelint",
+			"mhmadhamster.postcss-language",
+			"nadim-vscode.symfony-code-snippets"
+		]
+	}
+}
