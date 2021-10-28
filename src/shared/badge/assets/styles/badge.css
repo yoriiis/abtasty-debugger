@@ -5,11 +5,11 @@
 	font-size: var(--fontSizeSecondary);
 	display: inline-block;
 
-	&.accepted {
+	&.green {
 		background-color: var(--green);
 	}
 
-	&.rejected {
+	&.red {
 		background-color: var(--red);
 	}
 }

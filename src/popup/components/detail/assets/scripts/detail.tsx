@@ -35,6 +35,7 @@ export default class Detail {
 
 		return {
 			testId,
+			identifier: data.accountData.accountSettings.identifier,
 			test: data.accountData.tests[testId],
 			result: data.results[testId],
 			targetingSorted: formattedData.targetingsSortedByStatus[testId]

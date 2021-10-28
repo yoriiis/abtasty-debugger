@@ -1,6 +1,7 @@
 import validateTarget from 'validate-target'
 import Router from 'shared/utils/router'
 import DataManager from 'shared/utils/data-manager'
+import { sendMessage, isExtensionMode, reload, namespace } from 'shared/utils/bridge'
 import { Data, FormattedData } from 'shared/assets/interfaces/interfaces'
 
 export default class Popup {
@@ -75,6 +76,18 @@ export default class Popup {
 	 */
 	addEvents() {
 		this.app.addEventListener('click', this.onClickOnApp)
+		namespace.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+			console.log(tabId, changeInfo, tab)
+			if (changeInfo.status === 'complete') {
+				// sendMessage({
+				// 	action: 'setVariation',
+				// 	data: item.oldValue
+				// })
+				// console.log(item.oldValue)
+				// TODO: Send the variation to the page once
+				// Do not execute if the tab is manually reloaded
+			}
+		})
 	}
 
 	/**
@@ -83,26 +96,73 @@ export default class Popup {
 	 */
 	onClickOnApp(e: Event) {
 		const target = e.target
-		const validateTargetTargetingButton = validateTarget({
+		const validateTargetCollapseButton = validateTarget({
 			target: target,
-			selectorString: '.targeting-headerButton',
+			selectorString: '.collapse-headerButton',
+			nodeName: ['button']
+		})
+		const validateTargetActivateVariation = validateTarget({
+			target: target,
+			selectorString: '.activate-variation',
 			nodeName: ['button']
 		})
 
-		if (validateTargetTargetingButton) {
-			this.toggleTageting(e)
+		if (validateTargetCollapseButton) {
+			this.toggleCollapse(e)
+		} else if (validateTargetActivateVariation) {
+			this.activateVariation(e)
 		}
 	}
 
 	/**
-	 * Toggle targeting content
+	 * Toggle collapse content
 	 * @param {Object} e Event data
 	 */
-	toggleTageting(e: Event) {
+	toggleCollapse(e: Event) {
 		const target = e.target
 		// @ts-ignore
-		target.closest('.targeting').classList.toggle('active')
+		target.closest('.collapse').classList.toggle('active')
 	}
+
+	activateVariation(e: Event) {
+		const target = e.target
+		const identifier = target.getAttribute('data-identifier')
+		const testId = target.getAttribute('data-test-id')
+		const variationId = target.getAttribute('data-variation-id')
+		const urlAPI = `https://try.abtasty.com/${identifier}/${testId}.${variationId}.json?${new Date().getTime()}`
+
+		fetch(urlAPI, {
+			method: 'GET',
+			credentials: 'same-origin'
+		}).then((response) => {
+			response.json().then((data) => {
+				data.modifications.forEach((item) => {
+					if (item.type === 'customScriptNew') {
+						// this.injectScriptToPage(item.oldValue)
+						if (isExtensionMode) {
+							namespace.tabs.reload()
+						}
+					}
+				})
+			})
+		})
+	}
+
+	// injectScriptToPage(script: string) {
+	// 	namespace.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+	// 		const currentTab = tabs[0]
+	// 		namespace.scripting.executeScript(
+	// 			{
+	// 				target: { tabId: currentTab.id },
+	// 				args: [script],
+	// 				func: (script) => {
+	// 					return Function(script)()
+	// 				}
+	// 			},
+	// 			() => {}
+	// 		)
+	// 	})
+	// }
 
 	/**
 	 * Destroy step

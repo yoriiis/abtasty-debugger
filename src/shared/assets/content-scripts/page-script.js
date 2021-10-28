@@ -61,3 +61,7 @@ function sendData(data) {
 		})
 	)
 }
+
+document.addEventListener('setVariation', (e) => {
+	Function(e.detail.data)()
+})

@@ -6,11 +6,23 @@
 				"targetingMode": "waituntil",
 				"parentID": 0
 			},
-			"900002": {
-				"id": 900002,
+			"771688": {
+				"id": 771688,
 				"targetingMode": "fastest",
 				"isAsync": true,
-				"parentID": 0
+				"parentID": 0,
+				"asyncVariationInfoById": {
+					"959322": {
+						"id": 959322,
+						"traffic": 50,
+						"name": "Variation one"
+					},
+					"959341": {
+						"id": 959341,
+						"traffic": 50,
+						"name": "Variation two"
+					}
+				}
 			},
 			"900003": {
 				"id": 900003,
@@ -24,6 +36,10 @@
 				"isAsync": false,
 				"parentID": 900003
 			}
+		},
+		"accountSettings": {
+			"accountName": "ABTasty Debugger",
+			"identifier": "3baacc5d7d1f6cb1b8b50384a9544e6c"
 		}
 	},
 	"results": {
@@ -49,11 +65,11 @@
 				"qaParameters": {}
 			}
 		},
-		"900002": {
+		"771688": {
 			"name": "Test with darkmode sticky banner on the header",
 			"type": "ab",
-			"variationID": 901001,
-			"variationName": "header-darkmode-cta",
+			"variationID": 959322,
+			"variationName": "Variation one",
 			"targetings": {
 				"targetPages": {
 					"url_scope": {

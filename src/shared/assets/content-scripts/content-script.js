@@ -29,5 +29,15 @@ document.addEventListener('sendABTastyObject', (event) => {
 
 // Listen for messages from the popup
 namespace.runtime.onMessage.addListener((message, sender, response) => {
-	message.from === 'popup' && message.action === 'getData' && response(dataFromPage)
+	if (message.from === 'popup' && message.action === 'getData') {
+		response(dataFromPage)
+	} else if (message.from === 'popup' && message.action === 'setVariation') {
+		document.dispatchEvent(
+			new window.CustomEvent('setVariation', {
+				detail: {
+					data: message.data
+				}
+			})
+		)
+	}
 })

@@ -29,11 +29,21 @@ export interface Result {
 	}
 }
 
+export interface Variations {
+	[key: string]: Variation
+}
+
+export interface Variation {
+	id: number
+	name: string
+}
+
 export interface Test {
 	id: number
 	targetingMode: string
 	isAsync: string
 	parentID: number
+	asyncVariationInfoById: Variations
 }
 
 export interface Data {
@@ -73,6 +83,7 @@ export interface Wording {
 
 export interface DetailData {
 	testId: string
+	identifier: string
 	test: Test
 	result: Result
 	targetingSorted: TargetingItemSortedByStatus
