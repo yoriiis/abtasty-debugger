@@ -1,4 +1,4 @@
-import { createElement } from 'jsx-dom'
+import { createElement, Fragment } from 'jsx-dom'
 import arrowBottom from 'shared/assets/svgs/arrow-bottom.svg'
 import BadgeTemplate from 'shared/badge/assets/scripts/badge'
 import { ListData, Result } from 'shared/assets/interfaces/interfaces'
@@ -10,14 +10,17 @@ import { ListData, Result } from 'shared/assets/interfaces/interfaces'
  */
 export default function ({ data }: { data: ListData }) {
 	return (
-		<ul className="list" data-route-id="list">
-			{data.testsSortedByStatus.accepted.map((item: Result) => (
-				<ListItem data={item} />
-			))}
-			{data.testsSortedByStatus.rejected.map((item: Result) => (
-				<ListItem data={item} />
-			))}
-		</ul>
+		<>
+			<button className="disable-qa">Disable QA</button>
+			<ul className="list" data-route-id="list">
+				{data.testsSortedByStatus.accepted.map((item: Result) => (
+					<ListItem data={item} />
+				))}
+				{data.testsSortedByStatus.rejected.map((item: Result) => (
+					<ListItem data={item} />
+				))}
+			</ul>
+		</>
 	)
 }
 

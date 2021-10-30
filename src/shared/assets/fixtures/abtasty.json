@@ -22,6 +22,42 @@
 						"traffic": 50,
 						"name": "Variation two"
 					}
+				},
+				"globalCode": "console.log('Campaign script');",
+				"scopes": {
+					"code_scope": [
+						{
+							"isAsync": false,
+							"value": "if(window.matchMedia('only screen and (max-width: 749px)').matches){ return true; }else{ return false; }"
+						}
+					],
+					"ipScope": [
+						{
+							"include": true,
+							"to": 0,
+							"range": false,
+							"from": "1555592406"
+						}
+					],
+					"selector_scope": [
+						{
+							"include": true,
+							"condition": 44,
+							"value": ".header"
+						}
+					],
+					"url_scope": [
+						{
+							"include": false,
+							"condition": 10,
+							"value": "https://www.programme-tv.net"
+						},
+						{
+							"include": true,
+							"condition": 11,
+							"value": "https://www.programme-tv.net/news"
+						}
+					]
 				}
 			},
 			"900003": {
@@ -90,7 +126,7 @@
 					"code_scope": {
 						"conditions": [
 							{
-								"value": "var hourStart = 18;\nvar hourEnd = 4;\nvar hourGranted = new Date().getHours() >= hourStart || new Date().getHours() <= hourEnd;\n\nif (hourGranted) {\n    return true;\n} else {\n    return false;\n}"
+								"value": "if(window.matchMedia('only screen and (max-width: 749px)').matches){ return true; }else{ return false; }"
 							}
 						],
 						"success": true

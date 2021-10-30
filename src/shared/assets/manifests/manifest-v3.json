@@ -28,5 +28,14 @@
 		"default_popup": "popup.html",
 		"default_icon": "images/icon-32x32.png"
 	},
-	"permissions": ["scripting", "activeTab"]
+	"declarative_net_request": {
+		"rule_resources": [
+			{
+				"id": "abtasty",
+				"enabled": false,
+				"path": "json/rules.json"
+			}
+		]
+	},
+	"permissions": ["scripting", "activeTab", "webRequest", "declarativeNetRequest"]
 }

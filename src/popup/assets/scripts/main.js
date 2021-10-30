@@ -2,12 +2,8 @@ import List from '../../components/list/assets/scripts/list'
 import Detail from '../../components/detail/assets/scripts/detail'
 import Empty from 'shared/empty/assets/scripts/empty'
 import Popup from './popup'
-import { sendMessage, isExtensionMode, namespace } from 'shared/utils/bridge'
+import { sendMessage, getTabId, isExtensionMode, namespace } from 'shared/utils/bridge'
 import mockData from 'shared/assets/fixtures/abtasty.json'
-
-// const namespace =
-// 	typeof browser !== 'undefined' ? browser : typeof chrome !== 'undefined' ? chrome : null
-// const isExtensionMode = typeof namespace.tabs !== 'undefined'
 
 if (isExtensionMode) {
 	const manifestVersion = namespace.runtime.getManifest().manifest_version
@@ -15,7 +11,7 @@ if (isExtensionMode) {
 
 	sendMessage({
 		action: 'getData',
-		callback: ({ response, currentTab }) => {
+		callback: (response, tabId) => {
 			// Initialize the popup with data received from the page-script
 			const popup = new Popup({
 				// data: response,
@@ -26,7 +22,7 @@ if (isExtensionMode) {
 
 			// Remove the badge when the popup is open
 			namespace[action].setBadgeText({
-				tabId: currentTab.id,
+				tabId,
 				text: ''
 			})
 		}

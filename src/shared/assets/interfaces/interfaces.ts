@@ -101,3 +101,19 @@ export interface FormattedData {
 	testsSortedByStatus: TestsSortedByStatus
 	targetingsSortedByStatus: TargetingsSortedByStatus
 }
+
+export interface Modification {
+	id: number
+	oldValue: string
+	selector: string
+	type: string
+}
+
+export interface VariationEndpoint {
+	id: number
+	masterVariationId: number
+	modifications: Array<Modification>
+	name: string
+	trafic: number
+	_taginfo: string
+}

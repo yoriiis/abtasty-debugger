@@ -1,9 +1,7 @@
 import { createElement } from 'jsx-dom'
 import BadgeTemplate from 'shared/badge/assets/scripts/badge'
 import CollapseTemplate from 'shared/collapse/assets/scripts/collapse'
-import arrowBottom from 'shared/assets/svgs/arrow-bottom.svg'
-import wording from 'shared/utils/wording'
-import { Variations, Condition } from 'shared/assets/interfaces/interfaces'
+import { Variations } from 'shared/assets/interfaces/interfaces'
 
 /**
  * collapse template
@@ -19,11 +17,10 @@ export default function ({
 	identifier,
 	testId
 }: {
-	variations: Variations
-	identifier: number
 	testId: string
+	variations: Variations
+	identifier: string
 }) {
-	console.log(variations)
 	const content = (
 		<ul>
 			{Object.keys(variations).map((key) => {

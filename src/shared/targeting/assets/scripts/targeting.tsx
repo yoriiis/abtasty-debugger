@@ -25,12 +25,9 @@ export default function ({
 	headerOnly: Boolean
 	textarea: Boolean
 }) {
-	let badge = false
-	if (targeting.success || (!targeting.success && typeof testStatus === 'string')) {
-		badge = {
-			text: targeting.success ? 'accepted' : testStatus,
-			color: targeting.success ? 'green' : 'red'
-		}
+	const badge = {
+		text: targeting.success ? 'accepted' : testStatus,
+		color: targeting.success ? 'green' : 'red'
 	}
 
 	const content = !headerOnly && (
@@ -66,7 +63,11 @@ export default function ({
 		<CollapseTemplate
 			header={`${wording(targeting.key)} targeting`}
 			content={content}
-			badge={badge}
+			badge={
+				targeting.success || (!targeting.success && typeof testStatus === 'string')
+					? badge
+					: false
+			}
 		/>
 	)
 }

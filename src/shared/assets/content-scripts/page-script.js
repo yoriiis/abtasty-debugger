@@ -63,5 +63,35 @@ function sendData(data) {
 }
 
 document.addEventListener('setVariation', (e) => {
-	Function(e.detail.data)()
+	console.log('setVariation', e.detail)
+
+	e.detail.data.modifications.forEach((item) => {
+		if (item.type === 'customScriptNew') {
+			customScriptNew(item)
+		} else if (item.type === 'addCSS') {
+			addCss(item)
+		} else if (item.type === 'editHtml') {
+			editHtml(item)
+		} else if (item.type === 'hideCSS') {
+			hideCSS(item)
+		}
+	})
 })
+
+function customScriptNew(item) {
+	Function(item.oldValue)()
+}
+
+function addCss(item) {
+	const style = document.createElement('style')
+	style.innerText = item.value
+	document.querySelector('head').appendChild(style)
+}
+
+function editHtml(item) {
+	// document.querySelector(item.selector).innerHTML = item.value
+}
+
+function hideCSS(item) {
+	document.querySelector(item.selector).style.display = 'none'
+}

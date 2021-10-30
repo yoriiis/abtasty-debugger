@@ -12,6 +12,8 @@ import { Targeting, DetailData } from 'shared/assets/interfaces/interfaces'
  * @returns {HTMLElement} Generated HTML
  */
 export default function ({ data }: { data: DetailData }) {
+	const hasVariation =
+		data.test.asyncVariationInfoById && Object.keys(data.test.asyncVariationInfoById).length
 	const templateConfig = (
 		<ul className="detail-list">
 			<li>Type: {data.result.type}</li>
@@ -67,14 +69,13 @@ export default function ({ data }: { data: DetailData }) {
 			<CollapseTemplate header="Config" content={templateConfig} />
 			<CollapseTemplate header="Targeting" content={templateTargeting} />
 
-			{data.test.asyncVariationInfoById &&
-				Object.keys(data.test.asyncVariationInfoById).length && (
-					<VariationTemplate
-						testId={data.testId}
-						variations={data.test.asyncVariationInfoById}
-						identifier={data.identifier}
-					/>
-				)}
+			{hasVariation && (
+				<VariationTemplate
+					testId={data.testId}
+					variations={data.test.asyncVariationInfoById}
+					identifier={data.identifier}
+				/>
+			)}
 		</div>
 	)
 }

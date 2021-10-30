@@ -1,8 +1,14 @@
 import validateTarget from 'validate-target'
 import Router from 'shared/utils/router'
 import DataManager from 'shared/utils/data-manager'
-import { sendMessage, isExtensionMode, reload, namespace } from 'shared/utils/bridge'
-import { Data, FormattedData } from 'shared/assets/interfaces/interfaces'
+import { sendMessage, isExtensionMode, namespace } from 'shared/utils/bridge'
+import {
+	Data,
+	FormattedData,
+	VariationEndpoint,
+	Modification
+} from 'shared/assets/interfaces/interfaces'
+import mockVariations from 'shared/assets/fixtures/abtasty-variations.json'
 
 export default class Popup {
 	data: Data
@@ -12,12 +18,14 @@ export default class Popup {
 	instances: Array<any>
 	instancesResult: Array<any>
 	formattedData: null | FormattedData
+	currentVariation: null | VariationEndpoint
 
 	constructor({ data, instances = [] }: { data: Data; instances: Array<any> }) {
 		this.data = data
 		this.instances = instances
 		this.instancesResult = []
 		this.formattedData = null
+		this.currentVariation = null
 
 		// @ts-ignore
 		this.app = document.querySelector('#app')
@@ -25,6 +33,8 @@ export default class Popup {
 		this.onDestroy = this.onDestroy.bind(this)
 		this.onCreate = this.onCreate.bind(this)
 		this.onClickOnApp = this.onClickOnApp.bind(this)
+		this.onTabsUpdated = this.onTabsUpdated.bind(this)
+		this.disableQa = this.disableQa.bind(this)
 
 		this.dataManager = new DataManager()
 		this.router = new Router({
@@ -76,18 +86,21 @@ export default class Popup {
 	 */
 	addEvents() {
 		this.app.addEventListener('click', this.onClickOnApp)
-		namespace.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-			console.log(tabId, changeInfo, tab)
-			if (changeInfo.status === 'complete') {
-				// sendMessage({
-				// 	action: 'setVariation',
-				// 	data: item.oldValue
-				// })
-				// console.log(item.oldValue)
-				// TODO: Send the variation to the page once
-				// Do not execute if the tab is manually reloaded
+
+		if (isExtensionMode) {
+			namespace.tabs.onUpdated.addListener(this.onTabsUpdated.bind(this))
+		}
+	}
+
+	onTabsUpdated(tabId: number, changeInfo: { status: string }, tab: any) {
+		if (changeInfo.status === 'complete') {
+			if (this.currentVariation !== null) {
+				sendMessage({
+					action: 'setVariation',
+					data: this.currentVariation
+				})
 			}
-		})
+		}
 	}
 
 	/**
@@ -106,11 +119,18 @@ export default class Popup {
 			selectorString: '.activate-variation',
 			nodeName: ['button']
 		})
+		const validateTargetDisableQA = validateTarget({
+			target: target,
+			selectorString: '.disable-qa',
+			nodeName: ['button']
+		})
 
 		if (validateTargetCollapseButton) {
 			this.toggleCollapse(e)
 		} else if (validateTargetActivateVariation) {
 			this.activateVariation(e)
+		} else if (validateTargetDisableQA) {
+			this.disableQa(e)
 		}
 	}
 
@@ -125,44 +145,46 @@ export default class Popup {
 	}
 
 	activateVariation(e: Event) {
-		const target = e.target
+		const target = e.target as HTMLElement
 		const identifier = target.getAttribute('data-identifier')
 		const testId = target.getAttribute('data-test-id')
 		const variationId = target.getAttribute('data-variation-id')
 		const urlAPI = `https://try.abtasty.com/${identifier}/${testId}.${variationId}.json?${new Date().getTime()}`
-
+		console.log(mockVariations)
 		fetch(urlAPI, {
 			method: 'GET',
 			credentials: 'same-origin'
 		}).then((response) => {
-			response.json().then((data) => {
-				data.modifications.forEach((item) => {
-					if (item.type === 'customScriptNew') {
-						// this.injectScriptToPage(item.oldValue)
-						if (isExtensionMode) {
-							namespace.tabs.reload()
-						}
-					}
-				})
+			response.json().then((data: VariationEndpoint) => {
+				console.log(data)
+				this.currentVariation = {
+					// modifications: data.modifications,
+					modifications: JSON.parse(mockVariations).modifications,
+					globalCode: this.data.accountData.tests[testId].globalCode
+				}
+
+				if (isExtensionMode) {
+					namespace.declarativeNetRequest.updateEnabledRulesets({
+						enableRulesetIds: ['abtasty']
+					})
+
+					namespace.tabs.reload()
+				}
 			})
 		})
 	}
 
-	// injectScriptToPage(script: string) {
-	// 	namespace.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-	// 		const currentTab = tabs[0]
-	// 		namespace.scripting.executeScript(
-	// 			{
-	// 				target: { tabId: currentTab.id },
-	// 				args: [script],
-	// 				func: (script) => {
-	// 					return Function(script)()
-	// 				}
-	// 			},
-	// 			() => {}
-	// 		)
-	// 	})
-	// }
+	disableQa(e: Event) {
+		e.preventDefault()
+		namespace.declarativeNetRequest.updateEnabledRulesets(
+			{
+				disableRulesetIds: ['abtasty']
+			},
+			() => {
+				namespace.tabs.reload()
+			}
+		)
+	}
 
 	/**
 	 * Destroy step

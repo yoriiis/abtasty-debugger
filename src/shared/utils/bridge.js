@@ -1,31 +1,26 @@
 const namespace =
 	typeof browser !== 'undefined' ? browser : typeof chrome !== 'undefined' ? chrome : null
 
-const isExtensionMode = typeof namespace.tabs !== 'undefined'
+const isExtensionMode = !!namespace.tabs
 
-function sendMessage({ callback, action, data = null }) {
-	namespace.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-		const currentTab = tabs[0]
-
-		if (currentTab) {
-			namespace.tabs.sendMessage(
-				currentTab.id,
-				{ from: 'popup', action, data },
-				(response) => {
-					callback instanceof Function && callback({ response, currentTab })
-				}
-			)
-		}
+function getTabId() {
+	return new Promise((resolve, reject) => {
+		namespace.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+			if (tabs[0]) {
+				resolve(tabs[0].id)
+			} else {
+				reject(new Error('No tabs found'))
+			}
+		})
 	})
 }
 
-function reload(callback) {
-	// namespace.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-	// 	const currentTab = tabs[0]
-	// 	if (currentTab) {
-	// chrome.tabs.reload(currentTab.id, callback)
-	// 	}
-	// })
+function sendMessage({ callback, action, data }) {
+	getTabId().then((tabId) => {
+		namespace.tabs.sendMessage(tabId, { from: 'popup', action, data }, (response) => {
+			callback instanceof Function && callback(response, tabId)
+		})
+	})
 }
 
-export { namespace, isExtensionMode, sendMessage, reload }
+export { namespace, isExtensionMode, sendMessage, getTabId }
