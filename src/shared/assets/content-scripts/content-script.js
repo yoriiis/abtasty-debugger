@@ -27,6 +27,26 @@ document.addEventListener('sendABTastyObject', (event) => {
 	}
 })
 
+function getCookie(name) {
+	const v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)')
+	return v ? v[2] : null
+}
+function setCookie({ name, value, days = false, path = '/' }) {
+	let expires = ''
+	const domain = window.location.host.split('.').slice(-2).join('.')
+	const isSecure = window.location.protocol === 'https:'
+
+	if (days) {
+		const date = new Date()
+		date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000)
+		expires = `expires=${date.toGMTString()}; `
+	}
+
+	document.cookie = `${name}=${value}; ${expires}path=${path}; domain=.${domain};${
+		isSecure ? ' Secure;' : ''
+	}`
+}
+
 // Listen for messages from the popup
 namespace.runtime.onMessage.addListener((message, sender, response) => {
 	if (message.from === 'popup' && message.action === 'getData') {
@@ -39,5 +59,9 @@ namespace.runtime.onMessage.addListener((message, sender, response) => {
 				}
 			})
 		)
+	} else if (message.from === 'popup' && message.action === 'getCookie') {
+		response(getCookie('ABTasty'))
+	} else if (message.from === 'popup' && message.action === 'setCookie') {
+		setCookie({ name: 'ABTasty', value: message.data, days: 30 })
 	}
 })

@@ -5,7 +5,7 @@ const TIME_OUT_IN_MS = INTERVAL_IN_MS * 60
 // Search the ABTasty object in interval
 // Interval is automatically clear when the data is found
 const intervalSearchScript = window.setInterval(() => {
-	if (typeof window[ABTASTY_NAME] !== 'undefined') {
+	if (typeof window[ABTASTY_NAME] !== 'undefined' && window[ABTASTY_NAME].started) {
 		sendData(window[ABTASTY_NAME])
 
 		const pendingTests = searchPendingTests(window[ABTASTY_NAME])

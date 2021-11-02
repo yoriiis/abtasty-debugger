@@ -11,7 +11,6 @@ import { ListData, Result } from 'shared/assets/interfaces/interfaces'
 export default function ({ data }: { data: ListData }) {
 	return (
 		<>
-			<button className="disable-qa">Disable QA</button>
 			<ul className="list" data-route-id="list">
 				{data.testsSortedByStatus.accepted.map((item: Result) => (
 					<ListItem data={item} />

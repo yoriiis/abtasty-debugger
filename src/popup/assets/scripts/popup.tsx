@@ -33,8 +33,6 @@ export default class Popup {
 		this.onDestroy = this.onDestroy.bind(this)
 		this.onCreate = this.onCreate.bind(this)
 		this.onClickOnApp = this.onClickOnApp.bind(this)
-		this.onTabsUpdated = this.onTabsUpdated.bind(this)
-		this.disableQa = this.disableQa.bind(this)
 
 		this.dataManager = new DataManager()
 		this.router = new Router({
@@ -86,21 +84,6 @@ export default class Popup {
 	 */
 	addEvents() {
 		this.app.addEventListener('click', this.onClickOnApp)
-
-		if (isExtensionMode) {
-			namespace.tabs.onUpdated.addListener(this.onTabsUpdated.bind(this))
-		}
-	}
-
-	onTabsUpdated(tabId: number, changeInfo: { status: string }, tab: any) {
-		if (changeInfo.status === 'complete') {
-			if (this.currentVariation !== null) {
-				sendMessage({
-					action: 'setVariation',
-					data: this.currentVariation
-				})
-			}
-		}
 	}
 
 	/**
@@ -119,18 +102,11 @@ export default class Popup {
 			selectorString: '.activate-variation',
 			nodeName: ['button']
 		})
-		const validateTargetDisableQA = validateTarget({
-			target: target,
-			selectorString: '.disable-qa',
-			nodeName: ['button']
-		})
 
 		if (validateTargetCollapseButton) {
 			this.toggleCollapse(e)
 		} else if (validateTargetActivateVariation) {
 			this.activateVariation(e)
-		} else if (validateTargetDisableQA) {
-			this.disableQa(e)
 		}
 	}
 
@@ -150,40 +126,48 @@ export default class Popup {
 		const testId = target.getAttribute('data-test-id')
 		const variationId = target.getAttribute('data-variation-id')
 		const urlAPI = `https://try.abtasty.com/${identifier}/${testId}.${variationId}.json?${new Date().getTime()}`
-		console.log(mockVariations)
+
 		fetch(urlAPI, {
 			method: 'GET',
 			credentials: 'same-origin'
 		}).then((response) => {
 			response.json().then((data: VariationEndpoint) => {
-				console.log(data)
 				this.currentVariation = {
-					// modifications: data.modifications,
-					modifications: JSON.parse(mockVariations).modifications,
+					modifications: data.modifications,
+					// modifications: JSON.parse(mockVariations).modifications,
 					globalCode: this.data.accountData.tests[testId].globalCode
 				}
 
 				if (isExtensionMode) {
-					namespace.declarativeNetRequest.updateEnabledRulesets({
-						enableRulesetIds: ['abtasty']
-					})
+					sendMessage({
+						action: 'getCookie',
+						callback: (response) => {
+							if (response) {
+								const thValue = response
+									.split('&')
+									.find((item) => item.includes('th='))
+								const reg = `${testId}.([0-9]{1,6}).`
+								const regResult = thValue.match(new RegExp(reg))
 
-					namespace.tabs.reload()
+								if (regResult.length) {
+									const newThValue = thValue.replace(
+										`.${regResult[1]}`,
+										`.${variationId}`
+									)
+									response = response.replace(thValue, newThValue)
+
+									sendMessage({
+										action: 'setCookie',
+										data: response
+									})
+									namespace.tabs.reload()
+								}
+							}
+						}
+					})
 				}
 			})
 		})
-	}
-
-	disableQa(e: Event) {
-		e.preventDefault()
-		namespace.declarativeNetRequest.updateEnabledRulesets(
-			{
-				disableRulesetIds: ['abtasty']
-			},
-			() => {
-				namespace.tabs.reload()
-			}
-		)
 	}
 
 	/**

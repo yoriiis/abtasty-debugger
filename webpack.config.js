@@ -39,13 +39,6 @@ module.exports = (env, argv) => {
 				{
 					from: path.resolve(
 						__dirname,
-						'./src/shared/assets/net-request-rules/rules.json'
-					),
-					to: path.resolve(__dirname, './web/dist/json')
-				},
-				{
-					from: path.resolve(
-						__dirname,
 						`./src/shared/assets/manifests/${manifestFilename}`
 					),
 					to: path.resolve(__dirname, './web/dist/manifest.json')

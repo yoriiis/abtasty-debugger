@@ -11,7 +11,8 @@
 	"content_scripts": [
 		{
 			"matches": ["http://*/*", "https://*/*"],
-			"js": ["scripts/content-script.js"]
+			"js": ["scripts/content-script.js"],
+			"run_at": "document_idle"
 		}
 	],
 	"background": {
@@ -28,14 +29,5 @@
 		"default_popup": "popup.html",
 		"default_icon": "images/icon-32x32.png"
 	},
-	"declarative_net_request": {
-		"rule_resources": [
-			{
-				"id": "abtasty",
-				"enabled": false,
-				"path": "json/rules.json"
-			}
-		]
-	},
-	"permissions": ["scripting", "activeTab", "webRequest", "declarativeNetRequest"]
+	"permissions": ["activeTab"]
 }
