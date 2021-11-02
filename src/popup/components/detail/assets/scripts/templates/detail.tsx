@@ -16,6 +16,7 @@ export default function ({ data }: { data: DetailData }) {
 		data.test.asyncVariationInfoById && Object.keys(data.test.asyncVariationInfoById).length
 	const templateConfig = (
 		<ul className="detail-list">
+			<li>Id: {data.testId}</li>
 			<li>Type: {data.result.type}</li>
 			<li>Targeting mode: {data.test.targetingMode}</li>
 			<li>Async: {data.test.isAsync ? 'true' : 'false'}</li>
@@ -63,17 +64,16 @@ export default function ({ data }: { data: DetailData }) {
 					</a>
 				</li>
 			</ul>
-			<h1 className="detail-title">
-				<span className="detail-titleTestId">{data.testId}</span> - {data.result.name}
-			</h1>
+			<h1 className="detail-title">{data.result.name} </h1>
 			<CollapseTemplate header="Config" content={templateConfig} />
 			<CollapseTemplate header="Targeting" content={templateTargeting} />
 
-			{hasVariation && (
+			{data.result.status === 'accepted' && hasVariation && (
 				<VariationTemplate
 					testId={data.testId}
 					variations={data.test.asyncVariationInfoById}
 					identifier={data.identifier}
+					variationActive={data.result.variationID}
 				/>
 			)}
 		</div>

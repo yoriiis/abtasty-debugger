@@ -15,12 +15,15 @@ import { Variations } from 'shared/assets/interfaces/interfaces'
 export default function ({
 	variations,
 	identifier,
-	testId
+	testId,
+	variationActive
 }: {
 	testId: string
 	variations: Variations
 	identifier: string
+	variationActive: number
 }) {
+	console.log(variations)
 	const content = (
 		<ul>
 			{Object.keys(variations).map((key) => {
@@ -28,7 +31,10 @@ export default function ({
 				return (
 					<li>
 						<span>{variation.name}</span>
-						<BadgeTemplate text="Off" color="red" />
+						<BadgeTemplate
+							text="Off"
+							color={variation.id === variationActive ? 'green' : 'red'}
+						/>
 						<button
 							class="activate-variation"
 							data-variation-id={variation.id}

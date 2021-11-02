@@ -51,17 +51,11 @@ function setCookie({ name, value, days = false, path = '/' }) {
 namespace.runtime.onMessage.addListener((message, sender, response) => {
 	if (message.from === 'popup' && message.action === 'getData') {
 		response(dataFromPage)
-	} else if (message.from === 'popup' && message.action === 'setVariation') {
-		document.dispatchEvent(
-			new window.CustomEvent('setVariation', {
-				detail: {
-					data: message.data
-				}
-			})
-		)
 	} else if (message.from === 'popup' && message.action === 'getCookie') {
 		response(getCookie('ABTasty'))
 	} else if (message.from === 'popup' && message.action === 'setCookie') {
 		setCookie({ name: 'ABTasty', value: message.data, days: 30 })
+	} else if (message.from === 'popup' && message.action === 'getLiveData') {
+		response(dataFromPage)
 	}
 })
