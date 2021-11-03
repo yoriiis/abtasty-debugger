@@ -2,6 +2,7 @@ import { createElement, Fragment } from 'jsx-dom'
 import arrowBottom from 'shared/assets/svgs/arrow-bottom.svg'
 import BadgeTemplate from 'shared/badge/assets/scripts/badge'
 import { ListData, Result } from 'shared/assets/interfaces/interfaces'
+import debug from 'shared/assets/svgs/debug.svg'
 
 /**
  * List template
@@ -11,14 +12,22 @@ import { ListData, Result } from 'shared/assets/interfaces/interfaces'
 export default function ({ data }: { data: ListData }) {
 	return (
 		<>
-			<ul className="list" data-route-id="list">
-				{data.testsSortedByStatus.accepted.map((item: Result) => (
-					<ListItem data={item} />
-				))}
-				{data.testsSortedByStatus.rejected.map((item: Result) => (
-					<ListItem data={item} />
-				))}
-			</ul>
+			<div className="list" data-route-id="list">
+				<ul>
+					{data.testsSortedByStatus.accepted.map((item: Result) => (
+						<ListItem data={item} />
+					))}
+					{data.testsSortedByStatus.rejected.map((item: Result) => (
+						<ListItem data={item} />
+					))}
+				</ul>
+				<div className="nav">
+					<button className={`debugButton${data.debug ? ' active' : ''}`}>
+						<span className="debugButton-name">Debug</span>
+						<div className="debugButton-icon" innerHTML={debug}></div>
+					</button>
+				</div>
+			</div>
 		</>
 	)
 }

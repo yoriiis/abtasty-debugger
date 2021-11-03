@@ -95,6 +95,7 @@ export interface DynamicSegments {
 
 export interface ListData {
 	testsSortedByStatus: TestsSortedByStatus
+	debug: boolean
 }
 
 export interface FormattedData {
@@ -107,13 +108,4 @@ export interface Modification {
 	oldValue: string
 	selector: string
 	type: string
-}
-
-export interface VariationEndpoint {
-	id: number
-	masterVariationId: number
-	modifications: Array<Modification>
-	name: string
-	trafic: number
-	_taginfo: string
 }

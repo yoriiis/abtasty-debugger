@@ -8,14 +8,19 @@
 
 	&-headerButton {
 		padding: 15px 45px 15px 15px;
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
+		text-align: left;
 		position: relative;
 		width: 100%;
 
 		* {
 			pointer-events: none;
+		}
+
+		.badge {
+			position: absolute;
+			right: 40px;
+			top: 50%;
+			transform: translateY(-50%);
 		}
 	}
 
@@ -24,7 +29,7 @@
 		font-weight: 600;
 	}
 
-	&-headerIcon {
+	&-arrow {
 		position: absolute;
 		top: 50%;
 		right: 10px;
@@ -53,7 +58,7 @@
 	}
 
 	&.active {
-		& > .collapse-header .collapse-headerIcon svg {
+		& > .collapse-header .collapse-arrow svg {
 			transform: rotate(180deg);
 		}
 

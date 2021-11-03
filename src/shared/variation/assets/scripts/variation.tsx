@@ -1,5 +1,4 @@
 import { createElement } from 'jsx-dom'
-import BadgeTemplate from 'shared/badge/assets/scripts/badge'
 import CollapseTemplate from 'shared/collapse/assets/scripts/collapse'
 import { Variations } from 'shared/assets/interfaces/interfaces'
 
@@ -25,24 +24,27 @@ export default function ({
 }) {
 	console.log(variations)
 	const content = (
-		<ul>
+		<ul class="variation">
 			{Object.keys(variations).map((key) => {
 				const variation = variations[key]
 				return (
-					<li>
-						<span>{variation.name}</span>
-						<BadgeTemplate
-							text="Off"
-							color={variation.id === variationActive ? 'green' : 'red'}
-						/>
-						<button
-							class="activate-variation"
-							data-variation-id={variation.id}
-							data-identifier={identifier}
-							data-test-id={testId}
-						>
-							Activate
-						</button>
+					<li class="variation-listItem">
+						<label htmlFor={`variation-${variation.id}`} class="variation-name">
+							{variation.name}
+						</label>
+						<div class="variation-input">
+							<input
+								type="radio"
+								value={variation.id}
+								id={`variation-${variation.id}`}
+								class="variation-inputRadio"
+								name="variationId"
+								data-identifier={identifier}
+								data-test-id={testId}
+								checked={variation.id === variationActive}
+							/>
+							<span class="variation-inputRound"></span>
+						</div>
 					</li>
 				)
 			})}

@@ -31,6 +31,7 @@ function getCookie(name) {
 	const v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)')
 	return v ? v[2] : null
 }
+
 function setCookie({ name, value, days = false, path = '/' }) {
 	let expires = ''
 	const domain = window.location.host.split('.').slice(-2).join('.')
@@ -47,14 +48,30 @@ function setCookie({ name, value, days = false, path = '/' }) {
 	}`
 }
 
+function removeCookie({ name, path = '/' }) {
+	const domain = window.location.host.split('.').slice(-2).join('.')
+	document.cookie = `${name}=; expires=${new Date(
+		0
+	).toUTCString()}; path=${path}; domain=.${domain};`
+}
+
 // Listen for messages from the popup
 namespace.runtime.onMessage.addListener((message, sender, response) => {
 	if (message.from === 'popup' && message.action === 'getData') {
+		dataFromPage.debug = !!getCookie('abTastyDebug')
 		response(dataFromPage)
 	} else if (message.from === 'popup' && message.action === 'getCookie') {
-		response(getCookie('ABTasty'))
+		response(getCookie(message.data.cookieName))
 	} else if (message.from === 'popup' && message.action === 'setCookie') {
-		setCookie({ name: 'ABTasty', value: message.data, days: 30 })
+		setCookie({
+			name: message.data.cookieName,
+			value: message.data.value,
+			days: message.data.days
+		})
+	} else if (message.from === 'popup' && message.action === 'removeCookie') {
+		removeCookie({
+			name: message.data.cookieName
+		})
 	} else if (message.from === 'popup' && message.action === 'getLiveData') {
 		response(dataFromPage)
 	}

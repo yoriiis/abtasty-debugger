@@ -25,12 +25,13 @@ export default function ({
 	headerOnly: Boolean
 	textarea: Boolean
 }) {
+	const hasBadge = targeting.success || (!targeting.success && typeof testStatus === 'string')
 	const badge = {
-		text: targeting.success ? 'accepted' : testStatus,
+		text: targeting.success ? 'accepted' : 'rejected',
 		color: targeting.success ? 'green' : 'red'
 	}
 
-	const content = !headerOnly && (
+	const content = (
 		<table className="targeting-table">
 			<tbody>
 				{targeting.conditions.map((item: Condition) => {
@@ -61,13 +62,9 @@ export default function ({
 	)
 	return (
 		<CollapseTemplate
-			header={`${wording(targeting.key)} targeting`}
-			content={content}
-			badge={
-				targeting.success || (!targeting.success && typeof testStatus === 'string')
-					? badge
-					: false
-			}
+			header={`${wording(targeting.key)}`}
+			content={!headerOnly && content}
+			badge={badge}
 		/>
 	)
 }

@@ -19,7 +19,7 @@ export default function TemplateCollapse({
 				<button className="collapse-headerButton">
 					<span className="collapse-name">{header}</span>
 					{badge && <BadgeTemplate text={badge.text} color={badge.color} />}
-					{content && <div className="collapse-headerIcon" innerHTML={arrowBottom}></div>}
+					{content && <div className="collapse-arrow" innerHTML={arrowBottom}></div>}
 				</button>
 			</div>
 			{content && <div className="collapse-content">{content}</div>}

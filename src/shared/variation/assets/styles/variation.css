@@ -1,82 +1,61 @@
-.targeting {
-	&-header {
-		border: 1px solid var(--colorBorderPrimary);
-		border-top-left-radius: var(--radius);
-		border-top-right-radius: var(--radius);
-		background-color: var(--colorBgSecondary);
-	}
-
-	&-headerButton {
-		padding: 15px 45px 15px 15px;
+.variation {
+	&-listItem {
 		display: flex;
 		justify-content: space-between;
-		align-items: center;
-		position: relative;
-		width: 100%;
 
-		* {
-			pointer-events: none;
+		&:not(:last-child) {
+			margin-bottom: 10px;
 		}
+	}
+
+	&-input {
+		position: relative;
 	}
 
 	&-name {
-		font-size: var(--fontSizePrimary);
-		font-weight: 600;
-	}
-
-	&-headerIcon {
-		position: absolute;
-		top: 50%;
-		right: 10px;
-		transform: translateY(-50%);
-
-		svg {
-			display: block;
-			width: 20px;
-			height: 20px;
-			fill: var(--colorTextSecondary);
-			transition: transform var(--transition);
-		}
-	}
-
-	&-content {
-		padding: 15px;
-		border: 1px solid var(--colorBorderPrimary);
-		border-bottom-left-radius: var(--radius);
-		border-bottom-right-radius: var(--radius);
-		margin-top: -1px;
-		display: none;
-
-		&.active {
-			display: block;
-		}
-	}
-
-	&-table {
+		cursor: pointer;
 		width: 100%;
-		font-size: var(--fontSizeSecondary);
+		display: block;
+	}
 
-		td:first-child {
-			width: 70px;
+	&-inputRadio {
+		opacity: 0;
+		cursor: pointer;
+		position: absolute;
+		z-index: 1;
+		width: 18px;
+		height: 18px;
+		margin: 0;
+
+		&:checked + .variation-inputRound {
+			border-color: var(--green);
+
+			&::after {
+				display: block;
+			}
 		}
 	}
 
-	&.active {
-		.targeting-headerIcon svg {
-			transform: rotate(180deg);
+	&-inputRound {
+		position: relative;
+		display: block;
+		cursor: pointer;
+		width: 18px;
+		height: 18px;
+		border: 2px solid #fff;
+		border-radius: 50%;
+
+		&::after {
+			content: '';
+			display: none;
+			width: 8px;
+			height: 8px;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			background-color: var(--green);
+			border-radius: 50%;
 		}
-
-		.targeting-content {
-			display: block;
-		}
-	}
-
-	&:not(:last-child) {
-		margin-bottom: 15px;
-	}
-
-	&.headerOnly &-headerButton {
-		padding-right: 15px;
-		cursor: default;
 	}
 }

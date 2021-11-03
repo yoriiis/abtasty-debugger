@@ -18,14 +18,12 @@ export default class Popup {
 	instances: Array<any>
 	instancesResult: Array<any>
 	formattedData: null | FormattedData
-	currentVariation: null | VariationEndpoint
 
 	constructor({ data, instances = [] }: { data: Data; instances: Array<any> }) {
 		this.data = data
 		this.instances = instances
 		this.instancesResult = []
 		this.formattedData = null
-		this.currentVariation = null
 
 		// @ts-ignore
 		this.app = document.querySelector('#app')
@@ -33,6 +31,7 @@ export default class Popup {
 		this.onDestroy = this.onDestroy.bind(this)
 		this.onCreate = this.onCreate.bind(this)
 		this.onClickOnApp = this.onClickOnApp.bind(this)
+		this.onChangeOnApp = this.onChangeOnApp.bind(this)
 
 		this.dataManager = new DataManager()
 		this.router = new Router({
@@ -84,6 +83,7 @@ export default class Popup {
 	 */
 	addEvents() {
 		this.app.addEventListener('click', this.onClickOnApp)
+		this.app.addEventListener('change', this.onChangeOnApp)
 	}
 
 	/**
@@ -97,15 +97,28 @@ export default class Popup {
 			selectorString: '.collapse-headerButton',
 			nodeName: ['button']
 		})
-		const validateTargetActivateVariation = validateTarget({
+		const validateTargetDebug = validateTarget({
 			target: target,
-			selectorString: '.activate-variation',
+			selectorString: '.debugButton',
 			nodeName: ['button']
 		})
 
 		if (validateTargetCollapseButton) {
 			this.toggleCollapse(e)
-		} else if (validateTargetActivateVariation) {
+		} else if (validateTargetDebug) {
+			this.toggleDebugMode(e)
+		}
+	}
+
+	onChangeOnApp(e: Event) {
+		const target = e.target
+		const validateTargetActivateVariation = validateTarget({
+			target: target,
+			selectorString: '.variation-inputRadio',
+			nodeName: ['input']
+		})
+
+		if (validateTargetActivateVariation && isExtensionMode) {
 			this.activateVariation(e)
 		}
 	}
@@ -115,58 +128,74 @@ export default class Popup {
 	 * @param {Object} e Event data
 	 */
 	toggleCollapse(e: Event) {
-		const target = e.target
+		const target = e.target as HTMLElement
+
+		if (target.closest('.collapse.headerOnly')) {
+			return
+		}
+
 		// @ts-ignore
 		target.closest('.collapse').classList.toggle('active')
 	}
 
-	activateVariation(e: Event) {
+	/**
+	 * Toggle debug mode
+	 * @param {Object} e Event data
+	 */
+	toggleDebugMode(e: Event) {
 		const target = e.target as HTMLElement
-		const identifier = target.getAttribute('data-identifier')
-		const testId = target.getAttribute('data-test-id')
-		const variationId = target.getAttribute('data-variation-id')
-		const urlAPI = `https://try.abtasty.com/${identifier}/${testId}.${variationId}.json?${new Date().getTime()}`
 
-		fetch(urlAPI, {
-			method: 'GET',
-			credentials: 'same-origin'
-		}).then((response) => {
-			response.json().then((data: VariationEndpoint) => {
-				this.currentVariation = {
-					modifications: data.modifications,
-					// modifications: JSON.parse(mockVariations).modifications,
-					globalCode: this.data.accountData.tests[testId].globalCode
-				}
+		const isActive = target.classList.contains('active')
+		target.classList[isActive ? 'remove' : 'add']('active')
 
-				if (isExtensionMode) {
-					sendMessage({
-						action: 'getCookie',
-						callback: (response) => {
-							if (response) {
-								const thValue = response
-									.split('&')
-									.find((item) => item.includes('th='))
-								const reg = `${testId}.([0-9]{1,6}).`
-								const regResult = thValue.match(new RegExp(reg))
-
-								if (regResult.length) {
-									const newThValue = thValue.replace(
-										`.${regResult[1]}`,
-										`.${variationId}`
-									)
-									response = response.replace(thValue, newThValue)
-
-									sendMessage({
-										action: 'setCookie',
-										data: response
-									})
-									namespace.tabs.reload()
-								}
-							}
-						}
-					})
+		if (isExtensionMode) {
+			sendMessage({
+				action: isActive ? 'removeCookie' : 'setCookie',
+				data: {
+					cookieName: 'abTastyDebug',
+					value: !isActive
 				}
 			})
+			namespace.tabs.reload()
+		}
+	}
+
+	activateVariation(e: Event) {
+		const target = e.target as HTMLInputElement
+		const variationId = target.value
+		const testId = target.getAttribute('data-test-id')
+
+		sendMessage({
+			action: 'getCookie',
+			data: {
+				cookieName: 'ABTasty'
+			},
+			callback: (response: string) => {
+				if (response) {
+					const thValue = response.split('&').find((item: string) => item.includes('th='))
+
+					if (thValue) {
+						const regResult = thValue.match(new RegExp(`${testId}.([0-9]{1,6}).`))
+
+						if (regResult && regResult.length) {
+							const newThValue = thValue.replace(
+								`.${regResult[1]}`,
+								`.${variationId}`
+							)
+							response = response.replace(thValue, newThValue)
+
+							sendMessage({
+								action: 'setCookie',
+								data: {
+									cookieName: 'ABTasty',
+									value: response
+								}
+							})
+							namespace.tabs.reload()
+						}
+					}
+				}
+			}
 		})
 	}
 

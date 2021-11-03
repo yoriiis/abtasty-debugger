@@ -104,6 +104,7 @@
 		"771688": {
 			"name": "Test with darkmode sticky banner on the header",
 			"type": "ab",
+			"status": "accepted",
 			"variationID": 959322,
 			"variationName": "Variation one",
 			"targetings": {

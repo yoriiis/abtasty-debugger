@@ -1,11 +1,12 @@
 const namespace =
+	// @ts-ignore
 	typeof browser !== 'undefined' ? browser : typeof chrome !== 'undefined' ? chrome : null
 
 const isExtensionMode = !!namespace.tabs
 
 function getTabId() {
 	return new Promise((resolve, reject) => {
-		namespace.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+		namespace.tabs.query({ active: true, currentWindow: true }, (tabs: any) => {
 			if (tabs[0]) {
 				resolve(tabs[0].id)
 			} else {
@@ -15,12 +16,20 @@ function getTabId() {
 	})
 }
 
-function sendMessage({ callback, action, data }) {
+function sendMessage({
+	callback,
+	action,
+	data
+}: {
+	callback?: Function
+	action: string
+	data: any
+}) {
 	getTabId().then((tabId) => {
-		namespace.tabs.sendMessage(tabId, { from: 'popup', action, data }, (response) => {
+		namespace.tabs.sendMessage(tabId, { from: 'popup', action, data }, (response: any) => {
 			callback instanceof Function && callback(response, tabId)
 		})
 	})
 }
 
-export { namespace, isExtensionMode, sendMessage, getTabId }
+export { namespace, isExtensionMode, getTabId, sendMessage }
