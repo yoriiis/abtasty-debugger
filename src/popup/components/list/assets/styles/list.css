@@ -22,6 +22,53 @@
 		}
 	}
 
+	&-name {
+		display: block;
+		line-height: 20px;
+		font-size: var(--fontSizePrimary);
+
+		& + .badge {
+			margin-top: 10px;
+		}
+	}
+
+	&-footer {
+		display: flex;
+		justify-content: right;
+	}
+
+	&-footerDebugIcon {
+		margin-left: 3px;
+
+		svg {
+			display: block;
+			width: 20px;
+			height: 20px;
+			fill: var(--colorTextSecondary);
+			transition: transform var(--transition);
+		}
+	}
+
+	&-footerDebugButton {
+		display: flex;
+		align-items: center;
+		padding: 5px;
+
+		* {
+			pointer-events: none;
+		}
+
+		&.active {
+			.debugButton-name {
+				color: var(--green);
+			}
+
+			.debugButton-icon svg {
+				fill: var(--green);
+			}
+		}
+	}
+
 	&-link {
 		display: block;
 		width: 100%;
@@ -36,56 +83,6 @@
 
 		&:hover .list-icon svg {
 			transform: translateX(5px) rotate(-90deg);
-		}
-	}
-
-	&-name {
-		display: block;
-		line-height: 20px;
-		font-size: var(--fontSizePrimary);
-
-		& + .badge {
-			margin-top: 10px;
-		}
-	}
-}
-
-.nav {
-	display: flex;
-	justify-content: right;
-}
-
-.debugButton {
-	display: flex;
-	align-items: center;
-	padding: 5px;
-
-	* {
-		pointer-events: none;
-	}
-
-	&.active {
-		.debugButton-name {
-			color: var(--green);
-		}
-
-		.debugButton-icon svg {
-			fill: var(--green);
-		}
-	}
-
-	&-name {
-	}
-
-	&-icon {
-		margin-left: 3px;
-
-		svg {
-			display: block;
-			width: 20px;
-			height: 20px;
-			fill: var(--colorTextSecondary);
-			transition: transform var(--transition);
 		}
 	}
 }

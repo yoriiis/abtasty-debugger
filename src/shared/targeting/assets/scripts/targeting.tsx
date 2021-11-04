@@ -25,10 +25,9 @@ export default function ({
 	headerOnly: Boolean
 	textarea: Boolean
 }) {
-	const hasBadge = targeting.success || (!targeting.success && typeof testStatus === 'string')
 	const badge = {
-		text: targeting.success ? 'accepted' : 'rejected',
-		color: targeting.success ? 'green' : 'red'
+		color: targeting.success ? 'green' : 'red',
+		withIcon: true
 	}
 
 	const content = (

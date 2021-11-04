@@ -1,4 +1,6 @@
 import { createElement } from 'jsx-dom'
+import check from 'shared/assets/svgs/check.svg'
+import cross from 'shared/assets/svgs/cross.svg'
 
 /**
  * Badge template
@@ -6,6 +8,22 @@ import { createElement } from 'jsx-dom'
  * @param {Object} options.text Badge text
  * @returns {HTMLElement} Generated HTML
  */
-export default function ({ text, color = 'green' }: { text: string; color: string }) {
-	return <div className={`badge ${color}`}>{text}</div>
+export default function ({
+	text = '',
+	color = 'green',
+	withIcon = false
+}: {
+	text: string
+	color: string
+	withIcon?: boolean
+}) {
+	return (
+		<div className={`badge ${color} ${withIcon ? 'withIcon' : ''}`}>
+			{withIcon ? (
+				<div className="badge-icon" innerHTML={color === 'green' ? check : cross}></div>
+			) : (
+				text
+			)}
+		</div>
+	)
 }

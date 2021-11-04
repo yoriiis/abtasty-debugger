@@ -102,10 +102,3 @@ export interface FormattedData {
 	testsSortedByStatus: TestsSortedByStatus
 	targetingsSortedByStatus: TargetingsSortedByStatus
 }
-
-export interface Modification {
-	id: number
-	oldValue: string
-	selector: string
-	type: string
-}

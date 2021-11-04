@@ -3,7 +3,6 @@ import Detail from '../../components/detail/assets/scripts/detail'
 import Empty from 'shared/empty/assets/scripts/empty'
 import Popup from './popup'
 import { sendMessage, isExtensionMode, namespace } from 'shared/utils/bridge'
-import mockData from 'shared/assets/fixtures/abtasty.json'
 
 if (isExtensionMode) {
 	const manifestVersion = namespace.runtime.getManifest().manifest_version
@@ -15,7 +14,6 @@ if (isExtensionMode) {
 			// Initialize the popup with data received from the page-script
 			const popup = new Popup({
 				data: response,
-				// data: JSON.parse(mockData),
 				instances: [List, Detail, Empty]
 			})
 			popup.init()

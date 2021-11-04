@@ -17,8 +17,14 @@ export default function TemplateCollapse({
 		<section className={`collapse${!content ? ' headerOnly' : ''}`}>
 			<div className="collapse-header">
 				<button className="collapse-headerButton">
+					{badge && (
+						<BadgeTemplate
+							text={badge.text}
+							color={badge.color}
+							withIcon={badge.withIcon}
+						/>
+					)}
 					<span className="collapse-name">{header}</span>
-					{badge && <BadgeTemplate text={badge.text} color={badge.color} />}
 					{content && <div className="collapse-arrow" innerHTML={arrowBottom}></div>}
 				</button>
 			</div>

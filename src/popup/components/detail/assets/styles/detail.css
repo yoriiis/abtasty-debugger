@@ -8,8 +8,8 @@
 
 		svg {
 			display: block;
-			width: 18px;
-			height: 18px;
+			width: 16px;
+			height: 16px;
 			fill: var(--colorTextSecondary);
 			transition: transform var(--transition);
 			position: relative;
@@ -17,7 +17,7 @@
 	}
 
 	&-headerBackIcon {
-		margin-right: 4px;
+		margin-right: 2px;
 
 		svg {
 			transform: rotate(90deg);
@@ -28,7 +28,7 @@
 		font-size: var(--fontSizePrimary);
 
 		&:hover svg {
-			transform: translateX(-5px) rotate(90deg);
+			transform: translateX(-3px) rotate(90deg);
 		}
 	}
 
@@ -60,11 +60,19 @@
 		margin-bottom: 20px;
 	}
 
+	&-section {
+		&:not(.last) {
+			margin-bottom: 30px;
+		}
+	}
+
 	&-subtitle {
 		font-size: var(--fontSizePrimary);
 		font-weight: 600;
 		line-height: 24px;
-		margin-bottom: 20px;
+		margin-bottom: 16px;
+		padding-bottom: 5px;
+		border-bottom: 1px solid var(--colorBorderPrimary);
 	}
 
 	&-list {

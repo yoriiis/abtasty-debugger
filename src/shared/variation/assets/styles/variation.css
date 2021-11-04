@@ -18,6 +18,32 @@
 		display: block;
 	}
 
+	&-inputRound {
+		position: relative;
+		display: block;
+		cursor: pointer;
+		width: 18px;
+		height: 18px;
+		border: 2px solid var(--colorTextSecondary);
+		border-radius: 50%;
+		transition: border 300ms ease-in;
+
+		&::after {
+			transition: opacity 200ms ease-in;
+			content: '';
+			display: block;
+			opacity: 0;
+			width: 8px;
+			height: 8px;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			background-color: var(--green);
+			border-radius: 50%;
+		}
+	}
+
 	&-inputRadio {
 		opacity: 0;
 		cursor: pointer;
@@ -31,31 +57,8 @@
 			border-color: var(--green);
 
 			&::after {
-				display: block;
+				opacity: 1;
 			}
-		}
-	}
-
-	&-inputRound {
-		position: relative;
-		display: block;
-		cursor: pointer;
-		width: 18px;
-		height: 18px;
-		border: 2px solid #fff;
-		border-radius: 50%;
-
-		&::after {
-			content: '';
-			display: none;
-			width: 8px;
-			height: 8px;
-			position: absolute;
-			top: 50%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-			background-color: var(--green);
-			border-radius: 50%;
 		}
 	}
 }

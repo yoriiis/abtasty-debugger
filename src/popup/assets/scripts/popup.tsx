@@ -2,12 +2,7 @@ import validateTarget from 'validate-target'
 import Router from 'shared/utils/router'
 import DataManager from 'shared/utils/data-manager'
 import { sendMessage, isExtensionMode, namespace } from 'shared/utils/bridge'
-import {
-	Data,
-	FormattedData,
-	VariationEndpoint,
-	Modification
-} from 'shared/assets/interfaces/interfaces'
+import { Data, FormattedData } from 'shared/assets/interfaces/interfaces'
 import mockVariations from 'shared/assets/fixtures/abtasty-variations.json'
 
 export default class Popup {

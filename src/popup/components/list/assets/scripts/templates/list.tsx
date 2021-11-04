@@ -12,7 +12,7 @@ import debug from 'shared/assets/svgs/debug.svg'
 export default function ({ data }: { data: ListData }) {
 	return (
 		<>
-			<div className="list" data-route-id="list">
+			<div className="list">
 				<ul>
 					{data.testsSortedByStatus.accepted.map((item: Result) => (
 						<ListItem data={item} />
@@ -21,10 +21,10 @@ export default function ({ data }: { data: ListData }) {
 						<ListItem data={item} />
 					))}
 				</ul>
-				<div className="nav">
-					<button className={`debugButton${data.debug ? ' active' : ''}`}>
-						<span className="debugButton-name">Debug</span>
-						<div className="debugButton-icon" innerHTML={debug}></div>
+				<div className="list-footer">
+					<button className={`list-footerDebugButton${data.debug ? ' active' : ''}`}>
+						<span className="list-footerDebugName">Debug</span>
+						<div className="list-footerDebugIcon" innerHTML={debug}></div>
 					</button>
 				</div>
 			</div>

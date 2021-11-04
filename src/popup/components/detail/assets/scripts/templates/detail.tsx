@@ -16,11 +16,13 @@ export default function ({ data }: { data: DetailData }) {
 		data.test.asyncVariationInfoById && Object.keys(data.test.asyncVariationInfoById).length
 	const templateGeneral = (
 		<ul className="detail-list">
-			<li>Id: {data.testId}</li>
+			<li>
+				ID: {data.testId}&nbsp;
+				{data.test.parentID !== 0 && <>(parent ID: {data.test.parentID})</>}
+			</li>
 			<li>Type: {data.result.type}</li>
 			<li>Targeting mode: {data.test.targetingMode}</li>
 			<li>Async: {data.test.isAsync ? 'true' : 'false'}</li>
-			{data.test.parentID !== 0 && <li>Parent ID: {data.test.parentID}</li>}
 		</ul>
 	)
 	const templateTargeting = (
@@ -64,20 +66,23 @@ export default function ({ data }: { data: DetailData }) {
 					</a>
 				</li>
 			</ul>
-			<h1 className="detail-title">{data.result.name} </h1>
-			<h2 className="detail-subtitle">General</h2>
-			<CollapseTemplate header="Config" content={templateGeneral} />
-			{data.result.status === 'accepted' && hasVariation && (
-				<VariationTemplate
-					testId={data.testId}
-					variations={data.test.asyncVariationInfoById}
-					identifier={data.identifier}
-					variationActive={data.result.variationID}
-				/>
-			)}
+			<h1 className="detail-title">{data.result.name}</h1>
+			<div className="detail-section">
+				<CollapseTemplate header="General" content={templateGeneral} />
+				{data.result.status === 'accepted' && hasVariation && (
+					<VariationTemplate
+						testId={data.testId}
+						variations={data.test.asyncVariationInfoById}
+						identifier={data.identifier}
+						variationActive={data.result.variationID}
+					/>
+				)}
+			</div>
 
-			<h2 className="detail-subtitle">Targeting</h2>
-			{templateTargeting}
+			<div className="detail-section last">
+				<h2 className="detail-subtitle">Targeting</h2>
+				{templateTargeting}
+			</div>
 		</div>
 	)
 }
