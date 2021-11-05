@@ -27,11 +27,24 @@ document.addEventListener('sendABTastyObject', (event) => {
 	}
 })
 
+/**
+ * Get cookie
+ * @param {String} name Cookie name
+ * @returns {(String|null)} Cookie value or null if no result
+ */
 function getCookie(name) {
 	const v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)')
 	return v ? v[2] : null
 }
 
+/**
+ * Set cookie
+ * @param {Object} options
+ * @param {String} options.name Cookie name
+ * @param {String} options.value Cookie value
+ * @param {(Number|Boolean)} options.days Cookie expiration in days
+ * @param {String} options.path Cookie path
+ */
 function setCookie({ name, value, days = false, path = '/' }) {
 	let expires = ''
 	const domain = window.location.host.split('.').slice(-2).join('.')
@@ -48,6 +61,12 @@ function setCookie({ name, value, days = false, path = '/' }) {
 	}`
 }
 
+/**
+ * Remove cookie
+ * @param {Object} options
+ * @param {String} options.name Cookie name
+ * @param {String} options.value Cookie value
+ */
 function removeCookie({ name, path = '/' }) {
 	const domain = window.location.host.split('.').slice(-2).join('.')
 	document.cookie = `${name}=; expires=${new Date(
@@ -57,22 +76,22 @@ function removeCookie({ name, path = '/' }) {
 
 // Listen for messages from the popup
 namespace.runtime.onMessage.addListener((message, sender, response) => {
-	if (message.from === 'popup' && message.action === 'getData') {
-		dataFromPage.debug = !!getCookie('abTastyDebug')
-		response(dataFromPage)
-	} else if (message.from === 'popup' && message.action === 'getCookie') {
-		response(getCookie(message.data.cookieName))
-	} else if (message.from === 'popup' && message.action === 'setCookie') {
-		setCookie({
-			name: message.data.cookieName,
-			value: message.data.value,
-			days: message.data.days
-		})
-	} else if (message.from === 'popup' && message.action === 'removeCookie') {
-		removeCookie({
-			name: message.data.cookieName
-		})
-	} else if (message.from === 'popup' && message.action === 'getLiveData') {
-		response(dataFromPage)
+	if (message.from === 'popup') {
+		if (message.action === 'getData') {
+			dataFromPage.debug = !!getCookie('abTastyDebug')
+			response(dataFromPage)
+		} else if (message.action === 'getCookie') {
+			response(getCookie(message.data.cookieName))
+		} else if (message.action === 'setCookie') {
+			setCookie({
+				name: message.data.cookieName,
+				value: message.data.value,
+				days: message.data.days
+			})
+		} else if (message.action === 'removeCookie') {
+			removeCookie({
+				name: message.data.cookieName
+			})
+		}
 	}
 })

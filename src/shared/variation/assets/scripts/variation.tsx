@@ -5,24 +5,20 @@ import { Variations } from 'shared/assets/interfaces/interfaces'
 /**
  * collapse template
  * @param {Object} options
- * @param {String} options.testStatus Status of the test
- * @param {Object} options.data collapse data
- * @param {Object} options.headerOnly Display the header only, without content
- * @param {Object} options.textarea Use textarea instead of input field
+ * @param {String} options.variations Test variations
+ * @param {Object} options.currentVariationId Current variation ID
+ * @param {Object} options.testId Test ID
  * @returns {HTMLElement} Generated HTML
  */
 export default function ({
 	variations,
-	identifier,
-	testId,
-	variationActive
+	currentVariationId,
+	testId
 }: {
-	testId: string
 	variations: Variations
-	identifier: string
-	variationActive: number
+	currentVariationId: number
+	testId: string
 }) {
-	console.log(variations)
 	const content = (
 		<ul class="variation">
 			{Object.keys(variations).map((key) => {
@@ -39,9 +35,8 @@ export default function ({
 								id={`variation-${variation.id}`}
 								class="variation-inputRadio"
 								name="variationId"
-								data-identifier={identifier}
 								data-test-id={testId}
-								checked={variation.id === variationActive}
+								checked={variation.id === currentVariationId}
 							/>
 							<span class="variation-inputRound"></span>
 						</div>

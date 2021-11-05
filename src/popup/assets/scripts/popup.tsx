@@ -3,7 +3,6 @@ import Router from 'shared/utils/router'
 import DataManager from 'shared/utils/data-manager'
 import { sendMessage, isExtensionMode, namespace } from 'shared/utils/bridge'
 import { Data, FormattedData } from 'shared/assets/interfaces/interfaces'
-import mockVariations from 'shared/assets/fixtures/abtasty-variations.json'
 
 export default class Popup {
 	data: Data
@@ -69,7 +68,7 @@ export default class Popup {
 	 * Check if the not found route need to be display
 	 * @returns {Boolean} Display the not found route
 	 */
-	isNotFound() {
+	isNotFound(): boolean {
 		return !this.data || !this.data.results || Object.keys(this.data.results).length === 0
 	}
 
@@ -83,7 +82,7 @@ export default class Popup {
 
 	/**
 	 * On click event listener on the app
-	 * @param {Object} e Event data
+	 * @param {Event} e Event data
 	 */
 	onClickOnApp(e: Event) {
 		const target = e.target
@@ -105,22 +104,9 @@ export default class Popup {
 		}
 	}
 
-	onChangeOnApp(e: Event) {
-		const target = e.target
-		const validateTargetActivateVariation = validateTarget({
-			target: target,
-			selectorString: '.variation-inputRadio',
-			nodeName: ['input']
-		})
-
-		if (validateTargetActivateVariation && isExtensionMode) {
-			this.activateVariation(e)
-		}
-	}
-
 	/**
 	 * Toggle collapse content
-	 * @param {Object} e Event data
+	 * @param {Event} e Event data
 	 */
 	toggleCollapse(e: Event) {
 		const target = e.target as HTMLElement
@@ -135,7 +121,7 @@ export default class Popup {
 
 	/**
 	 * Toggle debug mode
-	 * @param {Object} e Event data
+	 * @param {Event} e Event data
 	 */
 	toggleDebugMode(e: Event) {
 		const target = e.target as HTMLElement
@@ -155,9 +141,30 @@ export default class Popup {
 		}
 	}
 
-	activateVariation(e: Event) {
+	/**
+	 * On change event listener on the app
+	 * @param {Event} e Event data
+	 */
+	onChangeOnApp(e: Event) {
+		const target = e.target
+		const validateTargetSwitchVariation = validateTarget({
+			target: target,
+			selectorString: '.variation-inputRadio',
+			nodeName: ['input']
+		})
+
+		if (validateTargetSwitchVariation && isExtensionMode) {
+			this.switchVariation(e)
+		}
+	}
+
+	/**
+	 * Switch variation
+	 * @param {Event} e Event data
+	 */
+	switchVariation(e: Event) {
 		const target = e.target as HTMLInputElement
-		const variationId = target.value
+		const newVariationId = target.value
 		const testId = target.getAttribute('data-test-id')
 
 		sendMessage({
@@ -170,14 +177,16 @@ export default class Popup {
 					const thValue = response.split('&').find((item: string) => item.includes('th='))
 
 					if (thValue) {
-						const regResult = thValue.match(new RegExp(`${testId}.([0-9]{1,6}).`))
+						const currentVariationId = thValue.match(
+							new RegExp(`${testId}.([0-9]{1,6}).`)
+						)
 
-						if (regResult && regResult.length) {
-							const newThValue = thValue.replace(
-								`.${regResult[1]}`,
-								`.${variationId}`
+						if (currentVariationId && currentVariationId.length) {
+							const thValueUpdated = thValue.replace(
+								`.${currentVariationId[1]}`,
+								`.${newVariationId}`
 							)
-							response = response.replace(thValue, newThValue)
+							response = response.replace(thValue, thValueUpdated)
 
 							sendMessage({
 								action: 'setCookie',

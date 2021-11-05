@@ -71,10 +71,9 @@ export default function ({ data }: { data: DetailData }) {
 				<CollapseTemplate header="General" content={templateGeneral} />
 				{data.result.status === 'accepted' && hasVariation && (
 					<VariationTemplate
-						testId={data.testId}
 						variations={data.test.asyncVariationInfoById}
-						identifier={data.identifier}
-						variationActive={data.result.variationID}
+						currentVariationId={data.result.variationID}
+						testId={data.testId}
 					/>
 				)}
 			</div>

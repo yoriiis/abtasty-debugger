@@ -1,14 +1,14 @@
 const ABTASTY_NAME = 'ABTasty'
 const INTERVAL_IN_MS = 1000
 const TIME_OUT_IN_MS = INTERVAL_IN_MS * 60
+const IGNORE_TEST_IDS = ['global']
+const IGNORE_TEST_TYPE = ['mastersegment']
 const WAITING_STATUS = [
 	'pending',
 	'currently_checking',
 	'other_subsegment_is_checking',
 	'target_by_event_pending'
 ]
-const IGNORE_TEST_IDS = ['global']
-const IGNORE_TEST_TYPE = ['mastersegment']
 let pendingCounter = 0
 
 // Search the ABTasty object in interval
@@ -60,12 +60,11 @@ function searchPendingTests(data) {
 	return testIds
 		.filter((id) => !IGNORE_TEST_IDS.includes(id))
 		.filter((id) => !IGNORE_TEST_TYPE.includes(tests[id].type))
-		.filter((testId) => {
-			const result =
+		.filter(
+			(testId) =>
 				data.results[testId]?.status === undefined ||
 				WAITING_STATUS.includes(data.results[testId]?.status)
-			return result
-		})
+		)
 }
 
 /**
@@ -81,5 +80,3 @@ function sendData(data) {
 		})
 	)
 }
-
-document.addEventListener('GetLiveData', (e) => {})
