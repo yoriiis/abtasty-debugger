@@ -93,7 +93,7 @@ export default class Popup {
 		})
 		const validateTargetDebug = validateTarget({
 			target: target,
-			selectorString: '.debugButton',
+			selectorString: '.list-footerDebugButton',
 			nodeName: ['button']
 		})
 

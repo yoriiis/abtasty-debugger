@@ -37,8 +37,13 @@
 		justify-content: right;
 	}
 
+	&-footerDebugName {
+		transition: color var(--transition);
+	}
+
 	&-footerDebugIcon {
 		margin-left: 3px;
+		transition: fill var(--transition);
 
 		svg {
 			display: block;
@@ -59,11 +64,11 @@
 		}
 
 		&.active {
-			.debugButton-name {
+			.list-footerDebugName {
 				color: var(--green);
 			}
 
-			.debugButton-icon svg {
+			.list-footerDebugIcon svg {
 				fill: var(--green);
 			}
 		}

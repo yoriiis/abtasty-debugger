@@ -26,10 +26,10 @@
 		height: 18px;
 		border: 2px solid var(--colorTextSecondary);
 		border-radius: 50%;
-		transition: border 300ms ease-in;
+		transition: border var(--transition);
 
 		&::after {
-			transition: opacity 200ms ease-in;
+			transition: opacity var(--transition);
 			content: '';
 			display: block;
 			opacity: 0;

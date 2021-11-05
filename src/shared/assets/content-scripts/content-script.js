@@ -1,31 +1,10 @@
-const namespace = typeof browser !== 'undefined' ? browser : chrome
+const namespace =
+	typeof browser !== 'undefined' ? browser : typeof chrome !== 'undefined' ? chrome : null
 
 // Inject the page script in the current web page
 const pageScript = document.createElement('script')
 pageScript.src = namespace.runtime.getURL('scripts/page-script.js')
 document.head.appendChild(pageScript)
-
-let dataFromPage
-
-// Listen for event from the page script
-document.addEventListener('sendABTastyObject', (event) => {
-	const data = JSON.parse(event.detail.ABTastyData)
-	dataFromPage = data
-
-	// Calculate the counter excluding "mastersegment" type tests
-	const counter = Object.keys(data.results).filter(
-		(key) => data.results[key].type !== 'mastersegment'
-	).length
-
-	// Update the badge only if the counter is greater than 0
-	if (counter > 0) {
-		namespace.runtime.sendMessage({
-			from: 'contentScript',
-			action: 'updateBadge',
-			counter
-		})
-	}
-})
 
 /**
  * Get cookie
@@ -74,12 +53,32 @@ function removeCookie({ name, path = '/' }) {
 	).toUTCString()}; path=${path}; domain=.${domain};`
 }
 
+// Listen for event from the page script
+document.addEventListener('updateBadge', (e) => {
+	const counter = e.detail.counter
+
+	// Update the badge only if the counter is greater than 0
+	if (counter > 0) {
+		namespace.runtime.sendMessage({
+			from: 'contentScript',
+			action: 'updateBadge',
+			counter
+		})
+	}
+})
+
 // Listen for messages from the popup
 namespace.runtime.onMessage.addListener((message, sender, response) => {
+	document.addEventListener('abtastyDebugger::sendData', (e) => {
+		const data = JSON.parse(e.detail.abtastyData)
+		data.debug = !!getCookie('abTastyDebug')
+		console.log(data)
+		response(data)
+	})
+
 	if (message.from === 'popup') {
-		if (message.action === 'getData') {
-			dataFromPage.debug = !!getCookie('abTastyDebug')
-			response(dataFromPage)
+		if (message.from === 'popup' && message.action === 'getData') {
+			document.dispatchEvent(new window.Event('abtastyDebugger::getData'))
 		} else if (message.action === 'getCookie') {
 			response(getCookie(message.data.cookieName))
 		} else if (message.action === 'setCookie') {

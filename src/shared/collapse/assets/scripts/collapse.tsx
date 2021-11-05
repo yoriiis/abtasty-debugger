@@ -1,8 +1,6 @@
 import { createElement } from 'jsx-dom'
 import BadgeTemplate from 'shared/badge/assets/scripts/badge'
 import arrowBottom from 'shared/assets/svgs/arrow-bottom.svg'
-import wording from 'shared/utils/wording'
-import { Variation, Condition } from 'shared/assets/interfaces/interfaces'
 
 export default function TemplateCollapse({
 	header,

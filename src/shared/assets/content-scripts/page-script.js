@@ -1,82 +1,80 @@
 const ABTASTY_NAME = 'ABTasty'
 const INTERVAL_IN_MS = 1000
-const TIME_OUT_IN_MS = INTERVAL_IN_MS * 60
+const TIME_OUT_IN_MS = INTERVAL_IN_MS * 10
 const IGNORE_TEST_IDS = ['global']
-const IGNORE_TEST_TYPE = ['mastersegment']
-const WAITING_STATUS = [
-	'pending',
-	'currently_checking',
-	'other_subsegment_is_checking',
-	'target_by_event_pending'
-]
-let pendingCounter = 0
 
-// Search the ABTasty object in interval
-// Interval is automatically clear when the data is found
-const intervalSearchScript = window.setInterval(() => {
+let counterIsUpdated = false
+let timerAbtastyData
+
+// Check for ABTasty data on the page and send the counter if tests is found
+const checkAbtastyData = () => {
 	if (typeof window[ABTASTY_NAME] !== 'undefined' && window[ABTASTY_NAME].started) {
-		sendData(window[ABTASTY_NAME])
+		const data = window[ABTASTY_NAME]
 
-		const pendingTests = searchPendingTests(window[ABTASTY_NAME])
-		pendingCounter = pendingTests.length
+		const counterTests = Object.keys(data.accountData.tests).filter(
+			(id) => !IGNORE_TEST_IDS.includes(id)
+		).length
+		const counterResults = Object.keys(data.results).length
 
-		// Check if pending tests are found
-		if (pendingCounter) {
-			// Search the pendings tests in interval
-			const intervalPendingTests = window.setInterval(() => {
-				const pendingTests = searchPendingTests(window[ABTASTY_NAME])
-				if (pendingTests.length !== pendingCounter) {
-					pendingCounter = pendingTests.length
-					sendData(window[ABTASTY_NAME])
-				}
-
-				// If no pending tests, send the new ABTasty object and clear the interval
-				if (pendingTests.length === 0) {
-					clearInterval(intervalPendingTests)
-					sendData(window[ABTASTY_NAME])
-				}
-			}, INTERVAL_IN_MS)
+		// Results are not yet ready
+		if (counterTests !== counterResults) {
+			timerAbtastyData = setTimeout(
+				() => requestAnimationFrame(checkAbtastyData),
+				INTERVAL_IN_MS
+			)
+		} else {
+			window.cancelAnimationFrame(checkAbtastyData)
+			clearTimeout(timerAbtastyData)
+			updateBadge()
 		}
 
-		clearInterval(intervalSearchScript)
+		// if(counter)
+	} else {
+		timerAbtastyData = setTimeout(() => requestAnimationFrame(checkAbtastyData), INTERVAL_IN_MS)
 	}
-}, INTERVAL_IN_MS)
+}
+window.requestAnimationFrame(checkAbtastyData)
 
 // Stop the research after a delay
 const timeout = setTimeout(() => {
-	clearInterval(intervalSearchScript)
+	window.cancelAnimationFrame(checkAbtastyData)
+	clearTimeout(timerAbtastyData)
 	clearTimeout(timeout)
+	!counterIsUpdated && updateBadge()
 }, TIME_OUT_IN_MS)
-
-/**
- * Search pending tests in the ABTasty object
- * @param {Object} data ABTasty object
- * @returns {Array} List of pending tests
- */
-function searchPendingTests(data) {
-	const tests = data.accountData.tests
-	const testIds = Object.keys(tests)
-
-	return testIds
-		.filter((id) => !IGNORE_TEST_IDS.includes(id))
-		.filter((id) => !IGNORE_TEST_TYPE.includes(tests[id].type))
-		.filter(
-			(testId) =>
-				data.results[testId]?.status === undefined ||
-				WAITING_STATUS.includes(data.results[testId]?.status)
-		)
-}
 
 /**
  * Send data from the ABTasty object to the service worker
  * @param {Object} data ABTasty object
  */
-function sendData(data) {
+document.addEventListener('abtastyDebugger::getData', (e) => {
 	document.dispatchEvent(
-		new window.CustomEvent('sendABTastyObject', {
+		new window.CustomEvent('abtastyDebugger::sendData', {
 			detail: {
-				ABTastyData: JSON.stringify(data || null)
+				abtastyData: JSON.stringify(window[ABTASTY_NAME])
 			}
 		})
 	)
+})
+
+/**
+ * Update extension counter badge
+ */
+function updateBadge() {
+	counterIsUpdated = true
+	const data = window[ABTASTY_NAME]
+
+	// Exclude "mastersegment" test type from counter
+	const counter = Object.keys(data.results).filter(
+		(key) => data.results[key].type !== 'mastersegment'
+	).length
+
+	// Update the badge only if the counter is greater than 0
+	if (counter > 0) {
+		document.dispatchEvent(
+			new window.CustomEvent('updateBadge', {
+				detail: { counter }
+			})
+		)
+	}
 }
