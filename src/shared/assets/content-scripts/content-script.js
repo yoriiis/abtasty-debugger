@@ -72,7 +72,6 @@ namespace.runtime.onMessage.addListener((message, sender, response) => {
 	document.addEventListener('abtastyDebugger::sendData', (e) => {
 		const data = JSON.parse(e.detail.abtastyData)
 		data.debug = !!getCookie('abTastyDebug')
-		console.log(data)
 		response(data)
 	})
 

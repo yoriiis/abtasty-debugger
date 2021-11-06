@@ -69,7 +69,7 @@ export default function ({ data }: { data: DetailData }) {
 			<h1 className="detail-title">{data.result.name}</h1>
 			<div className="detail-section">
 				<CollapseTemplate header="General" content={templateGeneral} />
-				{data.result.status === 'accepted' && hasVariation && (
+				{['accepted', 'traffic_rejected'].includes(data.result.status) && hasVariation && (
 					<VariationTemplate
 						variations={data.test.asyncVariationInfoById}
 						currentVariationId={data.result.variationID}

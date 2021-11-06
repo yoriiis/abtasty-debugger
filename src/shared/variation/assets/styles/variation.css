@@ -2,9 +2,10 @@
 	&-listItem {
 		display: flex;
 		justify-content: space-between;
+		position: relative;
 
 		&:not(:last-child) {
-			margin-bottom: 10px;
+			margin-bottom: 12px;
 		}
 	}
 
@@ -16,6 +17,22 @@
 		cursor: pointer;
 		width: 100%;
 		display: block;
+		margin-left: 54px;
+	}
+
+	&-traffic {
+		background-color: var(--colorBorderPrimary);
+		font-size: 12px;
+		padding: 4px 5px;
+		border-radius: 6px;
+		margin-right: 8px;
+		position: absolute;
+		left: 0;
+		top: 50%;
+		transform: translateY(-50%);
+		width: 40px;
+		overflow: hidden;
+		text-align: center;
 	}
 
 	&-inputRound {

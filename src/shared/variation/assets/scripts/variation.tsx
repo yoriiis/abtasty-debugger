@@ -1,6 +1,6 @@
 import { createElement } from 'jsx-dom'
 import CollapseTemplate from 'shared/collapse/assets/scripts/collapse'
-import { Variations } from 'shared/assets/interfaces/interfaces'
+import { Variations, Variation } from 'shared/assets/interfaces/interfaces'
 
 /**
  * collapse template
@@ -19,31 +19,52 @@ export default function ({
 	currentVariationId: number
 	testId: string
 }) {
+	const defaultVariation = {
+		id: 0,
+		name: 'Original',
+		traffic: 0
+	}
 	const content = (
 		<ul class="variation">
-			{Object.keys(variations).map((key) => {
-				const variation = variations[key]
-				return (
-					<li class="variation-listItem">
-						<label htmlFor={`variation-${variation.id}`} class="variation-name">
-							{variation.name}
-						</label>
-						<div class="variation-input">
-							<input
-								type="radio"
-								value={variation.id}
-								id={`variation-${variation.id}`}
-								class="variation-inputRadio"
-								name="variationId"
-								data-test-id={testId}
-								checked={variation.id === currentVariationId}
-							/>
-							<span class="variation-inputRound"></span>
-						</div>
-					</li>
-				)
-			})}
+			{Object.keys(variations).map((key) =>
+				variationListItem({ variation: variations[key], currentVariationId, testId })
+			)}
+			{variationListItem({ variation: defaultVariation, currentVariationId, testId })}
 		</ul>
 	)
 	return <CollapseTemplate header="Variations" content={content} />
+}
+
+const variationListItem = ({
+	variation,
+	currentVariationId,
+	testId
+}: {
+	variation: Variation
+	currentVariationId: number
+	testId: string
+}) => {
+	const isDefault = variation.id === 0
+	const isDefaultActive = [-2, -1, 0, undefined].includes(currentVariationId)
+	const isChecked = isDefault ? isDefaultActive : variation.id === currentVariationId
+	return (
+		<li class="variation-listItem">
+			<span class="variation-traffic">{isDefault ? '-' : `${variation.traffic}%`}</span>
+			<label htmlFor={`variation-${variation.id}`} class="variation-name">
+				{variation.name}
+			</label>
+			<div class="variation-input">
+				<input
+					type="radio"
+					value={variation.id}
+					id={`variation-${variation.id}`}
+					class="variation-inputRadio"
+					name="variationId"
+					data-test-id={testId}
+					checked={isChecked}
+				/>
+				<span class="variation-inputRound"></span>
+			</div>
+		</li>
+	)
 }

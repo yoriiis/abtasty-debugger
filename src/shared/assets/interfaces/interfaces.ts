@@ -30,10 +30,13 @@ export interface Result {
 }
 
 export interface Variations {
-	[key: string]: {
-		id: number
-		name: string
-	}
+	[key: string]: Variation
+}
+
+export interface Variation {
+	id: number
+	name: string
+	traffic: number
 }
 
 export interface Test {

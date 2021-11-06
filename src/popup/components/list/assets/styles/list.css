@@ -39,6 +39,7 @@
 
 	&-footerDebugName {
 		transition: color var(--transition);
+		color: var(--colorTextSecondary);
 	}
 
 	&-footerDebugIcon {
