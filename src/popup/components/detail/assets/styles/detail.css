@@ -45,6 +45,14 @@
 	}
 
 	&-headerBack,
+	&-headerReport,
+	&-subtitleLink {
+		&:hover svg {
+			fill: var(--colorAbtasty);
+		}
+	}
+
+	&-headerBack,
 	&-headerReport {
 		padding: 5px;
 		align-items: center;
@@ -60,14 +68,6 @@
 			svg {
 				fill: var(--colorAbtasty);
 			}
-		}
-	}
-
-	&-headerBack,
-	&-headerReport,
-	&-subtitleLink {
-		&:hover .detail-subtitleIcon svg {
-			fill: var(--colorAbtasty);
 		}
 	}
 
