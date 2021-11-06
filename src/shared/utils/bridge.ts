@@ -4,9 +4,6 @@ const namespace =
 
 const isExtensionMode = !!namespace.tabs
 
-const manifestVersion = namespace.runtime.getManifest().manifest_version
-const browserAction = manifestVersion === 3 ? 'action' : 'browserAction'
-
 /**
  * Get tab ID with Browser extension API
  * @returns {Promise<Number>} Tab id
@@ -46,4 +43,4 @@ function sendMessage({
 	})
 }
 
-export { namespace, isExtensionMode, getTabId, sendMessage, browserAction }
+export { namespace, isExtensionMode, getTabId, sendMessage }

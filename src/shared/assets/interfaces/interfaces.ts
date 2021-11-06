@@ -45,6 +45,8 @@ export interface Test {
 	isAsync: string
 	parentID: number
 	asyncVariationInfoById: Variations
+	actionTrackings: Trackings
+	traffic: number
 }
 
 export interface Data {
@@ -55,9 +57,11 @@ export interface Data {
 			}
 		}
 	}
-	results: {
-		[key: string]: Result
-	}
+	results: Results
+}
+
+export interface Results {
+	[key: string]: Result
 }
 
 export interface TestsSortedByStatus {
@@ -102,4 +106,19 @@ export interface ListData {
 export interface FormattedData {
 	testsSortedByStatus: TestsSortedByStatus
 	targetingsSortedByStatus: TargetingsSortedByStatus
+}
+
+export interface ChangeInfo {
+	status: string
+}
+
+export interface Trackings {
+	click: Array<Tracking>
+	mousedown: Array<Tracking>
+	submit: Array<Tracking>
+}
+
+export interface Tracking {
+	name: string
+	selector: string
 }

@@ -15,6 +15,7 @@ import './components/detail/config'
 import 'shared/badge/config'
 import 'shared/targeting/config'
 import 'shared/variation/config' // TODO: move to components
+import 'shared/tracking/config' // TODO: move to components
 import 'shared/collapse/config'
 import 'shared/empty/config'
 

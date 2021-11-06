@@ -22,7 +22,10 @@ export default function ({ data }: { data: ListData }) {
 					))}
 				</ul>
 				<div className="list-footer">
-					<button className={`list-footerDebugButton${data.debug ? ' active' : ''}`}>
+					<button
+						className={`list-footerDebugButton${data.debug ? ' active' : ''}`}
+						title="See DevTools > Console for debug logs"
+					>
 						<span className="list-footerDebugName">Debug</span>
 						<div className="list-footerDebugIcon" innerHTML={debug}></div>
 					</button>

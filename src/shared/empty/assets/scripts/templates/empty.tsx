@@ -10,6 +10,7 @@ export default function () {
 		<div className="empty">
 			<div className="empty-icon" innerHTML={info}></div>
 			<p className="empty-text">No tests available on the current page.</p>
+			<button className="empty-retryButton">Retry</button>
 		</div>
 	)
 }

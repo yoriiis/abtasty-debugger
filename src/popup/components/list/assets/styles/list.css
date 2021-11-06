@@ -38,13 +38,11 @@
 	}
 
 	&-footerDebugName {
-		transition: color var(--transition);
 		color: var(--colorTextSecondary);
 	}
 
 	&-footerDebugIcon {
 		margin-left: 3px;
-		transition: fill var(--transition);
 
 		svg {
 			display: block;
@@ -64,7 +62,8 @@
 			pointer-events: none;
 		}
 
-		&.active {
+		&.active,
+		&:hover {
 			.list-footerDebugName {
 				color: var(--green);
 			}

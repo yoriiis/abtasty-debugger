@@ -43,8 +43,8 @@ jobs:
       - name: Test Markdown
         run: npm run test:markdown
 
-      - name: Test Jest
-        run: npm run test
+      # - name: Test Jest
+      #   run: npm run test
 
       - name: Upload coverage artifacts
         uses: actions/upload-artifact@v2

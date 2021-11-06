@@ -2,7 +2,7 @@ import validateTarget from 'validate-target'
 import Router from 'shared/utils/router'
 import DataManager from 'shared/utils/data-manager'
 import { sendMessage, isExtensionMode, namespace } from 'shared/utils/bridge'
-import { Data, FormattedData } from 'shared/assets/interfaces/interfaces'
+import { Data, FormattedData, ChangeInfo } from 'shared/assets/interfaces/interfaces'
 
 export default class Popup {
 	data: Data
@@ -26,6 +26,7 @@ export default class Popup {
 		this.onCreate = this.onCreate.bind(this)
 		this.onClickOnApp = this.onClickOnApp.bind(this)
 		this.onChangeOnApp = this.onChangeOnApp.bind(this)
+		this.onTabUpdated = this.onTabUpdated.bind(this)
 
 		this.dataManager = new DataManager()
 		this.router = new Router({
@@ -78,6 +79,7 @@ export default class Popup {
 	addEvents() {
 		this.app.addEventListener('click', this.onClickOnApp)
 		this.app.addEventListener('change', this.onChangeOnApp)
+		isExtensionMode && namespace.tabs.onUpdated.addListener(this.onTabUpdated)
 	}
 
 	/**
@@ -96,11 +98,18 @@ export default class Popup {
 			selectorString: '.list-footerDebugButton',
 			nodeName: ['button']
 		})
+		const validateTargetRetry = validateTarget({
+			target: target,
+			selectorString: '.empty-retryButton',
+			nodeName: ['button']
+		})
 
 		if (validateTargetCollapseButton) {
 			this.toggleCollapse(e)
 		} else if (validateTargetDebug) {
 			this.toggleDebugMode(e)
+		} else if (validateTargetRetry) {
+			this.retry(e)
 		}
 	}
 
@@ -126,10 +135,14 @@ export default class Popup {
 	toggleDebugMode(e: Event) {
 		const target = e.target as HTMLElement
 
-		const isActive = target.classList.contains('active')
-		target.classList[isActive ? 'remove' : 'add']('active')
-
 		if (isExtensionMode) {
+			if (target.classList.contains('blocked')) return
+
+			target.classList.add('blocked')
+
+			const isActive = target.classList.contains('active')
+			target.classList[isActive ? 'remove' : 'add']('active')
+
 			sendMessage({
 				action: isActive ? 'removeCookie' : 'setCookie',
 				data: {
@@ -138,8 +151,16 @@ export default class Popup {
 				}
 			})
 			namespace.tabs.reload()
-			window.close()
 		}
+	}
+
+	/**
+	 * Retry and reload the popup if no results
+	 * @param {Event} e Event data
+	 */
+	retry(e: Event) {
+		e.preventDefault()
+		window.location.reload()
 	}
 
 	/**
@@ -165,8 +186,8 @@ export default class Popup {
 	 */
 	switchVariation(e: Event) {
 		const target = e.target as HTMLInputElement
-		const newVariationId = target.value
-		const testId = target.getAttribute('data-test-id')
+		const newVariationId = parseInt(target.value)
+		const testId = target.getAttribute('data-test-id') as string
 
 		sendMessage({
 			action: 'getCookie',
@@ -197,11 +218,32 @@ export default class Popup {
 								}
 							})
 							namespace.tabs.reload()
+
+							// Update the data with the new variation ID
+							// Useful if the detail view is re-rendered after updating the variation
+							this.data.results[testId].variationID = newVariationId
 						}
 					}
 				}
 			}
 		})
+	}
+
+	/**
+	 * On tab updates event listener
+	 * @param {Number} tabId Tab ID
+	 * @param {Object} changeInfo Updated data (status)
+	 * @param {Object} tab Tab data
+	 */
+	onTabUpdated(tabId: number, changeInfo: ChangeInfo, tab: any) {
+		const debugButton = document.querySelector('.list-footerDebugButton')
+		if (
+			debugButton &&
+			debugButton.classList.contains('blocked') &&
+			changeInfo.status === 'complete'
+		) {
+			debugButton.classList.remove('blocked')
+		}
 	}
 
 	/**

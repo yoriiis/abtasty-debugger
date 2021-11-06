@@ -3,8 +3,19 @@
 		width: 100%;
 		font-size: var(--fontSizeSecondary);
 
+		&,
+		td {
+			border: 1px solid var(--colorBorderPrimary);
+		}
+
 		td:first-child {
 			width: 70px;
+			text-align: center;
+			padding: 8px;
+		}
+
+		tr:nth-child(odd) {
+			background-color: var(--colorBorderPrimary);
 		}
 	}
 }

@@ -8,7 +8,7 @@ let timerAbtastyData
 
 // Check for ABTasty data on the page and send the counter if tests is found
 const checkAbtastyData = () => {
-	if (typeof window[ABTASTY_NAME] !== 'undefined' && window[ABTASTY_NAME].started) {
+	if (isAbtastyReady()) {
 		const data = window[ABTASTY_NAME]
 
 		const counterTests = Object.keys(data.accountData.tests).filter(
@@ -18,29 +18,44 @@ const checkAbtastyData = () => {
 
 		// Results are not yet ready
 		if (counterTests !== counterResults) {
-			timerAbtastyData = setTimeout(
-				() => requestAnimationFrame(checkAbtastyData),
-				INTERVAL_IN_MS
-			)
+			retryResearch()
 		} else {
 			window.cancelAnimationFrame(checkAbtastyData)
 			clearTimeout(timerAbtastyData)
 			updateBadge()
 		}
-
-		// if(counter)
 	} else {
-		timerAbtastyData = setTimeout(() => requestAnimationFrame(checkAbtastyData), INTERVAL_IN_MS)
+		retryResearch()
 	}
 }
 window.requestAnimationFrame(checkAbtastyData)
+
+/**
+ * Check if ABTasty data are ready to use
+ * @returns {Boolean} ABTasty data are ready
+ */
+function isAbtastyReady() {
+	return (
+		typeof window[ABTASTY_NAME] !== 'undefined' &&
+		window[ABTASTY_NAME].started &&
+		window[ABTASTY_NAME].accountData.tests &&
+		window[ABTASTY_NAME].results
+	)
+}
+
+/**
+ * Retry the request animation frame for ABTasty data research
+ */
+function retryResearch() {
+	timerAbtastyData = setTimeout(() => requestAnimationFrame(checkAbtastyData), INTERVAL_IN_MS)
+}
 
 // Stop the research after a delay
 const timeout = setTimeout(() => {
 	window.cancelAnimationFrame(checkAbtastyData)
 	clearTimeout(timerAbtastyData)
 	clearTimeout(timeout)
-	!counterIsUpdated && updateBadge()
+	!counterIsUpdated && isAbtastyReady() && updateBadge()
 }, TIME_OUT_IN_MS)
 
 /**
