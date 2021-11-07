@@ -1,8 +1,9 @@
 import { createElement, Fragment } from 'jsx-dom'
 import arrowBottom from 'shared/assets/svgs/arrow-bottom.svg'
+import check from 'shared/assets/svgs/check.svg'
+import reload from 'shared/assets/svgs/reload.svg'
 import BadgeTemplate from 'shared/badge/assets/scripts/badge'
 import { ListData, Result } from 'shared/assets/interfaces/interfaces'
-import debug from 'shared/assets/svgs/debug.svg'
 
 /**
  * List template
@@ -21,15 +22,36 @@ export default function ({ data }: { data: ListData }) {
 						<ListItem data={item} />
 					))}
 				</ul>
-				<div className="list-footer">
-					<button
-						className={`list-footerDebugButton${data.debug ? ' active' : ''}`}
-						title="See DevTools > Console for debug logs"
-					>
-						<span className="list-footerDebugName">Debug</span>
-						<div className="list-footerDebugIcon" innerHTML={debug}></div>
-					</button>
-				</div>
+				<ul className="list-footer">
+					<li className="list-footerItem">
+						<button className="list-footerItemButton reloadTag">
+							<div className="list-footerItemButtonIcon" innerHTML={reload}></div>
+							Reload tag
+						</button>
+					</li>
+					<li className="list-footerItem">
+						<label
+							htmlFor="debugMode"
+							className="list-footerItemLabel"
+							title="See DevTools > Console for debug logs"
+						>
+							Debug mode
+						</label>
+						<div className="customCheckbox">
+							<input
+								type="checkbox"
+								value={data.debug ? 'true' : 'false'}
+								className="customCheckbox-input"
+								id="debugMode"
+								name="debug"
+								checked={data.debug}
+							/>
+							<span className="customCheckbox-round">
+								<div className="customCheckbox-roundIcon" innerHTML={check}></div>
+							</span>
+						</div>
+					</li>
+				</ul>
 			</div>
 		</>
 	)

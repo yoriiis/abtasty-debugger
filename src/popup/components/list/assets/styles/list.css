@@ -34,42 +34,48 @@
 
 	&-footer {
 		display: flex;
-		justify-content: right;
-	}
-
-	&-footerDebugName {
+		justify-content: space-between;
+		align-items: center;
 		color: var(--colorTextSecondary);
 	}
 
-	&-footerDebugIcon {
-		margin-left: 3px;
+	&-footerItem {
+		display: flex;
+		align-items: center;
+
+		&:not(:last-child) {
+			margin-right: 15px;
+		}
+	}
+
+	&-footerItemLabel {
+		display: flex;
+		align-items: center;
+		margin-right: 10px;
+		cursor: pointer;
+	}
+
+	&-footerItemButtonIcon {
+		margin-right: 10px;
 
 		svg {
 			display: block;
 			width: 20px;
 			height: 20px;
 			fill: var(--colorTextSecondary);
-			transition: transform var(--transition);
 		}
 	}
 
-	&-footerDebugButton {
+	&-footerItemButton {
 		display: flex;
 		align-items: center;
-		padding: 5px;
+		margin-right: 10px;
 
-		* {
-			pointer-events: none;
-		}
-
-		&.active,
 		&:hover {
-			.list-footerDebugName {
-				color: var(--green);
-			}
+			color: var(--colorAbtasty);
 
-			.list-footerDebugIcon svg {
-				fill: var(--green);
+			svg {
+				fill: var(--colorAbtasty);
 			}
 		}
 	}

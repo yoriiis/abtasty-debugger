@@ -122,3 +122,8 @@ export interface Tracking {
 	name: string
 	selector: string
 }
+
+export interface TrafficAllocation {
+	original: number
+	untracked: number
+}

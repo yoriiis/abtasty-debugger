@@ -1,11 +1,27 @@
 .variation {
+	&-name {
+		cursor: pointer;
+		width: 100%;
+		display: flex;
+		align-items: center;
+		line-height: 20px;
+	}
+
 	&-listItem {
 		display: flex;
 		justify-content: space-between;
+		align-items: center;
 		position: relative;
 
 		&:not(:last-child) {
 			margin-bottom: 12px;
+		}
+
+		&.disabled {
+			.variation-name {
+				cursor: not-allowed;
+				opacity: 0.5;
+			}
 		}
 	}
 
@@ -13,69 +29,33 @@
 		position: relative;
 	}
 
-	&-name {
-		cursor: pointer;
-		width: 100%;
+	&-linkIcon svg {
 		display: block;
-		margin-left: 54px;
+		width: 16px;
+		height: 16px;
+		fill: var(--colorTextSecondary);
+		position: relative;
+	}
+
+	&-link {
+		padding: 6px;
+		margin-right: 9px;
+
+		&:hover {
+			svg {
+				fill: var(--colorAbtasty);
+			}
+		}
 	}
 
 	&-traffic {
 		background-color: var(--colorBorderPrimary);
 		font-size: 12px;
-		padding: 4px 5px;
+		padding: 5px 0;
 		border-radius: 6px;
 		margin-right: 8px;
-		position: absolute;
-		left: 0;
-		top: 50%;
-		transform: translateY(-50%);
 		width: 40px;
 		overflow: hidden;
 		text-align: center;
-	}
-
-	&-inputRound {
-		position: relative;
-		display: block;
-		cursor: pointer;
-		width: 18px;
-		height: 18px;
-		border: 2px solid var(--colorTextSecondary);
-		border-radius: 50%;
-		transition: border var(--transition);
-
-		&::after {
-			transition: opacity var(--transition);
-			content: '';
-			display: block;
-			opacity: 0;
-			width: 8px;
-			height: 8px;
-			position: absolute;
-			top: 50%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-			background-color: var(--green);
-			border-radius: 50%;
-		}
-	}
-
-	&-inputRadio {
-		opacity: 0;
-		cursor: pointer;
-		position: absolute;
-		z-index: 1;
-		width: 18px;
-		height: 18px;
-		margin: 0;
-
-		&:checked + .variation-inputRound {
-			border-color: var(--green);
-
-			&::after {
-				opacity: 1;
-			}
-		}
 	}
 }

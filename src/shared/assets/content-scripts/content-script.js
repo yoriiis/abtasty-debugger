@@ -92,6 +92,9 @@ namespace.runtime.onMessage.addListener((message, sender, response) => {
 				name: message.data.cookieName
 			})
 			response('success')
+		} else if (message.action === 'clearAbtastyCookies') {
+			document.dispatchEvent(new window.Event('abtastyDebugger::clearCookie'))
+			response('success')
 		}
 	}
 

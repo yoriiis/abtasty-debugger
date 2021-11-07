@@ -28,12 +28,17 @@
 					"959322": {
 						"id": 959322,
 						"name": "Variation one",
-						"traffic": 20
+						"traffic": 11
 					},
 					"959341": {
 						"id": 959341,
 						"name": "Variation two",
-						"traffic": 20
+						"traffic": 9
+					},
+					"963938": {
+						"id": 963938,
+						"name": "Variation three",
+						"traffic": 37
 					}
 				},
 				"globalCode": "console.log('Campaign script');",

@@ -4,6 +4,14 @@ import DataManager from 'shared/utils/data-manager'
 import { sendMessage, isExtensionMode, namespace } from 'shared/utils/bridge'
 import { Data, FormattedData, ChangeInfo } from 'shared/assets/interfaces/interfaces'
 
+declare global {
+	interface Window {
+		ABTasty: {
+			clearAllCookies: Function
+		}
+	}
+}
+
 export default class Popup {
 	data: Data
 	app: Element
@@ -93,23 +101,23 @@ export default class Popup {
 			selectorString: '.collapse-headerButton',
 			nodeName: ['button']
 		})
-		const validateTargetDebug = validateTarget({
-			target: target,
-			selectorString: '.list-footerDebugButton',
-			nodeName: ['button']
-		})
 		const validateTargetRetry = validateTarget({
 			target: target,
 			selectorString: '.empty-retryButton',
 			nodeName: ['button']
 		})
+		const validateTargetReloadTag = validateTarget({
+			target: target,
+			selectorString: '.reloadTag',
+			nodeName: ['button']
+		})
 
 		if (validateTargetCollapseButton) {
 			this.toggleCollapse(e)
-		} else if (validateTargetDebug) {
-			this.toggleDebugMode(e)
 		} else if (validateTargetRetry) {
 			this.retry(e)
+		} else if (validateTargetReloadTag && isExtensionMode) {
+			this.reloadTag(e)
 		}
 	}
 
@@ -129,38 +137,27 @@ export default class Popup {
 	}
 
 	/**
-	 * Toggle debug mode
+	 * Retry and reload the popup if no results
 	 * @param {Event} e Event data
 	 */
-	toggleDebugMode(e: Event) {
-		const target = e.target as HTMLElement
+	retry(e: Event) {
+		e.preventDefault()
 
-		if (isExtensionMode) {
-			if (target.classList.contains('blocked')) return
-
-			target.classList.add('blocked')
-
-			const isActive = target.classList.contains('active')
-			target.classList[isActive ? 'remove' : 'add']('active')
-
-			sendMessage({
-				action: isActive ? 'removeCookie' : 'setCookie',
-				data: {
-					cookieName: 'abTastyDebug',
-					value: !isActive
-				}
-			})
-			namespace.tabs.reload()
-		}
+		window.location.reload()
 	}
 
 	/**
 	 * Retry and reload the popup if no results
 	 * @param {Event} e Event data
 	 */
-	retry(e: Event) {
+	reloadTag(e: Event) {
 		e.preventDefault()
-		window.location.reload()
+
+		sendMessage({
+			action: 'clearAbtastyCookies'
+		})
+		namespace.tabs.reload()
+		window.close()
 	}
 
 	/**
@@ -174,9 +171,18 @@ export default class Popup {
 			selectorString: '.variation-inputRadio',
 			nodeName: ['input']
 		})
+		const validateTargeDebugMode = validateTarget({
+			target: target,
+			selectorString: '#debugMode',
+			nodeName: ['input']
+		})
 
-		if (validateTargetSwitchVariation && isExtensionMode) {
-			this.switchVariation(e)
+		if (isExtensionMode) {
+			if (validateTargetSwitchVariation) {
+				this.switchVariation(e)
+			} else if (validateTargeDebugMode) {
+				this.toggleDebugMode(e)
+			}
 		}
 	}
 
@@ -230,19 +236,34 @@ export default class Popup {
 	}
 
 	/**
+	 * Toggle debug mode
+	 * @param {Event} e Event data
+	 */
+	toggleDebugMode(e: Event) {
+		const target = e.target as HTMLInputElement
+
+		target.setAttribute('disabled', '')
+
+		sendMessage({
+			action: target.checked ? 'setCookie' : 'removeCookie',
+			data: {
+				cookieName: 'abTastyDebug',
+				value: target.checked
+			}
+		})
+		namespace.tabs.reload()
+	}
+
+	/**
 	 * On tab updates event listener
 	 * @param {Number} tabId Tab ID
 	 * @param {Object} changeInfo Updated data (status)
 	 * @param {Object} tab Tab data
 	 */
 	onTabUpdated(tabId: number, changeInfo: ChangeInfo, tab: any) {
-		const debugButton = document.querySelector('.list-footerDebugButton')
-		if (
-			debugButton &&
-			debugButton.classList.contains('blocked') &&
-			changeInfo.status === 'complete'
-		) {
-			debugButton.classList.remove('blocked')
+		const debugMode = document.querySelector('#debugMode')
+		if (debugMode && debugMode.hasAttribute('disabled') && changeInfo.status === 'complete') {
+			debugMode.removeAttribute('disabled')
 		}
 	}
 

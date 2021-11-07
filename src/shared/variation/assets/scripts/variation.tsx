@@ -1,6 +1,8 @@
 import { createElement } from 'jsx-dom'
 import CollapseTemplate from 'shared/collapse/assets/scripts/collapse'
+import externalLink from 'shared/assets/svgs/external-link.svg'
 import { Variations, Variation } from 'shared/assets/interfaces/interfaces'
+import getTrafficAllocation from 'shared/utils/getTrafficAllocation'
 
 /**
  * Template of variations list
@@ -13,24 +15,38 @@ import { Variations, Variation } from 'shared/assets/interfaces/interfaces'
 export default function ({
 	variations,
 	currentVariationId,
-	testId
+	testId,
+	accountId
 }: {
 	variations: Variations
 	currentVariationId: number
 	testId: string
+	accountId: string
 }) {
-	const defaultVariation = {
+	const originalVariation = {
 		id: 0,
 		name: 'Original',
-		traffic: 0
+		traffic: getTrafficAllocation(variations).original
+	}
+	const unTrackedVariation = {
+		id: -1,
+		name: 'Untracked',
+		traffic: getTrafficAllocation(variations).untracked
 	}
 	const content = (
 		<div class="variation">
 			<ul class="variation-list">
-				{Object.keys(variations).map((key) =>
-					variationListItem({ variation: variations[key], currentVariationId, testId })
+				{Object.entries(variations).map(
+					([id, variation]: [id: string, variation: Variation]) =>
+						variationListItem({
+							variation,
+							currentVariationId,
+							testId,
+							accountId
+						})
 				)}
-				{variationListItem({ variation: defaultVariation, currentVariationId, testId })}
+				{variationListItem({ variation: originalVariation, currentVariationId, testId })}
+				{variationListItem({ variation: unTrackedVariation, currentVariationId, testId })}
 			</ul>
 		</div>
 	)
@@ -48,34 +64,53 @@ export default function ({
 const variationListItem = ({
 	variation,
 	currentVariationId,
-	testId
+	testId,
+	accountId
 }: {
 	variation: Variation
 	currentVariationId: number
 	testId: string
+	accountId?: string
 }) => {
-	// Original = 0 | Untracked = -1 | Timeout = -2 | Other = undefined
-	const isDefaultActive = [-2, -1, 0, undefined].includes(currentVariationId)
+	// Original = 0 | unTracked = -1 | Timeout = -2 | Other = undefined
+	const isVariationChangeGranted = ![-2, -1, undefined].includes(variation.id)
 
-	const isDefault = variation.id === 0
-	const isChecked = isDefault ? isDefaultActive : variation.id === currentVariationId
+	//Current variation ID is set to undefined when traffic is not tracked (not synchronized with cookie value set to -1)
+	const isChecked =
+		variation.id === -1 && [-1, undefined].includes(currentVariationId)
+			? true
+			: variation.id === currentVariationId
+
 	return (
-		<li class="variation-listItem">
-			<span class="variation-traffic">{isDefault ? '-' : `${variation.traffic}%`}</span>
+		<li class={`variation-listItem${!isVariationChangeGranted ? ' disabled' : ''}`}>
+			<span class="variation-traffic">{variation.traffic}%</span>
 			<label htmlFor={`variation-${variation.id}`} class="variation-name">
 				{variation.name}
+				{isVariationChangeGranted && variation.id !== 0 && (
+					<a
+						href={`https://try.abtasty.com/${accountId}/${testId}.${
+							variation.id
+						}.json?${new Date().getTime()}`}
+						target="_blank"
+						rel="noreferrer"
+						className="variation-link"
+					>
+						<div className="variation-linkIcon" innerHTML={externalLink}></div>
+					</a>
+				)}
 			</label>
-			<div class="variation-input">
+			<div class="customRadio">
 				<input
 					type="radio"
 					value={variation.id}
 					id={`variation-${variation.id}`}
-					class="variation-inputRadio"
+					class="customRadio-input variation-inputRadio"
 					name="variationId"
 					data-test-id={testId}
+					disabled={!isVariationChangeGranted}
 					checked={isChecked}
 				/>
-				<span class="variation-inputRound"></span>
+				<span class="customRadio-round"></span>
 			</div>
 		</li>
 	)

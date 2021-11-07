@@ -37,7 +37,8 @@ module.exports = {
 		document: false,
 		window: false,
 		chrome: true,
-		browser: true
+		browser: true,
+		ABTasty: true
 	},
 
 	settings: {

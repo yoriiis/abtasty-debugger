@@ -80,6 +80,7 @@ export default function ({ data }: { data: DetailData }) {
 						variations={data.test.asyncVariationInfoById}
 						currentVariationId={data.result.variationID}
 						testId={data.testId}
+						accountId={data.identifier}
 					/>
 				)}
 				{hasTracking && <TrackingTemplate trackings={data.test.actionTrackings} />}

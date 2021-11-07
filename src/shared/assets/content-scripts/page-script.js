@@ -60,7 +60,7 @@ const timeout = setTimeout(() => {
 
 /**
  * Send data from the ABTasty object to the service worker
- * @param {Object} data ABTasty object
+ * @param {Object} e Event data
  */
 document.addEventListener('abtastyDebugger::getData', (e) => {
 	document.dispatchEvent(
@@ -70,6 +70,15 @@ document.addEventListener('abtastyDebugger::getData', (e) => {
 			}
 		})
 	)
+})
+
+/**
+ * Clear ABTasty cookies
+ * @param {Object} e Event data
+ * {@Link https://developers.abtasty.com/docs/tag/tag-window-abtasty#clearallcookies}
+ */
+document.addEventListener('abtastyDebugger::clearCookie', (e) => {
+	window.ABTasty.clearAllCookies()
 })
 
 /**

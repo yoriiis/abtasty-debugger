@@ -2,6 +2,7 @@ body {
 	font-family: -apple-system, blinkmacsystemfont, segoe UI, Helvetica, Arial, sans-serif,
 		Apple Color Emoji, Segoe UI Emoji;
 	color: var(--colorTextPrimary);
+	font-size: 16px;
 }
 
 #app {
@@ -30,4 +31,112 @@ body {
 	color: inherit;
 	background-color: transparent;
 	border: none;
+}
+
+/* Custom input radio */
+.customRadio {
+	&-round {
+		position: relative;
+		display: block;
+		cursor: pointer;
+		width: 18px;
+		height: 18px;
+		border: 2px solid var(--colorTextSecondary);
+		border-radius: 50%;
+		transition: border var(--transition);
+
+		&::after {
+			transition: opacity var(--transition);
+			content: '';
+			display: block;
+			opacity: 0;
+			width: 8px;
+			height: 8px;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			background-color: var(--green);
+			border-radius: 50%;
+		}
+	}
+
+	&-input {
+		opacity: 0;
+		cursor: pointer;
+		position: absolute;
+		z-index: 1;
+		width: 18px;
+		height: 18px;
+		margin: 0;
+
+		&:disabled {
+			opacity: 0.5;
+			cursor: not-allowed;
+		}
+
+		&:checked + .customRadio-round {
+			border-color: var(--green);
+
+			&::after {
+				opacity: 1;
+			}
+		}
+	}
+}
+
+/* Custom input checkbox */
+.customCheckbox {
+	&-round {
+		position: relative;
+		display: block;
+		cursor: pointer;
+		width: 18px;
+		height: 18px;
+		border: 2px solid var(--colorTextSecondary);
+		border-radius: var(--radius);
+		transition: border var(--transition);
+	}
+
+	&-roundIcon {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width: 12px;
+		height: 12px;
+
+		svg {
+			opacity: 0;
+			transition: opacity var(--transition);
+			width: 100%;
+			height: 100%;
+			fill: var(--green);
+		}
+	}
+
+	&-input {
+		opacity: 0;
+		cursor: pointer;
+		position: absolute;
+		z-index: 1;
+		width: 18px;
+		height: 18px;
+		margin: 0;
+
+		&:disabled {
+			opacity: 0.5;
+			cursor: not-allowed;
+		}
+
+		&:checked {
+			& + .customCheckbox-round {
+				border-color: var(--green);
+			}
+
+			& + .customCheckbox-round svg {
+				opacity: 1;
+			}
+		}
+	}
 }
