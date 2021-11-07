@@ -86,10 +86,15 @@ namespace.runtime.onMessage.addListener((message, sender, response) => {
 				value: message.data.value,
 				days: message.data.days
 			})
+			response('success')
 		} else if (message.action === 'removeCookie') {
 			removeCookie({
 				name: message.data.cookieName
 			})
+			response('success')
 		}
 	}
+
+	// Keeps the message channel open until `sendResponse` is executed
+	return true
 })
