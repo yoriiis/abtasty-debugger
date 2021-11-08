@@ -2,7 +2,7 @@ const namespace =
 	// @ts-ignore
 	typeof browser !== 'undefined' ? browser : typeof chrome !== 'undefined' ? chrome : null
 
-const isExtensionMode = !!namespace.tabs
+const isExtensionMode = !!namespace?.tabs
 
 /**
  * Get tab ID with Browser extension API
