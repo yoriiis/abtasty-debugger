@@ -2,7 +2,7 @@ import { createElement } from 'jsx-dom'
 import CollapseTemplate from 'shared/collapse/assets/scripts/collapse'
 import externalLink from 'shared/assets/svgs/external-link.svg'
 import { Variations, Variation } from 'shared/assets/interfaces/interfaces'
-import getTrafficAllocation from 'shared/utils/getTrafficAllocation'
+import getTrafficAllocation from 'shared/utils/get-traffic-allocation'
 
 /**
  * Template of variations list
@@ -75,7 +75,7 @@ const variationListItem = ({
 	// Original = 0 | unTracked = -1 | Timeout = -2 | Other = undefined
 	const isVariationChangeGranted = ![-2, -1, undefined].includes(variation.id)
 
-	//Current variation ID is set to undefined when traffic is not tracked (not synchronized with cookie value set to -1)
+	// Current variation ID is set to undefined when traffic is not tracked (not synchronized with cookie value set to -1)
 	const isChecked =
 		variation.id === -1 && [-1, undefined].includes(currentVariationId)
 			? true
@@ -83,7 +83,9 @@ const variationListItem = ({
 
 	return (
 		<li class={`variation-listItem${!isVariationChangeGranted ? ' disabled' : ''}`}>
-			<span class="variation-traffic">{variation.traffic}%</span>
+			<span class="variation-traffic">
+				{variation.traffic === -1 ? '-' : `${variation.traffic}%`}
+			</span>
 			<label htmlFor={`variation-${variation.id}`} class="variation-name">
 				{variation.name}
 				{isVariationChangeGranted && variation.id !== 0 && (
