@@ -3,35 +3,34 @@ import fixturesAbtasty from '../../assets/fixtures/abtasty.json'
 
 let dataManager
 const testsSortedByStatus = {
-	accepted: [fixturesAbtasty.results[900001]],
-	rejected: [fixturesAbtasty.results[900002], fixturesAbtasty.results[900004]]
+	accepted: [fixturesAbtasty.results[100002]],
+	rejected: [fixturesAbtasty.results[100001], fixturesAbtasty.results[100004]]
 }
 const targetingsSortedByStatus = {
-	900001: {
+	100001: {
 		accepted: [],
-		rejected: [fixturesAbtasty.results[900001].targetings.targetPages.url_scope]
+		rejected: [fixturesAbtasty.results[100001].targetings.targetPages.url_scope]
 	},
-	900002: {
+	100002: {
 		accepted: [
-			fixturesAbtasty.results[900002].targetings.targetPages.url_scope,
-			fixturesAbtasty.results[900002].targetings.targetPages.code_scope,
-			fixturesAbtasty.results[900002].targetings.qaParameters.ip_scope
+			fixturesAbtasty.results[100002].targetings.targetPages.code_scope,
+			fixturesAbtasty.results[100002].targetings.targetPages.selector_scope,
+			fixturesAbtasty.results[100002].targetings.targetPages.url_scope,
+			fixturesAbtasty.results[100002].targetings.qaParameters.cookie_scope,
+			fixturesAbtasty.results[100002].targetings.qaParameters.ip_scope
 		],
-		rejected: [
-			fixturesAbtasty.results[900002].targetings.targetPages.selector_scope,
-			fixturesAbtasty.results[900002].targetings.qaParameters.cookie_scope
-		]
+		rejected: []
 	},
-	900003: {
+	100003: {
 		accepted: [],
 		rejected: []
 	},
-	900004: {
+	100004: {
 		accepted: [
-			fixturesAbtasty.results[900004].targetings.targetPages.url_scope,
-			fixturesAbtasty.results[900004].targetings.targetPages.code_scope
+			fixturesAbtasty.results[100004].targetings.targetPages.selector_scope,
+			fixturesAbtasty.results[100004].targetings.targetPages.url_scope
 		],
-		rejected: [fixturesAbtasty.results[900004].targetings.targetPages.selector_scope]
+		rejected: [fixturesAbtasty.results[100004].targetings.targetPages.code_scope]
 	}
 }
 
