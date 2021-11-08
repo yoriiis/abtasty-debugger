@@ -6,8 +6,9 @@ import DataManager from 'shared/utils/data-manager'
 import Router from 'shared/utils/router'
 import { namespace, sendMessage } from 'shared/utils/bridge'
 
-const abtastyCookie =
-	'uid=zed18spa36wefrnq&fst=1632216663697&pst=-1&cst=1632216663697&ns=1&pvt=1&pvis=1&th=661111.820024.1.1.1.1.1632216664066.1632216664066.1_771688.959322.1.1.1.1.1632216664068.1632216664068.1'
+const testId = '100002'
+const newVariationId = '200002'
+const abtastyCookie = `uid=zed18spa36wefrnq&fst=1632216663697&pst=-1&cst=1632216663697&ns=1&pvt=1&pvis=1&th=661111.820024.1.1.1.1.1632216664066.1632216664066.1_${testId}.200001.1.1.1.1.1632216664068.1632216664068.1`
 
 jest.mock('validate-target')
 jest.mock('shared/utils/data-manager')
@@ -131,11 +132,11 @@ beforeEach(() => {
 									<div className="customRadio">
 										<input
 											type="radio"
-											value="959341"
-											id="variation-959341"
+											value={newVariationId}
+											id={`variation-${newVariationId}`}
 											className="customRadio-input variation-inputRadio"
 											name="variationId"
-											data-test-id="771688"
+											data-test-id={testId}
 											checked
 										/>
 										<span className="customRadio-round"></span>
@@ -546,8 +547,7 @@ describe('Popup switchVariation', () => {
 			action: 'setCookie',
 			data: {
 				cookieName: 'ABTasty',
-				value:
-					'uid=zed18spa36wefrnq&fst=1632216663697&pst=-1&cst=1632216663697&ns=1&pvt=1&pvis=1&th=661111.820024.1.1.1.1.1632216664066.1632216664066.1_771688.959341.1.1.1.1.1632216664068.1632216664068.1'
+				value: `uid=zed18spa36wefrnq&fst=1632216663697&pst=-1&cst=1632216663697&ns=1&pvt=1&pvis=1&th=661111.820024.1.1.1.1.1632216664066.1632216664066.1_${testId}.${newVariationId}.1.1.1.1.1632216664068.1632216664068.1`
 			}
 		})
 		expect(namespace.tabs.reload).toHaveBeenCalled()
