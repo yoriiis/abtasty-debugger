@@ -17,7 +17,7 @@ export default function ({ trackings }: { trackings: Trackings }) {
 						return (
 							<li className="tracking-listItem">
 								<span className="tracking-type">{type}</span>
-								<table className="tracking-table">
+								<table className="table">
 									<tbody>
 										{trackingsByType.map((tracking: Tracking) => {
 											return (
@@ -34,6 +34,7 @@ export default function ({ trackings }: { trackings: Trackings }) {
 																disabled
 																type="text"
 																value={tracking.selector}
+																title={tracking.selector}
 															/>
 														</span>
 													</td>

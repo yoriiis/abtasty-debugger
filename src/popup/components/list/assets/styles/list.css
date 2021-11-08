@@ -42,26 +42,22 @@
 	&-footerItem {
 		display: flex;
 		align-items: center;
-
-		&:not(:last-child) {
-			margin-right: 15px;
-		}
 	}
 
 	&-footerItemLabel {
 		display: flex;
 		align-items: center;
-		margin-right: 10px;
+		margin-right: 5px;
 		cursor: pointer;
 	}
 
 	&-footerItemButtonIcon {
-		margin-right: 10px;
+		margin-right: 5px;
 
 		svg {
 			display: block;
-			width: 20px;
-			height: 20px;
+			width: 16px;
+			height: 16px;
 			fill: var(--colorTextSecondary);
 		}
 	}
@@ -69,7 +65,6 @@
 	&-footerItemButton {
 		display: flex;
 		align-items: center;
-		margin-right: 10px;
 
 		&:hover {
 			color: var(--colorAbtasty);

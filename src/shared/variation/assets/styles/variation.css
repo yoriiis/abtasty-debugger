@@ -23,6 +23,10 @@
 				opacity: 0.5;
 			}
 		}
+
+		.customRadio {
+			flex-shrink: 0;
+		}
 	}
 
 	&-input {
@@ -51,7 +55,7 @@
 	&-traffic {
 		background-color: var(--colorBorderPrimary);
 		font-size: 12px;
-		padding: 5px 0;
+		padding: 6px 0;
 		border-radius: 6px;
 		margin-right: 8px;
 		width: 40px;

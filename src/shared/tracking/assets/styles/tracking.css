@@ -11,27 +11,7 @@
 		display: block;
 		font-size: var(--fontSizeSecondary);
 		text-transform: capitalize;
-		margin-bottom: 15px;
-	}
-
-	&-table {
-		width: 100%;
-		font-size: var(--fontSizeSecondary);
-
-		&,
-		td {
-			border: 1px solid var(--colorBorderPrimary);
-		}
-
-		tr {
-			&:nth-child(odd) {
-				background-color: var(--colorBorderPrimary);
-			}
-		}
-
-		td:first-child {
-			text-align: center;
-			padding: 8px;
-		}
+		margin-bottom: 10px;
+		font-weight: bold;
 	}
 }

@@ -31,7 +31,7 @@ export default function ({
 	}
 
 	const content = (
-		<table className="targeting-table">
+		<table className="table">
 			<tbody>
 				{targeting.conditions.map((item: Condition) => {
 					let value = item.value

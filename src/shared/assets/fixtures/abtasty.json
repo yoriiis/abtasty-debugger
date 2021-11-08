@@ -9,7 +9,7 @@
 				"actionTrackings": {
 					"click": [
 						{
-							"name": "CLick breadcrumb",
+							"name": "Click breadcrumb",
 							"selector": ".breadcrumbs-link"
 						},
 						{
