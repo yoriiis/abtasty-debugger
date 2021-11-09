@@ -20,7 +20,7 @@
 		&.disabled {
 			.variation-name {
 				cursor: not-allowed;
-				opacity: 0.5;
+				opacity: 50%;
 			}
 		}
 
