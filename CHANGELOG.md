@@ -6,18 +6,18 @@
 
 - Visualization and activation of the variations of a test
 - Visualization of the trackings of a test
-- Add a debug mode button to activate AB Tasty logs in the DevTools console (the button reloads the page and is blocked when reloading)
-- Add a reload tag button to clear the AB Tasty cookies and reload the page
-- Add a retry button on the not found page, when no result is found (the button reloads the pop-up)
+- Add a debug mode button to activate AB Tasty logs in the DevTools console (the button reloads the page and hangs when reloading)
+- Add a reload button to clear AB Tasty cookies and reload the page
+- Add a "retry" button on the 404 page, when no result is found (the button reloads the pop-up)
 - Add a link to see the test report
 - Add a link to see the JSON file of each variation
-- Data is now retrieved when opening the pop-up window (before, if the data changed after the first search, it was no longer up to date)
-- Add `.code-workspace` file for VS Code
+- Data is now retrieved each time the pop-up window is opened (previously, if the data changed after the first search, it was no longer up to date)
+- Add the `.code-workspace` file for VS Code
 
 ### Updates
 
-- Improve the check of ABTasty ready detection
-- The counter badge is kept even when the pop-up opens
+- Improve control when ABTasty is ready
+- The counter badge is now kept even when the pop-up opens
 - Small design improvements
 
 ## 1.1.3
