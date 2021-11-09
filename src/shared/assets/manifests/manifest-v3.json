@@ -1,6 +1,6 @@
 {
 	"name": "AB Tasty Debugger",
-	"version": "1.1.3",
+	"version": "1.2.0",
 	"description": "Debug A/B tests from AB Tasty. Open source.",
 	"action": {
 		"default_title": "AB Tasty Debugger",
@@ -12,13 +12,8 @@
 	},
 	"content_scripts": [
 		{
-			"matches": [
-				"http://*/*",
-				"https://*/*"
-			],
-			"js": [
-				"scripts/content-script.js"
-			],
+			"matches": ["http://*/*", "https://*/*"],
+			"js": ["scripts/content-script.js"],
 			"run_at": "document_idle"
 		}
 	],
@@ -28,18 +23,11 @@
 		"128": "images/icon-128x128.png"
 	},
 	"manifest_version": 3,
-	"permissions": [
-		"activeTab"
-	],
+	"permissions": ["activeTab"],
 	"web_accessible_resources": [
 		{
-			"resources": [
-				"scripts/page-script.js"
-			],
-			"matches": [
-				"http://*/*",
-				"https://*/*"
-			]
+			"resources": ["scripts/page-script.js"],
+			"matches": ["http://*/*", "https://*/*"]
 		}
 	]
 }
