@@ -19,6 +19,7 @@
 - Improve control when ABTasty is ready
 - The counter badge is now kept even when the pop-up opens
 - Small design improvements
+- Upgrade to Node LTS `v14.18.1`
 
 ## 1.1.3
 

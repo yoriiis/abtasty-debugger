@@ -51,8 +51,7 @@
 			"esbenp.prettier-vscode",
 			"dbaeumer.vscode-eslint",
 			"stylelint.vscode-stylelint",
-			"mhmadhamster.postcss-language",
-			"nadim-vscode.symfony-code-snippets"
+			"mhmadhamster.postcss-language"
 		]
 	}
 }
