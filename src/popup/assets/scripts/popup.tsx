@@ -12,6 +12,13 @@ declare global {
 	}
 }
 
+// Fix innerHTML attribute with jsx-dom and TS
+declare module 'react' {
+	interface HTMLAttributes<T> {
+		innerHTML?: any
+	}
+}
+
 export default class Popup {
 	data: Data
 	app: Element

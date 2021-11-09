@@ -8,5 +8,7 @@ module.exports = {
 	transform: {
 		'^.+\\.(ts|tsx|js)$': 'ts-jest',
 		'^.+\\.svg$': 'jest-transform-stub'
-	}
+	},
+	transformIgnorePatterns: ['node_modules/(?!jsx-dom)'],
+	testEnvironment: 'jsdom'
 }

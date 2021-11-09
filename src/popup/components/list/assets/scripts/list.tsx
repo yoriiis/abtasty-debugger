@@ -40,7 +40,7 @@ export default class List {
 	 * @param {Object} data Template's data
 	 * @returns {HTMLElement} Template
 	 */
-	getTemplate(data: ListData): Element {
+	getTemplate(data: ListData): any {
 		return <Template data={data} />
 	}
 }

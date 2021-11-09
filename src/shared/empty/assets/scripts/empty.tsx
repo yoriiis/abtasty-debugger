@@ -19,7 +19,7 @@ export default class Empty {
 	 * @param {Object} data Template's data
 	 * @returns {HTMLElement} Template
 	 */
-	getTemplate(): Element {
+	getTemplate(): any {
 		return <Template />
 	}
 }

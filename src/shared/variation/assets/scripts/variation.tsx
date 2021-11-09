@@ -34,8 +34,8 @@ export default function ({
 		traffic: getTrafficAllocation(variations).untracked
 	}
 	const content = (
-		<div class="variation">
-			<ul class="variation-list">
+		<div className="variation">
+			<ul className="variation-list">
 				{Object.entries(variations).map(
 					([id, variation]: [id: string, variation: Variation]) =>
 						variationListItem({
@@ -82,11 +82,11 @@ const variationListItem = ({
 			: variation.id === currentVariationId
 
 	return (
-		<li class={`variation-listItem${!isVariationChangeGranted ? ' disabled' : ''}`}>
-			<span class="variation-traffic">
+		<li className={`variation-listItem${!isVariationChangeGranted ? ' disabled' : ''}`}>
+			<span className="variation-traffic">
 				{variation.traffic === -1 ? '-' : `${variation.traffic}%`}
 			</span>
-			<label htmlFor={`variation-${variation.id}`} class="variation-name">
+			<label htmlFor={`variation-${variation.id}`} className="variation-name">
 				{variation.name}
 				{isVariationChangeGranted && variation.id !== 0 && (
 					<a
@@ -101,18 +101,18 @@ const variationListItem = ({
 					</a>
 				)}
 			</label>
-			<div class="customRadio">
+			<div className="customRadio">
 				<input
 					type="radio"
 					value={variation.id}
 					id={`variation-${variation.id}`}
-					class="customRadio-input variation-inputRadio"
+					className="customRadio-input variation-inputRadio"
 					name="variationId"
 					data-test-id={testId}
 					disabled={!isVariationChangeGranted}
 					checked={isChecked}
 				/>
-				<span class="customRadio-round"></span>
+				<span className="customRadio-round"></span>
 			</div>
 		</li>
 	)

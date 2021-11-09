@@ -47,7 +47,7 @@ export default class Detail {
 	 * @param {Object} data Template's data
 	 * @returns {HTMLElement} Template
 	 */
-	getTemplate(data: DetailData): Element {
+	getTemplate(data: DetailData): any {
 		return <Template data={data} />
 	}
 }

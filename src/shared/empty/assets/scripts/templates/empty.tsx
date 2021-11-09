@@ -5,7 +5,7 @@ import info from 'shared/assets/svgs/info.svg'
  * Empty template
  * @returns {HTMLElement} Generated HTML
  */
-export default function () {
+export default function (): any {
 	return (
 		<div className="empty">
 			<div className="empty-icon" innerHTML={info}></div>
