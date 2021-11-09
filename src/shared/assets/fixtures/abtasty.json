@@ -8,8 +8,8 @@
 			"100001": {
 				"id": 100001,
 				"parentID": 0,
-				"targetingMode": "waituntil",
-				"scopes": {}
+				"scopes": {},
+				"targetingMode": "waituntil"
 			},
 			"100002": {
 				"actionTrackings": {
@@ -162,7 +162,19 @@
 			"name": "Satisfaction survey",
 			"status": "master_campaign_not_checked",
 			"targetings": {
-				"qaParameters": {},
+				"qaParameters": {
+					"ip_scope": {
+						"conditions": [
+							{
+								"from": "1555592406",
+								"include": true,
+								"range": false,
+								"to": 0
+							}
+						],
+						"success": false
+					}
+				},
 				"targetPages": {}
 			},
 			"type": "mastersegment",

@@ -182,6 +182,14 @@ describe('Popup constructor', () => {
 			onCreate: popup.onCreate
 		})
 	})
+
+	it('Should initialize the constructor with the default value', () => {
+		const popupCustom = new Popup({
+			data: { ...fixturesAbtasty }
+		})
+
+		expect(popupCustom.instances).toStrictEqual([])
+	})
 })
 
 describe('Popup init', () => {
@@ -231,13 +239,28 @@ describe('Popup init', () => {
 
 describe('Popup analyzeInstance', () => {
 	it('Should call the analyzeInstance function', () => {
+		const route = '/detail/:testId'
+		const dynamicSegmentsReturnValue = { ':testId': '100002' }
+		const formattedDataReturnValue = { dataFormatted: true }
+
+		popup.router.getDynamicSegments = jest.fn().mockReturnValue(dynamicSegmentsReturnValue)
+
+		popup.formattedData = formattedDataReturnValue
 		const result = popup.analyzeInstance()
+
+		const dynamicSegments = result[0].requestDynamicSegments(route)
+		const data = result[0].requestData()
+		const formattedData = result[0].requestFormattedData()
 
 		expect(result).toMatchObject(instancesResult)
 		expect(result[0]).toBeInstanceOf(Detail)
 		expect(result[0].requestDynamicSegments).toEqual(expect.any(Function))
 		expect(result[0].requestData).toEqual(expect.any(Function))
 		expect(result[0].requestFormattedData).toEqual(expect.any(Function))
+		expect(popup.router.getDynamicSegments).toHaveBeenCalledWith(route)
+		expect(dynamicSegments).toStrictEqual(dynamicSegmentsReturnValue)
+		expect(data).toStrictEqual(popup.data)
+		expect(formattedData).toStrictEqual(formattedDataReturnValue)
 	})
 })
 

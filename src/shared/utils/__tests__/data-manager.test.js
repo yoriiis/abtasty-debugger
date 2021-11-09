@@ -9,28 +9,64 @@ const testsSortedByStatus = {
 const targetingsSortedByStatus = {
 	100001: {
 		accepted: [],
-		rejected: [fixturesAbtasty.results[100001].targetings.targetPages.url_scope]
+		rejected: [
+			{
+				...fixturesAbtasty.results[100001].targetings.targetPages.url_scope,
+				...{ key: 'url_scope' }
+			}
+		]
 	},
 	100002: {
 		accepted: [
-			fixturesAbtasty.results[100002].targetings.targetPages.code_scope,
-			fixturesAbtasty.results[100002].targetings.targetPages.selector_scope,
-			fixturesAbtasty.results[100002].targetings.targetPages.url_scope,
-			fixturesAbtasty.results[100002].targetings.qaParameters.cookie_scope,
-			fixturesAbtasty.results[100002].targetings.qaParameters.ip_scope
+			{
+				...fixturesAbtasty.results[100002].targetings.targetPages.code_scope,
+				...{ key: 'code_scope' }
+			},
+			{
+				...fixturesAbtasty.results[100002].targetings.targetPages.selector_scope,
+				...{ key: 'selector_scope' }
+			},
+			{
+				...fixturesAbtasty.results[100002].targetings.targetPages.url_scope,
+				...{ key: 'url_scope' }
+			},
+			{
+				...fixturesAbtasty.results[100002].targetings.qaParameters.cookie_scope,
+				...{ key: 'cookie_scope' }
+			},
+			{
+				...fixturesAbtasty.results[100002].targetings.qaParameters.ip_scope,
+				...{ key: 'ip_scope' }
+			}
 		],
 		rejected: []
 	},
 	100003: {
 		accepted: [],
-		rejected: []
+		rejected: [
+			{
+				...fixturesAbtasty.results[100003].targetings.qaParameters.ip_scope,
+				...{ key: 'ip_scope' }
+			}
+		]
 	},
 	100004: {
 		accepted: [
-			fixturesAbtasty.results[100004].targetings.targetPages.selector_scope,
-			fixturesAbtasty.results[100004].targetings.targetPages.url_scope
+			{
+				...fixturesAbtasty.results[100004].targetings.targetPages.selector_scope,
+				...{ key: 'selector_scope' }
+			},
+			{
+				...fixturesAbtasty.results[100004].targetings.targetPages.url_scope,
+				...{ key: 'url_scope' }
+			}
 		],
-		rejected: [fixturesAbtasty.results[100004].targetings.targetPages.code_scope]
+		rejected: [
+			{
+				...fixturesAbtasty.results[100004].targetings.targetPages.code_scope,
+				...{ key: 'code_scope' }
+			}
+		]
 	}
 }
 
