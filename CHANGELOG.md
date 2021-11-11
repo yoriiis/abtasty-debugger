@@ -7,7 +7,7 @@
 - Visualization and activation of the variations of a test
 - Visualization of the trackings of a test
 - Add a debug mode button to activate AB Tasty logs in the DevTools console (the button reloads the page and hangs when reloading)
-- Add a reload button to clear AB Tasty cookies and reload the page
+- Add a clear AB Tasty cookies button to clear AB Tasty cookies and reload the page
 - Add a "retry" button on the 404 page, when no result is found (the button reloads the pop-up)
 - Add a link to see the test report
 - Add a link to see the JSON file of each variation
