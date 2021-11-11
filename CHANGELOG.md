@@ -18,6 +18,7 @@
 
 - Improve control when ABTasty is ready
 - The counter badge is now kept even when the pop-up opens
+- Add `activeTab` permission to limit the use of the extension to the active tab only
 - Small design improvements
 - Upgrade to Node LTS `v16.13.0`
 

@@ -35,11 +35,11 @@ Simplifies the debugging of A/B tests from AB Tasty and adds useful informations
 
 ### activeTab permission
 
-The extension has limited use to the active tab only. It can do the following actions:
+The extension has limited use to the active tab only. It can perform the following actions:
 
-- Reload the tab when the user click on a button (no A/B tests are found on the page, debug mode is enabled, A/B test variation change)
-- Listen to the `onUpdated` tab event to update the UI according to the debug mode cookie
-- Send message to the content script of the active tab (with tab ID) to establish a communication between the popup and the page (read A/B tests data from global variable, update AB Tasty cookies)
+- Reload the tab when the user clicks on a button (no A/B test is found on the page, debug mode is activated, change of variation of an A/B test)
+- Listen to the tab's `onUpdated` event to update the popup UI based on the debug mode cookie
+- Send a message to the content script of the active tab (with tab ID) to establish communication between the popup and the page (read the data of the A / B tests in the global variable `window.ABTasty`, update AB Tasty cookies)
 
 ### host permission
 
