@@ -92,7 +92,7 @@ beforeEach(() => {
 			<div className="list">
 				<ul className="list-footer">
 					<li className="list-footerItem">
-						<button className="list-footerItemButton reloadTag">
+						<button className="list-footerItemButton clearCookies">
 							<div className="list-footerItemButtonIcon"></div>
 							Reload tag
 						</button>
@@ -349,9 +349,9 @@ describe('Popup onClickOnApp', () => {
 	})
 
 	it('Should call the onClickOnApp function with the reload button', () => {
-		popup.reloadTag = jest.fn()
+		popup.clearCookies = jest.fn()
 
-		const target = document.querySelector('.reloadTag')
+		const target = document.querySelector('.clearCookies')
 		validateTarget
 			.mockReturnValueOnce(false)
 			.mockReturnValueOnce(false)
@@ -363,16 +363,16 @@ describe('Popup onClickOnApp', () => {
 
 		expect(validateTarget).toHaveBeenCalledWith({
 			target,
-			selectorString: '.reloadTag',
+			selectorString: '.clearCookies',
 			nodeName: ['button']
 		})
-		expect(popup.reloadTag).toHaveBeenCalled()
+		expect(popup.clearCookies).toHaveBeenCalled()
 	})
 
 	it('Should call the onClickOnApp function with no valid element', () => {
 		popup.toggleCollapse = jest.fn()
 		popup.retry = jest.fn()
-		popup.reloadTag = jest.fn()
+		popup.clearCookies = jest.fn()
 
 		const target = document.querySelector('body')
 		validateTarget
@@ -386,7 +386,7 @@ describe('Popup onClickOnApp', () => {
 
 		expect(popup.toggleCollapse).not.toHaveBeenCalled()
 		expect(popup.retry).not.toHaveBeenCalled()
-		expect(popup.reloadTag).not.toHaveBeenCalled()
+		expect(popup.clearCookies).not.toHaveBeenCalled()
 	})
 })
 
@@ -432,15 +432,15 @@ describe('Popup retry', () => {
 	})
 })
 
-describe('Popup reloadTag', () => {
-	it('Should call the reloadTag function', () => {
-		const target = document.querySelector('.reloadTag')
+describe('Popup clearCookies', () => {
+	it('Should call the clearCookies function', () => {
+		const target = document.querySelector('.clearCookies')
 		const event = {
 			preventDefault: jest.fn(),
 			target
 		}
 
-		popup.reloadTag(event)
+		popup.clearCookies(event)
 
 		expect(event.preventDefault).toHaveBeenCalled()
 		expect(sendMessage).toHaveBeenCalledWith({

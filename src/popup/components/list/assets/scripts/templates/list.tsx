@@ -1,7 +1,7 @@
 import { createElement, Fragment } from 'jsx-dom'
 import arrowBottom from 'shared/assets/svgs/arrow-bottom.svg'
 import check from 'shared/assets/svgs/check.svg'
-import reload from 'shared/assets/svgs/reload.svg'
+import clear from 'shared/assets/svgs/clear.svg'
 import BadgeTemplate from 'shared/badge/assets/scripts/badge'
 import { ListData, Result } from 'shared/assets/interfaces/interfaces'
 
@@ -24,9 +24,9 @@ export default function ({ data }: { data: ListData }) {
 				</ul>
 				<ul className="list-footer">
 					<li className="list-footerItem">
-						<button className="list-footerItemButton reloadTag">
-							<div className="list-footerItemButtonIcon" innerHTML={reload}></div>
-							Reload tag
+						<button className="list-footerItemButton clearCookies">
+							<div className="list-footerItemButtonIcon" innerHTML={clear}></div>
+							Clear AB Tasty cookies
 						</button>
 					</li>
 					<li className="list-footerItem">

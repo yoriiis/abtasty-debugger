@@ -113,9 +113,9 @@ export default class Popup {
 			selectorString: '.empty-retryButton',
 			nodeName: ['button']
 		})
-		const validateTargetReloadTag = validateTarget({
+		const validateTargetclearCookies = validateTarget({
 			target: target,
-			selectorString: '.reloadTag',
+			selectorString: '.clearCookies',
 			nodeName: ['button']
 		})
 
@@ -123,8 +123,8 @@ export default class Popup {
 			this.toggleCollapse(e)
 		} else if (validateTargetRetry) {
 			this.retry(e)
-		} else if (validateTargetReloadTag && isExtensionMode) {
-			this.reloadTag(e)
+		} else if (validateTargetclearCookies && isExtensionMode) {
+			this.clearCookies(e)
 		}
 	}
 
@@ -157,7 +157,7 @@ export default class Popup {
 	 * Retry and reload the popup if no results
 	 * @param {Event} e Event data
 	 */
-	reloadTag(e: Event) {
+	clearCookies(e: Event) {
 		e.preventDefault()
 
 		sendMessage({
