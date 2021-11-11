@@ -2,6 +2,14 @@ import { createElement } from 'jsx-dom'
 import BadgeTemplate from 'shared/badge/assets/scripts/badge'
 import arrowBottom from 'shared/assets/svgs/arrow-bottom.svg'
 
+/**
+ * Collapse template
+ * @param {Object} options
+ * @param {String} options.header Collapse header title
+ * @param {Object} options.content Collapse content
+ * @param {Object} options.badge Badge options
+ * @returns {HTMLElement} Generated HTML
+ */
 export default function TemplateCollapse({
 	header,
 	content,

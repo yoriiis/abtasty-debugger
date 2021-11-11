@@ -10,7 +10,7 @@
 - Add a clear AB Tasty cookies button to clear AB Tasty cookies and reload the page
 - Add a "retry" button on the 404 page, when no result is found (the button reloads the pop-up)
 - Add a link to see the test report
-- Add a link to see the JSON file of each variation
+- Add a link to see the JSON modifications of each variation
 - Data is now retrieved each time the pop-up window is opened (previously, if the data changed after the first search, it was no longer up to date)
 - Add the `.code-workspace` file for VS Code
 

@@ -4,7 +4,7 @@
 
 Browser extension that simplifies the debugging of A/B tests from AB Tasty and adds useful informations.
 
-Display A/B tests available on the current page and vizualize targeting, variations and trackings information. For example, if a test does not display, the extension displays invalid targets.
+Display A/B tests available on the current page and detail their informations such as variations and trackings and targetings. For example, if a test does not display, the extension displays the current variation and invalid targets.
 
 Features:
 
@@ -16,12 +16,12 @@ Features:
 - Displays a debug mode button to activate AB Tasty logs in the DevTools console.
 - Displays a detail view of each tests with their general informations (ID, status, type, targeting mode, async, traffic).
 - Displays a link to see the test report.
-- List all variations of the test if the status is `accepted` or `traffic_rejected`, with their name, traffic, JSON modifications link and activation button.
-- List all trackings informations of the test with their name and selector.
-- List all targeting informations of the test (URL, code, selector, cookie, IP) with their status.
+- List all variations of the test if the status is `accepted` or `traffic_rejected`, with their name, traffic, a link of JSON modifications and activation button.
+- List all trackings information of the test with their name and selector.
+- List all targeting information of the test (URL, code, selector, cookie, IP) with their status.
 - Displays a link to edit the test targetings on the AB Tasty editor.
 - The list of targeting is sorted to show the invalid targets at the top of the list.
-- Collapse/expand all variations, trackings and targeting informations.
+- Collapse/expand all variations, trackings and targetings information.
 
 ## Labels
 
@@ -29,7 +29,7 @@ abtasty, abtest, debugger, inspect
 
 ## Goal
 
-Simplifies the debugging of A/B tests from AB Tasty and adds useful informations. Display A/B tests available on the current page and debug variations, trackings and targeting information.
+Simplifies the debugging of A/B tests from AB Tasty and adds useful informations. Display A/B tests available on the current page and visualize variations, trackings and targeting information.
 
 ## Privacy
 

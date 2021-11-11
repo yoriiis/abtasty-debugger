@@ -16,8 +16,8 @@
 		"start:chrome": "web-ext run --target=chromium --source-dir ./web/dist",
 		"start:firefox": "web-ext run --source-dir ./web/dist",
 		"test": "jest --verbose --coverage",
-		"test:eslint": "eslint --ignore-pattern dist --ignore-pattern lib",
-		"test:eslint:fix": "eslint --ignore-pattern dist --fix --ignore-pattern lib",
+		"test:eslint": "eslint . --ignore-pattern dist --ignore-pattern lib",
+		"test:eslint:fix": "eslint . --ignore-pattern dist --fix --ignore-pattern lib",
 		"test:markdown": "markdownlint '**/*.md' --ignore node_modules",
 		"test:stylelint": "stylelint './src/**/*.css'",
 		"test:type-check": "tsc --noEmit",
@@ -83,6 +83,6 @@
 		"webpack-cli": "^4.9.1"
 	},
 	"engines": {
-		"node": ">=14.18.1"
+		"node": ">=16.13.0"
 	}
 }

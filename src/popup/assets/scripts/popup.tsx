@@ -93,8 +93,11 @@ export default class Popup {
 	 */
 	addEvents() {
 		this.app.addEventListener('click', this.onClickOnApp)
-		this.app.addEventListener('change', this.onChangeOnApp)
-		isExtensionMode && namespace.tabs.onUpdated.addListener(this.onTabUpdated)
+
+		if (isExtensionMode) {
+			this.app.addEventListener('change', this.onChangeOnApp)
+			namespace.tabs.onUpdated.addListener(this.onTabUpdated)
+		}
 	}
 
 	/**
@@ -184,12 +187,10 @@ export default class Popup {
 			nodeName: ['input']
 		})
 
-		if (isExtensionMode) {
-			if (validateTargetSwitchVariation) {
-				this.switchVariation(e)
-			} else if (validateTargeDebugMode) {
-				this.toggleDebugMode(e)
-			}
+		if (validateTargetSwitchVariation) {
+			this.switchVariation(e)
+		} else if (validateTargeDebugMode) {
+			this.toggleDebugMode(e)
 		}
 	}
 
