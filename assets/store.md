@@ -33,6 +33,14 @@ Simplifies the debugging of A/B tests from AB Tasty and adds useful informations
 
 ## Privacy
 
-### host authorization
+### activeTab permission
 
-The host permission is used to inject a small script on the current page to retrieve a global `window.ABTasty` object. The object stores the data of the A/B tests and allows to create a user interface in the popup. The script searches for the object with an interval and sends it to the service worker when it is found. When no results are found after a timeout, the interval is destroyed.
+The extension has limited use to the active tab only. It can do the following actions:
+
+- Reload the tab when the user click on a button (no A/B tests are found on the page, debug mode is enabled, A/B test variation change)
+- Listen to the `onUpdated` tab event to update the UI according to the debug mode cookie
+- Send message to the content script of the active tab (with tab ID) to establish a communication between the popup and the page (read A/B tests data from global variable, update AB Tasty cookies)
+
+### host permission
+
+The active tab permission is used to inject a small script on the current page to retrieve a global `window.ABTasty` object. The object stores the data of the A/B tests and allows to create a user interface in the popup. The script searches for the object with an interval and sends it to the service worker when it is found. When no results are found after a timeout, the interval is destroyed.
