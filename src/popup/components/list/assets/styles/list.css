@@ -35,17 +35,24 @@
 	}
 
 	&-nav {
-		border-radius: var(--radius);
 		position: fixed;
-		top: 10px;
-		left: 10;
+		top: 0;
+		left: 10px;
+		z-index: 1;
 		width: 430px;
+		background-color: var(--canvas);
+		padding-top: 10px;
+	}
+
+	&-navList {
+		padding: 10px;
+		background-color: var(--colorBorderPrimary);
+		border-radius: var(--radius);
+		width: 100%;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
 		color: var(--colorTextSecondary);
-		background-color: var(--colorBorderPrimary);
-		padding: 10px;
 	}
 
 	&-navItem {

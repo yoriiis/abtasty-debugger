@@ -14,36 +14,41 @@ export default function ({ data }: { data: ListData }) {
 	return (
 		<>
 			<div className="list">
-				<ul className="list-nav">
-					<li className="list-navItem">
-						<button className="list-navItemButton clearCookies">
-							<div className="list-navItemButtonIcon" innerHTML={clear}></div>
-							Clear AB Tasty cookies
-						</button>
-					</li>
-					<li className="list-navItem">
-						<label
-							htmlFor="debugMode"
-							className="list-navItemLabel"
-							title="See DevTools > Console for debug logs"
-						>
-							Debug mode
-						</label>
-						<div className="customCheckbox">
-							<input
-								type="checkbox"
-								value={data.debug ? 'true' : 'false'}
-								className="customCheckbox-input"
-								id="debugMode"
-								name="debug"
-								checked={data.debug}
-							/>
-							<span className="customCheckbox-round">
-								<div className="customCheckbox-roundIcon" innerHTML={check}></div>
-							</span>
-						</div>
-					</li>
-				</ul>
+				<div className="list-nav">
+					<ul className="list-navList">
+						<li className="list-navItem">
+							<button className="list-navItemButton clearCookies">
+								<div className="list-navItemButtonIcon" innerHTML={clear}></div>
+								Clear AB Tasty cookies
+							</button>
+						</li>
+						<li className="list-navItem">
+							<label
+								htmlFor="debugMode"
+								className="list-navItemLabel"
+								title="See DevTools > Console for debug logs"
+							>
+								Debug mode
+							</label>
+							<div className="customCheckbox">
+								<input
+									type="checkbox"
+									value={data.debug ? 'true' : 'false'}
+									className="customCheckbox-input"
+									id="debugMode"
+									name="debug"
+									checked={data.debug}
+								/>
+								<span className="customCheckbox-round">
+									<div
+										className="customCheckbox-roundIcon"
+										innerHTML={check}
+									></div>
+								</span>
+							</div>
+						</li>
+					</ul>
+				</div>
 				<ul>
 					{data.testsSortedByStatus.accepted.map((item: Result) => (
 						<ListItem data={item} />
