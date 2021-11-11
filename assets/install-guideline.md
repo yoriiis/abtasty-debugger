@@ -4,7 +4,7 @@ The project is open-source and available on the public repository, download the 
 
 ## Prerequisites
 
-The project was built for Node.js `12.14.0` and npm `6.13.4`, on macOS `10.15.3`.
+The project was built for Node.js `16.13.0` and npm `8.1.0`, on macOS `11.5.2`.
 
 ## Installation
 
@@ -17,7 +17,8 @@ npm install
 Build the code
 
 ```bash
-npm run release:browser
+npm run release:browser # Firefox, Opera and Edge
+# npm run release:chrome # Chrome
 ```
 
 The source code is available in the `./src` directory and the build code is available in the `./web/dist` directory.
