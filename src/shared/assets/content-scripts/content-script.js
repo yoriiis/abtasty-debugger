@@ -70,9 +70,15 @@ document.addEventListener('updateBadge', (e) => {
 // Listen for messages from the popup
 namespace.runtime.onMessage.addListener((message, sender, response) => {
 	document.addEventListener('abtastyDebugger::sendData', (e) => {
-		const data = JSON.parse(e.detail.abtastyData)
-		data.debug = !!getCookie('abTastyDebug')
-		response(data)
+		const abtastyData = e.detail.abtastyData
+
+		if (abtastyData) {
+			const data = JSON.parse(abtastyData)
+			data.debug = !!getCookie('abTastyDebug')
+			response(data)
+		}
+
+		response(undefined)
 	})
 
 	if (message.from === 'popup') {
