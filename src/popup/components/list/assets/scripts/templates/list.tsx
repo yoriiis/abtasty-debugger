@@ -14,25 +14,17 @@ export default function ({ data }: { data: ListData }) {
 	return (
 		<>
 			<div className="list">
-				<ul>
-					{data.testsSortedByStatus.accepted.map((item: Result) => (
-						<ListItem data={item} />
-					))}
-					{data.testsSortedByStatus.rejected.map((item: Result) => (
-						<ListItem data={item} />
-					))}
-				</ul>
-				<ul className="list-footer">
-					<li className="list-footerItem">
-						<button className="list-footerItemButton clearCookies">
-							<div className="list-footerItemButtonIcon" innerHTML={clear}></div>
+				<ul className="list-nav">
+					<li className="list-navItem">
+						<button className="list-navItemButton clearCookies">
+							<div className="list-navItemButtonIcon" innerHTML={clear}></div>
 							Clear AB Tasty cookies
 						</button>
 					</li>
-					<li className="list-footerItem">
+					<li className="list-navItem">
 						<label
 							htmlFor="debugMode"
-							className="list-footerItemLabel"
+							className="list-navItemLabel"
 							title="See DevTools > Console for debug logs"
 						>
 							Debug mode
@@ -51,6 +43,14 @@ export default function ({ data }: { data: ListData }) {
 							</span>
 						</div>
 					</li>
+				</ul>
+				<ul>
+					{data.testsSortedByStatus.accepted.map((item: Result) => (
+						<ListItem data={item} />
+					))}
+					{data.testsSortedByStatus.rejected.map((item: Result) => (
+						<ListItem data={item} />
+					))}
 				</ul>
 			</div>
 		</>

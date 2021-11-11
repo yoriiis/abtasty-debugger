@@ -90,17 +90,17 @@ beforeEach(() => {
 	document.body.append(
 		<div id="app">
 			<div className="list">
-				<ul className="list-footer">
-					<li className="list-footerItem">
-						<button className="list-footerItemButton clearCookies">
-							<div className="list-footerItemButtonIcon"></div>
+				<ul className="list-nav">
+					<li className="list-navItem">
+						<button className="list-navItemButton clearCookies">
+							<div className="list-navItemButtonIcon"></div>
 							Reload tag
 						</button>
 					</li>
-					<li className="list-footerItem">
+					<li className="list-navItem">
 						<label
 							htmlFor="debugMode"
-							className="list-footerItemLabel"
+							className="list-navItemLabel"
 							title="See DevTools > Console for debug logs"
 						>
 							Debug mode

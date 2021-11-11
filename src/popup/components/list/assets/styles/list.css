@@ -1,4 +1,6 @@
 .list {
+	padding-top: 50px;
+
 	&-item {
 		margin-bottom: 10px;
 		list-style-type: none;
@@ -32,26 +34,33 @@
 		}
 	}
 
-	&-footer {
+	&-nav {
+		border-radius: var(--radius);
+		position: fixed;
+		top: 10px;
+		left: 10;
+		width: 430px;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
 		color: var(--colorTextSecondary);
+		background-color: var(--colorBorderPrimary);
+		padding: 10px;
 	}
 
-	&-footerItem {
+	&-navItem {
 		display: flex;
 		align-items: center;
 	}
 
-	&-footerItemLabel {
+	&-navItemLabel {
 		display: flex;
 		align-items: center;
 		margin-right: 5px;
 		cursor: pointer;
 	}
 
-	&-footerItemButtonIcon {
+	&-navItemButtonIcon {
 		margin-right: 5px;
 
 		svg {
@@ -62,7 +71,7 @@
 		}
 	}
 
-	&-footerItemButton {
+	&-navItemButton {
 		display: flex;
 		align-items: center;
 
