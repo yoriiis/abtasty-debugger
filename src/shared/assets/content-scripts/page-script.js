@@ -1,63 +1,104 @@
 const ABTASTY_NAME = 'ABTasty'
 const INTERVAL_IN_MS = 1000
-const TIME_OUT_IN_MS = INTERVAL_IN_MS * 60
+const TIME_OUT_IN_MS = INTERVAL_IN_MS * 10
+const IGNORE_TEST_IDS = ['global']
 
-// Search the ABTasty object in interval
-// Interval is automatically clear when the data is found
-const intervalSearchScript = window.setInterval(() => {
-	if (typeof window[ABTASTY_NAME] !== 'undefined') {
-		sendData(window[ABTASTY_NAME])
+let counterIsUpdated = false
+let timerAbtastyData
 
-		const pendingTests = searchPendingTests(window[ABTASTY_NAME])
-		// Check if pending tests are found
-		if (pendingTests.length) {
-			// Search the pendings tests in interval
-			const intervalPendingTests = window.setInterval(() => {
-				const pendingTests = searchPendingTests(window[ABTASTY_NAME])
+// Check for ABTasty data on the page and send the counter if tests is found
+const checkAbtastyData = () => {
+	if (isAbtastyReady()) {
+		const data = window[ABTASTY_NAME]
 
-				// If no pending tests, send the new ABTasty object and clear the interval
-				if (pendingTests.length === 0) {
-					clearInterval(intervalPendingTests)
-					sendData(window[ABTASTY_NAME])
-				}
-			}, INTERVAL_IN_MS)
+		const counterTests = Object.keys(data.accountData.tests).filter(
+			(id) => !IGNORE_TEST_IDS.includes(id)
+		).length
+		const counterResults = Object.keys(data.results).length
+
+		// Results are not yet ready
+		if (counterTests !== counterResults) {
+			retryResearch()
+		} else {
+			window.cancelAnimationFrame(checkAbtastyData)
+			clearTimeout(timerAbtastyData)
+			updateBadge()
 		}
-
-		clearInterval(intervalSearchScript)
+	} else {
+		retryResearch()
 	}
-}, INTERVAL_IN_MS)
-
-// Stop the research after a delay
-const timeout = setTimeout(() => {
-	clearInterval(intervalSearchScript)
-	clearTimeout(timeout)
-}, TIME_OUT_IN_MS)
+}
+window.requestAnimationFrame(checkAbtastyData)
 
 /**
- * Search pending tests in the ABTasty object
- * @param {Object} data ABTasty object
- * @returns {Array} List of pending tests
+ * Check if ABTasty data are ready to use
+ * @returns {Boolean} ABTasty data are ready
  */
-function searchPendingTests(data) {
-	const tests = data.accountData.tests
-	const results = data.results
-	return Object.keys(tests).filter(
-		(testId) =>
-			(tests[testId].targetingMode === 'waituntil' && tests[testId].status === 'pending') ||
-			(tests[testId].isAsync && results[testId].status === undefined)
+function isAbtastyReady() {
+	return (
+		typeof window[ABTASTY_NAME] !== 'undefined' &&
+		window[ABTASTY_NAME].started &&
+		window[ABTASTY_NAME].accountData.tests &&
+		window[ABTASTY_NAME].results
 	)
 }
 
 /**
- * Send data from the ABTasty object to the service worker
- * @param {Object} data ABTasty object
+ * Retry the request animation frame for ABTasty data research
  */
-function sendData(data) {
+function retryResearch() {
+	timerAbtastyData = setTimeout(() => requestAnimationFrame(checkAbtastyData), INTERVAL_IN_MS)
+}
+
+// Stop the research after a delay
+const timeout = setTimeout(() => {
+	window.cancelAnimationFrame(checkAbtastyData)
+	clearTimeout(timerAbtastyData)
+	clearTimeout(timeout)
+	!counterIsUpdated && isAbtastyReady() && updateBadge()
+}, TIME_OUT_IN_MS)
+
+/**
+ * Send data from the ABTasty object to the service worker
+ * @param {Object} e Event data
+ */
+document.addEventListener('abtastyDebugger::getData', (e) => {
 	document.dispatchEvent(
-		new window.CustomEvent('sendABTastyObject', {
+		new window.CustomEvent('abtastyDebugger::sendData', {
 			detail: {
-				ABTastyData: JSON.stringify(data || null)
+				abtastyData: JSON.stringify(window[ABTASTY_NAME])
 			}
 		})
 	)
+})
+
+/**
+ * Clear ABTasty cookies
+ * @param {Object} e Event data
+ * {@Link https://developers.abtasty.com/docs/tag/tag-window-abtasty#clearallcookies}
+ */
+document.addEventListener('abtastyDebugger::clearCookie', (e) => {
+	window.ABTasty.clearAllCookies()
+})
+
+/**
+ * Update extension counter badge
+ */
+function updateBadge() {
+	counterIsUpdated = true
+	const data = window[ABTASTY_NAME]
+
+	// Exclude "mastersegment" test type from counter
+	const counter = Object.keys(data.results).filter(
+		(key) => data.results[key].type !== 'mastersegment'
+	).length
+
+	// Update the badge only if the counter is greater than 0
+	if (counter > 0) {
+		document.dispatchEvent(
+			new window.CustomEvent('updateBadge', {
+				detail: { counter }
+			})
+		)
+	}
 }

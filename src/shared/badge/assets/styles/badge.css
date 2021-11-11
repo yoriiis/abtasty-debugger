@@ -5,11 +5,24 @@
 	font-size: var(--fontSizeSecondary);
 	display: inline-block;
 
-	&.accepted {
+	&.green {
 		background-color: var(--green);
 	}
 
-	&.rejected {
+	&.red {
 		background-color: var(--red);
+	}
+
+	&.withIcon {
+		border-radius: 50%;
+		width: 16px;
+		height: 16px;
+		padding: 3px;
+
+		svg {
+			width: 100%;
+			height: 100%;
+			fill: var(--canvas);
+		}
 	}
 }

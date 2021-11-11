@@ -1,0 +1,65 @@
+.variation {
+	&-name {
+		cursor: pointer;
+		width: 100%;
+		display: flex;
+		align-items: center;
+		line-height: 20px;
+	}
+
+	&-listItem {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		position: relative;
+
+		&:not(:last-child) {
+			margin-bottom: 12px;
+		}
+
+		&.disabled {
+			.variation-name {
+				cursor: not-allowed;
+				opacity: 50%;
+			}
+		}
+
+		.customRadio {
+			flex-shrink: 0;
+		}
+	}
+
+	&-input {
+		position: relative;
+	}
+
+	&-linkIcon svg {
+		display: block;
+		width: 16px;
+		height: 16px;
+		fill: var(--colorTextSecondary);
+		position: relative;
+	}
+
+	&-link {
+		padding: 6px;
+		margin-right: 9px;
+
+		&:hover {
+			svg {
+				fill: var(--colorAbtasty);
+			}
+		}
+	}
+
+	&-traffic {
+		background-color: var(--colorBorderPrimary);
+		font-size: 12px;
+		padding: 6px 0;
+		border-radius: 6px;
+		margin-right: 8px;
+		width: 40px;
+		overflow: hidden;
+		text-align: center;
+	}
+}

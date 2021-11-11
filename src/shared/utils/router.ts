@@ -75,7 +75,7 @@ export default class Router {
 	 * On hash change event listener
 	 * @param {Obhect} e Event data
 	 */
-	onHashChange(e?: HashChangeEvent): void {
+	onHashChange(e?: Event): void {
 		this.currentRoute = this.getRoute()
 
 		// Redirect to the not found route if necessary
@@ -85,7 +85,7 @@ export default class Router {
 		}
 
 		if (e) {
-			this.previousRoute = this.getPreviousRoute(e)
+			this.previousRoute = this.getPreviousRoute(e as HashChangeEvent)
 
 			if (this.previousRoute) {
 				// Destroy the previous step

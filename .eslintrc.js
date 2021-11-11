@@ -1,5 +1,5 @@
 module.exports = {
-	parser: 'babel-eslint',
+	parser: '@babel/eslint-parser',
 	parserOptions: {
 		ecmaVersion: 6,
 		ecmaFeatures: {
@@ -16,9 +16,7 @@ module.exports = {
 		jest: true
 	},
 
-	extends: ['standard', 'plugin:react/recommended'],
-
-	plugins: ['prettier'],
+	extends: ['standard', 'plugin:react/recommended', 'plugin:prettier/recommended'],
 
 	rules: {
 		indent: ['error', 'tab', { ignoredNodes: ['TemplateLiteral *'] }],
@@ -37,7 +35,8 @@ module.exports = {
 		document: false,
 		window: false,
 		chrome: true,
-		browser: true
+		browser: true,
+		ABTasty: true
 	},
 
 	settings: {

@@ -2,7 +2,9 @@ import {
 	Data,
 	TestsSortedByStatus,
 	TargetingsSortedByStatus,
-	FormattedData
+	FormattedData,
+	Result,
+	Targeting
 } from 'shared/assets/interfaces/interfaces'
 
 /**
@@ -27,25 +29,23 @@ export default class DataManager {
 	 */
 	getTestsSortedByStatus(data: Data): TestsSortedByStatus {
 		return {
-			accepted: Object.keys(data.results)
+			accepted: Object.entries(data.results)
 				.filter(
-					(id: string) =>
-						data.results[id].status === 'accepted' &&
-						data.results[id].type !== 'mastersegment'
+					([id, result]: [id: string, result: Result]) =>
+						result.status === 'accepted' && result.type !== 'mastersegment'
 				)
-				.map((id: string) => {
-					data.results[id].key = id
-					return data.results[id]
+				.map(([id, result]: [id: string, result: Result]) => {
+					result.key = id
+					return result
 				}),
-			rejected: Object.keys(data.results)
+			rejected: Object.entries(data.results)
 				.filter(
-					(id: string) =>
-						data.results[id].status !== 'accepted' &&
-						data.results[id].type !== 'mastersegment'
+					([id, result]: [id: string, result: Result]) =>
+						result.status !== 'accepted' && result.type !== 'mastersegment'
 				)
-				.map((id: string) => {
-					data.results[id].key = id
-					return data.results[id]
+				.map(([id, result]: [id: string, result: Result]) => {
+					result.key = id
+					return result
 				})
 		}
 	}
@@ -56,40 +56,31 @@ export default class DataManager {
 	 */
 	getTargetingsSortedByStatus(data: Data): TargetingsSortedByStatus {
 		const outputData: TargetingsSortedByStatus = {}
-		Object.keys(data.results).forEach((id: string) => {
-			const targetings = data.results[id].targetings
-			const acceptedTargetPages = Object.keys(targetings.targetPages)
-				.filter(
-					(targetingKey: string) => targetings.targetPages[targetingKey].success === true
-				)
-				.map((targetingKey) => {
-					targetings.targetPages[targetingKey].key = targetingKey
-					return targetings.targetPages[targetingKey]
+		Object.entries(data.results).forEach(([id, result]: [id: string, result: Result]) => {
+			const targetings = result.targetings
+			const acceptedTargetPages = Object.entries(targetings.targetPages)
+				.filter(([key, value]: [key: string, value: Targeting]) => value.success === true)
+				.map(([key, value]: [key: string, value: Targeting]) => {
+					value.key = key
+					return value
 				})
-			const acceptedQaParameters = Object.keys(targetings.qaParameters)
-				.filter(
-					(targetingKey: string) => targetings.qaParameters[targetingKey].success === true
-				)
-				.map((targetingKey) => {
-					targetings.qaParameters[targetingKey].key = targetingKey
-					return targetings.qaParameters[targetingKey]
+			const acceptedQaParameters = Object.entries(targetings.qaParameters)
+				.filter(([key, value]: [key: string, value: Targeting]) => value.success === true)
+				.map(([key, value]: [key: string, value: Targeting]) => {
+					value.key = key
+					return value
 				})
-			const rejectedTargetPages = Object.keys(targetings.targetPages)
-				.filter(
-					(targetingKey: string) => targetings.targetPages[targetingKey].success === false
-				)
-				.map((targetingKey) => {
-					targetings.targetPages[targetingKey].key = targetingKey
-					return targetings.targetPages[targetingKey]
+			const rejectedTargetPages = Object.entries(targetings.targetPages)
+				.filter(([key, value]: [key: string, value: Targeting]) => value.success === false)
+				.map(([key, value]: [key: string, value: Targeting]) => {
+					value.key = key
+					return value
 				})
-			const rejectedQaParameters = Object.keys(targetings.qaParameters)
-				.filter(
-					(targetingKey: string) =>
-						targetings.qaParameters[targetingKey].success === false
-				)
-				.map((targetingKey) => {
-					targetings.qaParameters[targetingKey].key = targetingKey
-					return targetings.qaParameters[targetingKey]
+			const rejectedQaParameters = Object.entries(targetings.qaParameters)
+				.filter(([key, value]: [key: string, value: Targeting]) => value.success === false)
+				.map(([key, value]: [key: string, value: Targeting]) => {
+					value.key = key
+					return value
 				})
 
 			outputData[id] = {

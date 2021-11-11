@@ -35,6 +35,7 @@ export default class Detail {
 
 		return {
 			testId,
+			identifier: data.accountData.accountSettings.identifier,
 			test: data.accountData.tests[testId],
 			result: data.results[testId],
 			targetingSorted: formattedData.targetingsSortedByStatus[testId]
@@ -46,7 +47,7 @@ export default class Detail {
 	 * @param {Object} data Template's data
 	 * @returns {HTMLElement} Template
 	 */
-	getTemplate(data: DetailData): Element {
+	getTemplate(data: DetailData): any {
 		return <Template data={data} />
 	}
 }

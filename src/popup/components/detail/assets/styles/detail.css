@@ -5,58 +5,104 @@
 		display: flex;
 		justify-content: space-between;
 		margin-bottom: 15px;
+	}
 
+	&-headerLinkIcon {
+		transition: transform var(--transition);
+	}
+
+	&-headerLinkIcon,
+	&-subtitleIcon {
 		svg {
 			display: block;
-			width: 18px;
-			height: 18px;
+			width: 16px;
+			height: 16px;
 			fill: var(--colorTextSecondary);
-			transition: transform var(--transition);
 			position: relative;
 		}
 	}
 
-	&-headerBackIcon {
-		margin-right: 4px;
-
-		svg {
-			transform: rotate(90deg);
+	&-headerReport {
+		.detail-headerLinkIcon {
+			margin-left: 7px;
 		}
 	}
 
 	&-headerBack {
 		font-size: var(--fontSizePrimary);
 
-		&:hover svg {
-			transform: translateX(-5px) rotate(90deg);
+		.detail-headerLinkIcon {
+			margin-right: 2px;
+
+			svg {
+				transform: rotate(90deg);
+			}
+		}
+
+		&:hover .detail-headerLinkIcon {
+			transform: translateX(-3px);
 		}
 	}
 
-	&-headerDashboard {
-		font-size: var(--fontSizeSecondary);
-	}
-
-	&-headerDashboardIcon {
-		margin-left: 7px;
+	&-headerBack,
+	&-headerReport,
+	&-subtitleLink {
+		&:hover svg {
+			fill: var(--colorAbtasty);
+		}
 	}
 
 	&-headerBack,
-	&-headerDashboard {
+	&-headerReport {
 		padding: 5px;
 		align-items: center;
 		text-decoration: none;
 		position: relative;
 		display: flex;
+		font-size: var(--fontSizeSecondary);
 
 		&:hover {
 			text-decoration: underline;
+			color: var(--colorAbtasty);
+
+			svg {
+				fill: var(--colorAbtasty);
+			}
 		}
+	}
+
+	&-title {
+		font-size: var(--fontSizePrimary);
+		font-weight: 600;
+		line-height: 24px;
+		margin-bottom: 20px;
+	}
+
+	&-section {
+		&:not(.last) {
+			margin-bottom: 30px;
+		}
+	}
+
+	&-subtitle {
+		font-size: var(--fontSizePrimary);
+		font-weight: 600;
+		line-height: 24px;
+		margin-bottom: 16px;
+		padding-bottom: 5px;
+		border-bottom: 1px solid var(--colorBorderPrimary);
+		display: flex;
+		align-items: center;
+	}
+
+	&-subtitleLink {
+		padding: 6px;
+		margin-left: 2px;
 	}
 
 	&-list {
 		list-style-type: disc;
 		padding-left: 24px;
-		margin-bottom: 20px;
 		font-size: var(--fontSizeSecondary);
 
 		li:not(:last-child) {

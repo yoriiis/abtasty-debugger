@@ -1,153 +1,128 @@
 {
 	"accountData": {
+		"accountSettings": {
+			"accountName": "ABTasty Debugger",
+			"identifier": "3d09baddc21a365b7da5ae4d0aa5cb95"
+		},
 		"tests": {
-			"900001": {
-				"id": 900001,
-				"targetingMode": "waituntil",
-				"parentID": 0
+			"100001": {
+				"id": 100001,
+				"parentID": 0,
+				"scopes": {},
+				"targetingMode": "waituntil"
 			},
-			"900002": {
-				"id": 900002,
-				"targetingMode": "fastest",
+			"100002": {
+				"actionTrackings": {
+					"click": [
+						{
+							"name": "Click breadcrumb",
+							"selector": ".breadcrumbs"
+						},
+						{
+							"name": "Click channel",
+							"selector": ".channel"
+						}
+					],
+					"mousedown": [
+						{
+							"name": "Mousedown on logo",
+							"selector": ".logo"
+						}
+					]
+				},
+				"asyncVariationInfoById": {
+					"200001": {
+						"id": 200001,
+						"name": "Variation one",
+						"traffic": 11
+					},
+					"200002": {
+						"id": 200002,
+						"name": "Variation two",
+						"traffic": 9
+					},
+					"200003": {
+						"id": 200003,
+						"name": "Variation three",
+						"traffic": 37
+					}
+				},
+				"globalCode": "console.log('Campaign script');",
+				"id": 100002,
 				"isAsync": true,
-				"parentID": 0
-			},
-			"900003": {
-				"id": 900003,
+				"parentID": 0,
 				"targetingMode": "fastest",
-				"isAsync": false,
-				"parentID": 0
+				"traffic": 40
 			},
-			"900004": {
-				"id": 900004,
-				"targetingMode": "fastest",
+			"100003": {
+				"id": 100003,
 				"isAsync": false,
-				"parentID": 900003
+				"parentID": 0,
+				"targetingMode": "fastest"
+			},
+			"100004": {
+				"id": 100004,
+				"isAsync": false,
+				"parentID": 100003,
+				"targetingMode": "fastest"
 			}
 		}
 	},
 	"results": {
-		"900001": {
+		"100001": {
 			"name": "Test with the menu button on the left",
+			"status": "rejected",
+			"targetings": {
+				"qaParameters": {},
+				"targetPages": {
+					"url_scope": {
+						"conditions": [
+							{
+								"condition": 10,
+								"include": true,
+								"value": "https://www.programme-tv.net"
+							}
+						],
+						"success": false
+					}
+				}
+			},
 			"type": "ab",
-			"status": "accepted",
 			"variationID": null,
-			"variationName": null,
-			"targetings": {
-				"targetPages": {
-					"url_scope": {
-						"conditions": [
-							{
-								"include": true,
-								"condition": 10,
-								"value": "https://www.programme-tv.net"
-							}
-						],
-						"success": false
-					}
-				},
-				"qaParameters": {}
-			}
+			"variationName": null
 		},
-		"900002": {
-			"name": "Test with darkmode sticky banner on the header",
-			"type": "ab",
-			"variationID": 901001,
-			"variationName": "header-darkmode-cta",
+		"100002": {
+			"name": "Test with darkmode button on the header",
+			"status": "accepted",
 			"targetings": {
-				"targetPages": {
-					"url_scope": {
-						"conditions": [
-							{
-								"include": false,
-								"condition": 10,
-								"value": "https://www.programme-tv.net"
-							},
-							{
-								"include": true,
-								"condition": 11,
-								"value": "https://www.programme-tv.net/news"
-							}
-						],
-						"success": true
-					},
-					"code_scope": {
-						"conditions": [
-							{
-								"value": "var hourStart = 18;\nvar hourEnd = 4;\nvar hourGranted = new Date().getHours() >= hourStart || new Date().getHours() <= hourEnd;\n\nif (hourGranted) {\n    return true;\n} else {\n    return false;\n}"
-							}
-						],
-						"success": true
-					},
-					"selector_scope": {
-						"conditions": [
-							{
-								"include": true,
-								"condition": 44,
-								"value": ".header"
-							}
-						],
-						"success": false
-					}
-				},
 				"qaParameters": {
 					"cookie_scope": {
 						"conditions": [
 							{
 								"include": false,
-								"value": "true",
-								"name": "sampleCookie"
+								"name": "sampleCookie",
+								"value": "true"
 							}
 						],
-						"success": false
+						"success": true
 					},
 					"ip_scope": {
 						"conditions": [
 							{
+								"from": "1555592406",
 								"include": true,
-								"to": 0,
 								"range": false,
-								"from": "1555592406"
+								"to": 0
 							}
 						],
 						"success": true
 					}
-				}
-			}
-		},
-		"900003": {
-			"name": "Satisfaction survey",
-			"type": "mastersegment",
-			"status": "master_campaign_not_checked",
-			"variationID": null,
-			"variationName": null,
-			"targetings": {
-				"targetPages": {},
-				"qaParameters": {}
-			}
-		},
-		"900004": {
-			"name": "Scenario satisfaction survey",
-			"type": "subsegment",
-			"status": "pending",
-			"variationID": null,
-			"variationName": null,
-			"targetings": {
+				},
 				"targetPages": {
-					"url_scope": {
-						"conditions": [
-							{
-								"include": false,
-								"condition": 10,
-								"value": "https://www.programme-tv.net"
-							}
-						],
-						"success": true
-					},
 					"code_scope": {
 						"conditions": [
 							{
-								"value": "var hourStart = 18;\nvar hourEnd = 4;\nvar hourGranted = new Date().getHours() >= hourStart || new Date().getHours() <= hourEnd;\n\nif (hourGranted) {\n    return true;\n} else {\n    return false;\n}"
+								"value": "if(window.matchMedia('only screen and (max-width: 749px)').matches){return!0}else{return!1}"
 							}
 						],
 						"success": true
@@ -155,16 +130,96 @@
 					"selector_scope": {
 						"conditions": [
 							{
-								"include": true,
 								"condition": 44,
-								"value": ".footer"
+								"include": true,
+								"value": ".header"
+							}
+						],
+						"success": true
+					},
+					"url_scope": {
+						"conditions": [
+							{
+								"condition": 10,
+								"include": false,
+								"value": "https://www.programme-tv.net"
+							},
+							{
+								"condition": 11,
+								"include": true,
+								"value": "https://www.programme-tv.net/news"
+							}
+						],
+						"success": true
+					}
+				}
+			},
+			"type": "ab",
+			"variationID": 200001,
+			"variationName": "Variation one"
+		},
+		"100003": {
+			"name": "Satisfaction survey",
+			"status": "master_campaign_not_checked",
+			"targetings": {
+				"qaParameters": {
+					"ip_scope": {
+						"conditions": [
+							{
+								"from": "1555592406",
+								"include": true,
+								"range": false,
+								"to": 0
 							}
 						],
 						"success": false
 					}
 				},
-				"qaParameters": {}
-			}
+				"targetPages": {}
+			},
+			"type": "mastersegment",
+			"variationID": null,
+			"variationName": null
+		},
+		"100004": {
+			"name": "Scenario satisfaction survey",
+			"status": "pending",
+			"targetings": {
+				"qaParameters": {},
+				"targetPages": {
+					"code_scope": {
+						"conditions": [
+							{
+								"value": "const hourStart=18;const hourEnd=4;const hourGranted=new Date().getHours()>=hourStart||new Date().getHours()<=hourEnd\nif(hourGranted){return!0}else{return!1}"
+							}
+						],
+						"success": false
+					},
+					"selector_scope": {
+						"conditions": [
+							{
+								"condition": 44,
+								"include": true,
+								"value": ".footer"
+							}
+						],
+						"success": true
+					},
+					"url_scope": {
+						"conditions": [
+							{
+								"condition": 10,
+								"include": false,
+								"value": "https://www.programme-tv.net"
+							}
+						],
+						"success": true
+					}
+				}
+			},
+			"type": "subsegment",
+			"variationID": null,
+			"variationName": null
 		}
 	},
 	"visitor": {

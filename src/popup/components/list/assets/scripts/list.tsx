@@ -5,6 +5,8 @@ import { ListData } from 'shared/assets/interfaces/interfaces'
 export default class List {
 	// @ts-ignore
 	requestFormattedData: Function
+	// @ts-ignore
+	requestData: Function
 
 	id = 'list'
 	route = '/'
@@ -24,10 +26,12 @@ export default class List {
 	 * @returns {Object} Template's data
 	 */
 	getData(): ListData {
+		const data = this.requestData()
 		const formattedData = this.requestFormattedData()
 
 		return {
-			testsSortedByStatus: formattedData.testsSortedByStatus
+			testsSortedByStatus: formattedData.testsSortedByStatus,
+			debug: data.debug
 		}
 	}
 
@@ -36,7 +40,7 @@ export default class List {
 	 * @param {Object} data Template's data
 	 * @returns {HTMLElement} Template
 	 */
-	getTemplate(data: ListData): Element {
+	getTemplate(data: ListData): any {
 		return <Template data={data} />
 	}
 }

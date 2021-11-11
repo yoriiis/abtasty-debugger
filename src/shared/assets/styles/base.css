@@ -1,7 +1,8 @@
 body {
-	font-family: -apple-system, blinkmacsystemfont, segoe UI, Helvetica, Arial, sans-serif,
-		Apple Color Emoji, Segoe UI Emoji;
+	font-family: -apple-system, blinkmacsystemfont, 'segoe UI', Helvetica, Arial, sans-serif,
+		'Apple Color Emoji', 'Segoe UI Emoji';
 	color: var(--colorTextPrimary);
+	font-size: 16px;
 }
 
 #app {
@@ -10,9 +11,9 @@ body {
 
 .textarea {
 	width: 100%;
-	height: 100px;
+	height: 50px;
 	font-family: inherit;
-	padding: 8px 12px 6px 12px;
+	padding: 8px 5px;
 	border-radius: 6px;
 	font-size: var(--fontSizeSecondary);
 	color: inherit;
@@ -24,10 +25,145 @@ body {
 	width: 100%;
 	height: 25px;
 	font-family: inherit;
-	padding: 6px 12px;
 	border-radius: 6px;
 	font-size: var(--fontSizeSecondary);
 	color: inherit;
 	background-color: transparent;
 	border: none;
+}
+
+/* Custom input radio */
+.customRadio {
+	position: relative;
+	width: 18px;
+	height: 18px;
+
+	&-round {
+		position: relative;
+		display: block;
+		cursor: pointer;
+		width: 100%;
+		height: 100%;
+		border: 2px solid var(--colorTextSecondary);
+		border-radius: 50%;
+		transition: border var(--transition);
+
+		&::after {
+			transition: opacity var(--transition);
+			content: '';
+			display: block;
+			opacity: 0%;
+			width: 8px;
+			height: 8px;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			background-color: var(--green);
+			border-radius: 50%;
+		}
+	}
+
+	&-input {
+		opacity: 0%;
+		cursor: pointer;
+		position: absolute;
+		z-index: 1;
+		width: auto;
+		height: auto;
+		margin: 0;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+
+		&:disabled {
+			opacity: 50%;
+			cursor: not-allowed;
+		}
+
+		&:checked + .customRadio-round {
+			border-color: var(--green);
+
+			&::after {
+				opacity: 100%;
+			}
+		}
+	}
+}
+
+/* Custom input checkbox */
+.customCheckbox {
+	position: relative;
+	width: 16px;
+	height: 16px;
+
+	&-round {
+		position: relative;
+		display: block;
+		cursor: pointer;
+		width: 100%;
+		height: 100%;
+		border: 2px solid var(--colorTextSecondary);
+		border-radius: var(--radius);
+		transition: border var(--transition);
+	}
+
+	&-roundIcon {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width: 10px;
+		height: 10px;
+
+		svg {
+			opacity: 0%;
+			transition: opacity var(--transition);
+			width: 100%;
+			height: 100%;
+			fill: var(--green);
+		}
+	}
+
+	&-input {
+		opacity: 0%;
+		cursor: pointer;
+		position: absolute;
+		z-index: 1;
+		width: auto;
+		height: auto;
+		margin: 0;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+
+		&:disabled {
+			opacity: 50%;
+			cursor: not-allowed;
+		}
+
+		&:checked {
+			& + .customCheckbox-round {
+				border-color: var(--green);
+			}
+
+			& + .customCheckbox-round svg {
+				opacity: 100%;
+			}
+		}
+	}
+}
+
+.table {
+	width: 100%;
+	font-size: var(--fontSizeSecondary);
+
+	&,
+	td {
+		border: 1px solid var(--colorBorderPrimary);
+	}
+
+	td {
+		padding: 3px 5px;
+	}
 }

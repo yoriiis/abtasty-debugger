@@ -29,11 +29,24 @@ export interface Result {
 	}
 }
 
+export interface Variations {
+	[key: string]: Variation
+}
+
+export interface Variation {
+	id: number
+	name: string
+	traffic: number
+}
+
 export interface Test {
 	id: number
 	targetingMode: string
 	isAsync: string
 	parentID: number
+	asyncVariationInfoById: Variations
+	actionTrackings: Trackings
+	traffic: number
 }
 
 export interface Data {
@@ -44,9 +57,11 @@ export interface Data {
 			}
 		}
 	}
-	results: {
-		[key: string]: Result
-	}
+	results: Results
+}
+
+export interface Results {
+	[key: string]: Result
 }
 
 export interface TestsSortedByStatus {
@@ -73,6 +88,7 @@ export interface Wording {
 
 export interface DetailData {
 	testId: string
+	identifier: string
 	test: Test
 	result: Result
 	targetingSorted: TargetingItemSortedByStatus
@@ -84,9 +100,30 @@ export interface DynamicSegments {
 
 export interface ListData {
 	testsSortedByStatus: TestsSortedByStatus
+	debug: boolean
 }
 
 export interface FormattedData {
 	testsSortedByStatus: TestsSortedByStatus
 	targetingsSortedByStatus: TargetingsSortedByStatus
+}
+
+export interface ChangeInfo {
+	status: string
+}
+
+export interface Trackings {
+	click: Array<Tracking>
+	mousedown: Array<Tracking>
+	submit: Array<Tracking>
+}
+
+export interface Tracking {
+	name: string
+	selector: string
+}
+
+export interface TrafficAllocation {
+	original: number
+	untracked: number
 }
