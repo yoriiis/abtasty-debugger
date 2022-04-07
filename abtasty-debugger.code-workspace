@@ -5,41 +5,20 @@
 		}
 	],
 	"settings": {
-		"[javascript]": {
-			"editor.formatOnSave": true
-		},
-		"[typescript]": {
-			"editor.formatOnSave": true
-		},
-		"[postcss]": {
-			"editor.formatOnSave": true
-		},
-		"[html]": {
-			"editor.formatOnSave": true
-		},
-		"[markdown]": {
-			"editor.formatOnSave": true
-		},
-		"[json]": {
-			"editor.formatOnSave": true
-		},
-		"editor.formatOnSave": false,
-		"editor.codeActionsOnSave": {
-			"source.fixAll.eslint": true,
-			"source.fixAll.stylelint": true
-		},
-		"editor.rulers": [100],
-		"editor.tabSize": 4,
+		"editor.defaultFormatter": "esbenp.prettier-vscode",
+        "[javascript][typescript][postcss][html][markdown][json]": {
+            "editor.formatOnSave": true,
+            "editor.tabSize": 4,
+            "editor.rulers": [100]
+        },
 		"emmet.includeLanguages": {
-			"postcss": "css",
-			"twig": "html"
+			"postcss": "css"
 		},
 		"emmet.syntaxProfiles": {
 			"postcss": "css"
 		},
 		"files.associations": {
-			"*.css": "postcss",
-			"*.html": "twig"
+			"*.css": "postcss"
 		},
 		"files.trimTrailingWhitespace": true,
 		"search.exclude": {
