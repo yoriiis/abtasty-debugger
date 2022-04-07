@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.2.1
+
+### Fixes
+
+- Fix variation ID regexp ([#9](https://github.com/yoriiis/abtasty-debugger/pull/9))
+
 ## 1.2.0
 
 ### New features

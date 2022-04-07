@@ -1,6 +1,6 @@
 {
 	"name": "AB Tasty Debugger",
-	"version": "1.2.0",
+	"version": "1.2.1",
 	"description": "Debug A/B tests from AB Tasty. Open source.",
 	"action": {
 		"default_title": "AB Tasty Debugger",
