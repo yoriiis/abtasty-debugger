@@ -575,6 +575,62 @@ describe('Popup switchVariation', () => {
 		})
 		expect(namespace.tabs.reload).toHaveBeenCalled()
 	})
+
+	it('Should call the switchVariation function with a variation id negative', () => {
+		const target = document.querySelector('.variation-inputRadio')
+		const event = {
+			target
+		}
+
+		const newVariationId = '-1'
+		document.querySelector('.variation-inputRadio').value = newVariationId
+		popup.switchVariation(event)
+
+		expect(sendMessage).toHaveBeenCalledTimes(2)
+		expect(sendMessage).toHaveBeenNthCalledWith(1, {
+			action: 'getCookie',
+			data: {
+				cookieName: 'ABTasty'
+			},
+			callback: expect.any(Function)
+		})
+		expect(sendMessage).toHaveBeenNthCalledWith(2, {
+			action: 'setCookie',
+			data: {
+				cookieName: 'ABTasty',
+				value: `uid=zed18spa36wefrnq&fst=1632216663697&pst=-1&cst=1632216663697&ns=1&pvt=1&pvis=1&th=661111.820024.1.1.1.1.1632216664066.1632216664066.1_${testId}.${newVariationId}.1.1.1.1.1632216664068.1632216664068.1`
+			}
+		})
+		expect(namespace.tabs.reload).toHaveBeenCalled()
+	})
+
+	it('Should call the switchVariation function with a variation id with more than 6 numbers', () => {
+		const target = document.querySelector('.variation-inputRadio')
+		const event = {
+			target
+		}
+
+		const newVariationId = '123456789'
+		document.querySelector('.variation-inputRadio').value = newVariationId
+		popup.switchVariation(event)
+
+		expect(sendMessage).toHaveBeenCalledTimes(2)
+		expect(sendMessage).toHaveBeenNthCalledWith(1, {
+			action: 'getCookie',
+			data: {
+				cookieName: 'ABTasty'
+			},
+			callback: expect.any(Function)
+		})
+		expect(sendMessage).toHaveBeenNthCalledWith(2, {
+			action: 'setCookie',
+			data: {
+				cookieName: 'ABTasty',
+				value: `uid=zed18spa36wefrnq&fst=1632216663697&pst=-1&cst=1632216663697&ns=1&pvt=1&pvis=1&th=661111.820024.1.1.1.1.1632216664066.1632216664066.1_${testId}.${newVariationId}.1.1.1.1.1632216664068.1632216664068.1`
+			}
+		})
+		expect(namespace.tabs.reload).toHaveBeenCalled()
+	})
 })
 
 describe('Popup onTabUpdated', () => {
