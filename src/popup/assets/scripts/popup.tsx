@@ -214,7 +214,7 @@ export default class Popup {
 
 					if (thValue) {
 						const currentVariationId = thValue.match(
-							new RegExp(`${testId}.([+\\-0-9]{1,6}).`)
+							new RegExp(`${testId}.(-?[0-9]*).`)
 						)
 
 						if (currentVariationId && currentVariationId.length) {
