@@ -81,8 +81,8 @@ describe('DataManager getFormattedData', () => {
 		const result = dataManager.getFormattedData(fixturesAbtasty)
 
 		expect(result).toStrictEqual({
-			testsSortedByStatus: testsSortedByStatus,
-			targetingsSortedByStatus: targetingsSortedByStatus
+			testsSortedByStatus,
+			targetingsSortedByStatus
 		})
 	})
 })
