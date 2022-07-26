@@ -206,7 +206,7 @@ export default class Popup {
 		sendMessage({
 			action: 'getCookie',
 			data: {
-				cookieName: 'ABTasty'
+				name: 'ABTasty'
 			},
 			callback: (response: string) => {
 				if (response) {
@@ -225,10 +225,11 @@ export default class Popup {
 							response = response.replace(thValue, thValueUpdated)
 
 							sendMessage({
-								action: 'setCookie',
+								action: 'setStorage',
 								data: {
-									cookieName: 'ABTasty',
-									value: response
+									name: 'ABTasty',
+									value: response,
+									syncWithLocalStorage: true
 								}
 							})
 							namespace.tabs.reload()
@@ -253,9 +254,9 @@ export default class Popup {
 		target.setAttribute('disabled', '')
 
 		sendMessage({
-			action: target.checked ? 'setCookie' : 'removeCookie',
+			action: target.checked ? 'setStorage' : 'removeCookie',
 			data: {
-				cookieName: 'abTastyDebug',
+				name: 'abTastyDebug',
 				value: target.checked
 			}
 		})

@@ -17,7 +17,7 @@ jest.mock('shared/utils/bridge', () => {
 	return {
 		sendMessage: jest.fn().mockImplementation(({ action, data, callback }) => {
 			let response = null
-			if (action === 'getCookie' && data.cookieName === 'ABTasty') {
+			if (action === 'getCookie' && data.name === 'ABTasty') {
 				response = abtastyCookie
 			}
 			callback instanceof Function && callback(response)
@@ -519,7 +519,7 @@ describe('Popup toggleDebugMode', () => {
 		expect(sendMessage).toHaveBeenCalledWith({
 			action: 'removeCookie',
 			data: {
-				cookieName: 'abTastyDebug',
+				name: 'abTastyDebug',
 				value: false
 			}
 		})
@@ -539,9 +539,9 @@ describe('Popup toggleDebugMode', () => {
 
 		expect(target.setAttribute).toHaveBeenCalledWith('disabled', '')
 		expect(sendMessage).toHaveBeenCalledWith({
-			action: 'setCookie',
+			action: 'setStorage',
 			data: {
-				cookieName: 'abTastyDebug',
+				name: 'abTastyDebug',
 				value: true
 			}
 		})
@@ -562,15 +562,16 @@ describe('Popup switchVariation', () => {
 		expect(sendMessage).toHaveBeenNthCalledWith(1, {
 			action: 'getCookie',
 			data: {
-				cookieName: 'ABTasty'
+				name: 'ABTasty'
 			},
 			callback: expect.any(Function)
 		})
 		expect(sendMessage).toHaveBeenNthCalledWith(2, {
-			action: 'setCookie',
+			action: 'setStorage',
 			data: {
-				cookieName: 'ABTasty',
-				value: `uid=zed18spa36wefrnq&fst=1632216663697&pst=-1&cst=1632216663697&ns=1&pvt=1&pvis=1&th=661111.820024.1.1.1.1.1632216664066.1632216664066.1_${testId}.${newVariationId}.1.1.1.1.1632216664068.1632216664068.1`
+				name: 'ABTasty',
+				value: `uid=zed18spa36wefrnq&fst=1632216663697&pst=-1&cst=1632216663697&ns=1&pvt=1&pvis=1&th=661111.820024.1.1.1.1.1632216664066.1632216664066.1_${testId}.${newVariationId}.1.1.1.1.1632216664068.1632216664068.1`,
+				syncWithLocalStorage: true
 			}
 		})
 		expect(namespace.tabs.reload).toHaveBeenCalled()
@@ -590,15 +591,16 @@ describe('Popup switchVariation', () => {
 		expect(sendMessage).toHaveBeenNthCalledWith(1, {
 			action: 'getCookie',
 			data: {
-				cookieName: 'ABTasty'
+				name: 'ABTasty'
 			},
 			callback: expect.any(Function)
 		})
 		expect(sendMessage).toHaveBeenNthCalledWith(2, {
-			action: 'setCookie',
+			action: 'setStorage',
 			data: {
-				cookieName: 'ABTasty',
-				value: `uid=zed18spa36wefrnq&fst=1632216663697&pst=-1&cst=1632216663697&ns=1&pvt=1&pvis=1&th=661111.820024.1.1.1.1.1632216664066.1632216664066.1_${testId}.${newVariationId}.1.1.1.1.1632216664068.1632216664068.1`
+				name: 'ABTasty',
+				value: `uid=zed18spa36wefrnq&fst=1632216663697&pst=-1&cst=1632216663697&ns=1&pvt=1&pvis=1&th=661111.820024.1.1.1.1.1632216664066.1632216664066.1_${testId}.${newVariationId}.1.1.1.1.1632216664068.1632216664068.1`,
+				syncWithLocalStorage: true
 			}
 		})
 		expect(namespace.tabs.reload).toHaveBeenCalled()
@@ -618,15 +620,16 @@ describe('Popup switchVariation', () => {
 		expect(sendMessage).toHaveBeenNthCalledWith(1, {
 			action: 'getCookie',
 			data: {
-				cookieName: 'ABTasty'
+				name: 'ABTasty'
 			},
 			callback: expect.any(Function)
 		})
 		expect(sendMessage).toHaveBeenNthCalledWith(2, {
-			action: 'setCookie',
+			action: 'setStorage',
 			data: {
-				cookieName: 'ABTasty',
-				value: `uid=zed18spa36wefrnq&fst=1632216663697&pst=-1&cst=1632216663697&ns=1&pvt=1&pvis=1&th=661111.820024.1.1.1.1.1632216664066.1632216664066.1_${testId}.${newVariationId}.1.1.1.1.1632216664068.1632216664068.1`
+				name: 'ABTasty',
+				value: `uid=zed18spa36wefrnq&fst=1632216663697&pst=-1&cst=1632216663697&ns=1&pvt=1&pvis=1&th=661111.820024.1.1.1.1.1632216664066.1632216664066.1_${testId}.${newVariationId}.1.1.1.1.1632216664068.1632216664068.1`,
+				syncWithLocalStorage: true
 			}
 		})
 		expect(namespace.tabs.reload).toHaveBeenCalled()
