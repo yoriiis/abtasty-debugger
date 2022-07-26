@@ -19,12 +19,11 @@ function getCookie(name) {
 /**
  * Set storage (cookie and localStorage)
  * @param {Object} options
- * @param {String} options.name Name
- * @param {String} options.value Value
- * @param {String} options.path Cookie path
+ * @param {String} options.name Storage name
+ * @param {String} options.value Storage value
  * @param {Boolean} options.syncWithLocalStorage Sync localtorage
  */
-function setStorage({ name, value, path = '/', syncWithLocalStorage = false }) {
+function setStorage({ name, value, syncWithLocalStorage = false }) {
 	const domain = window.location.host.split('.').slice(-2).join('.')
 	const isSecure = window.location.protocol === 'https:'
 
@@ -42,7 +41,7 @@ function setStorage({ name, value, path = '/', syncWithLocalStorage = false }) {
  * @param {String} options.name Cookie name
  * @param {String} options.value Cookie value
  */
-function removeCookie({ name, path = '/' }) {
+function removeCookie({ name }) {
 	const domain = window.location.host.split('.').slice(-2).join('.')
 	document.cookie = `${name}=; expires=${new Date(0).toUTCString()}; path=/; domain=.${domain};`
 }
