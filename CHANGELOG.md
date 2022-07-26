@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.2.2
+
+### Fixes
+
+- Sync cookie with storage ([#10](https://github.com/yoriiis/abtasty-debugger/pull/10))
+
 ## 1.2.1
 
 ### Fixes
