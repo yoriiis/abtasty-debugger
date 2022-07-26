@@ -229,7 +229,7 @@ export default class Popup {
 								data: {
 									name: 'ABTasty',
 									value: response,
-                                    syncWithLocalStorage: true
+									syncWithLocalStorage: true
 								}
 							})
 							namespace.tabs.reload()
