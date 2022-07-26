@@ -79,6 +79,7 @@ document.addEventListener('abtastyDebugger::getData', (e) => {
  */
 document.addEventListener('abtastyDebugger::clearCookie', (e) => {
 	window.ABTasty.clearAllCookies()
+	window.localStorage.removeItem(ABTASTY_NAME)
 })
 
 /**
