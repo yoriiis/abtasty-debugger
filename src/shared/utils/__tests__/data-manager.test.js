@@ -27,8 +27,8 @@ const targetingsSortedByStatus = {
 				...{ key: 'selector_scope' }
 			},
 			{
-				...fixturesAbtasty.results[100002].targetings.targetPages.url_scope,
-				...{ key: 'url_scope' }
+				...fixturesAbtasty.results[100002].targetings.targetPages.favorite_url_scope,
+				...{ key: 'favorite_url_scope' }
 			},
 			{
 				...fixturesAbtasty.results[100002].targetings.qaParameters.cookie_scope,
