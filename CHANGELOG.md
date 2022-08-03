@@ -4,7 +4,7 @@
 
 ### Fixes
 
-- Add favorite url scope from page builder feature ([#11](https://github.com/yoriiis/abtasty-debugger/pull/11))
+- Fix url targeting with favorite url scope ([#11](https://github.com/yoriiis/abtasty-debugger/pull/11))
 
 ## 1.2.2
 
