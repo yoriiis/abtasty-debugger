@@ -3,12 +3,20 @@ export interface Condition {
 	value: string
 	include: Boolean
 	condition: number
+	url?: string
+	operator?: string
+	favorite_url_id: string
+}
+
+export interface FavoriteUrlScope {
+	favoriteUrlScopeConditions: Array<Condition>
+	urlScopes: Array<Condition>
 }
 
 export interface Targeting {
 	key: string
 	success: Boolean
-	conditions: Array<Condition>
+	conditions: Array<Condition> | FavoriteUrlScope
 }
 
 export interface Result {
@@ -16,7 +24,6 @@ export interface Result {
 	name: string
 	type: string
 	status: string
-	targetingMode: string
 	variationID: number
 	variationName: string
 	targetings: {
@@ -41,7 +48,6 @@ export interface Variation {
 
 export interface Test {
 	id: number
-	targetingMode: string
 	isAsync: string
 	parentID: number
 	asyncVariationInfoById: Variations
@@ -52,9 +58,7 @@ export interface Test {
 export interface Data {
 	accountData: {
 		tests: {
-			[key: string]: {
-				targetingMode: string
-			}
+			[key: string]: {}
 		}
 	}
 	results: Results

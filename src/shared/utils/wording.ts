@@ -9,6 +9,7 @@ import { Wording } from 'shared/assets/interfaces/interfaces'
 export default function (key: string): string {
 	const wordings: Wording = {
 		url_scope: 'URL',
+		favorite_url_scope: 'URL',
 		code_scope: 'Code',
 		selector_scope: 'Selector',
 		cookie_scope: 'Cookie',
