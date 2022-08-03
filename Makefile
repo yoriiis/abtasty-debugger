@@ -1,4 +1,7 @@
-build-release: create-release-chrome create-release-browser generate-zip
+build-release: clean-previous-release create-release-chrome create-release-browser generate-zip
+
+clean-previous-release:
+	rm -f ./release-chrome.zip ./release-firefox.zip ./release-opera.zip ./release-edge.zip
 
 # Used by Chrome only
 create-release-chrome:
