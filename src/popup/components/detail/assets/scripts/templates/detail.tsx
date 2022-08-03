@@ -25,7 +25,6 @@ export default function ({ data }: { data: DetailData }) {
 			</li>
 			<li>Status: {data.result.status}</li>
 			<li>Type: {data.result.type}</li>
-			<li>Targeting mode: {data.test.targetingMode}</li>
 			<li>Async: {data.test.isAsync ? 'true' : 'false'}</li>
 			<li>Traffic: {data.test.traffic}%</li>
 		</ul>

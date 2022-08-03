@@ -8,8 +8,7 @@
 			"100001": {
 				"id": 100001,
 				"parentID": 0,
-				"scopes": {},
-				"targetingMode": "waituntil"
+				"scopes": {}
 			},
 			"100002": {
 				"actionTrackings": {
@@ -51,20 +50,17 @@
 				"id": 100002,
 				"isAsync": true,
 				"parentID": 0,
-				"targetingMode": "fastest",
 				"traffic": 40
 			},
 			"100003": {
 				"id": 100003,
 				"isAsync": false,
-				"parentID": 0,
-				"targetingMode": "fastest"
+				"parentID": 0
 			},
 			"100004": {
 				"id": 100004,
 				"isAsync": false,
-				"parentID": 100003,
-				"targetingMode": "fastest"
+				"parentID": 100003
 			}
 		}
 	},
@@ -137,19 +133,28 @@
 						],
 						"success": true
 					},
-					"url_scope": {
-						"conditions": [
-							{
-								"condition": 10,
-								"include": false,
-								"value": "https://www.programme-tv.net"
-							},
-							{
-								"condition": 11,
-								"include": true,
-								"value": "https://www.programme-tv.net/news"
-							}
-						],
+					"favorite_url_scope": {
+						"conditions": {
+							"favoriteUrlScopeConditions": [
+								{
+									"include": true,
+									"url": "/news/*",
+									"operator": "regex",
+									"favorite_url_id": "123456"
+								}
+							],
+							"urlScopes": [
+								{
+									"include": true,
+									"favorite_url_id": "123456"
+								},
+								{
+									"condition": 10,
+									"include": false,
+									"value": "https://www.programme-tv.net"
+								}
+							]
+						},
 						"success": true
 					}
 				}
