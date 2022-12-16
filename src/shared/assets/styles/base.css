@@ -52,7 +52,7 @@ body {
 			transition: opacity var(--transition);
 			content: '';
 			display: block;
-			opacity: 0%;
+			opacity: 0;
 			width: 8px;
 			height: 8px;
 			position: absolute;
@@ -65,7 +65,7 @@ body {
 	}
 
 	&-input {
-		opacity: 0%;
+		opacity: 0;
 		cursor: pointer;
 		position: absolute;
 		z-index: 1;
@@ -77,7 +77,7 @@ body {
 		transform: translate(-50%, -50%);
 
 		&:disabled {
-			opacity: 50%;
+			opacity: 0.5;
 			cursor: not-allowed;
 		}
 
@@ -85,7 +85,7 @@ body {
 			border-color: var(--green);
 
 			&::after {
-				opacity: 100%;
+				opacity: 1;
 			}
 		}
 	}
@@ -117,7 +117,7 @@ body {
 		height: 10px;
 
 		svg {
-			opacity: 0%;
+			opacity: 0;
 			transition: opacity var(--transition);
 			width: 100%;
 			height: 100%;
@@ -126,7 +126,7 @@ body {
 	}
 
 	&-input {
-		opacity: 0%;
+		opacity: 0;
 		cursor: pointer;
 		position: absolute;
 		z-index: 1;
@@ -138,7 +138,7 @@ body {
 		transform: translate(-50%, -50%);
 
 		&:disabled {
-			opacity: 50%;
+			opacity: 0.5;
 			cursor: not-allowed;
 		}
 
@@ -148,7 +148,7 @@ body {
 			}
 
 			& + .customCheckbox-round svg {
-				opacity: 100%;
+				opacity: 1;
 			}
 		}
 	}

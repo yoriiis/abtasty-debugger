@@ -1,4 +1,3 @@
-const path = require('path')
 const crypto = require('crypto')
 const md5 = (string) => crypto.createHash('md5').update(string).digest('hex')
 
@@ -23,7 +22,6 @@ module.exports = (api) => {
 			}),
 			require('postcss-nested')(),
 			require('postcss-custom-media')({
-				importFrom: [path.resolve(__dirname, './src/shared/assets/styles/vars.css')],
 				preserve: false
 			})
 		]
