@@ -2,7 +2,6 @@ const fs = require('fs')
 const path = require('path')
 const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -18,64 +17,18 @@ module.exports = (env, argv) => {
 	const isReleaseMode = env.release || false
 	const manifestFilename = target === 'chrome' ? 'manifest-v3.json' : 'manifest-v2.json'
 
-	const entries = {
-		popup: './src/popup/config'
-	}
-	const plugins = [
-		new ProgressBarPlugin(),
-		new MiniCssExtractPlugin({
-			filename: `styles/[name]${suffixHash}.css`,
-			chunkFilename: `styles/[name]${suffixHash}.css`
-		}),
-		new HtmlWebpackPlugin({
-			filename: 'popup.html',
-			template: resolveApp('src/popup/views/popup.html'),
-			publicPath: '',
-			chunks: ['popup']
-		}),
-		new webpack.optimize.ModuleConcatenationPlugin(),
-		new CopyPlugin({
-			patterns: [
-				{
-					from: resolveApp('src/shared/assets/content-scripts'),
-					to: resolveApp('web/dist/scripts')
-				},
-				{
-					from: resolveApp(`src/shared/assets/manifests/${manifestFilename}`),
-					to: resolveApp('web/dist/manifest.json')
-				},
-				{
-					from: resolveApp('src/shared/assets/background'),
-					to: resolveApp('web/dist/')
-				}
-			]
-		})
-	]
-
-	// On release mode disabled, add the debug entry point and plugin
-	if (!isReleaseMode) {
-		entries['popup-debug'] = './src/popup-debug/config'
-		plugins.push(
-			new HtmlWebpackPlugin({
-				filename: 'popup-debug.html',
-				template: resolveApp('src/popup/views/popup.html'),
-				publicPath: '',
-				chunks: ['popup-debug']
-			})
-		)
-	}
-
-	return {
-		entry: entries,
-		watch: !isProduction,
+	const config = {
+		entry: {
+			popup: resolveApp('src/popup/config')
+		},
 		context: appDirectory,
 		watchOptions: {
 			ignored: /node_modules/
 		},
 		devtool: isProduction ? false : 'source-map',
 		output: {
-			path: resolveApp('web/dist'),
-			publicPath: 'dist/',
+			path: resolveApp('web'),
+			publicPath: '/',
 			filename: `scripts/[name]${suffixHash}.js`,
 			chunkFilename: `scripts/[name]${suffixHash}.js`
 		},
@@ -145,7 +98,35 @@ module.exports = (env, argv) => {
 				globalAssets: resolveApp('assets')
 			}
 		},
-		plugins,
+		plugins: [
+			new MiniCssExtractPlugin({
+				filename: `styles/[name]${suffixHash}.css`,
+				chunkFilename: `styles/[name]${suffixHash}.css`
+			}),
+			new HtmlWebpackPlugin({
+				filename: 'popup.html',
+				template: resolveApp('src/popup/views/popup.html'),
+				publicPath: '',
+				chunks: ['popup']
+			}),
+			new webpack.optimize.ModuleConcatenationPlugin(),
+			new CopyPlugin({
+				patterns: [
+					{
+						from: resolveApp('src/shared/assets/content-scripts'),
+						to: resolveApp('web/scripts')
+					},
+					{
+						from: resolveApp(`src/shared/assets/manifests/${manifestFilename}`),
+						to: resolveApp('web/manifest.json')
+					},
+					{
+						from: resolveApp('src/shared/assets/background'),
+						to: resolveApp('web/')
+					}
+				]
+			})
+		],
 		stats: {
 			assets: true,
 			colors: true,
@@ -180,4 +161,36 @@ module.exports = (env, argv) => {
 			splitChunks: false
 		}
 	}
+
+	if (!isProduction) {
+		config.plugins.push(new webpack.ProgressPlugin())
+
+		if (env.WEBPACK_SERVE) {
+			config.devServer = {
+				static: {
+					directory: resolveApp('web')
+				},
+				historyApiFallback: true,
+				port: 3000,
+				compress: true,
+				hot: true,
+				open: ['popup-debug.html']
+			}
+		}
+	}
+
+	// On release mode disabled, add the debug entry point and plugin
+	if (!isReleaseMode) {
+		config.entry['popup-debug'] = resolveApp('src/popup-debug/config')
+		config.plugins.push(
+			new HtmlWebpackPlugin({
+				filename: 'popup-debug.html',
+				template: resolveApp('src/popup/views/popup.html'),
+				publicPath: '',
+				chunks: ['popup-debug']
+			})
+		)
+	}
+
+	return config
 }

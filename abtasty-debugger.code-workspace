@@ -32,5 +32,15 @@
 			"stylelint.vscode-stylelint",
 			"csstools.postcss"
 		]
+	},
+	"launch": {
+		"configurations": [
+			{
+				"type": "node",
+				"request": "attach",
+				"name": "Node: Nodemon",
+				"restart": true
+			}
+		]
 	}
 }

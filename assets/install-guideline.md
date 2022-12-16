@@ -21,4 +21,4 @@ npm run release:browser # Firefox, Opera and Edge
 # npm run release:chrome # Chrome
 ```
 
-The source code is available in the `./src` directory and the build code is available in the `./web/dist` directory.
+The source code is available in the `./src` directory and the build code is available in the `./web` directory.
