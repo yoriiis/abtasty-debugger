@@ -22,7 +22,6 @@ module.exports = (api) => {
 			}),
 			require('postcss-nested')(),
 			require('postcss-custom-media')({
-				// importFrom: [path.resolve(__dirname, '../src/shared/assets/styles/vars.css')],
 				preserve: false
 			})
 		]

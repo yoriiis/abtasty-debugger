@@ -8,7 +8,6 @@ module.exports = {
 			jsx: true
 		},
 		babelOptions: { configFile: './config/babel.config.js' },
-
 		sourceType: 'module'
 	},
 

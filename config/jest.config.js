@@ -7,7 +7,7 @@ module.exports = {
 	coverageDirectory: 'coverage',
 	rootDir: '../',
 	transform: {
-		'^.+\\.(ts|tsx|js)$': ['ts-jest'],
+		'^.+\\.(ts|tsx|js)$': 'ts-jest',
 		'^.+\\.svg$': 'jest-transform-stub'
 	},
 	transformIgnorePatterns: ['<rootDir>/node_modules/(?!jsx-dom)'],
