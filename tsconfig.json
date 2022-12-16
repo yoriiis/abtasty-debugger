@@ -19,7 +19,8 @@
 		"paths": {
 			"shared": ["./shared"]
 		},
-		"resolveJsonModule": true
+		"resolveJsonModule": true,
+		"forceConsistentCasingInFileNames": true
 	},
-	"include": ["./src/**/*.ts", "src/shared/assets/definitions/decs.d.ts"]
+	"include": ["./src/**/*.ts", "./src/**/*.tsx", "src/shared/assets/definitions/decs.d.ts"]
 }
