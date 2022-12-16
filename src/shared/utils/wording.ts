@@ -13,7 +13,9 @@ export default function (key: string): string {
 		code_scope: 'Code',
 		selector_scope: 'Selector',
 		cookie_scope: 'Cookie',
-		ip_scope: 'Ip'
+		ip_scope: 'Ip',
+		segment: 'Segment',
+		trigger: 'Trigger'
 	}
 
 	return wordings[key] || ''

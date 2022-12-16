@@ -81,7 +81,27 @@
 						],
 						"success": false
 					}
-				}
+				},
+				"segment": [
+					{
+						"success": false,
+						"name": "RETURNING_VISITOR"
+					}
+				],
+				"trigger": [
+					{
+						"success": true,
+						"name": "LANDING_PAGE"
+					},
+					{
+						"success": false,
+						"name": "DEVICE"
+					},
+					{
+						"success": true,
+						"name": "CODE"
+					}
+				]
 			},
 			"type": "ab",
 			"variationID": null,

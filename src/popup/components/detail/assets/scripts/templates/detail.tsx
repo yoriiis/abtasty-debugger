@@ -36,7 +36,7 @@ export default function ({ data }: { data: DetailData }) {
 					testStatus={data.result.status}
 					targeting={item}
 					textarea={item.key === 'code_scope'}
-					headerOnly={item.key === 'ip_scope'}
+					headerOnly={['ip_scope', 'segment', 'trigger'].includes(item.key)}
 				/>
 			))}
 			{data.targetingSorted.accepted.map((item: Targeting) => (
@@ -44,7 +44,7 @@ export default function ({ data }: { data: DetailData }) {
 					testStatus={data.result.status}
 					targeting={item}
 					textarea={item.key === 'code_scope'}
-					headerOnly={item.key === 'ip_scope'}
+					headerOnly={['ip_scope', 'segment', 'trigger'].includes(item.key)}
 				/>
 			))}
 		</>

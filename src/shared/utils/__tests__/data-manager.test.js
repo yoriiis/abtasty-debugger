@@ -8,11 +8,28 @@ const testsSortedByStatus = {
 }
 const targetingsSortedByStatus = {
 	100001: {
-		accepted: [],
+		accepted: [
+			{
+				...fixturesAbtasty.results[100001].targetings.trigger[0],
+				...{ key: 'trigger' }
+			},
+			{
+				...fixturesAbtasty.results[100001].targetings.trigger[2],
+				...{ key: 'trigger' }
+			}
+		],
 		rejected: [
 			{
 				...fixturesAbtasty.results[100001].targetings.targetPages.url_scope,
 				...{ key: 'url_scope' }
+			},
+			{
+				...fixturesAbtasty.results[100001].targetings.segment[0],
+				...{ key: 'segment' }
+			},
+			{
+				...fixturesAbtasty.results[100001].targetings.trigger[1],
+				...{ key: 'trigger' }
 			}
 		]
 	},

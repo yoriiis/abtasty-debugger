@@ -39,7 +39,7 @@ export default function ({
 	const content = (
 		<table className="table">
 			<tbody>
-				{conditions.map((item: Condition) => {
+				{conditions && conditions.map((item: Condition) => {
 					let value = item.value
 					if (targeting.key === 'cookie_scope') {
 						value = `${item.name}=${item.value}`
@@ -75,9 +75,14 @@ export default function ({
 			</tbody>
 		</table>
 	)
+
+    let headerText = wording(targeting.key)
+    if(['segment', 'trigger'].includes(targeting.key)){
+        headerText += `: ${targeting.name.toLowerCase()}`
+    }
 	return (
 		<CollapseTemplate
-			header={`${wording(targeting.key)}`}
+			header={headerText}
 			content={!headerOnly && content}
 			badge={badge}
 		/>
