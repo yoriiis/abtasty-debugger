@@ -18,7 +18,7 @@
 		"start:chrome": "web-ext run --target=chromium --source-dir ./web",
 		"start:firefox": "web-ext run --source-dir ./web",
 		"test": "jest --config config/jest.config.js --verbose --coverage",
-		"test:eslint": "eslint . --config config/.eslintrc.js --ignore-pattern --ignore-pattern lib",
+		"test:eslint": "eslint . --config config/.eslintrc.js --ignore-pattern web --ignore-pattern lib",
 		"test:markdown": "markdownlint '**/*.md' --ignore node_modules",
 		"test:stylelint": "stylelint './src/**/*.css' --config ./config/stylelint.config.js",
 		"test:type-check": "tsc --noEmit",
