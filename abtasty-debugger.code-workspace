@@ -6,11 +6,11 @@
 	],
 	"settings": {
 		"editor.defaultFormatter": "esbenp.prettier-vscode",
-        "[javascript][typescript][postcss][html][markdown][json]": {
-            "editor.formatOnSave": true,
-            "editor.tabSize": 4,
-            "editor.rulers": [100]
-        },
+		"[javascript][typescript][postcss][html][markdown][json]": {
+			"editor.formatOnSave": true,
+			"editor.tabSize": 4,
+			"editor.rulers": [100]
+		},
 		"emmet.includeLanguages": {
 			"postcss": "css"
 		},
@@ -30,7 +30,7 @@
 			"esbenp.prettier-vscode",
 			"dbaeumer.vscode-eslint",
 			"stylelint.vscode-stylelint",
-			"mhmadhamster.postcss-language"
+			"csstools.postcss"
 		]
 	}
 }

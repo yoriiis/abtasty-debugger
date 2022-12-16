@@ -1,3 +1,4 @@
+const fs = require('fs')
 const path = require('path')
 const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
@@ -6,6 +7,9 @@ const TerserPlugin = require('terser-webpack-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
+
+const appDirectory = fs.realpathSync(process.cwd())
+const resolveApp = (relativePath) => path.resolve(appDirectory, relativePath)
 
 module.exports = (env, argv) => {
 	const target = env.target
@@ -25,7 +29,7 @@ module.exports = (env, argv) => {
 		}),
 		new HtmlWebpackPlugin({
 			filename: 'popup.html',
-			template: path.resolve(__dirname, './src/popup/views/popup.html'),
+			template: resolveApp('src/popup/views/popup.html'),
 			publicPath: '',
 			chunks: ['popup']
 		}),
@@ -33,19 +37,16 @@ module.exports = (env, argv) => {
 		new CopyPlugin({
 			patterns: [
 				{
-					from: path.resolve(__dirname, './src/shared/assets/content-scripts'),
-					to: path.resolve(__dirname, './web/dist/scripts')
+					from: resolveApp('src/shared/assets/content-scripts'),
+					to: resolveApp('web/dist/scripts')
 				},
 				{
-					from: path.resolve(
-						__dirname,
-						`./src/shared/assets/manifests/${manifestFilename}`
-					),
-					to: path.resolve(__dirname, './web/dist/manifest.json')
+					from: resolveApp(`src/shared/assets/manifests/${manifestFilename}`),
+					to: resolveApp('web/dist/manifest.json')
 				},
 				{
-					from: path.resolve(__dirname, './src/shared/assets/background'),
-					to: path.resolve(__dirname, './web/dist/')
+					from: resolveApp('src/shared/assets/background'),
+					to: resolveApp('web/dist/')
 				}
 			]
 		})
@@ -57,7 +58,7 @@ module.exports = (env, argv) => {
 		plugins.push(
 			new HtmlWebpackPlugin({
 				filename: 'popup-debug.html',
-				template: path.resolve(__dirname, './src/popup/views/popup.html'),
+				template: resolveApp('src/popup/views/popup.html'),
 				publicPath: '',
 				chunks: ['popup-debug']
 			})
@@ -67,12 +68,13 @@ module.exports = (env, argv) => {
 	return {
 		entry: entries,
 		watch: !isProduction,
+		context: appDirectory,
 		watchOptions: {
 			ignored: /node_modules/
 		},
 		devtool: isProduction ? false : 'source-map',
 		output: {
-			path: path.resolve(__dirname, './web/dist'),
+			path: resolveApp('web/dist'),
 			publicPath: 'dist/',
 			filename: `scripts/[name]${suffixHash}.js`,
 			chunkFilename: `scripts/[name]${suffixHash}.js`
@@ -81,7 +83,7 @@ module.exports = (env, argv) => {
 			rules: [
 				{
 					test: /\.(js)$/,
-					include: path.resolve(__dirname, './src'),
+					include: resolveApp('src'),
 					use: [
 						{
 							loader: 'babel-loader'
@@ -90,7 +92,7 @@ module.exports = (env, argv) => {
 				},
 				{
 					test: /\.(ts|tsx)$/,
-					include: path.resolve(__dirname, './src'),
+					include: resolveApp('src'),
 					use: [
 						{
 							loader: 'babel-loader'
@@ -102,7 +104,7 @@ module.exports = (env, argv) => {
 				},
 				{
 					test: /\.css$/,
-					include: [path.resolve(__dirname, './src')],
+					include: [resolveApp('src')],
 					use: [
 						MiniCssExtractPlugin.loader,
 						{
@@ -112,7 +114,7 @@ module.exports = (env, argv) => {
 							loader: 'postcss-loader',
 							options: {
 								postcssOptions: {
-									config: path.resolve(__dirname, 'postcss.config.js')
+									config: resolveApp('config/postcss.config.js')
 								}
 							}
 						}
@@ -120,10 +122,7 @@ module.exports = (env, argv) => {
 				},
 				{
 					test: /\.(jpe?g|png|gif)$/i,
-					include: [
-						path.resolve(__dirname, './assets/'),
-						path.resolve(__dirname, './src/')
-					],
+					include: [resolveApp('assets'), resolveApp('src')],
 					type: 'asset/resource',
 					generator: {
 						filename: 'images/[name][ext]'
@@ -131,7 +130,7 @@ module.exports = (env, argv) => {
 				},
 				{
 					test: /\.(json|svg)$/i,
-					include: path.resolve(__dirname, './src/'),
+					include: resolveApp('src'),
 					type: 'asset/source',
 					generator: {
 						filename: '[name][ext]'
@@ -142,8 +141,8 @@ module.exports = (env, argv) => {
 		resolve: {
 			extensions: ['.js', '.ts', '.tsx', '.css'],
 			alias: {
-				shared: path.resolve(__dirname, './src/shared'),
-				globalAssets: path.resolve(__dirname, './assets')
+				shared: resolveApp('src/shared'),
+				globalAssets: resolveApp('assets')
 			}
 		},
 		plugins,
