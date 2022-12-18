@@ -3,6 +3,7 @@ import { createElement } from 'jsx-dom'
 import TemplateList from './templates/list'
 import { Component, navigate } from 'costro'
 import { sendMessage, isExtensionMode, namespace } from 'shared/utils/bridge'
+import { TestsSortedByStatus } from 'shared/assets/interfaces/interfaces'
 
 export default class List extends Component {
 	element: null | HTMLElement
@@ -17,16 +18,38 @@ export default class List extends Component {
 	}
 
 	/**
+	 * Before render
+	 */
+	beforeRender() {
+		if (!this.props.data) {
+			navigate('/empty')
+			return
+		}
+
+		if (typeof this.getStore('testsSortedByStatus') === 'undefined') {
+			this.setStore({
+				testsSortedByStatus: this.props.dataManager.getTestsSortedByStatus(this.props.data)
+			})
+		}
+		if (typeof this.getStore('debug') === 'undefined') {
+			this.setStore({ debug: this.props.dataManager.getTestsSortedByStatus(this.props.data) })
+		}
+	}
+
+	/**
 	 * Render the template
 	 * @returns {HTMLElement} Template
 	 */
 	render() {
-		return (
-			<TemplateList
-				testsSortedByStatus={this.props.testsSortedByStatus}
-				debug={this.props.debug}
-			/>
-		)
+		const testsSortedByStatus = this.getStore('testsSortedByStatus') as TestsSortedByStatus
+		// @ts-ignore
+		const debug = this.getStore('debug') as boolean
+
+		if (!testsSortedByStatus) {
+			return
+		}
+
+		return <TemplateList testsSortedByStatus={testsSortedByStatus} debug={debug} />
 	}
 
 	/**
@@ -34,17 +57,20 @@ export default class List extends Component {
 	 */
 	afterRender() {
 		this.element = document.querySelector('.list')
-		this.addEvents()
+
+		if (this.element) {
+			this.addEvents()
+		}
 	}
 
 	/**
 	 * Add event listeners
 	 */
 	addEvents() {
-		if (this.element) {
-			this.element.addEventListener('click', this.onClickOnElement)
-			this.element.addEventListener('change', this.onChangeOnElement)
-		}
+		const element = this.element as HTMLElement
+
+		element.addEventListener('click', this.onClickOnElement)
+		element.addEventListener('change', this.onChangeOnElement)
 	}
 
 	/**

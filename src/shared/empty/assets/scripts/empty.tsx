@@ -18,9 +18,7 @@ export default class Empty extends Component {
 	 * Before render
 	 */
 	beforeRender() {
-		if (this.props.data && this.props.data.results) {
-			navigate('/list')
-		}
+		this.props.hasData && navigate('/list')
 	}
 
 	/**

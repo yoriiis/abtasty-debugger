@@ -9,7 +9,7 @@ if (isExtensionMode) {
 			const popup = new Popup({
 				data: response
 			})
-			popup.init()
+			document.getElementById('app') && popup.init()
 		}
 	})
 }

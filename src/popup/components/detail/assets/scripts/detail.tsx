@@ -3,6 +3,7 @@ import { createElement } from 'jsx-dom'
 import TemplateDetail from './templates/detail'
 import { Component, navigate } from 'costro'
 import { sendMessage, isExtensionMode, namespace } from 'shared/utils/bridge'
+import { TargetingsSortedByStatus } from 'shared/assets/interfaces/interfaces'
 
 export default class Detail extends Component {
 	element: null | HTMLElement
@@ -17,18 +18,44 @@ export default class Detail extends Component {
 	}
 
 	/**
+	 * Before render
+	 */
+	beforeRender() {
+		if (!this.props.data) {
+			navigate('/empty')
+			return
+		}
+
+		if (typeof this.getStore('targetingsSortedByStatus') === 'undefined') {
+			this.setStore({
+				targetingsSortedByStatus: this.props.dataManager.getTargetingsSortedByStatus(
+					this.props.data
+				)
+			})
+		}
+	}
+
+	/**
 	 * Render the template
 	 * @returns {HTMLElement} Template
 	 */
 	render() {
+		const targetingsSortedByStatus = this.getStore(
+			'targetingsSortedByStatus'
+		) as TargetingsSortedByStatus
 		const testId = this.route.params.testId
+
+		if (!targetingsSortedByStatus) {
+			return
+		}
+
 		return (
 			<TemplateDetail
 				testId={testId}
-				identifier={this.props.accountData.accountSettings.identifier}
-				test={this.props.accountData.tests[testId]}
-				result={this.props.results[testId]}
-				targetingSorted={this.props.targetingsSortedByStatus[testId]}
+				identifier={this.props.data.accountData.accountSettings.identifier}
+				test={this.props.data.accountData.tests[testId]}
+				result={this.props.data.results[testId]}
+				targetingSorted={targetingsSortedByStatus[testId]}
 			/>
 		)
 	}
@@ -38,17 +65,20 @@ export default class Detail extends Component {
 	 */
 	afterRender() {
 		this.element = document.querySelector('.detail')
-		this.addEvents()
+
+		if (this.element) {
+			this.addEvents()
+		}
 	}
 
 	/**
 	 * Add event listeners
 	 */
 	addEvents() {
-		if (this.element) {
-			this.element.addEventListener('click', this.onClickOnElement)
-			this.element.addEventListener('change', this.onChangeOnElement)
-		}
+		const element = this.element as HTMLElement
+
+		element.addEventListener('click', this.onClickOnElement)
+		element.addEventListener('change', this.onChangeOnElement)
 	}
 
 	/**

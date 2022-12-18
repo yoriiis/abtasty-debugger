@@ -25,14 +25,14 @@ declare module 'react' {
 
 export default class Popup {
 	data: Data
-	app: Element
+	element: Element
 	dataManager: any
+	app!: any
 
 	constructor({ data }: { data: Data }) {
 		this.data = data
 
-		// @ts-ignore
-		this.app = document.querySelector('#app')
+		this.element = document.querySelector('#app') as HTMLElement
 
 		this.onTabUpdated = this.onTabUpdated.bind(this)
 
@@ -43,49 +43,48 @@ export default class Popup {
 	 * Initialize the popup
 	 */
 	init() {
-		if (this.app) {
-			const app = new App({
-				target: this.app as HTMLElement,
-				routes: [
-					{
-						path: '/list',
-						component: List,
-						props: {
-							testsSortedByStatus: this.dataManager.getTestsSortedByStatus(this.data),
-							debug: this.data.debug
-						}
-					},
-					{
-						path: '/detail/:testId',
-						component: Detail,
-						props: {
-							accountData: this.data.accountData,
-							results: this.data.results,
-							targetingsSortedByStatus: this.dataManager.getTargetingsSortedByStatus(
-								this.data
-							)
-						}
-					},
-					{
-						path: '/empty',
-						component: Empty,
-						props: {
-							data: this.data
-						}
+		this.app = new App({
+			target: this.element as HTMLElement,
+			routes: [
+				{
+					path: '/list',
+					component: List,
+					props: {
+						data: this.data,
+						dataManager: this.dataManager
 					}
-				]
-			})
-
-			if (this.data && this.data.results) {
-				if (['/', '/empty'].includes(app.location.currentPath)) {
-					navigate('/list')
+				},
+				{
+					path: '/detail/:testId',
+					component: Detail,
+					props: {
+						data: this.data,
+						dataManager: this.dataManager
+					}
+				},
+				{
+					path: '/empty',
+					component: Empty,
+					props: {
+						hasData: !!(this.data && this.data.results)
+					}
 				}
-			} else {
-				navigate('/empty')
-			}
-		}
+			]
+		})
 
+		this.setRedirection()
 		this.addEvents()
+	}
+
+	/**
+	 * Set redirection
+	 */
+	setRedirection() {
+		if (!(this.data && this.data.results)) {
+			navigate('/empty')
+		} else if (['/', '/empty'].includes(this.app.location.currentPath)) {
+			navigate('/list')
+		}
 	}
 
 	/**
@@ -106,13 +105,5 @@ export default class Popup {
 		if (debugMode && debugMode.hasAttribute('disabled') && changeInfo.status === 'complete') {
 			debugMode.removeAttribute('disabled')
 		}
-	}
-
-	/**
-	 * Remove HTML Element
-	 * @param {HTMLElement} element
-	 */
-	removeElement(element: Element) {
-		element.remove()
 	}
 }
