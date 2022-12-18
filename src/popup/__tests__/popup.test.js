@@ -1,38 +1,24 @@
 import { createElement } from 'jsx-dom'
-import validateTarget from 'validate-target'
 import Popup from '../assets/scripts/popup'
 import fixturesAbtasty from '../../shared/assets/fixtures/abtasty.json'
 import DataManager from 'shared/utils/data-manager'
-import { namespace, sendMessage } from 'shared/utils/bridge'
+import { namespace } from 'shared/utils/bridge'
 import { App, navigate } from 'costro'
 import List from '../components/list/assets/scripts/list'
 import Detail from '../components/detail/assets/scripts/detail'
 import Empty from 'shared/empty/assets/scripts/empty'
 
-const testId = '100002'
-const newVariationId = '200002'
-const abtastyCookie = `uid=zed18spa36wefrnq&fst=1632216663697&pst=-1&cst=1632216663697&ns=1&pvt=1&pvis=1&th=661111.820024.1.1.1.1.1632216664066.1632216664066.1_${testId}.200001.1.1.1.1.1632216664068.1632216664068.1`
-
-jest.mock('validate-target')
 jest.mock('shared/utils/data-manager')
 jest.mock('shared/utils/bridge', () => {
 	return {
-		sendMessage: jest.fn().mockImplementation(({ action, data, callback }) => {
-			let response = null
-			if (action === 'getCookie' && data.name === 'ABTasty') {
-				response = abtastyCookie
-			}
-			callback instanceof Function && callback(response)
-		}),
-		isExtensionMode: true,
 		namespace: {
 			tabs: {
 				onUpdated: {
 					addListener: jest.fn()
-				},
-				reload: jest.fn()
+				}
 			}
-		}
+		},
+		isExtensionMode: true
 	}
 })
 jest.mock('costro', () => {
@@ -54,8 +40,6 @@ jest.mock('../components/detail/assets/scripts/detail')
 jest.mock('shared/empty/assets/scripts/empty')
 
 let popup
-const routeDetail = 'detail/000001'
-const instancesResult = [new Detail(), new Empty()]
 
 const getInstance = () =>
 	new Popup({
@@ -90,12 +74,6 @@ describe('Popup', () => {
 			expect(popup.data).toStrictEqual(fixturesAbtasty)
 			expect(popup.element).toBe(document.getElementById('app'))
 			expect(DataManager).toHaveBeenCalled()
-		})
-
-		it('Should initialize the constructor with the default value', () => {
-			new Popup({
-				data: { ...fixturesAbtasty }
-			})
 		})
 	})
 

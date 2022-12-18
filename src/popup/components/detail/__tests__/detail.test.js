@@ -1,8 +1,12 @@
 import { createElement } from 'jsx-dom'
 import validateTarget from 'validate-target'
-import { namespace, isExtensionMode, sendMessage } from 'shared/utils/bridge'
+import { namespace, sendMessage } from 'shared/utils/bridge'
 import fixturesAbtasty from '../../../../shared/assets/fixtures/abtasty.json'
 import Detail from '../assets/scripts/detail'
+
+const newVariationId = '200002'
+const testId = '100002'
+const abtastyCookie = `uid=zed18spa36wefrnq&fst=1632216663697&pst=-1&cst=1632216663697&ns=1&pvt=1&pvis=1&th=661111.820024.1.1.1.1.1632216664066.1632216664066.1_${testId}.200001.1.1.1.1.1632216664068.1632216664068.1`
 
 jest.mock('validate-target')
 jest.mock('shared/utils/bridge', () => {
@@ -27,9 +31,6 @@ jest.mock('shared/utils/bridge', () => {
 })
 
 let detail
-const newVariationId = '200002'
-const testId = '100002'
-const abtastyCookie = `uid=zed18spa36wefrnq&fst=1632216663697&pst=-1&cst=1632216663697&ns=1&pvt=1&pvis=1&th=661111.820024.1.1.1.1.1632216664066.1632216664066.1_${testId}.200001.1.1.1.1.1632216664068.1632216664068.1`
 
 const getInstance = () => new Detail()
 

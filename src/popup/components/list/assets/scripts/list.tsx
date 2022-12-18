@@ -32,7 +32,7 @@ export default class List extends Component {
 			})
 		}
 		if (typeof this.getStore('debug') === 'undefined') {
-			this.setStore({ debug: this.props.dataManager.getTestsSortedByStatus(this.props.data) })
+			this.setStore({ debug: this.props.data.debug })
 		}
 	}
 

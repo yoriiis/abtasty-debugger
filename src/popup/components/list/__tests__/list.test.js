@@ -1,7 +1,10 @@
 import { createElement } from 'jsx-dom'
 import validateTarget from 'validate-target'
-import { namespace, isExtensionMode, sendMessage } from 'shared/utils/bridge'
+import { namespace, sendMessage } from 'shared/utils/bridge'
 import List from '../assets/scripts/list'
+
+const testId = '100002'
+const abtastyCookie = `uid=zed18spa36wefrnq&fst=1632216663697&pst=-1&cst=1632216663697&ns=1&pvt=1&pvis=1&th=661111.820024.1.1.1.1.1632216664066.1632216664066.1_${testId}.200001.1.1.1.1.1632216664068.1632216664068.1`
 
 jest.mock('validate-target')
 jest.mock('shared/utils/bridge', () => {
