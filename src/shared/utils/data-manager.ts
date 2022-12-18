@@ -58,6 +58,11 @@ export default class DataManager {
 		const outputData: TargetingsSortedByStatus = {}
 		Object.entries(data.results).forEach(([id, result]: [id: string, result: Result]) => {
 			const targetings = result.targetings
+			let acceptedSegment: Array<Targeting> = []
+			let rejectedSegment: Array<Targeting> = []
+			let acceptedTrigger: Array<Targeting> = []
+			let rejectedTrigger: Array<Targeting> = []
+
 			const acceptedTargetPages = Object.entries(targetings.targetPages)
 				.filter(([key, value]: [key: string, value: Targeting]) => value.success === true)
 				.map(([key, value]: [key: string, value: Targeting]) => {
@@ -70,6 +75,24 @@ export default class DataManager {
 					value.key = key
 					return value
 				})
+
+			if (targetings.segment) {
+				acceptedSegment = targetings.segment
+					.filter((item: Targeting) => item.success === true)
+					.map((item) => {
+						item.key = 'segment'
+						return item
+					})
+			}
+			if (targetings.trigger) {
+				acceptedTrigger = targetings.trigger
+					.filter((item: Targeting) => item.success === true)
+					.map((item) => {
+						item.key = 'trigger'
+						return item
+					})
+			}
+
 			const rejectedTargetPages = Object.entries(targetings.targetPages)
 				.filter(([key, value]: [key: string, value: Targeting]) => value.success === false)
 				.map(([key, value]: [key: string, value: Targeting]) => {
@@ -83,9 +106,36 @@ export default class DataManager {
 					return value
 				})
 
+			if (targetings.segment) {
+				rejectedSegment = targetings.segment
+					.filter((item: Targeting) => item.success === false)
+					.map((item) => {
+						item.key = 'segment'
+						return item
+					})
+			}
+			if (targetings.trigger) {
+				rejectedTrigger = targetings.trigger
+					.filter((item: Targeting) => item.success === false)
+					.map((item) => {
+						item.key = 'trigger'
+						return item
+					})
+			}
+
 			outputData[id] = {
-				accepted: [...acceptedTargetPages, ...acceptedQaParameters],
-				rejected: [...rejectedTargetPages, ...rejectedQaParameters]
+				accepted: [
+					...acceptedTargetPages,
+					...acceptedQaParameters,
+					...acceptedSegment,
+					...acceptedTrigger
+				],
+				rejected: [
+					...rejectedTargetPages,
+					...rejectedQaParameters,
+					...rejectedSegment,
+					...rejectedTrigger
+				]
 			}
 		})
 

@@ -16,7 +16,8 @@ export interface FavoriteUrlScope {
 export interface Targeting {
 	key: string
 	success: Boolean
-	conditions: Array<Condition> | FavoriteUrlScope
+	conditions?: Array<Condition> | FavoriteUrlScope
+	name: string
 }
 
 export interface Result {
@@ -33,6 +34,8 @@ export interface Result {
 		qaParameters: {
 			[key: string]: Targeting
 		}
+		segment: Array<Targeting>
+		trigger: Array<Targeting>
 	}
 }
 
