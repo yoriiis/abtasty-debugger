@@ -68,14 +68,18 @@ export default class Popup {
 					},
 					{
 						path: '/empty',
-						component: Empty
+						component: Empty,
+						props: {
+							data: this.data
+						}
 					}
 				]
 			})
-			console.log(app, this.data)
 
 			if (this.data && this.data.results) {
-				navigate('/list')
+				if (['/', '/empty'].includes(app.location.currentPath)) {
+					navigate('/list')
+				}
 			} else {
 				navigate('/empty')
 			}

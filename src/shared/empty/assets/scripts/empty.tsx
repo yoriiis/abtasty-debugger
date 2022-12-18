@@ -1,7 +1,7 @@
 import validateTarget from 'validate-target'
 import { createElement } from 'jsx-dom'
 import TemplateEmpty from './templates/empty'
-import { Component } from 'costro'
+import { Component, navigate } from 'costro'
 
 export default class Empty extends Component {
 	element: null | HTMLElement
@@ -12,6 +12,15 @@ export default class Empty extends Component {
 		this.element = null
 
 		this.onClickOnElement = this.onClickOnElement.bind(this)
+	}
+
+	/**
+	 * Before render
+	 */
+	beforeRender() {
+		if (this.props.data && this.props.data.results) {
+			navigate('/list')
+		}
 	}
 
 	/**
