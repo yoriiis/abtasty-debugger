@@ -1,25 +1,13 @@
 import { createElement } from 'jsx-dom'
-import Template from './templates/empty'
+import TemplateEmpty from './templates/empty'
+import { Component } from 'costro'
 
-export default class Empty {
-	id = 'empty'
-	route = '/empty'
-	selector = '.empty'
-
+export default class Empty extends Component {
 	/**
 	 * Render the template
 	 * @returns {HTMLElement} Template
 	 */
-	render(): Element {
-		return this.getTemplate()
-	}
-
-	/**
-	 * Get template
-	 * @param {Object} data Template's data
-	 * @returns {HTMLElement} Template
-	 */
-	getTemplate(): any {
-		return <Template />
+	render() {
+		return <TemplateEmpty />
 	}
 }

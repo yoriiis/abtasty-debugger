@@ -4,13 +4,14 @@ import check from 'shared/assets/svgs/check.svg'
 import clear from 'shared/assets/svgs/clear.svg'
 import BadgeTemplate from 'shared/badge/assets/scripts/badge'
 import { ListData, Result } from 'shared/assets/interfaces/interfaces'
+import { navigate } from 'costro'
 
 /**
  * List template
  * @param {Object} options Template options
  * @returns {HTMLElement} Generated HTML
  */
-export default function ({ data }: { data: ListData }) {
+export default function ({ testsSortedByStatus, debug }: ListData) {
 	return (
 		<>
 			<div className="list">
@@ -33,11 +34,11 @@ export default function ({ data }: { data: ListData }) {
 							<div className="customCheckbox">
 								<input
 									type="checkbox"
-									value={data.debug ? 'true' : 'false'}
+									value={debug ? 'true' : 'false'}
 									className="customCheckbox-input"
 									id="debugMode"
 									name="debug"
-									checked={data.debug}
+									checked={debug}
 								/>
 								<span className="customCheckbox-round">
 									<div
@@ -50,10 +51,10 @@ export default function ({ data }: { data: ListData }) {
 					</ul>
 				</div>
 				<ul>
-					{data.testsSortedByStatus.accepted.map((item: Result) => (
+					{testsSortedByStatus.accepted.map((item: Result) => (
 						<ListItem data={item} />
 					))}
-					{data.testsSortedByStatus.rejected.map((item: Result) => (
+					{testsSortedByStatus.rejected.map((item: Result) => (
 						<ListItem data={item} />
 					))}
 				</ul>
@@ -71,7 +72,7 @@ export default function ({ data }: { data: ListData }) {
 function ListItem({ data }: { data: Result }) {
 	return (
 		<li className="list-item">
-			<a href={`#/detail/${data.key}`} className="list-link">
+			<button onClick={() => navigate(`/detail/${data.key}`)} className="list-link">
 				<span className="list-name">{data.name}</span>
 				{typeof data.status === 'string' && (
 					<BadgeTemplate
@@ -80,7 +81,7 @@ function ListItem({ data }: { data: Result }) {
 					/>
 				)}
 				<div className="list-icon" innerHTML={arrowBottom}></div>
-			</a>
+			</button>
 		</li>
 	)
 }

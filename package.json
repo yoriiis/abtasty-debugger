@@ -29,6 +29,7 @@
 	},
 	"prettier": "./config/prettier.config.js",
 	"dependencies": {
+		"costro": "^1.0.3",
 		"validate-target": "^2.0.0"
 	},
 	"devDependencies": {

@@ -65,6 +65,7 @@ export interface Data {
 		}
 	}
 	results: Results
+	debug: boolean
 }
 
 export interface Results {
@@ -99,10 +100,6 @@ export interface DetailData {
 	test: Test
 	result: Result
 	targetingSorted: TargetingItemSortedByStatus
-}
-
-export interface DynamicSegments {
-	[key: string]: string
 }
 
 export interface ListData {

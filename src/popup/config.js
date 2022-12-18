@@ -12,11 +12,6 @@ import './components/list/config'
 import './components/detail/config'
 
 // import shared components
-import 'shared/badge/config'
-import 'shared/targeting/config'
-import 'shared/variation/config'
-import 'shared/tracking/config'
-import 'shared/collapse/config'
 import 'shared/empty/config'
 
 // import Images
