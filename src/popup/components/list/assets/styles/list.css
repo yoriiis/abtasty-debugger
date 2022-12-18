@@ -98,6 +98,7 @@
 		cursor: pointer;
 		position: relative;
 		text-decoration: none;
+		text-align: left;
 
 		* {
 			pointer-events: none;
