@@ -4,7 +4,7 @@ The project is open-source and available on the public repository, download the 
 
 ## Prerequisites
 
-The project was built for Node.js `16.13.0` and npm `8.1.0`, on macOS `11.5.2`.
+The project was built for Node.js `18.12.0` and npm `8.19.2`, on macOS `12.6`.
 
 ## Installation
 
