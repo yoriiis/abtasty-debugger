@@ -7,12 +7,9 @@ import { Variations, Variation, TrafficAllocation } from 'shared/assets/interfac
  */
 export default function getTrafficAllocation(variations: Variations): TrafficAllocation {
 	const listVariationTraffic = Object.entries(variations).map(
-		([id, variation]: [id: string, variation: Variation]) => variation.traffic
+		([, variation]: [id: string, variation: Variation]) => variation.traffic
 	)
-	const totalVariationTraffic = listVariationTraffic.reduce(
-		(partial_sum, a) => partial_sum + a,
-		0
-	)
+	const totalVariationTraffic = listVariationTraffic.reduce((partialSum, a) => partialSum + a, 0)
 	const highestTraffic = Math.max(...listVariationTraffic)
 
 	let untracked = -1

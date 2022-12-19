@@ -1,28 +1,24 @@
 import { createElement } from 'jsx-dom'
 import CollapseTemplate from 'shared/collapse/assets/scripts/collapse'
-import arrowBottom from 'shared/assets/svgs/arrow-bottom.svg'
 import wording from 'shared/utils/wording'
 import { Targeting, Condition, FavoriteUrlScope } from 'shared/assets/interfaces/interfaces'
 
 /**
  * Targeting template
  * @param {Object} options
- * @param {String} options.testStatus Status of the test
  * @param {Object} options.targeting Targeting data
  * @param {Object} options.headerOnly Display the header only, without content
  * @param {Object} options.textarea Use textarea instead of input field
  * @returns {HTMLElement} Generated HTML
  */
 export default function ({
-	testStatus,
 	targeting,
 	headerOnly = false,
 	textarea = false
 }: {
-	testStatus: string
 	targeting: Targeting
-	headerOnly: Boolean
-	textarea: Boolean
+	headerOnly: boolean
+	textarea: boolean
 }) {
 	const badge = {
 		color: targeting.success ? 'green' : 'red',

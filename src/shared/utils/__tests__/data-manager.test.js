@@ -93,29 +93,20 @@ beforeEach(() => {
 	dataManager = getInstance()
 })
 
-describe('DataManager getFormattedData', () => {
-	it('Should call the getFormattedData function', () => {
-		const result = dataManager.getFormattedData(fixturesAbtasty)
+describe('DataManager', () => {
+	describe(' getTestsSortedByStatus', () => {
+		it('Should call the getTestsSortedByStatus function', () => {
+			const result = dataManager.getTestsSortedByStatus(fixturesAbtasty)
 
-		expect(result).toStrictEqual({
-			testsSortedByStatus,
-			targetingsSortedByStatus
+			expect(result).toStrictEqual(testsSortedByStatus)
 		})
 	})
-})
 
-describe('DataManager getTestsSortedByStatus', () => {
-	it('Should call the getTestsSortedByStatus function', () => {
-		const result = dataManager.getTestsSortedByStatus(fixturesAbtasty)
+	describe(' getTargetingsSortedByStatus', () => {
+		it('Should call the getTargetingsSortedByStatus function', () => {
+			const result = dataManager.getTargetingsSortedByStatus(fixturesAbtasty)
 
-		expect(result).toStrictEqual(testsSortedByStatus)
-	})
-})
-
-describe('DataManager getTargetingsSortedByStatus', () => {
-	it('Should call the getTargetingsSortedByStatus function', () => {
-		const result = dataManager.getTargetingsSortedByStatus(fixturesAbtasty)
-
-		expect(result).toStrictEqual(targetingsSortedByStatus)
+			expect(result).toStrictEqual(targetingsSortedByStatus)
+		})
 	})
 })

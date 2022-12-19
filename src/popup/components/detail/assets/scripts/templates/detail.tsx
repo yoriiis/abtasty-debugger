@@ -7,41 +7,40 @@ import VariationTemplate from 'shared/variation/assets/scripts/variation'
 import TrackingTemplate from 'shared/tracking/assets/scripts/tracking'
 import CollapseTemplate from 'shared/collapse/assets/scripts/collapse'
 import { Targeting, DetailData } from 'shared/assets/interfaces/interfaces'
+import { navigate } from 'costro'
 
 /**
  * Detail template
  * @param {Object} options Template options
  * @returns {HTMLElement} Generated HTML
  */
-export default function ({ data }: { data: DetailData }) {
+export default function ({ testId, identifier, test, result, targetingSorted }: DetailData) {
 	const hasVariation =
-		!!data.test.asyncVariationInfoById && Object.keys(data.test.asyncVariationInfoById).length
-	const hasTracking = !!data.test.actionTrackings && Object.keys(data.test.actionTrackings).length
+		!!test.asyncVariationInfoById && Object.keys(test.asyncVariationInfoById).length
+	const hasTracking = !!test.actionTrackings && Object.keys(test.actionTrackings).length
 	const templateGeneral = (
-		<ul className="detail-list" data-status={data.result.status}>
+		<ul className="detail-list" data-status={result.status}>
 			<li>
-				ID: {data.testId}&nbsp;
-				{data.test.parentID !== 0 && <>(parent ID: {data.test.parentID})</>}
+				ID: {testId}&nbsp;
+				{test.parentID !== 0 && <>(parent ID: {test.parentID})</>}
 			</li>
-			<li>Status: {data.result.status}</li>
-			<li>Type: {data.result.type}</li>
-			<li>Async: {data.test.isAsync ? 'true' : 'false'}</li>
-			<li>Traffic: {data.test.traffic}%</li>
+			<li>Status: {result.status}</li>
+			<li>Type: {result.type}</li>
+			<li>Async: {test.isAsync ? 'true' : 'false'}</li>
+			<li>Traffic: {test.traffic}%</li>
 		</ul>
 	)
 	const templateTargeting = (
 		<>
-			{data.targetingSorted.rejected.map((item: Targeting) => (
+			{targetingSorted.rejected.map((item: Targeting) => (
 				<TargetingTemplate
-					testStatus={data.result.status}
 					targeting={item}
 					textarea={item.key === 'code_scope'}
 					headerOnly={['ip_scope', 'segment', 'trigger'].includes(item.key)}
 				/>
 			))}
-			{data.targetingSorted.accepted.map((item: Targeting) => (
+			{targetingSorted.accepted.map((item: Targeting) => (
 				<TargetingTemplate
-					testStatus={data.result.status}
 					targeting={item}
 					textarea={item.key === 'code_scope'}
 					headerOnly={['ip_scope', 'segment', 'trigger'].includes(item.key)}
@@ -53,14 +52,14 @@ export default function ({ data }: { data: DetailData }) {
 		<div className="detail">
 			<ul className="detail-header">
 				<li>
-					<a href="#/" className="detail-headerBack">
+					<button onClick={() => navigate(`/list`)} className="detail-headerBack">
 						<div className="detail-headerLinkIcon" innerHTML={arrowBottom}></div>
 						Back
-					</a>
+					</button>
 				</li>
 				<li>
 					<a
-						href={`https://app2.abtasty.com/reporting/test/${data.testId}/report`}
+						href={`https://app2.abtasty.com/reporting/test/${testId}/report`}
 						target="_blank"
 						rel="noreferrer"
 						className="detail-headerReport"
@@ -71,25 +70,25 @@ export default function ({ data }: { data: DetailData }) {
 				</li>
 			</ul>
 
-			<h1 className="detail-title">{data.result.name}</h1>
+			<h1 className="detail-title">{result.name}</h1>
 			<div className="detail-section">
 				<CollapseTemplate header="General" content={templateGeneral} />
-				{['accepted', 'traffic_rejected'].includes(data.result.status) && hasVariation && (
+				{['accepted', 'traffic_rejected'].includes(result.status) && hasVariation && (
 					<VariationTemplate
-						variations={data.test.asyncVariationInfoById}
-						currentVariationId={data.result.variationID}
-						testId={data.testId}
-						accountId={data.identifier}
+						variations={test.asyncVariationInfoById}
+						currentVariationId={result.variationID}
+						testId={testId}
+						accountId={identifier}
 					/>
 				)}
-				{hasTracking && <TrackingTemplate trackings={data.test.actionTrackings} />}
+				{hasTracking && <TrackingTemplate trackings={test.actionTrackings} />}
 			</div>
 
 			<div className="detail-section last">
 				<h2 className="detail-subtitle">
 					Targeting
 					<a
-						href={`https://app2.abtasty.com/edit/test/${data.testId}/audience`}
+						href={`https://app2.abtasty.com/edit/test/${testId}/audience`}
 						target="_blank"
 						rel="noreferrer"
 						className="detail-subtitleLink"
