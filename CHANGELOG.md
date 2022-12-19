@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 1.3.0
+
+### New features
+
+- Visualization of triggers and segments of a test
+
+### Updates
+
+- Migration to [Costrojs](https://github.com/costrojs/costro) for the application
+
 ## 1.2.3
 
 ### Fixes
