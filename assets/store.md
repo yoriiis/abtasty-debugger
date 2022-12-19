@@ -18,7 +18,7 @@ Features:
 - Displays a link to see the test report.
 - List all variations of the test if the status is `accepted` or `traffic_rejected`, with their name, traffic, a link of JSON modifications and activation button.
 - List all trackings information of the test with their name and selector.
-- List all targeting information of the test (URL, code, selector, cookie, IP) with their status.
+- List all targeting information of the test (segment, trigger, URL, code, selector, cookie, IP) with their status.
 - Displays a link to edit the test targetings on the AB Tasty editor.
 - The list of targeting is sorted to show the invalid targets at the top of the list.
 - Collapse/expand all variations, trackings and targetings information.
