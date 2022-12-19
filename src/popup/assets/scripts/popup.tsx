@@ -1,6 +1,5 @@
-import validateTarget from 'validate-target'
 import DataManager from 'shared/utils/data-manager'
-import { sendMessage, isExtensionMode, namespace } from 'shared/utils/bridge'
+import { isExtensionMode, namespace } from 'shared/utils/bridge'
 import { Data, ChangeInfo } from 'shared/assets/interfaces/interfaces'
 import List from '../../components/list/assets/scripts/list'
 import Detail from '../../components/detail/assets/scripts/detail'
@@ -11,14 +10,14 @@ import { App, navigate } from 'costro'
 declare global {
 	interface Window {
 		ABTasty: {
-			clearAllCookies: Function
+			clearAllCookies: () => void
 		}
 	}
 }
 
 // Fix innerHTML attribute with jsx-dom and TS
 declare module 'react' {
-	interface HTMLAttributes<T> {
+	interface HTMLAttributes<T> extends DOMAttributes<T> {
 		innerHTML?: any
 	}
 }
@@ -100,7 +99,7 @@ export default class Popup {
 	 * @param {Object} changeInfo Updated data (status)
 	 * @param {Object} tab Tab data
 	 */
-	onTabUpdated(tabId: number, changeInfo: ChangeInfo, tab: any) {
+	onTabUpdated(tabId: number, changeInfo: ChangeInfo) {
 		const debugMode = document.querySelector('#debugMode')
 		if (debugMode && debugMode.hasAttribute('disabled') && changeInfo.status === 'complete') {
 			debugMode.removeAttribute('disabled')

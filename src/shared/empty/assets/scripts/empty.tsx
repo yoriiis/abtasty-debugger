@@ -53,7 +53,7 @@ export default class Empty extends Component {
 	onClickOnElement(e: Event) {
 		const target = e.target
 		const validateTargetRetry = validateTarget({
-			target: target,
+			target,
 			selectorString: '.empty-retryButton',
 			nodeName: ['button']
 		})

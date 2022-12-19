@@ -2,7 +2,6 @@ import {
 	Data,
 	TestsSortedByStatus,
 	TargetingsSortedByStatus,
-	FormattedData,
 	Result,
 	Targeting
 } from 'shared/assets/interfaces/interfaces'
@@ -19,7 +18,7 @@ export default class DataManager {
 		return {
 			accepted: Object.entries(data.results)
 				.filter(
-					([id, result]: [id: string, result: Result]) =>
+					([, result]: [id: string, result: Result]) =>
 						result.status === 'accepted' && result.type !== 'mastersegment'
 				)
 				.map(([id, result]: [id: string, result: Result]) => {
@@ -28,7 +27,7 @@ export default class DataManager {
 				}),
 			rejected: Object.entries(data.results)
 				.filter(
-					([id, result]: [id: string, result: Result]) =>
+					([, result]: [id: string, result: Result]) =>
 						result.status !== 'accepted' && result.type !== 'mastersegment'
 				)
 				.map(([id, result]: [id: string, result: Result]) => {
@@ -52,13 +51,13 @@ export default class DataManager {
 			let rejectedTrigger: Array<Targeting> = []
 
 			const acceptedTargetPages = Object.entries(targetings.targetPages)
-				.filter(([key, value]: [key: string, value: Targeting]) => value.success === true)
+				.filter(([, value]: [key: string, value: Targeting]) => value.success === true)
 				.map(([key, value]: [key: string, value: Targeting]) => {
 					value.key = key
 					return value
 				})
 			const acceptedQaParameters = Object.entries(targetings.qaParameters)
-				.filter(([key, value]: [key: string, value: Targeting]) => value.success === true)
+				.filter(([, value]: [key: string, value: Targeting]) => value.success === true)
 				.map(([key, value]: [key: string, value: Targeting]) => {
 					value.key = key
 					return value
@@ -82,13 +81,13 @@ export default class DataManager {
 			}
 
 			const rejectedTargetPages = Object.entries(targetings.targetPages)
-				.filter(([key, value]: [key: string, value: Targeting]) => value.success === false)
+				.filter(([, value]: [key: string, value: Targeting]) => value.success === false)
 				.map(([key, value]: [key: string, value: Targeting]) => {
 					value.key = key
 					return value
 				})
 			const rejectedQaParameters = Object.entries(targetings.qaParameters)
-				.filter(([key, value]: [key: string, value: Targeting]) => value.success === false)
+				.filter(([, value]: [key: string, value: Targeting]) => value.success === false)
 				.map(([key, value]: [key: string, value: Targeting]) => {
 					value.key = key
 					return value

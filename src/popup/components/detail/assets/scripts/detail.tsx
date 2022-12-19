@@ -2,7 +2,7 @@ import validateTarget from 'validate-target'
 import { createElement } from 'jsx-dom'
 import TemplateDetail from './templates/detail'
 import { Component, navigate } from 'costro'
-import { sendMessage, isExtensionMode, namespace } from 'shared/utils/bridge'
+import { sendMessage, namespace } from 'shared/utils/bridge'
 import { TargetingsSortedByStatus } from 'shared/assets/interfaces/interfaces'
 
 export default class Detail extends Component {
@@ -88,7 +88,7 @@ export default class Detail extends Component {
 	onClickOnElement(e: Event) {
 		const target = e.target
 		const validateTargetCollapseButton = validateTarget({
-			target: target,
+			target,
 			selectorString: '.collapse-headerButton',
 			nodeName: ['button']
 		})
@@ -105,7 +105,7 @@ export default class Detail extends Component {
 	onChangeOnElement(e: Event) {
 		const target = e.target
 		const validateTargetSwitchVariation = validateTarget({
-			target: target,
+			target,
 			selectorString: '.variation-inputRadio',
 			nodeName: ['input']
 		})

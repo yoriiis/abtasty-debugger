@@ -81,7 +81,7 @@ export default class List extends Component {
 		const target = e.target
 
 		const validateTargetclearCookies = validateTarget({
-			target: target,
+			target,
 			selectorString: '.clearCookies',
 			nodeName: ['button']
 		})
@@ -99,7 +99,7 @@ export default class List extends Component {
 		const target = e.target
 
 		const validateTargeDebugMode = validateTarget({
-			target: target,
+			target,
 			selectorString: '#debugMode',
 			nodeName: ['input']
 		})

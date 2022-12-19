@@ -37,7 +37,7 @@ export default function ({
 		<div className="variation">
 			<ul className="variation-list">
 				{Object.entries(variations).map(
-					([id, variation]: [id: string, variation: Variation]) =>
+					([, variation]: [id: string, variation: Variation]) =>
 						variationListItem({
 							variation,
 							currentVariationId,

@@ -6,9 +6,9 @@ const isExtensionMode = !!namespace?.tabs
 
 /**
  * Get tab ID with Browser extension API
- * @returns {Promise<Number>} Tab id
+ * @returns {Promise<number>} Tab id
  */
-function getTabId(): Promise<Number> {
+function getTabId(): Promise<number> {
 	return new Promise((resolve, reject) => {
 		namespace.tabs.query({ active: true, currentWindow: true }, (tabs: any) => {
 			if (tabs[0]) {
@@ -34,11 +34,11 @@ function sendMessage({
 }: {
 	action: string
 	data?: any
-	callback?: Function
+	callback?: (response: string) => void
 }): void {
 	getTabId().then((tabId) => {
 		namespace.tabs.sendMessage(tabId, { from: 'popup', action, data }, (response: any) => {
-			callback instanceof Function && callback(response, tabId)
+			callback instanceof Function && callback(response)
 		})
 	})
 }

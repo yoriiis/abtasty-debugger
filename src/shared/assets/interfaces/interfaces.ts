@@ -1,7 +1,7 @@
 export interface Condition {
 	name?: string
 	value: string
-	include: Boolean
+	include: boolean
 	condition: number
 	url?: string
 	operator?: string
@@ -15,7 +15,7 @@ export interface FavoriteUrlScope {
 
 export interface Targeting {
 	key: string
-	success: Boolean
+	success: boolean
 	conditions?: Array<Condition> | FavoriteUrlScope
 	name: string
 }
@@ -39,14 +39,25 @@ export interface Result {
 	}
 }
 
-export interface Variations {
-	[key: string]: Variation
-}
-
 export interface Variation {
 	id: number
 	name: string
 	traffic: number
+}
+
+export interface Variations {
+	[key: string]: Variation
+}
+
+export interface Tracking {
+	name: string
+	selector: string
+}
+
+export interface Trackings {
+	click: Array<Tracking>
+	mousedown: Array<Tracking>
+	submit: Array<Tracking>
 }
 
 export interface Test {
@@ -58,18 +69,18 @@ export interface Test {
 	traffic: number
 }
 
+export interface Results {
+	[key: string]: Result
+}
+
 export interface Data {
 	accountData: {
 		tests: {
-			[key: string]: {}
+			[key: string]: any
 		}
 	}
 	results: Results
 	debug: boolean
-}
-
-export interface Results {
-	[key: string]: Result
 }
 
 export interface TestsSortedByStatus {
@@ -107,24 +118,8 @@ export interface ListData {
 	debug: boolean
 }
 
-export interface FormattedData {
-	testsSortedByStatus: TestsSortedByStatus
-	targetingsSortedByStatus: TargetingsSortedByStatus
-}
-
 export interface ChangeInfo {
 	status: string
-}
-
-export interface Trackings {
-	click: Array<Tracking>
-	mousedown: Array<Tracking>
-	submit: Array<Tracking>
-}
-
-export interface Tracking {
-	name: string
-	selector: string
 }
 
 export interface TrafficAllocation {

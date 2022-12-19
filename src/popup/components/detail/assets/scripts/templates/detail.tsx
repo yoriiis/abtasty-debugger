@@ -34,7 +34,6 @@ export default function ({ testId, identifier, test, result, targetingSorted }: 
 		<>
 			{targetingSorted.rejected.map((item: Targeting) => (
 				<TargetingTemplate
-					testStatus={result.status}
 					targeting={item}
 					textarea={item.key === 'code_scope'}
 					headerOnly={['ip_scope', 'segment', 'trigger'].includes(item.key)}
@@ -42,7 +41,6 @@ export default function ({ testId, identifier, test, result, targetingSorted }: 
 			))}
 			{targetingSorted.accepted.map((item: Targeting) => (
 				<TargetingTemplate
-					testStatus={result.status}
 					targeting={item}
 					textarea={item.key === 'code_scope'}
 					headerOnly={['ip_scope', 'segment', 'trigger'].includes(item.key)}
