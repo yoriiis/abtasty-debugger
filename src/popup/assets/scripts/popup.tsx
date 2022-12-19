@@ -25,6 +25,7 @@ declare module 'react' {
 export default class Popup {
 	data: Data
 	element: Element
+	redirectToEmpty: boolean
 	dataManager: any
 	app!: any
 
@@ -32,6 +33,7 @@ export default class Popup {
 		this.data = data
 
 		this.element = document.querySelector('#app') as HTMLElement
+		this.redirectToEmpty = false
 
 		this.onTabUpdated = this.onTabUpdated.bind(this)
 
@@ -42,6 +44,8 @@ export default class Popup {
 	 * Initialize the popup
 	 */
 	init() {
+		this.redirectToEmpty = this.isEmpty()
+
 		this.app = new App({
 			target: this.element as HTMLElement,
 			routes: [
@@ -49,6 +53,7 @@ export default class Popup {
 					path: '/list',
 					component: List,
 					props: {
+						hasData: !this.redirectToEmpty,
 						data: this.data,
 						dataManager: this.dataManager
 					}
@@ -57,6 +62,7 @@ export default class Popup {
 					path: '/detail/:testId',
 					component: Detail,
 					props: {
+						hasData: !this.redirectToEmpty,
 						data: this.data,
 						dataManager: this.dataManager
 					}
@@ -65,7 +71,7 @@ export default class Popup {
 					path: '/empty',
 					component: Empty,
 					props: {
-						hasData: !!(this.data && this.data.results)
+						hasData: !this.redirectToEmpty
 					}
 				}
 			]
@@ -76,10 +82,18 @@ export default class Popup {
 	}
 
 	/**
+	 * Check if no result is found
+	 * @returns {Boolean} No result found
+	 */
+	isEmpty(): boolean {
+		return !this.data || !this.data.results || Object.keys(this.data.results).length === 0
+	}
+
+	/**
 	 * Set redirection
 	 */
 	setRedirection() {
-		if (!(this.data && this.data.results)) {
+		if (this.redirectToEmpty) {
 			navigate('/empty')
 		} else if (['/', '/empty'].includes(this.app.location.currentPath)) {
 			navigate('/list')

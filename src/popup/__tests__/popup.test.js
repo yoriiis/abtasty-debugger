@@ -105,6 +105,7 @@ describe('Popup', () => {
 						path: '/list',
 						component: List,
 						props: {
+							hasData: true,
 							data: fixturesAbtasty,
 							dataManager: popup.dataManager
 						}
@@ -113,6 +114,7 @@ describe('Popup', () => {
 						path: '/detail/:testId',
 						component: Detail,
 						props: {
+							hasData: true,
 							data: fixturesAbtasty,
 							dataManager: popup.dataManager
 						}
@@ -140,6 +142,7 @@ describe('Popup', () => {
 						path: '/list',
 						component: List,
 						props: {
+							hasData: false,
 							data: undefined,
 							dataManager: popup.dataManager
 						}
@@ -148,6 +151,7 @@ describe('Popup', () => {
 						path: '/detail/:testId',
 						component: Detail,
 						props: {
+							hasData: false,
 							data: undefined,
 							dataManager: popup.dataManager
 						}
@@ -175,6 +179,7 @@ describe('Popup', () => {
 						path: '/list',
 						component: List,
 						props: {
+							hasData: false,
 							data: popup.data,
 							dataManager: popup.dataManager
 						}
@@ -183,6 +188,7 @@ describe('Popup', () => {
 						path: '/detail/:testId',
 						component: Detail,
 						props: {
+							hasData: false,
 							data: popup.data,
 							dataManager: popup.dataManager
 						}
@@ -199,17 +205,38 @@ describe('Popup', () => {
 		})
 	})
 
-	describe('Popup setRedirection', () => {
-		it('Should call the setRedirection function with no data', () => {
-			popup.data = undefined
+	describe('isEmpty', () => {
+		it('Should call the isEmpty function with no data', () => {
+			popup.data = null
+			const result = popup.isEmpty()
 
-			popup.setRedirection()
-
-			expect(navigate).toHaveBeenCalledWith('/empty')
+			expect(result).toBe(true)
 		})
 
-		it('Should call the setRedirection function without results inside data', () => {
+		it('Should call the isEmpty function with no results key inside data', () => {
+			delete popup.data.results
+			const result = popup.isEmpty()
+
+			expect(result).toBe(true)
+		})
+
+		it('Should call the isEmpty function with no results inside data', () => {
 			popup.data.results = null
+			const result = popup.isEmpty()
+
+			expect(result).toBe(true)
+		})
+
+		it('Should call the isEmpty function with all valid fields', () => {
+			const result = popup.isEmpty()
+
+			expect(result).toBe(false)
+		})
+	})
+
+	describe('Popup setRedirection', () => {
+		it('Should call the setRedirection function with no data', () => {
+			popup.redirectToEmpty = true
 
 			popup.setRedirection()
 

@@ -21,7 +21,7 @@ export default class List extends Component {
 	 * Before render
 	 */
 	beforeRender() {
-		if (!this.props.data) {
+		if (!this.props.hasData) {
 			navigate('/empty')
 			return
 		}
