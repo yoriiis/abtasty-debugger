@@ -9,6 +9,8 @@
 ### Updates
 
 - Migration to [Costrojs](https://github.com/costrojs/costro) for the application
+- Remove Opera support
+- Edge migration to manifest v3
 
 ## 1.2.3
 

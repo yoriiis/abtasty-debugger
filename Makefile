@@ -1,15 +1,13 @@
-build-release: clean-previous-release create-release-chrome create-release-browser generate-zip
+build-release: clean-previous-release create-release-v3 create-release-v2
 
 clean-previous-release:
-	rm -f ./release-chrome.zip ./release-firefox.zip ./release-opera.zip ./release-edge.zip
+	rm -f ./release-chrome.zip ./release-edge.zip ./release-firefox.zip
 
-# Used by Chrome only
-create-release-chrome:
-	npm run release:chrome && cd ./web && zip --recurse-paths ../release-chrome.zip ./ && cd ../
+# Used by Chrome and Edge
+create-release-v3:
+	npm run release:v3 && cd ./web && zip --recurse-paths ../release-chrome.zip ./ && cd ../
+	cp ./release-chrome.zip ./release-edge.zip
 
-# Used by Firefox, Opera and Edge
-create-release-browser:
-	npm run release:browser && cd ./web && zip --recurse-paths ../release-firefox.zip ./ && cd ../
-
-generate-zip:
-	cp ./release-firefox.zip ./release-opera.zip && cp ./release-firefox.zip ./release-edge.zip
+# Used by Firefox only
+create-release-v2:
+	npm run release:v2 && cd ./web && zip --recurse-paths ../release-firefox.zip ./ && cd ../

@@ -17,8 +17,8 @@ npm install
 Build the code
 
 ```bash
-npm run release:browser # Firefox, Opera and Edge
-# npm run release:chrome # Chrome
+npm run release:v2 # Firefox only
+# npm run release:v3 # Chrome and Edge
 ```
 
 The source code is available in the `./src` directory and the build code is available in the `./web` directory.

@@ -11,11 +11,11 @@ const appDirectory = fs.realpathSync(process.cwd())
 const resolveApp = (relativePath) => path.resolve(appDirectory, relativePath)
 
 module.exports = (env, argv) => {
-	const target = env.target
+	const manifest = env.manifest
 	const isProduction = argv.mode === 'production'
 	const suffixHash = isProduction ? '.[contenthash]' : ''
 	const isReleaseMode = env.release || false
-	const manifestFilename = target === 'chrome' ? 'manifest-v3.json' : 'manifest-v2.json'
+	const manifestFilename = manifest === 'v3' ? 'manifest-v3.json' : 'manifest-v2.json'
 
 	const config = {
 		entry: {
