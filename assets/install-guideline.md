@@ -22,3 +22,15 @@ npm run release:v2 # Firefox only
 ```
 
 The source code is available in the `./src` directory and the build code is available in the `./web` directory.
+
+## Test
+
+The extension allows you to display the A/B tests created by the ABTasty site (https://www.abtasty.com).
+
+If the page contains A/B tests, the extension icon displays a counter and when the popup is opened a list and a detail of each of the elements are displayed. This information is useful for testing, debugging, and visualizing A/B testing on a website.
+If the page does not load the ABTasty script or if there are no A/B tests, the counter does not display and the popup displays a "Content not found".
+
+Below is a list of websites that have at least one A/B test on their page
+https://www.abtasty.com
+
+<!-- Add other examples -->
