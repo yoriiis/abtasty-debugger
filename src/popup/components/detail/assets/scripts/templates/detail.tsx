@@ -21,8 +21,10 @@ export default function ({ testId, identifier, test, result, targetingSorted }: 
 	const templateGeneral = (
 		<ul className="detail-list" data-status={result.status}>
 			<li>
-				ID: {testId}&nbsp;
-				{test.parentID !== 0 && <>(parent ID: {test.parentID})</>}
+				ID: {testId}
+				{test.parentID !== 0 && (
+					<span className="detail-listParentId">(parent ID: {test.parentID})</span>
+				)}
 			</li>
 			<li>Status: {result.status}</li>
 			<li>Type: {result.type}</li>
