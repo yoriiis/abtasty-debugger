@@ -15,7 +15,7 @@ declare global {
 	}
 }
 
-// Fix innerHTML attribute with jsx-dom and TS
+// Fix innerHTML attribute with JSX and TS
 declare module 'react' {
 	interface HTMLAttributes<T> extends DOMAttributes<T> {
 		innerHTML?: any

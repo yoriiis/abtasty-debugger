@@ -10,6 +10,5 @@ module.exports = {
 		'^.+\\.(ts|tsx|js)$': 'ts-jest',
 		'^.+\\.svg$': 'jest-transform-stub'
 	},
-	transformIgnorePatterns: ['<rootDir>/node_modules/(?!jsx-dom)'],
 	testEnvironment: 'jsdom'
 }
