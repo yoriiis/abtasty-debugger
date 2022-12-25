@@ -1,4 +1,4 @@
-import { createElement, Fragment } from 'jsx-dom'
+import { createElement, Fragment } from 'costro/jsx'
 import arrowBottom from 'shared/assets/svgs/arrow-bottom.svg'
 import check from 'shared/assets/svgs/check.svg'
 import clear from 'shared/assets/svgs/clear.svg'

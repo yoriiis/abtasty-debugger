@@ -1,4 +1,4 @@
-import { createElement } from 'jsx-dom'
+import { createElement } from 'costro/jsx'
 import CollapseTemplate from 'shared/collapse/assets/scripts/collapse'
 import externalLink from 'shared/assets/svgs/external-link.svg'
 import { Variations, Variation } from 'shared/assets/interfaces/interfaces'

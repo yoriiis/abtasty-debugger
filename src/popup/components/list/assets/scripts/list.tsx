@@ -1,5 +1,5 @@
 import validateTarget from 'validate-target'
-import { createElement } from 'jsx-dom'
+import { createElement } from 'costro/jsx'
 import TemplateList from './templates/list'
 import { Component, navigate } from 'costro'
 import { sendMessage, isExtensionMode, namespace } from 'shared/utils/bridge'

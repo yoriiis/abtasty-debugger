@@ -1,4 +1,4 @@
-import { createElement } from 'jsx-dom'
+import { createElement } from 'costro/jsx'
 import notFound from 'shared/assets/svgs/not-found.svg'
 
 /**

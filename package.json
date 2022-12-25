@@ -26,7 +26,7 @@
 	},
 	"prettier": "./config/prettier.config.js",
 	"dependencies": {
-		"costro": "^1.0.3",
+		"costro": "^1.0.5",
 		"validate-target": "^2.0.0"
 	},
 	"devDependencies": {
@@ -57,7 +57,6 @@
 		"jest": "^29.3.1",
 		"jest-environment-jsdom": "^29.3.1",
 		"jest-transform-stub": "^2.0.0",
-		"jsx-dom": "^8.0.3",
 		"markdownlint-cli": "^0.32.2",
 		"mini-css-extract-plugin": "^2.7.2",
 		"postcss": "^8.4.20",

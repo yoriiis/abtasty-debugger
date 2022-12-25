@@ -1,4 +1,4 @@
-import { createElement } from 'jsx-dom'
+import { createElement } from 'costro/jsx'
 import CollapseTemplate from 'shared/collapse/assets/scripts/collapse'
 import wording from 'shared/utils/wording'
 import { Targeting, Condition, FavoriteUrlScope } from 'shared/assets/interfaces/interfaces'
