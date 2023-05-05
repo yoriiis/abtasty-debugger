@@ -1,6 +1,8 @@
+# AB Tasty documentation
+
 Example of an AB Tasty cookie
 
-```
+```text
 uid=zed18spa36wefrnq    // Unique visitor ID
 &fst=1632216663697      // First session timestamp
 &pst=-1                 // Previous session timestamp
@@ -29,4 +31,4 @@ uid=zed18spa36wefrnq    // Unique visitor ID
     // .number of last seen session according to session list
 ```
 
-Resource: https://developers.abtasty.com/docs/tag/tag-cookies#abtasty
+Resource: [AB Tasty cookie definition](https://developers.abtasty.com/docs/tag/tag-cookies#abtasty)
