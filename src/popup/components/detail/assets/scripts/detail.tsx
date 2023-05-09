@@ -155,8 +155,8 @@ export default class Detail extends Component {
 
 						if (currentVariationId && currentVariationId.length) {
 							const thValueUpdated = thValue.replace(
-								`.${currentVariationId[1]}`,
-								`.${newVariationId}`
+								`${testId}.${currentVariationId[1]}`,
+								`${testId}.${newVariationId}`
 							)
 							response = response.replace(thValue, thValueUpdated)
 
