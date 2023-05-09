@@ -11,14 +11,7 @@ const abtastyCookie = `uid=zed18spa36wefrnq&fst=1632216663697&pst=-1&cst=1632216
 jest.mock('validate-target')
 jest.mock('shared/utils/bridge', () => {
 	return {
-		sendMessage: jest.fn().mockImplementation(({ action, data, callback }) => {
-			let response = null
-			if (action === 'getCookie' && data.name === 'ABTasty') {
-				response = abtastyCookie
-			}
-			callback instanceof Function && callback(response)
-		}),
-		isExtensionMode: true,
+		sendMessage: jest.fn(),
 		namespace: {
 			tabs: {
 				onUpdated: {
@@ -223,6 +216,14 @@ describe('Detail', () => {
 
 	describe('Detail switchVariation', () => {
 		beforeEach(() => {
+			sendMessage.mockImplementation(({ action, data, callback }) => {
+				let response = null
+				if (action === 'getCookie' && data.name === 'ABTasty') {
+					response = abtastyCookie
+				}
+				callback instanceof Function && callback(response)
+			})
+
 			detail.props = {
 				results: fixturesAbtasty.results
 			}

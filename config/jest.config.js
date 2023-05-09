@@ -10,5 +10,7 @@ module.exports = {
 		'^.+\\.(ts|tsx|js)$': 'ts-jest',
 		'^.+\\.svg$': 'jest-transform-stub'
 	},
-	testEnvironment: 'jsdom'
+	testEnvironment: 'jsdom',
+	resetMocks: true,
+	clearMocks: true
 }
