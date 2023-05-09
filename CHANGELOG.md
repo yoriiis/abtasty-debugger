@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## 1.3.1
+
+### Fixes
+
+- Fix switch variation when variation id already exist on other test ([#15](https://github.com/yoriiis/abtasty-debugger/pull/15))
+
+### Updates
+
+- Update packages dependencies ([#17](https://github.com/yoriiis/abtasty-debugger/pull/17))
+
 ## 1.3.0
 
 ### New features
