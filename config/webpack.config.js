@@ -11,11 +11,9 @@ const appDirectory = fs.realpathSync(process.cwd())
 const resolveApp = (relativePath) => path.resolve(appDirectory, relativePath)
 
 module.exports = (env, argv) => {
-	const manifest = env.manifest
 	const isProduction = argv.mode === 'production'
 	const suffixHash = isProduction ? '.[contenthash]' : ''
 	const isReleaseMode = env.release || false
-	const manifestFilename = manifest === 'v3' ? 'manifest-v3.json' : 'manifest-v2.json'
 
 	const config = {
 		entry: {
@@ -27,7 +25,7 @@ module.exports = (env, argv) => {
 		},
 		devtool: isProduction ? false : 'source-map',
 		output: {
-			path: resolveApp('web'),
+			path: resolveApp('public'),
 			publicPath: '/',
 			filename: `scripts/[name]${suffixHash}.js`,
 			chunkFilename: `scripts/[name]${suffixHash}.js`
@@ -114,15 +112,15 @@ module.exports = (env, argv) => {
 				patterns: [
 					{
 						from: resolveApp('src/shared/assets/content-scripts'),
-						to: resolveApp('web/scripts')
+						to: resolveApp('public/scripts')
 					},
 					{
-						from: resolveApp(`src/shared/assets/manifests/${manifestFilename}`),
-						to: resolveApp('web/manifest.json')
+						from: resolveApp(`src/shared/assets/manifests/manifest.json`),
+						to: resolveApp('public/manifest.json')
 					},
 					{
 						from: resolveApp('src/shared/assets/background'),
-						to: resolveApp('web/')
+						to: resolveApp('public/')
 					}
 				]
 			})
@@ -168,7 +166,7 @@ module.exports = (env, argv) => {
 		if (env.WEBPACK_SERVE) {
 			config.devServer = {
 				static: {
-					directory: resolveApp('web')
+					directory: resolveApp('public')
 				},
 				historyApiFallback: true,
 				port: 3000,

@@ -1,5 +1,5 @@
 node_modules
-web/*
+public/*
 coverage
 *.zip
 lib
