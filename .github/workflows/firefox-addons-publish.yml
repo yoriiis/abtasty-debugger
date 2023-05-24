@@ -1,0 +1,15 @@
+name: Publish Firefox Add-ons
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  deploy:
+    uses: yoriiis/actions/.github/workflows/firefox-addons-publish.yml.yml@main
+    with:
+      source_dir: web
+      script: npm run release:v2
+    secrets:
+      FIREFOX_API_KEY: ${{ secrets.FIREFOX_API_KEY }}
+      FIREFOX_API_SECRET: ${{ secrets.FIREFOX_API_SECRET }}

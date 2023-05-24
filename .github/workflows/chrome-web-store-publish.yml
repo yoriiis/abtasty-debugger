@@ -1,0 +1,17 @@
+name: Publish Chrome Web Store
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  deploy:
+    uses: yoriiis/actions/.github/workflows/chrome-web-store-publish.yml@main
+    with:
+      source-dir: web
+      script: npm run release:v3
+    secrets:
+      CHROME_EXTENSION_ID: ${{ secrets.CHROME_EXTENSION_ID }}
+      CHROME_CLIENT_ID: ${{ secrets.CHROME_CLIENT_ID }}
+      CHROME_CLIENT_SECRET: ${{ secrets.CHROME_CLIENT_SECRET }}
+      CHROME_REFRESH_TOKEN: ${{ secrets.CHROME_REFRESH_TOKEN }}
