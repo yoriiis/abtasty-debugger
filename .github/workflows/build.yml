@@ -145,7 +145,7 @@ jobs:
           node-version: 16
           registry-url: 'https://registry.npmjs.org'
 
-      - run: npx chrome-webstore-upload upload --auto-publish --source stacks-wallet-chromium.zip
+      - run: npx chrome-webstore-upload upload --auto-publish --source web
         env:
           EXTENSION_ID: ${{ secrets.CHROME_EXTENSION_ID }}
           CLIENT_ID: ${{ secrets.CHROME_CLIENT_ID }}
