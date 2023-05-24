@@ -7,10 +7,8 @@ on:
   pull_request:
     branches:
       - main
-
-concurrency:
-  group: ${{ github.ref }}
-  cancel-in-progress: true
+  release:
+    types: [published]
 
 jobs:
   build:
@@ -55,6 +53,18 @@ jobs:
       - name: Build Release
         run: make build-release
 
+      - name: Upload web artifacts
+        uses: actions/upload-artifact@v3
+        if: github.event_name == 'release' &&
+          matrix.node == '16' &&
+          matrix.os == 'ubuntu-latest'
+        with:
+          name: web
+          path: web
+
+      - name: Lint web-ext
+        run: npm run test:ext
+
   deploy-coverage:
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -77,3 +87,61 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           path-to-lcov: 'coverage/lcov.info'
+
+  publish-firefox:
+    runs-on: ubuntu-latest
+    if: success() &&
+      github.event_name == 'release' &&
+      github.event.release.target_commitish == 'main'
+    environment: firefox
+    needs: build
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Download web artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: web
+          path: web
+
+      - uses: actions/setup-node@v3
+        with:
+          cache: 'npm'
+          cache-dependency-path: ./package-lock.json
+          node-version: 16
+          registry-url: 'https://registry.npmjs.org'
+
+      - run: npx web-ext sign --source-dir web
+        env:
+          WEB_EXT_API_KEY: ${{ secrets.FIREFOX_API_KEY }}
+          WEB_EXT_API_SECRET: ${{ secrets.FIREFOX_API_SECRET }}
+
+  publish-chrome:
+    runs-on: ubuntu-latest
+    if: success() &&
+      github.event_name == 'release' &&
+      github.event.release.target_commitish == 'main'
+    environment: chrome
+    needs: build
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Download web artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: web
+          path: web
+
+      - uses: actions/setup-node@v3
+        with:
+          cache: 'npm'
+          cache-dependency-path: ./package-lock.json
+          node-version: 16
+          registry-url: 'https://registry.npmjs.org'
+
+      - run: npx chrome-webstore-upload upload --auto-publish --source web
+        env:
+          EXTENSION_ID: ${{ secrets.CHROME_EXTENSION_ID }}
+          CLIENT_ID: ${{ secrets.CHROME_CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.CHROME_CLIENT_SECRET }}
+          REFRESH_TOKEN: ${{ secrets.CHROME_REFRESH_TOKEN }}
