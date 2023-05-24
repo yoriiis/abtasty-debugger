@@ -109,7 +109,7 @@ jobs:
       - name: Download release artifacts
         uses: actions/download-artifact@v3
         with:
-          name: release-v3
+          name: release-v2
           path: web
 
       - uses: actions/setup-node@v3
@@ -122,7 +122,8 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - run: npx web-ext sign --use-submission-api --channel=listed --source-dir web
+      - name: Deploy to Firefox Add-ons
+        run: npx web-ext sign --use-submission-api --channel=listed --source-dir web
         env:
           WEB_EXT_API_KEY: ${{ secrets.FIREFOX_API_KEY }}
           WEB_EXT_API_SECRET: ${{ secrets.FIREFOX_API_SECRET }}
@@ -140,7 +141,7 @@ jobs:
       - name: Download release artifacts
         uses: actions/download-artifact@v3
         with:
-          name: release-v2
+          name: release-v3
           path: web
 
       - uses: actions/setup-node@v3
@@ -153,7 +154,8 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - run: npx chrome-webstore-upload upload --auto-publish --source web
+      - name: Deploy to Chrome Web Store
+        run: npx chrome-webstore-upload upload --auto-publish --source web
         env:
           EXTENSION_ID: ${{ secrets.CHROME_EXTENSION_ID }}
           CLIENT_ID: ${{ secrets.CHROME_CLIENT_ID }}
