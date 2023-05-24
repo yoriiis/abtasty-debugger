@@ -53,7 +53,7 @@ jobs:
       - name: Build Chrome release
         run: npm run release:v3
 
-      - name: Upload web artifacts
+      - name: Upload Chrome artifacts
         uses: actions/upload-artifact@v3
         if: github.event_name == 'release'
         with:
@@ -63,7 +63,7 @@ jobs:
       - name: Build Firefox release
         run: npm run release:v2
 
-      - name: Upload web artifacts
+      - name: Upload Firefox artifacts
         uses: actions/upload-artifact@v3
         if: github.event_name == 'release'
         with:
@@ -140,7 +140,7 @@ jobs:
       - name: Download release artifacts
         uses: actions/download-artifact@v3
         with:
-          name: relese-v2
+          name: release-v2
           path: web
 
       - uses: actions/setup-node@v3
