@@ -109,7 +109,7 @@ jobs:
           node-version: 16
           registry-url: 'https://registry.npmjs.org'
 
-      - run: npx web-ext sign --source-dir web
+      - run: npx web-ext sign --use-submission-api --channel=listed --source-dir web
         env:
           WEB_EXT_API_KEY: ${{ secrets.FIREFOX_API_KEY }}
           WEB_EXT_API_SECRET: ${{ secrets.FIREFOX_API_SECRET }}
