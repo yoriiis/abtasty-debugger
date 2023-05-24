@@ -50,16 +50,6 @@ jobs:
           name: coverage
           path: coverage
 
-      - name: Build Firefox release
-        run: npm run release:v2
-
-      - name: Upload web artifacts
-        uses: actions/upload-artifact@v3
-        if: github.event_name == 'release'
-        with:
-          name: release-v2
-          path: web
-
       - name: Build Chrome release
         run: npm run release:v3
 
@@ -70,7 +60,17 @@ jobs:
           name: release-v3
           path: web
 
-      - name: Lint v3 with web-ext
+      - name: Build Firefox release
+        run: npm run release:v2
+
+      - name: Upload web artifacts
+        uses: actions/upload-artifact@v3
+        if: github.event_name == 'release'
+        with:
+          name: release-v2
+          path: web
+
+      - name: Lint Firefox release with web-ext
         run: npm run test:ext
 
   deploy-coverage:
