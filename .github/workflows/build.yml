@@ -45,9 +45,6 @@ jobs:
       - name: Test Jest
         run: npm run test
 
-      - name: Lint web-ext
-        run: npm run test:ext
-
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         if: github.ref == 'refs/heads/main' &&
@@ -70,6 +67,9 @@ jobs:
         with:
           name: web
           path: web
+
+      - name: Lint web-ext
+        run: npm run test:ext
 
   deploy-coverage:
     runs-on: ubuntu-latest
