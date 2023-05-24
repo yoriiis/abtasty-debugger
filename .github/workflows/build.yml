@@ -1,4 +1,4 @@
-name: Build & Deploy coverage
+name: Build & Deploy
 
 on:
   push:
@@ -41,15 +41,6 @@ jobs:
       - name: Test Jest
         run: npm run test
 
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v3
-        if: github.ref == 'refs/heads/main' &&
-          github.repository == 'yoriiis/abtasty-debugger' &&
-          github.event_name != 'pull_request'
-        with:
-          name: coverage
-          path: coverage
-
       - name: Build Chrome release
         run: npm run release:v3
 
@@ -72,29 +63,6 @@ jobs:
 
       - name: Lint Firefox release with web-ext
         run: npm run test:ext
-
-  deploy-coverage:
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    needs: build
-    if: success() &&
-      github.ref == 'refs/heads/main' &&
-      github.repository == 'yoriiis/abtasty-debugger' &&
-      github.event_name != 'pull_request'
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Download artifacts
-        uses: actions/download-artifact@v3
-        with:
-          name: coverage
-          path: coverage
-
-      - name: Coveralls
-        uses: coverallsapp/github-action@master
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          path-to-lcov: 'coverage/lcov.info'
 
   publish-firefox:
     runs-on: ubuntu-latest
