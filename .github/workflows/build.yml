@@ -50,17 +50,27 @@ jobs:
           name: coverage
           path: coverage
 
-      - name: Build Release
-        run: make build-release
+      - name: Build Firefox release
+        run: npm run release:v2
 
       - name: Upload web artifacts
         uses: actions/upload-artifact@v3
         if: github.event_name == 'release'
         with:
-          name: web
+          name: release-v2
           path: web
 
-      - name: Lint web-ext
+      - name: Build Chrome release
+        run: npm run release:v3
+
+      - name: Upload web artifacts
+        uses: actions/upload-artifact@v3
+        if: github.event_name == 'release'
+        with:
+          name: release-v3
+          path: web
+
+      - name: Lint v3 with web-ext
         run: npm run test:ext
 
   deploy-coverage:
@@ -96,18 +106,21 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Download web artifacts
+      - name: Download release artifacts
         uses: actions/download-artifact@v3
         with:
-          name: web
+          name: release-v3
           path: web
 
       - uses: actions/setup-node@v3
         with:
           cache: 'npm'
           cache-dependency-path: ./package-lock.json
-          node-version: 16
+          node-version: 18
           registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        run: npm ci
 
       - run: npx web-ext sign --use-submission-api --channel=listed --source-dir web
         env:
@@ -124,18 +137,21 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Download web artifacts
+      - name: Download release artifacts
         uses: actions/download-artifact@v3
         with:
-          name: web
+          name: relese-v2
           path: web
 
       - uses: actions/setup-node@v3
         with:
           cache: 'npm'
           cache-dependency-path: ./package-lock.json
-          node-version: 16
+          node-version: 18
           registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        run: npm ci
 
       - run: npx chrome-webstore-upload upload --auto-publish --source web
         env:
