@@ -6,7 +6,7 @@ on:
 
 jobs:
   firefox:
-    uses: yoriiis/actions/.github/workflows/firefox-addons-publish.yml.yml@main
+    uses: yoriiis/actions/.github/workflows/firefox-addons-publish.yml@main
     with:
       node-version: 16
       source-dir: web
