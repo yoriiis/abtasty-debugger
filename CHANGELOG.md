@@ -8,6 +8,8 @@
 
 ### Updates
 
+- Improve Edge store validation ([bca3710](https://github.com/yoriiis/abtasty-debugger/commit/bca3710d8eaef7f023922dbde2fa6280cfcf7a87), [b9eac39](https://github.com/yoriiis/abtasty-debugger/commit/b9eac39ad9c490b611ebcf28fa55dc6f1fdd47a6))
+- Replace jsx-dom by costro jsx ([19f62ab](https://github.com/yoriiis/abtasty-debugger/commit/19f62ab6daa3ab4345bce7ea9689a912f5fcc27a), [2c7f733](https://github.com/yoriiis/abtasty-debugger/commit/2c7f7339b1cc3dbca3dc7178d5d8cf503ae2b9e2))
 - Update packages dependencies ([#17](https://github.com/yoriiis/abtasty-debugger/pull/17))
 
 ## 1.3.0
