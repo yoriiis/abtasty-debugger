@@ -5,11 +5,12 @@ on:
     types: [published]
 
 jobs:
-  deploy:
+  chrome:
     uses: yoriiis/actions/.github/workflows/chrome-web-store-publish.yml@main
     with:
+      node-version: 16
       source-dir: web
-      script: npm run release:v3
+      command: npm run release:v3
     secrets:
       CHROME_EXTENSION_ID: ${{ secrets.CHROME_EXTENSION_ID }}
       CHROME_CLIENT_ID: ${{ secrets.CHROME_CLIENT_ID }}
