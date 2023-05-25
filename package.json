@@ -16,7 +16,7 @@
 		"inspect": "node --inspect node_modules/webpack/bin/webpack.js --config webpack.config.js --mode=development",
 		"release:v2": "rm -rf ./web/ && webpack --mode=production --config=config/webpack.config.js --env manifest=v2 --env release=true",
 		"release:v3": "rm -rf ./web/ && webpack --mode=production --config=config/webpack.config.js --env manifest=v3 --env release=true",
-		"test": "npm run test:eslint && npm run test:stylelint && npm run test:type-check && npm run test:markdown && npm run test",
+		"test": "npm run test:eslint && npm run test:stylelint && npm run test:type-check && npm run test:markdown && npm run test:unit",
 		"test:eslint": "eslint . --config config/.eslintrc.js --ignore-pattern web --ignore-pattern lib",
 		"test:ext": "web-ext lint --source-dir web",
 		"test:markdown": "markdownlint '**/*.md' --ignore node_modules",
