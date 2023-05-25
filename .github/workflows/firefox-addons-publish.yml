@@ -10,7 +10,7 @@ jobs:
     with:
       node-version: 16
       source-dir: web
-      command: npm run release:v2
+      command-build: npm run release:v2
     secrets:
       FIREFOX_API_KEY: ${{ secrets.FIREFOX_API_KEY }}
       FIREFOX_API_SECRET: ${{ secrets.FIREFOX_API_SECRET }}
