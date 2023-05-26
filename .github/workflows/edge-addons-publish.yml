@@ -5,13 +5,13 @@ on:
     types: [published]
 
 jobs:
-  firefox:
+  edge:
     uses: yoriiis/actions/.github/workflows/edge-addons-publish.yml@main
     with:
       node-version: 18
       source-dir: web
       command-build: npm run release:v3
-      publication-note: Publication note
+      publication-note: ${cat ./assets/install-guideline.md}
     secrets:
       EDGE_PRODUCT_ID: ${{ secrets.EDGE_PRODUCT_ID }}
       EDGE_CLIENT_ID: ${{ secrets.EDGE_CLIENT_ID }}
