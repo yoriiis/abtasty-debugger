@@ -13,4 +13,7 @@ jobs:
     uses: yoriiis/actions/.github/workflows/test-and-build.yml@main
     with:
       node-version: 18
-      command-build: npm run release:v3 && npm run release:v2 && npm run test:ext
+      command-build: |
+        npm run release:v3
+        npm run release:v2
+        npm run test:ext
