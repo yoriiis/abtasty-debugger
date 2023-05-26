@@ -1,0 +1,19 @@
+name: Publish Edge Add-ons
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  firefox:
+    uses: yoriiis/actions/.github/workflows/edge-addons-publish.yml@main
+    with:
+      node-version: 18
+      source-dir: web
+      command-build: npm run release:v3
+      publication-note: Publication note
+    secrets:
+      EDGE_PRODUCT_ID: ${{ secrets.EDGE_PRODUCT_ID }}
+      EDGE_CLIENT_ID: ${{ secrets.EDGE_CLIENT_ID }}
+      EDGE_CLIENT_SECRET: ${{ secrets.EDGE_CLIENT_SECRET }}
+      EDGE_ACCESS_TOKEN_URL: ${{ secrets.EDGE_ACCESS_TOKEN_URL }}
