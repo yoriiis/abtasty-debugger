@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.3.2
+
+### Updates
+
+- Add GitHub Actions workflow to publish on Chrome Web Store, Edge Add-ons and Firefox Add-ons
+
 ## 1.3.1
 
 ### Fixes
