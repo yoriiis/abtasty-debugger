@@ -1,7 +1,6 @@
-import { createElement } from 'costro/jsx'
 import CollapseTemplate from 'shared/collapse/assets/scripts/collapse'
 import wording from 'shared/utils/wording'
-import { Targeting, Condition, FavoriteUrlScope } from 'shared/assets/interfaces/interfaces'
+import { Targeting, Condition, FavoriteUrlScope } from 'shared/assets/definitions/types'
 
 /**
  * Targeting template
@@ -36,7 +35,7 @@ export default function ({
 		contentTemplate = (
 			<table className="table">
 				<tbody>
-					{(conditions as Array<Condition>).map((item: Condition) => {
+					{(conditions as Condition[]).map((item: Condition) => {
 						let value = item.value
 						if (targeting.key === 'cookie_scope') {
 							value = `${item.name}=${item.value}`

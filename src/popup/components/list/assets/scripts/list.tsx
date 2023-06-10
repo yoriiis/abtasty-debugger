@@ -1,9 +1,8 @@
 import validateTarget from 'validate-target'
-import { createElement } from 'costro/jsx'
 import TemplateList from './templates/list'
 import { Component, navigate } from 'costro'
 import { sendMessage, isExtensionMode, namespace } from 'shared/utils/bridge'
-import { TestsSortedByStatus } from 'shared/assets/interfaces/interfaces'
+import { TestsSortedByStatus } from 'shared/assets/definitions/types'
 
 export default class List extends Component {
 	element: null | HTMLElement

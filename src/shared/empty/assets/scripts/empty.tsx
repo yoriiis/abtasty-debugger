@@ -1,5 +1,4 @@
 import validateTarget from 'validate-target'
-import { createElement } from 'costro/jsx'
 import TemplateEmpty from './templates/empty'
 import { Component, navigate } from 'costro'
 

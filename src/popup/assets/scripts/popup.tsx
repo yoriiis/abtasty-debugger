@@ -1,6 +1,6 @@
 import DataManager from 'shared/utils/data-manager'
 import { isExtensionMode, namespace } from 'shared/utils/bridge'
-import { Data, ChangeInfo } from 'shared/assets/interfaces/interfaces'
+import { Data, ChangeInfo } from 'shared/assets/definitions/types'
 import List from '../../components/list/assets/scripts/list'
 import Detail from '../../components/detail/assets/scripts/detail'
 import Empty from 'shared/empty/assets/scripts/empty'

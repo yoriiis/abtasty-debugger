@@ -1,4 +1,3 @@
-import { createElement } from 'costro/jsx'
 import Popup from '../assets/scripts/popup'
 import fixturesAbtasty from '../../shared/assets/fixtures/abtasty.json'
 import DataManager from 'shared/utils/data-manager'

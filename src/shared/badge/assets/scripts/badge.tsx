@@ -1,4 +1,3 @@
-import { createElement } from 'costro/jsx'
 import check from 'shared/assets/svgs/check.svg'
 import cross from 'shared/assets/svgs/cross.svg'
 

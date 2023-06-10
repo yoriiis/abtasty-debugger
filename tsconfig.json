@@ -1,26 +1,27 @@
 {
 	"compilerOptions": {
+		"strict": true,
+		"module": "amd",
 		"moduleResolution": "nodenext",
+		"target": "es2017",
+		"lib": ["es2017", "DOM"],
 		"outDir": "./lib",
+		"declaration": false,
 		"allowJs": true,
 		"checkJs": false,
-		"target": "es2017",
-		"lib": ["es2017", "dom"],
-		"strict": true,
 		"esModuleInterop": true,
-		"declaration": false,
 		"skipLibCheck": true,
+		"forceConsistentCasingInFileNames": true,
 		"allowSyntheticDefaultImports": true,
-		"module": "amd",
-		"jsx": "react",
-		"jsxFactory": "createElement",
-		"jsxFragmentFactory": "Fragment",
+		"resolveJsonModule": true,
+		"jsx": "react-jsx",
+		"jsxImportSource": "jsx-dom-cjs",
+		"jsxFactory": "",
+		"jsxFragmentFactory": "",
 		"baseUrl": "./src",
 		"paths": {
 			"shared": ["./shared"]
-		},
-		"resolveJsonModule": true,
-		"forceConsistentCasingInFileNames": true
+		}
 	},
-	"include": ["./src/**/*.ts", "./src/**/*.tsx", "src/shared/assets/definitions/decs.d.ts"]
+	"include": ["./src/**/*.ts", "./src/**/*.tsx"]
 }

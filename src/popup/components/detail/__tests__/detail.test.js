@@ -1,4 +1,3 @@
-import { createElement } from 'costro/jsx'
 import validateTarget from 'validate-target'
 import { namespace, sendMessage } from 'shared/utils/bridge'
 import fixturesAbtasty from '../../../../shared/assets/fixtures/abtasty.json'

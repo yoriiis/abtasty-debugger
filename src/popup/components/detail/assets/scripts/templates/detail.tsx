@@ -1,4 +1,3 @@
-import { createElement, Fragment } from 'costro/jsx'
 import externalLink from 'shared/assets/svgs/external-link.svg'
 import arrowBottom from 'shared/assets/svgs/arrow-bottom.svg'
 import chart from 'shared/assets/svgs/chart.svg'
@@ -6,7 +5,7 @@ import TargetingTemplate from 'shared/targeting/assets/scripts/targeting'
 import VariationTemplate from 'shared/variation/assets/scripts/variation'
 import TrackingTemplate from 'shared/tracking/assets/scripts/tracking'
 import CollapseTemplate from 'shared/collapse/assets/scripts/collapse'
-import { Targeting, DetailData } from 'shared/assets/interfaces/interfaces'
+import { Targeting, DetailData } from 'shared/assets/definitions/types'
 import { navigate } from 'costro'
 
 /**

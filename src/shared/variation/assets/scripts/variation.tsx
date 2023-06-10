@@ -1,7 +1,6 @@
-import { createElement } from 'costro/jsx'
 import CollapseTemplate from 'shared/collapse/assets/scripts/collapse'
 import externalLink from 'shared/assets/svgs/external-link.svg'
-import { Variations, Variation } from 'shared/assets/interfaces/interfaces'
+import { Variations, Variation } from 'shared/assets/definitions/types'
 import getTrafficAllocation from 'shared/utils/get-traffic-allocation'
 
 /**

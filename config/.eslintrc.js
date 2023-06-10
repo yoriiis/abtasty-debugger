@@ -39,7 +39,9 @@ module.exports = {
 		'@typescript-eslint/ban-ts-comment': 'off',
 		'@typescript-eslint/no-var-requires': 'off',
 		'@typescript-eslint/no-explicit-any': 'off',
-		'react/no-unknown-property': ['error', { ignore: ['innerHTML'] }]
+		'react/no-unknown-property': ['error', { ignore: ['innerHTML'] }],
+		'react/react-in-jsx-scope': 'off',
+		'react/jsx-uses-react': 'off'
 	},
 
 	globals: {
@@ -52,8 +54,6 @@ module.exports = {
 
 	settings: {
 		react: {
-			pragma: 'createElement',
-			fragment: 'Fragment',
 			version: '0' // Remove the warning of the missing React package
 		}
 	}

@@ -1,4 +1,3 @@
-import { createElement } from 'costro/jsx'
 import BadgeTemplate from 'shared/badge/assets/scripts/badge'
 import arrowBottom from 'shared/assets/svgs/arrow-bottom.svg'
 

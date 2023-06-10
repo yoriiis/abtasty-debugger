@@ -1,9 +1,8 @@
-import { createElement, Fragment } from 'costro/jsx'
 import arrowBottom from 'shared/assets/svgs/arrow-bottom.svg'
 import check from 'shared/assets/svgs/check.svg'
 import clear from 'shared/assets/svgs/clear.svg'
 import BadgeTemplate from 'shared/badge/assets/scripts/badge'
-import { ListData, Result } from 'shared/assets/interfaces/interfaces'
+import { ListData, Result } from 'shared/assets/definitions/types'
 import { navigate } from 'costro'
 
 /**

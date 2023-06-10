@@ -1,6 +1,5 @@
-import { createElement } from 'costro/jsx'
 import CollapseTemplate from 'shared/collapse/assets/scripts/collapse'
-import { Trackings, Tracking } from 'shared/assets/interfaces/interfaces'
+import { Trackings, Tracking } from 'shared/assets/definitions/types'
 
 /**
  * Template of trackings list
@@ -13,7 +12,7 @@ export default function ({ trackings }: { trackings: Trackings }) {
 		<div className="tracking">
 			<ul className="tracking-list">
 				{Object.entries(trackings).map(
-					([type, trackingsByType]: [type: string, trackingsByType: Array<Tracking>]) => {
+					([type, trackingsByType]: [type: string, trackingsByType: Tracking[]]) => {
 						return (
 							<li className="tracking-listItem">
 								<span className="tracking-type">{type}</span>

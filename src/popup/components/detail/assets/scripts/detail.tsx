@@ -1,9 +1,8 @@
 import validateTarget from 'validate-target'
-import { createElement } from 'costro/jsx'
 import TemplateDetail from './templates/detail'
 import { Component, navigate } from 'costro'
 import { sendMessage, namespace } from 'shared/utils/bridge'
-import { TargetingsSortedByStatus } from 'shared/assets/interfaces/interfaces'
+import { TargetingsSortedByStatus } from 'shared/assets/definitions/types'
 
 export default class Detail extends Component {
 	element: null | HTMLElement

@@ -4,7 +4,7 @@ import {
 	TargetingsSortedByStatus,
 	Result,
 	Targeting
-} from 'shared/assets/interfaces/interfaces'
+} from 'shared/assets/definitions/types'
 
 /**
  * Data manager for ABTasty data
@@ -45,10 +45,10 @@ export default class DataManager {
 		const outputData: TargetingsSortedByStatus = {}
 		Object.entries(data.results).forEach(([id, result]: [id: string, result: Result]) => {
 			const targetings = result.targetings
-			let acceptedSegment: Array<Targeting> = []
-			let rejectedSegment: Array<Targeting> = []
-			let acceptedTrigger: Array<Targeting> = []
-			let rejectedTrigger: Array<Targeting> = []
+			let acceptedSegment: Targeting[] = []
+			let rejectedSegment: Targeting[] = []
+			let acceptedTrigger: Targeting[] = []
+			let rejectedTrigger: Targeting[] = []
 
 			const acceptedTargetPages = Object.entries(targetings.targetPages)
 				.filter(([, value]: [key: string, value: Targeting]) => value.success === true)
