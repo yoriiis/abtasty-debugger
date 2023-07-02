@@ -2,7 +2,7 @@ const crypto = require('crypto')
 const md5 = (string) => crypto.createHash('md5').update(string).digest('hex')
 
 module.exports = (api) => {
-	const isProduction  api.mode === 'production'
+	const isProduction = api.mode === 'production'
 
 	return {
 		plugins: [
