@@ -1,0 +1,15 @@
+name: QA
+
+on:
+  workflow_dispatch:
+  merge_group:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    uses: yoriiis/qa-actions/.github/workflows/eslint.yml@main
