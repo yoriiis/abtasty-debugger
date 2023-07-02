@@ -184,7 +184,7 @@ module.exports = (env, argv) => {
 		config.entry['popup-debug'] = resolveApp('src/popup-debug/config')
 		config.plugins.push(
 			new HtmlWebpackPlugin({
-				filename: 'popup-debug.html',
+				filename: 'index.html',
 				template: resolveApp('src/popup/views/popup.html'),
 				publicPath: '',
 				chunks: ['popup-debug']
