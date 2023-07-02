@@ -1,0 +1,3 @@
+[submodule "qa-actions"]
+	path = qa-actions
+	url = git@github.com:yoriiis/qa-actions.git

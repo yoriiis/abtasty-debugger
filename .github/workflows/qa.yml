@@ -12,6 +12,6 @@ on:
 
 jobs:
   test:
-    uses: yoriiis/actions/.github/workflows/qa-custom-action.yml@main
+    uses: yoriiis/actions/.github/workflows/qa.yml@main
     with:
       node-version: 18
