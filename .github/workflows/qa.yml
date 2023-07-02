@@ -12,4 +12,6 @@ on:
 
 jobs:
   test:
-    uses: yoriiis/qa-actions/.github/workflows/eslint.yml@main
+    uses: yoriiis/actions/.github/workflows/qa-custom-action.yml@main
+    with:
+      node-version: 18
