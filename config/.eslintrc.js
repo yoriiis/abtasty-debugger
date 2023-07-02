@@ -57,5 +57,7 @@ module.exports = {
 		react: {
 			version: '0' // Remove the warning of the missing React package
 		}
-	}
+	},
+
+	ignorePatterns: ['node_modules', 'web', 'lib']
 }
