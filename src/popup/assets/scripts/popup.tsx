@@ -23,7 +23,7 @@ declare module 'react' {
 }
 
 export default class Popup {
-	data: Data
+	// data: Data
 	element: Element
 	redirectToEmpty: boolean
 	dataManager: any
