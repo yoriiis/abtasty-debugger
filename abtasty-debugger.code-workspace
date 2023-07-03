@@ -11,7 +11,7 @@
 			"editor.tabSize": 4,
 			"editor.rulers": [100]
 		},
-        "[yaml]": {
+		"[yaml]": {
 			"editor.tabSize": 2,
 			"editor.detectIndentation": true,
 			"editor.insertSpaces": true,
@@ -25,14 +25,14 @@
 		},
 		"files.associations": {
 			"*.css": "postcss",
-            "*.yaml": "yaml",
+			"*.yaml": "yaml",
 			"*.yml": "yaml"
 		},
 		"files.trimTrailingWhitespace": true,
 		"search.exclude": {
 			"**/node_modules": true
 		},
-        "files.eol": "\n",
+		"files.eol": "\n",
 	},
 	"extensions": {
 		"recommendations": [
