@@ -1,8 +1,7 @@
-name: QA
+name: Lint
 
 on:
   workflow_dispatch:
-  merge_group:
   push:
     branches:
       - main
@@ -11,5 +10,5 @@ on:
       - main
 
 jobs:
-  test:
-    uses: yoriiis/actions/.github/workflows/qa.yml@main
+  lint:
+    uses: yoriiis/actions/.github/workflows/lint.yml@main
