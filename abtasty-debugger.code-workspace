@@ -11,6 +11,12 @@
 			"editor.tabSize": 4,
 			"editor.rulers": [100]
 		},
+        "[yaml]": {
+			"editor.tabSize": 2,
+			"editor.detectIndentation": true,
+			"editor.insertSpaces": true,
+			"editor.autoIndent": "none"
+		},
 		"emmet.includeLanguages": {
 			"postcss": "css"
 		},
@@ -18,12 +24,15 @@
 			"postcss": "css"
 		},
 		"files.associations": {
-			"*.css": "postcss"
+			"*.css": "postcss",
+            "*.yaml": "yaml",
+			"*.yml": "yaml"
 		},
 		"files.trimTrailingWhitespace": true,
 		"search.exclude": {
 			"**/node_modules": true
-		}
+		},
+        "files.eol": "\n",
 	},
 	"extensions": {
 		"recommendations": [
