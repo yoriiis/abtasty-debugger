@@ -7,7 +7,7 @@
 	"bugs": "https://github.com/yoriiis/abtasty-debugger/issues",
 	"repository": "https://github.com/yoriiis/abtasty-debugger.git",
 	"license": "MIT",
-	"author": "Yoriiis aka Joris DANIEL",
+	"author": "Yoriiis",
 	"scripts": {
 		"build:v2": "rm -rf ./web/ && webpack --mode=production --config=config/webpack.config.js --env manifest=v2",
 		"build:v3": "rm -rf ./web/ && webpack --mode=production --config=config/webpack.config.js --env manifest=v3",
