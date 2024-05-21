@@ -23,7 +23,7 @@ function getCookie(name) {
  * @param {String} options.value Storage value
  */
 function setCookie({ name, value }) {
-	const domain = window.location.host.split('.')
+	const domain = window.location.host
 	const isSecure = window.location.protocol === 'https:'
 
 	document.cookie = `${name}=${value}; path=/; domain=.${domain};${isSecure ? ' Secure;' : ''}`
@@ -54,7 +54,7 @@ function changeVariation({ testId, variationId, cookieValue }) {
  * @param {String} options.value Cookie value
  */
 function removeCookie({ name }) {
-	const domain = window.location.host.split('.')
+	const domain = window.location.host
 	document.cookie = `${name}=; expires=${new Date(0).toUTCString()}; path=/; domain=.${domain};`
 }
 
