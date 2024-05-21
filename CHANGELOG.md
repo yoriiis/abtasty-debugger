@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.3.4
+
+### Fixes
+
+- Fix set cookie domain ([#31](https://github.com/yoriiis/abtasty-debugger/pull/31))
+
 ## 1.3.3
 
 ### Fixes
