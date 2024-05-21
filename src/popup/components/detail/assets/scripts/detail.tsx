@@ -162,7 +162,7 @@ export default class Detail extends Component {
 								action: 'changeVariation',
 								data: {
 									testId,
-									variationId: `${newVariationId}`,
+									variationId: newVariationId,
 									cookieValue: response.replace(thValue, thValueUpdated)
 								}
 							})
