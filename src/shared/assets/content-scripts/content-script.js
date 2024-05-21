@@ -17,22 +17,34 @@ function getCookie(name) {
 }
 
 /**
- * Set storage (cookie and localStorage)
+ * Set cookie
  * @param {Object} options
  * @param {String} options.name Storage name
  * @param {String} options.value Storage value
- * @param {Boolean} options.syncWithLocalStorage Sync localtorage
  */
-function setStorage({ name, value, syncWithLocalStorage = false }) {
-	const domain = window.location.host.split('.').slice(-2).join('.')
+function setCookie({ name, value }) {
+	const domain = window.location.host.split('.')
 	const isSecure = window.location.protocol === 'https:'
 
 	document.cookie = `${name}=${value}; path=/; domain=.${domain};${isSecure ? ' Secure;' : ''}`
+}
 
-	const valueInStorage = window.localStorage.getItem(name)
-	if (syncWithLocalStorage && valueInStorage) {
-		window.localStorage.setItem(name, value)
-	}
+/**
+ * Change test variation
+ * Update new browser storage to force the variation changes
+ * @param {Object} options
+ * @param {String} options.testId Test ID
+ * @param {String} options.variationId Variation ID
+ * @param {String} options.cookieValue Cookie value
+ */
+function changeVariation({ testId, variationId, cookieValue }) {
+	setCookie({ name: 'ABTasty', value: cookieValue })
+
+	// Update new browser storage to force variation changes
+	const storageKey = 'ABTastyForcedVariations'
+	const storage = JSON.parse(window.sessionStorage.getItem(storageKey)) || {}
+	storage[testId] = variationId
+	window.sessionStorage.setItem(storageKey, JSON.stringify(storage))
 }
 
 /**
@@ -42,7 +54,7 @@ function setStorage({ name, value, syncWithLocalStorage = false }) {
  * @param {String} options.value Cookie value
  */
 function removeCookie({ name }) {
-	const domain = window.location.host.split('.').slice(-2).join('.')
+	const domain = window.location.host.split('.')
 	document.cookie = `${name}=; expires=${new Date(0).toUTCString()}; path=/; domain=.${domain};`
 }
 
@@ -79,11 +91,10 @@ namespace.runtime.onMessage.addListener((message, sender, response) => {
 			document.dispatchEvent(new window.Event('abtastyDebugger::getData'))
 		} else if (message.action === 'getCookie') {
 			response(getCookie(message.data.name))
-		} else if (message.action === 'setStorage') {
-			setStorage({
+		} else if (message.action === 'setCookie') {
+			setCookie({
 				name: message.data.name,
-				value: message.data.value,
-				syncWithLocalStorage: message.data.syncWithLocalStorage
+				value: message.data.value
 			})
 			response('success')
 		} else if (message.action === 'removeCookie') {
@@ -93,6 +104,13 @@ namespace.runtime.onMessage.addListener((message, sender, response) => {
 			response('success')
 		} else if (message.action === 'clearAbtastyCookies') {
 			document.dispatchEvent(new window.Event('abtastyDebugger::clearCookie'))
+			response('success')
+		} else if (message.action === 'changeVariation') {
+			changeVariation({
+				testId: message.data.testId,
+				variationId: message.data.variationId,
+				cookieValue: message.data.cookieValue
+			})
 			response('success')
 		}
 	}

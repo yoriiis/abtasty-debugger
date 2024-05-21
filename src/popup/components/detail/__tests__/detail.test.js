@@ -245,11 +245,11 @@ describe('Detail', () => {
 				callback: expect.any(Function)
 			})
 			expect(sendMessage).toHaveBeenNthCalledWith(2, {
-				action: 'setStorage',
+				action: 'changeVariation',
 				data: {
-					name: 'ABTasty',
-					value: `uid=zed18spa36wefrnq&fst=1632216663697&pst=-1&cst=1632216663697&ns=1&pvt=1&pvis=1&th=661111.200001.1.1.1.1.1632216664066.1632216664066.1.2_${testId}.${newVariationId}.1.1.1.1.1632216664068.1632216664068.1.2`,
-					syncWithLocalStorage: true
+					testId,
+					variationId: parseInt(newVariationId),
+					cookieValue: `uid=zed18spa36wefrnq&fst=1632216663697&pst=-1&cst=1632216663697&ns=1&pvt=1&pvis=1&th=661111.200001.1.1.1.1.1632216664066.1632216664066.1.2_${testId}.${newVariationId}.1.1.1.1.1632216664068.1632216664068.1.2`
 				}
 			})
 			expect(namespace.tabs.reload).toHaveBeenCalled()
@@ -274,11 +274,11 @@ describe('Detail', () => {
 				callback: expect.any(Function)
 			})
 			expect(sendMessage).toHaveBeenNthCalledWith(2, {
-				action: 'setStorage',
+				action: 'changeVariation',
 				data: {
-					name: 'ABTasty',
-					value: `uid=zed18spa36wefrnq&fst=1632216663697&pst=-1&cst=1632216663697&ns=1&pvt=1&pvis=1&th=661111.200001.1.1.1.1.1632216664066.1632216664066.1.2_${testId}.${newVariationId}.1.1.1.1.1632216664068.1632216664068.1.2`,
-					syncWithLocalStorage: true
+					testId,
+					variationId: parseInt(newVariationId),
+					cookieValue: `uid=zed18spa36wefrnq&fst=1632216663697&pst=-1&cst=1632216663697&ns=1&pvt=1&pvis=1&th=661111.200001.1.1.1.1.1632216664066.1632216664066.1.2_${testId}.${newVariationId}.1.1.1.1.1632216664068.1632216664068.1.2`
 				}
 			})
 			expect(namespace.tabs.reload).toHaveBeenCalled()
@@ -303,11 +303,11 @@ describe('Detail', () => {
 				callback: expect.any(Function)
 			})
 			expect(sendMessage).toHaveBeenNthCalledWith(2, {
-				action: 'setStorage',
+				action: 'changeVariation',
 				data: {
-					name: 'ABTasty',
-					value: `uid=zed18spa36wefrnq&fst=1632216663697&pst=-1&cst=1632216663697&ns=1&pvt=1&pvis=1&th=661111.200001.1.1.1.1.1632216664066.1632216664066.1.2_${testId}.${newVariationId}.1.1.1.1.1632216664068.1632216664068.1.2`,
-					syncWithLocalStorage: true
+					testId,
+					variationId: parseInt(newVariationId),
+					cookieValue: `uid=zed18spa36wefrnq&fst=1632216663697&pst=-1&cst=1632216663697&ns=1&pvt=1&pvis=1&th=661111.200001.1.1.1.1.1632216664066.1632216664066.1.2_${testId}.${newVariationId}.1.1.1.1.1632216664068.1632216664068.1.2`
 				}
 			})
 			expect(namespace.tabs.reload).toHaveBeenCalled()

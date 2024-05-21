@@ -157,21 +157,16 @@ export default class Detail extends Component {
 								`${testId}.${currentVariationId[1]}`,
 								`${testId}.${newVariationId}`
 							)
-							response = response.replace(thValue, thValueUpdated)
 
 							sendMessage({
-								action: 'setStorage',
+								action: 'changeVariation',
 								data: {
-									name: 'ABTasty',
-									value: response,
-									syncWithLocalStorage: true
+									testId,
+									variationId: newVariationId,
+									cookieValue: response.replace(thValue, thValueUpdated)
 								}
 							})
 							namespace.tabs.reload()
-
-							// Update the data with the new variation ID
-							// Useful if the detail view is re-rendered after updating the variation
-							this.props.results[testId].variationID = newVariationId
 						}
 					}
 				}

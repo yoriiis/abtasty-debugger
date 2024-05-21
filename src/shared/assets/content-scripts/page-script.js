@@ -80,6 +80,7 @@ document.addEventListener('abtastyDebugger::getData', () => {
 document.addEventListener('abtastyDebugger::clearCookie', () => {
 	window.ABTasty.clearAllCookies()
 	window.localStorage.removeItem(ABTASTY_NAME)
+	window.sessionStorage.removeItem('ABTastyForcedVariations')
 })
 
 /**

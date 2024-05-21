@@ -132,7 +132,7 @@ export default class List extends Component {
 		target.setAttribute('disabled', '')
 
 		sendMessage({
-			action: target.checked ? 'setStorage' : 'removeCookie',
+			action: target.checked ? 'setCookie' : 'removeCookie',
 			data: {
 				name: 'abTastyDebug',
 				value: target.checked
