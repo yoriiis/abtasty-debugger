@@ -248,7 +248,7 @@ describe('List', () => {
 
 			expect(target.setAttribute).toHaveBeenCalledWith('disabled', '')
 			expect(sendMessage).toHaveBeenCalledWith({
-				action: 'setStorage',
+				action: 'setCookie',
 				data: {
 					name: 'abTastyDebug',
 					value: true

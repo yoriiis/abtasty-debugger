@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.3.3
+
+### Fixes
+
+- Fix variation changes with cookie domain and new `ABTastyForcedVariations` browser storage ([#30](https://github.com/yoriiis/abtasty-debugger/pull/30))
+
 ## 1.3.2
 
 ### Updates
