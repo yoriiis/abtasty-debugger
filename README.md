@@ -1,6 +1,6 @@
 # AB Tasty Debugger
 
-![GitHub Workflow Status (branch)](https://img.shields.io/github/actions/workflow/status/yoriiis/abtasty-debugger/build.yml?branch=main&style=for-the-badge) [![Coverage Status](https://img.shields.io/coveralls/github/yoriiis/abtasty-debugger?style=for-the-badge)](https://coveralls.io/github/yoriiis/abtasty-debugger?branch=main)
+![GitHub Workflow Status (branch)](https://img.shields.io/github/actions/workflow/status/yoriiis/abtasty-debugger/build.yml?branch=main&style=for-the-badge) [![Coverage Status](https://img.shields.io/coveralls/github/yoriiis/abtasty-debugger?style=for-the-badge)](https://coveralls.io/github/yoriiis/abtasty-debugger?branch=main) [![Chrome Web Store Users](https://img.shields.io/chrome-web-store/users/ideeaicjegejlmejdjbhbhfhenekneie?style=for-the-badge&logo=googlechrome&logoColor=FFCD46&color=%234C8BF5&link=https%3A%2F%2Fchromewebstore.google.com%2Fdetail%2Fab-tasty-debugger%2Fideeaicjegejlmejdjbhbhfhenekneie)](https://chromewebstore.google.com/detail/ab-tasty-debugger/ideeaicjegejlmejdjbhbhfhenekneie)
 
 `AB Tasty Debugger` is a browser extension that simplifies the debugging of A/B Tests from AB Tasty and adds useful informations.
 
