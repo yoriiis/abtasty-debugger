@@ -45,6 +45,7 @@ function changeVariation({ testId, variationId, cookieValue }) {
 	const storage = JSON.parse(window.sessionStorage.getItem(storageKey)) || {}
 	storage[testId] = variationId
 	window.sessionStorage.setItem(storageKey, JSON.stringify(storage))
+	window.sessionStorage.setItem('AB_TASTY_QA_ASSISTANT_ENV', 'staging')
 }
 
 /**
