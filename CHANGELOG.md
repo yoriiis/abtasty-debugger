@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.3.5
+
+### Fixes
+
+- Fix variation changes (next) ([#35](https://github.com/yoriiis/abtasty-debugger/pull/35))
+
 ## 1.3.4
 
 ### Fixes
