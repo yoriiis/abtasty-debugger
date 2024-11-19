@@ -1,6 +1,6 @@
+import type { Condition, FavoriteUrlScope, Targeting } from 'shared/assets/definitions/types'
 import CollapseTemplate from 'shared/collapse/assets/scripts/collapse'
 import wording from 'shared/utils/wording'
-import { Targeting, Condition, FavoriteUrlScope } from 'shared/assets/definitions/types'
 
 /**
  * Targeting template
@@ -43,10 +43,9 @@ export default function ({
 							const urlScopeRef = (
 								targeting.conditions as FavoriteUrlScope
 							).favoriteUrlScopeConditions.find(
-								(urlScope: Condition) =>
-									urlScope.favorite_url_id === item.favorite_url_id
+								(urlScope: Condition) => urlScope.favorite_url_id === item.favorite_url_id
 							)
-							if (urlScopeRef && urlScopeRef.url) {
+							if (urlScopeRef?.url) {
 								value = urlScopeRef.url
 							}
 						}
@@ -62,12 +61,7 @@ export default function ({
 											{value}
 										</textarea>
 									) : (
-										<input
-											className="input"
-											disabled
-											type="text"
-											value={value}
-										/>
+										<input className="input" disabled type="text" value={value} />
 									)}
 								</td>
 							</tr>

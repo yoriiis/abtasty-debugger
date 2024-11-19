@@ -1,6 +1,6 @@
+import { Component, navigate } from 'costro'
 import validateTarget from 'validate-target'
 import TemplateEmpty from './templates/empty'
-import { Component, navigate } from 'costro'
 
 export default class Empty extends Component {
 	element: null | HTMLElement

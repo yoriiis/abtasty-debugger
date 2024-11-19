@@ -1,7 +1,7 @@
 {
 	"compilerOptions": {
 		"strict": true,
-		"module": "amd",
+		"module": "nodenext",
 		"moduleResolution": "nodenext",
 		"target": "es2017",
 		"lib": ["es2017", "DOM"],

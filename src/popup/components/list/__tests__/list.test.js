@@ -1,5 +1,5 @@
-import validateTarget from 'validate-target'
 import { namespace, sendMessage } from 'shared/utils/bridge'
+import validateTarget from 'validate-target'
 import List from '../assets/scripts/list'
 
 const testId = '100002'
@@ -35,8 +35,8 @@ beforeEach(() => {
 		<div className="list">
 			<ul className="list-nav">
 				<li className="list-navItem">
-					<button className="list-navItemButton clearCookies">
-						<div className="list-navItemButtonIcon"></div>
+					<button type="button" className="list-navItemButton clearCookies">
+						<div className="list-navItemButtonIcon" />
 						Reload tag
 					</button>
 				</li>
@@ -44,8 +44,7 @@ beforeEach(() => {
 					<label
 						htmlFor="debugMode"
 						className="list-navItemLabel"
-						title="See DevTools > Console for debug logs"
-					>
+						title="See DevTools > Console for debug logs">
 						Debug mode
 					</label>
 					<div className="customCheckbox">
@@ -57,7 +56,7 @@ beforeEach(() => {
 							name="debug"
 						/>
 						<span className="customCheckbox-round">
-							<div className="customCheckbox-roundIcon"></div>
+							<div className="customCheckbox-roundIcon" />
 						</span>
 					</div>
 				</li>
@@ -113,14 +112,8 @@ describe('List', () => {
 
 			list.addEvents()
 
-			expect(list.element.addEventListener).toHaveBeenCalledWith(
-				'click',
-				list.onClickOnElement
-			)
-			expect(list.element.addEventListener).toHaveBeenCalledWith(
-				'change',
-				list.onChangeOnElement
-			)
+			expect(list.element.addEventListener).toHaveBeenCalledWith('click', list.onClickOnElement)
+			expect(list.element.addEventListener).toHaveBeenCalledWith('change', list.onChangeOnElement)
 		})
 	})
 

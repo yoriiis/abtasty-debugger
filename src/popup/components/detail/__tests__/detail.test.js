@@ -1,5 +1,5 @@
-import validateTarget from 'validate-target'
 import { namespace, sendMessage } from 'shared/utils/bridge'
+import validateTarget from 'validate-target'
 import fixturesAbtasty from '../../../../shared/assets/fixtures/abtasty.json'
 import Detail from '../assets/scripts/detail'
 
@@ -31,7 +31,7 @@ beforeEach(() => {
 		<div className="detail">
 			<div className="collapse">
 				<div className="collapse-header">
-					<button className="collapse-headerButton"></button>
+					<button type="button" className="collapse-headerButton" />
 				</div>
 				<div className="collapse-content">
 					<div className="variation">
@@ -47,7 +47,7 @@ beforeEach(() => {
 										data-test-id={testId}
 										checked
 									/>
-									<span className="customRadio-round"></span>
+									<span className="customRadio-round" />
 								</div>
 							</li>
 						</ul>
@@ -105,10 +105,7 @@ describe('Detail', () => {
 
 			detail.addEvents()
 
-			expect(detail.element.addEventListener).toHaveBeenCalledWith(
-				'click',
-				detail.onClickOnElement
-			)
+			expect(detail.element.addEventListener).toHaveBeenCalledWith('click', detail.onClickOnElement)
 			expect(detail.element.addEventListener).toHaveBeenCalledWith(
 				'change',
 				detail.onChangeOnElement
@@ -248,7 +245,7 @@ describe('Detail', () => {
 				action: 'changeVariation',
 				data: {
 					testId,
-					variationId: parseInt(newVariationId),
+					variationId: Number.parseInt(newVariationId),
 					cookieValue: `uid=zed18spa36wefrnq&fst=1632216663697&pst=-1&cst=1632216663697&ns=1&pvt=1&pvis=1&th=661111.200001.1.1.1.1.1632216664066.1632216664066.1.2_${testId}.${newVariationId}.1.1.1.1.1632216664068.1632216664068.1.2`
 				}
 			})
@@ -277,7 +274,7 @@ describe('Detail', () => {
 				action: 'changeVariation',
 				data: {
 					testId,
-					variationId: parseInt(newVariationId),
+					variationId: Number.parseInt(newVariationId),
 					cookieValue: `uid=zed18spa36wefrnq&fst=1632216663697&pst=-1&cst=1632216663697&ns=1&pvt=1&pvis=1&th=661111.200001.1.1.1.1.1632216664066.1632216664066.1.2_${testId}.${newVariationId}.1.1.1.1.1632216664068.1632216664068.1.2`
 				}
 			})
@@ -306,7 +303,7 @@ describe('Detail', () => {
 				action: 'changeVariation',
 				data: {
 					testId,
-					variationId: parseInt(newVariationId),
+					variationId: Number.parseInt(newVariationId),
 					cookieValue: `uid=zed18spa36wefrnq&fst=1632216663697&pst=-1&cst=1632216663697&ns=1&pvt=1&pvis=1&th=661111.200001.1.1.1.1.1632216664066.1632216664066.1.2_${testId}.${newVariationId}.1.1.1.1.1632216664068.1632216664068.1.2`
 				}
 			})

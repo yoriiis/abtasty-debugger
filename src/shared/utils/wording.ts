@@ -1,4 +1,4 @@
-import { Wording } from 'shared/assets/definitions/types'
+import type { Wording } from 'shared/assets/definitions/types'
 
 /**
  * Correlation table for key

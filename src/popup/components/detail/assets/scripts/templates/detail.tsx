@@ -1,12 +1,12 @@
-import externalLink from 'shared/assets/svgs/external-link.svg'
+import { navigate } from 'costro'
+import type { DetailData, Targeting } from 'shared/assets/definitions/types'
 import arrowBottom from 'shared/assets/svgs/arrow-bottom.svg'
 import chart from 'shared/assets/svgs/chart.svg'
-import TargetingTemplate from 'shared/targeting/assets/scripts/targeting'
-import VariationTemplate from 'shared/variation/assets/scripts/variation'
-import TrackingTemplate from 'shared/tracking/assets/scripts/tracking'
+import externalLink from 'shared/assets/svgs/external-link.svg'
 import CollapseTemplate from 'shared/collapse/assets/scripts/collapse'
-import { Targeting, DetailData } from 'shared/assets/definitions/types'
-import { navigate } from 'costro'
+import TargetingTemplate from 'shared/targeting/assets/scripts/targeting'
+import TrackingTemplate from 'shared/tracking/assets/scripts/tracking'
+import VariationTemplate from 'shared/variation/assets/scripts/variation'
 
 /**
  * Detail template
@@ -53,8 +53,8 @@ export default function ({ testId, identifier, test, result, targetingSorted }: 
 		<div className="detail">
 			<ul className="detail-header">
 				<li>
-					<button onClick={() => navigate(`/list`)} className="detail-headerBack">
-						<div className="detail-headerLinkIcon" innerHTML={arrowBottom}></div>
+					<button type="button" onClick={() => navigate('/list')} className="detail-headerBack">
+						<div className="detail-headerLinkIcon" innerHTML={arrowBottom} />
 						Back
 					</button>
 				</li>
@@ -63,10 +63,9 @@ export default function ({ testId, identifier, test, result, targetingSorted }: 
 						href={`https://app2.abtasty.com/reporting/test/${testId}/report`}
 						target="_blank"
 						rel="noreferrer"
-						className="detail-headerReport"
-					>
+						className="detail-headerReport">
 						See the report
-						<div className="detail-headerLinkIcon" innerHTML={chart}></div>
+						<div className="detail-headerLinkIcon" innerHTML={chart} />
 					</a>
 				</li>
 			</ul>
@@ -92,9 +91,8 @@ export default function ({ testId, identifier, test, result, targetingSorted }: 
 						href={`https://app2.abtasty.com/edit/test/${testId}/audience`}
 						target="_blank"
 						rel="noreferrer"
-						className="detail-subtitleLink"
-					>
-						<div className="detail-subtitleIcon" innerHTML={externalLink}></div>
+						className="detail-subtitleLink">
+						<div className="detail-subtitleIcon" innerHTML={externalLink} />
 					</a>
 				</h2>
 				{templateTargeting}

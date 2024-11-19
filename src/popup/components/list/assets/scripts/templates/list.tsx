@@ -1,9 +1,9 @@
+import { navigate } from 'costro'
+import type { ListData, Result } from 'shared/assets/definitions/types'
 import arrowBottom from 'shared/assets/svgs/arrow-bottom.svg'
 import check from 'shared/assets/svgs/check.svg'
 import clear from 'shared/assets/svgs/clear.svg'
 import BadgeTemplate from 'shared/badge/assets/scripts/badge'
-import { ListData, Result } from 'shared/assets/definitions/types'
-import { navigate } from 'costro'
 
 /**
  * List template
@@ -17,8 +17,8 @@ export default function ({ testsSortedByStatus, debug }: ListData) {
 				<div className="list-nav">
 					<ul className="list-navList">
 						<li className="list-navItem">
-							<button className="list-navItemButton clearCookies">
-								<div className="list-navItemButtonIcon" innerHTML={clear}></div>
+							<button type="button" className="list-navItemButton clearCookies">
+								<div className="list-navItemButtonIcon" innerHTML={clear} />
 								Clear AB Tasty cookies
 							</button>
 						</li>
@@ -26,8 +26,7 @@ export default function ({ testsSortedByStatus, debug }: ListData) {
 							<label
 								htmlFor="debugMode"
 								className="list-navItemLabel"
-								title="See DevTools > Console for debug logs"
-							>
+								title="See DevTools > Console for debug logs">
 								Debug mode
 							</label>
 							<div className="customCheckbox">
@@ -40,10 +39,7 @@ export default function ({ testsSortedByStatus, debug }: ListData) {
 									checked={debug}
 								/>
 								<span className="customCheckbox-round">
-									<div
-										className="customCheckbox-roundIcon"
-										innerHTML={check}
-									></div>
+									<div className="customCheckbox-roundIcon" innerHTML={check} />
 								</span>
 							</div>
 						</li>
@@ -71,15 +67,12 @@ export default function ({ testsSortedByStatus, debug }: ListData) {
 function ListItem({ data }: { data: Result }) {
 	return (
 		<li className="list-item">
-			<button onClick={() => navigate(`/detail/${data.key}`)} className="list-link">
+			<button type="button" onClick={() => navigate(`/detail/${data.key}`)} className="list-link">
 				<span className="list-name">{data.name}</span>
 				{typeof data.status === 'string' && (
-					<BadgeTemplate
-						text={data.status}
-						color={data.status === 'accepted' ? 'green' : 'red'}
-					/>
+					<BadgeTemplate text={data.status} color={data.status === 'accepted' ? 'green' : 'red'} />
 				)}
-				<div className="list-icon" innerHTML={arrowBottom}></div>
+				<div className="list-icon" innerHTML={arrowBottom} />
 			</button>
 		</li>
 	)

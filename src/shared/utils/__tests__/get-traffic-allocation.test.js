@@ -61,7 +61,7 @@ describe('getTrafficAllocation', () => {
 	it('Should call the getTrafficAllocation function when none of the conditions are valid', () => {
 		const result = getTrafficAllocation({
 			959322: {
-				traffic: NaN
+				traffic: Number.NaN
 			},
 			959341: {
 				traffic: 10

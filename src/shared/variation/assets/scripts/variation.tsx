@@ -1,6 +1,6 @@
-import CollapseTemplate from 'shared/collapse/assets/scripts/collapse'
+import type { Variation, Variations } from 'shared/assets/definitions/types'
 import externalLink from 'shared/assets/svgs/external-link.svg'
-import { Variations, Variation } from 'shared/assets/definitions/types'
+import CollapseTemplate from 'shared/collapse/assets/scripts/collapse'
 import getTrafficAllocation from 'shared/utils/get-traffic-allocation'
 
 /**
@@ -35,14 +35,13 @@ export default function ({
 	const content = (
 		<div className="variation">
 			<ul className="variation-list">
-				{Object.entries(variations).map(
-					([, variation]: [id: string, variation: Variation]) =>
-						variationListItem({
-							variation,
-							currentVariationId,
-							testId,
-							accountId
-						})
+				{Object.entries(variations).map(([, variation]: [id: string, variation: Variation]) =>
+					variationListItem({
+						variation,
+						currentVariationId,
+						testId,
+						accountId
+					})
 				)}
 				{variationListItem({ variation: originalVariation, currentVariationId, testId })}
 				{variationListItem({ variation: unTrackedVariation, currentVariationId, testId })}
@@ -94,9 +93,8 @@ const variationListItem = ({
 						}.json?${new Date().getTime()}`}
 						target="_blank"
 						rel="noreferrer"
-						className="variation-link"
-					>
-						<div className="variation-linkIcon" innerHTML={externalLink}></div>
+						className="variation-link">
+						<div className="variation-linkIcon" innerHTML={externalLink} />
 					</a>
 				)}
 			</label>
@@ -111,7 +109,7 @@ const variationListItem = ({
 					disabled={!isVariationChangeGranted}
 					checked={isChecked}
 				/>
-				<span className="customRadio-round"></span>
+				<span className="customRadio-round" />
 			</div>
 		</li>
 	)
