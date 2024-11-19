@@ -1,5 +1,5 @@
+import type { Tracking, Trackings } from 'shared/assets/definitions/types'
 import CollapseTemplate from 'shared/collapse/assets/scripts/collapse'
-import { Trackings, Tracking } from 'shared/assets/definitions/types'
 
 /**
  * Template of trackings list
@@ -22,9 +22,7 @@ export default function ({ trackings }: { trackings: Trackings }) {
 											return (
 												<tr>
 													<td>
-														<span className="tracking-name">
-															{tracking.name}
-														</span>
+														<span className="tracking-name">{tracking.name}</span>
 													</td>
 													<td>
 														<span className="tracking-selector">

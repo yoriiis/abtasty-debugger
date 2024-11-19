@@ -1,9 +1,9 @@
-import DataManager from 'shared/utils/data-manager'
-import { isExtensionMode, namespace } from 'shared/utils/bridge'
-import { Data, ChangeInfo } from 'shared/assets/definitions/types'
-import List from '../../components/list/assets/scripts/list'
-import Detail from '../../components/detail/assets/scripts/detail'
+import type { ChangeInfo, Data } from 'shared/assets/definitions/types'
 import Empty from 'shared/empty/assets/scripts/empty'
+import { isExtensionMode, namespace } from 'shared/utils/bridge'
+import DataManager from 'shared/utils/data-manager'
+import Detail from '../../components/detail/assets/scripts/detail'
+import List from '../../components/list/assets/scripts/list'
 
 import { App, navigate } from 'costro'
 
@@ -115,7 +115,7 @@ export default class Popup {
 	 */
 	onTabUpdated(tabId: number, changeInfo: ChangeInfo) {
 		const debugMode = document.querySelector('#debugMode')
-		if (debugMode && debugMode.hasAttribute('disabled') && changeInfo.status === 'complete') {
+		if (debugMode?.hasAttribute('disabled') && changeInfo.status === 'complete') {
 			debugMode.removeAttribute('disabled')
 		}
 	}

@@ -4,7 +4,7 @@ const action = manifestVersion === 3 ? 'action' : 'browserAction'
 
 namespace.runtime.onMessage.addListener((message) => {
 	if (message.from === 'contentScript' && message.action === 'updateBadge') {
-		namespace.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+		namespace.tabs.query({ active: true, currentWindow: true }, (tabs) => {
 			const currentTab = tabs[0]
 			if (currentTab) {
 				namespace[action].setBadgeText({

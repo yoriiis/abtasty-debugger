@@ -1,11 +1,11 @@
-import Popup from '../assets/scripts/popup'
-import fixturesAbtasty from '../../shared/assets/fixtures/abtasty.json'
-import DataManager from 'shared/utils/data-manager'
-import { namespace } from 'shared/utils/bridge'
 import { App, navigate } from 'costro'
-import List from '../components/list/assets/scripts/list'
-import Detail from '../components/detail/assets/scripts/detail'
 import Empty from 'shared/empty/assets/scripts/empty'
+import { namespace } from 'shared/utils/bridge'
+import DataManager from 'shared/utils/data-manager'
+import fixturesAbtasty from '../../shared/assets/fixtures/abtasty.json'
+import Popup from '../assets/scripts/popup'
+import Detail from '../components/detail/assets/scripts/detail'
+import List from '../components/list/assets/scripts/list'
 
 jest.mock('shared/utils/data-manager')
 jest.mock('shared/utils/bridge', () => {
@@ -46,7 +46,7 @@ const getInstance = () =>
 	})
 
 beforeEach(() => {
-	document.body.append(<div id="app"></div>)
+	document.body.append(<div id="app" />)
 
 	Object.defineProperty(window, 'location', {
 		writable: true,
@@ -213,7 +213,7 @@ describe('Popup', () => {
 		})
 
 		it('Should call the isEmpty function with no results key inside data', () => {
-			delete popup.data.results
+			popup.data.results = undefined
 			const result = popup.isEmpty()
 
 			expect(result).toBe(true)

@@ -1,8 +1,8 @@
+import { Component, navigate } from 'costro'
+import type { TargetingsSortedByStatus } from 'shared/assets/definitions/types'
+import { namespace, sendMessage } from 'shared/utils/bridge'
 import validateTarget from 'validate-target'
 import TemplateDetail from './templates/detail'
-import { Component, navigate } from 'costro'
-import { sendMessage, namespace } from 'shared/utils/bridge'
-import { TargetingsSortedByStatus } from 'shared/assets/definitions/types'
 
 export default class Detail extends Component {
 	element: null | HTMLElement
@@ -135,7 +135,7 @@ export default class Detail extends Component {
 	 */
 	switchVariation(e: Event) {
 		const target = e.target as HTMLInputElement
-		const newVariationId = parseInt(target.value)
+		const newVariationId = Number.parseInt(target.value)
 		const testId = target.getAttribute('data-test-id') as string
 
 		sendMessage({
@@ -148,11 +148,9 @@ export default class Detail extends Component {
 					const thValue = response.split('&').find((item: string) => item.includes('th='))
 
 					if (thValue) {
-						const currentVariationId = thValue.match(
-							new RegExp(`${testId}.(-?[0-9]*).`)
-						)
+						const currentVariationId = thValue.match(new RegExp(`${testId}.(-?[0-9]*).`))
 
-						if (currentVariationId && currentVariationId.length) {
+						if (currentVariationId?.length) {
 							const thValueUpdated = thValue.replace(
 								`${testId}.${currentVariationId[1]}`,
 								`${testId}.${newVariationId}`

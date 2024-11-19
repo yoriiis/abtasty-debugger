@@ -1,9 +1,9 @@
-import {
+import type {
 	Data,
-	TestsSortedByStatus,
-	TargetingsSortedByStatus,
 	Result,
-	Targeting
+	Targeting,
+	TargetingsSortedByStatus,
+	TestsSortedByStatus
 } from 'shared/assets/definitions/types'
 
 /**

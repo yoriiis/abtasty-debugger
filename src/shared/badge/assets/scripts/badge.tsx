@@ -19,7 +19,7 @@ export default function ({
 	return (
 		<div className={`badge ${color} ${withIcon ? 'withIcon' : ''}`}>
 			{withIcon ? (
-				<div className="badge-icon" innerHTML={color === 'green' ? check : cross}></div>
+				<div className="badge-icon" innerHTML={color === 'green' ? check : cross} />
 			) : (
 				text
 			)}

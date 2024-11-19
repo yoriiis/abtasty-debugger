@@ -7,9 +7,11 @@ import notFound from 'shared/assets/svgs/not-found.svg'
 export default function (): any {
 	return (
 		<div className="empty">
-			<div className="empty-icon" innerHTML={notFound}></div>
+			<div className="empty-icon" innerHTML={notFound} />
 			<p className="empty-text">AB Tasty was not found on the page</p>
-			<button className="empty-retryButton">Try again</button>
+			<button type="button" className="empty-retryButton">
+				Try again
+			</button>
 		</div>
 	)
 }

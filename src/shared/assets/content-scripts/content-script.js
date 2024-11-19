@@ -12,7 +12,7 @@ document.head.appendChild(pageScript)
  * @returns {(String|null)} Cookie value or null if no result
  */
 function getCookie(name) {
-	const v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)')
+	const v = document.cookie.match(`(^|;) ?${name}=([^;]*)(;|$)`)
 	return v ? v[2] : null
 }
 

@@ -1,4 +1,4 @@
-const crypto = require('crypto')
+const crypto = require('node:crypto')
 const md5 = (string) => crypto.createHash('md5').update(string).digest('hex')
 
 module.exports = (api) => {
@@ -12,8 +12,7 @@ module.exports = (api) => {
 			[
 				'postcss-custom-properties-transformer',
 				{
-					transformer: ({ property }) =>
-						isProduction ? md5(property).slice(0, 4) : property
+					transformer: ({ property }) => (isProduction ? md5(property).slice(0, 4) : property)
 				}
 			],
 			[
