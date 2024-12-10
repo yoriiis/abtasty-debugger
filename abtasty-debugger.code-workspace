@@ -6,7 +6,7 @@
 	],
 	"settings": {
 		"editor.defaultFormatter": "biomejs.biome",
-		"[javascript][typescript][typescriptreact][postcss][html][markdown][json]": {
+		"[javascript][typescript][typescriptreact][css][html][markdown][json]": {
 			"editor.formatOnSave": true,
 			"editor.tabSize": 4,
 			"editor.rulers": [100]
@@ -24,7 +24,6 @@
 			"postcss": "css"
 		},
 		"files.associations": {
-			"*.css": "postcss",
 			"*.yaml": "yaml",
 			"*.yml": "yaml"
 		},
@@ -35,7 +34,7 @@
 		"files.eol": "\n"
 	},
 	"extensions": {
-		"recommendations": ["esbenp.prettier-vscode", "biomejs.biome", "csstools.postcss"]
+		"recommendations": ["biomejs.biome", "csstools.postcss"]
 	},
 	"launch": {
 		"configurations": [

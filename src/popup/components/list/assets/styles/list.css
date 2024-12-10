@@ -42,6 +42,7 @@
 		width: 430px;
 		background-color: var(--canvas);
 		padding-top: 10px;
+		font-size: var(--fontSizePrimary);
 	}
 
 	&-navList {

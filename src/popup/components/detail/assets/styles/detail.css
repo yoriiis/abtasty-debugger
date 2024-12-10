@@ -1,68 +1,64 @@
 .detail {
-	padding: 5px 15px 15px;
+	padding: 50px 15px 15px;
 
-	&-header {
+	&-nav {
+		position: fixed;
+		top: 0;
+		left: 10px;
+		z-index: 1;
+		width: 430px;
+		background-color: var(--canvas);
+		padding-top: 10px;
+		font-size: var(--fontSizePrimary);
+	}
+
+	&-navList {
+		padding: 10px;
+		background-color: var(--colorBorderPrimary);
+		border-radius: var(--radius);
+		width: 100%;
 		display: flex;
 		justify-content: space-between;
-		margin-bottom: 15px;
+		align-items: center;
+		color: var(--colorTextSecondary);
 	}
 
-	&-headerLinkIcon {
-		transition: transform var(--transition);
-	}
+	&-navItem {
+		display: flex;
+		align-items: center;
 
-	&-headerLinkIcon,
-	&-subtitleIcon {
-		svg {
-			display: block;
-			width: 16px;
-			height: 16px;
-			fill: var(--colorTextSecondary);
-			position: relative;
-		}
-	}
+		&.back {
+			.detail-navItemButton {
+				transition: transform var(--transition);
 
-	&-headerReport {
-		.detail-headerLinkIcon {
-			margin-left: 7px;
-		}
-	}
-
-	&-headerBack {
-		font-size: var(--fontSizePrimary);
-
-		.detail-headerLinkIcon {
-			margin-right: 2px;
+				&:hover .detail-navItemButtonIcon {
+					transform: translateX(-3px);
+				}
+			}
 
 			svg {
 				transform: rotate(90deg);
 			}
 		}
+	}
 
-		&:hover .detail-headerLinkIcon {
-			transform: translateX(-3px);
+	&-navItemButtonIcon {
+		margin-right: 5px;
+
+		svg {
+			display: block;
+			width: 16px;
+			height: 16px;
+			fill: var(--colorTextSecondary);
 		}
 	}
 
-	&-headerBack,
-	&-headerReport,
-	&-subtitleLink {
-		&:hover svg {
-			fill: var(--colorAbtasty);
-		}
-	}
-
-	&-headerBack,
-	&-headerReport {
-		padding: 5px;
+	&-navItemButton {
+		display: flex;
 		align-items: center;
 		text-decoration: none;
-		position: relative;
-		display: flex;
-		font-size: var(--fontSizeSecondary);
 
 		&:hover {
-			text-decoration: underline;
 			color: var(--colorAbtasty);
 
 			svg {
