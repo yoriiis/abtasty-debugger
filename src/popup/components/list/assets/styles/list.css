@@ -1,11 +1,13 @@
 .list {
-	padding-top: 50px;
+	position: relative;
+	padding-bottom: 32px;
 
 	&-item {
 		margin-bottom: 10px;
 		list-style-type: none;
 		border: 1px solid var(--colorBorderPrimary);
 		border-radius: var(--radius);
+		transition: border var(--transition);
 	}
 
 	&-icon {
@@ -19,7 +21,7 @@
 			width: 20px;
 			height: 20px;
 			fill: var(--colorTextSecondary);
-			transition: transform var(--transition);
+			transition: transform var(--transition), fill var(--transition);
 			transform: rotate(-90deg);
 		}
 	}
@@ -28,6 +30,7 @@
 		display: block;
 		line-height: 20px;
 		font-size: var(--fontSizePrimary);
+		transition: color var(--transition);
 
 		& + .badge {
 			margin-top: 10px;
@@ -35,9 +38,9 @@
 	}
 
 	&-nav {
-		position: fixed;
-		top: 0;
-		left: 10px;
+		position: absolute;
+		bottom: 0;
+		left: 0;
 		z-index: 1;
 		width: 430px;
 		background-color: var(--canvas);
@@ -46,7 +49,7 @@
 	}
 
 	&-navList {
-		padding: 10px;
+		padding: 6px 10px;
 		background-color: var(--colorBorderPrimary);
 		border-radius: var(--radius);
 		width: 100%;
@@ -64,8 +67,9 @@
 	&-navItemLabel {
 		display: flex;
 		align-items: center;
-		margin-right: 5px;
+		margin-left: 5px;
 		cursor: pointer;
+		transition: color var(--transition);
 	}
 
 	&-navItemButtonIcon {
@@ -82,6 +86,7 @@
 	&-navItemButton {
 		display: flex;
 		align-items: center;
+		transition: color var(--transition);
 
 		&:hover {
 			color: var(--colorAbtasty);
@@ -107,6 +112,34 @@
 
 		&:hover .list-icon svg {
 			transform: translateX(5px) rotate(-90deg);
+		}
+	}
+}
+
+@media (hover: hover) {
+	.list {
+		&-item:hover {
+			border-color: var(--colorAbtasty);
+
+			.list-name {
+				color: var(--colorAbtasty);
+			}
+
+			.list-icon {
+				svg {
+					fill: var(--colorAbtasty);
+				}
+			}
+		}
+
+		&-navItem.checkbox:hover {
+			.customCheckbox-round {
+				border-color: var(--colorAbtasty);
+			}
+
+			.list-navItemLabel {
+				color: var(--colorAbtasty);
+			}
 		}
 	}
 }

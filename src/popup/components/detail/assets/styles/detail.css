@@ -13,7 +13,7 @@
 	}
 
 	&-navList {
-		padding: 10px;
+		padding: 6px 10px;
 		background-color: var(--colorBorderPrimary);
 		border-radius: var(--radius);
 		width: 100%;
@@ -30,10 +30,6 @@
 		&.back {
 			.detail-navItemButton {
 				transition: transform var(--transition);
-
-				&:hover .detail-navItemButtonIcon {
-					transform: translateX(-3px);
-				}
 			}
 
 			svg {
@@ -57,14 +53,6 @@
 		display: flex;
 		align-items: center;
 		text-decoration: none;
-
-		&:hover {
-			color: var(--colorAbtasty);
-
-			svg {
-				fill: var(--colorAbtasty);
-			}
-		}
 	}
 
 	&-title {
@@ -84,7 +72,7 @@
 		font-size: var(--fontSizePrimary);
 		font-weight: 600;
 		line-height: 24px;
-		margin-bottom: 16px;
+		margin-bottom: 12px;
 		padding-bottom: 5px;
 		border-bottom: 1px solid var(--colorBorderPrimary);
 		display: flex;
@@ -96,9 +84,21 @@
 		margin-left: 2px;
 	}
 
+	&-subtitleIcon {
+		width: 16px;
+		height: 16px;
+
+		svg {
+			width: 100%;
+			height: 100%;
+			fill: var(--colorTextSecondary);
+			transition: fill var(--transition);
+		}
+	}
+
 	&-list {
 		list-style-type: disc;
-		padding-left: 24px;
+		padding-left: 20px;
 		font-size: var(--fontSizeSecondary);
 
 		li:not(:last-child) {
@@ -108,5 +108,27 @@
 
 	&-listParentId {
 		margin-left: 4px;
+	}
+}
+
+@media (hover: hover) {
+	.detail {
+		&-navItem.back:hover .detail-navItemButtonIcon {
+			transform: translateX(-3px);
+		}
+
+		&-navItemButton:hover {
+			color: var(--colorAbtasty);
+
+			svg {
+				fill: var(--colorAbtasty);
+			}
+		}
+
+		&-subtitleLink:hover {
+			svg {
+				fill: var(--colorAbtasty);
+			}
+		}
 	}
 }
