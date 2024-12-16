@@ -173,8 +173,7 @@ module.exports = (env, argv) => {
 				historyApiFallback: true,
 				port: 3000,
 				compress: true,
-				hot: true,
-				open: ['popup-debug.html']
+				hot: true
 			}
 		}
 	}
