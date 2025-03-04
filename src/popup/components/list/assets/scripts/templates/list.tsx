@@ -1,9 +1,9 @@
 import { navigate } from 'costro'
-import type { ListData, Result } from 'shared/assets/definitions/types'
+import type { ListData, Result } from 'shared/assets/definitions/types.js'
 import arrowBottom from 'shared/assets/svgs/arrow-bottom.svg'
 import check from 'shared/assets/svgs/check.svg'
 import clear from 'shared/assets/svgs/clear.svg'
-import BadgeTemplate from 'shared/badge/assets/scripts/badge'
+import BadgeTemplate from 'shared/badge/assets/scripts/badge.js'
 
 /**
  * List template

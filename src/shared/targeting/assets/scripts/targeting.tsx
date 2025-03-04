@@ -1,6 +1,6 @@
-import type { Condition, FavoriteUrlScope, Targeting } from 'shared/assets/definitions/types'
-import CollapseTemplate from 'shared/collapse/assets/scripts/collapse'
-import wording from 'shared/utils/wording'
+import type { Condition, FavoriteUrlScope, Targeting } from 'shared/assets/definitions/types.js'
+import CollapseTemplate from 'shared/collapse/assets/scripts/collapse.js'
+import wording from 'shared/utils/wording.js'
 /**
  * Targeting template
  * @param {Object} options

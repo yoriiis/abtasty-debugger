@@ -1,12 +1,12 @@
 import { navigate } from 'costro'
-import type { DetailData, Targeting } from 'shared/assets/definitions/types'
+import type { DetailData, Targeting } from 'shared/assets/definitions/types.js'
 import arrowBottom from 'shared/assets/svgs/arrow-bottom.svg'
 import chart from 'shared/assets/svgs/chart.svg'
 import externalLink from 'shared/assets/svgs/external-link.svg'
-import CollapseTemplate from 'shared/collapse/assets/scripts/collapse'
-import TargetingTemplate from 'shared/targeting/assets/scripts/targeting'
-import TrackingTemplate from 'shared/tracking/assets/scripts/tracking'
-import VariationTemplate from 'shared/variation/assets/scripts/variation'
+import CollapseTemplate from 'shared/collapse/assets/scripts/collapse.js'
+import TargetingTemplate from 'shared/targeting/assets/scripts/targeting.js'
+import TrackingTemplate from 'shared/tracking/assets/scripts/tracking.js'
+import VariationTemplate from 'shared/variation/assets/scripts/variation.js'
 
 /**
  * Detail template

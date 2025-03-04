@@ -1,4 +1,4 @@
-import type { Wording } from 'shared/assets/definitions/types'
+import type { Wording } from 'shared/assets/definitions/types.js'
 
 /**
  * Correlation table for key

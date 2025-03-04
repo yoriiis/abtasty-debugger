@@ -1,6 +1,6 @@
+import fixturesAbtasty from 'shared/assets/fixtures/abtasty.json'
 import { namespace, sendMessage } from 'shared/utils/bridge'
 import validateTarget from 'validate-target'
-import fixturesAbtasty from '../../../../shared/assets/fixtures/abtasty.json'
 import Detail from '../assets/scripts/detail.js'
 
 const newVariationId = '200002'
