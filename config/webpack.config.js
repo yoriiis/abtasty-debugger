@@ -6,9 +6,17 @@ const TerserPlugin = require('terser-webpack-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
+const dotenv = require('dotenv')
 
 const appDirectory = fs.realpathSync(process.cwd())
 const resolveApp = (relativePath) => path.resolve(appDirectory, relativePath)
+
+dotenv.config({ path: resolveApp('.env') })
+
+// TODO: found a solution for reusable workflow
+if (!process.env.GITHUB_ACTION && !process.env.SENTRY_DSN) {
+	throw new Error('Environments variables are missing in .env ("SENTRY_DSN")')
+}
 
 module.exports = (env, argv) => {
 	const manifest = env.manifest
@@ -125,6 +133,9 @@ module.exports = (env, argv) => {
 						to: resolveApp('web/')
 					}
 				]
+			}),
+			new webpack.DefinePlugin({
+				'process.env.SENTRY_DSN': JSON.stringify(process.env.SENTRY_DSN)
 			})
 		],
 		stats: {
@@ -173,8 +184,7 @@ module.exports = (env, argv) => {
 				historyApiFallback: true,
 				port: 3000,
 				compress: true,
-				hot: true,
-				open: ['popup-debug.html']
+				hot: true
 			}
 		}
 	}
