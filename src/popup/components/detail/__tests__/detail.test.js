@@ -1,5 +1,5 @@
 import fixturesAbtasty from 'shared/assets/fixtures/abtasty.json'
-import { namespace, sendMessage } from 'shared/utils/bridge'
+import { namespace, sendMessage } from 'shared/utils/bridge.js'
 import validateTarget from 'validate-target'
 import Detail from '../assets/scripts/detail.js'
 

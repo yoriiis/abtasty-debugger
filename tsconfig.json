@@ -15,12 +15,12 @@
 		"allowSyntheticDefaultImports": true,
 		"resolveJsonModule": true,
 		"jsx": "react-jsx",
-		"jsxImportSource": "jsx-dom",
+		"jsxImportSource": "jsx-dom-cjs",
 		"jsxFactory": "",
 		"jsxFragmentFactory": "",
-		"baseUrl": "./src",
+		"baseUrl": "./",
 		"paths": {
-			"shared": ["./shared"]
+			"shared/*": ["./src/shared/*"]
 		}
 	},
 	"include": ["./src/**/*.ts", "./src/**/*.tsx"]
