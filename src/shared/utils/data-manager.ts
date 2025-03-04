@@ -57,6 +57,7 @@ export default class DataManager {
 					return value
 				})
 			const acceptedQaParameters = Object.entries(targetings.qaParameters)
+				.filter(([key]) => key !== 'qa_url_parameter_enabled')
 				.filter(([, value]: [key: string, value: Targeting]) => value.success === true)
 				.map(([key, value]: [key: string, value: Targeting]) => {
 					value.key = key
@@ -87,6 +88,7 @@ export default class DataManager {
 					return value
 				})
 			const rejectedQaParameters = Object.entries(targetings.qaParameters)
+				.filter(([key]) => key !== 'qa_url_parameter_enabled')
 				.filter(([, value]: [key: string, value: Targeting]) => value.success === false)
 				.map(([key, value]: [key: string, value: Targeting]) => {
 					value.key = key
