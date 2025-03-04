@@ -1,4 +1,4 @@
-import getTrafficAllocation from '../get-traffic-allocation'
+import getTrafficAllocation from '../get-traffic-allocation.js'
 
 describe('getTrafficAllocation', () => {
 	it('Should call the getTrafficAllocation function with the traffic equal to 100', () => {

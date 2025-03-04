@@ -1,8 +1,8 @@
 import { Component, navigate } from 'costro'
-import type { TargetingsSortedByStatus } from 'shared/assets/definitions/types'
-import { namespace, sendMessage } from 'shared/utils/bridge'
+import type { TargetingsSortedByStatus } from 'shared/assets/definitions/types.js'
+import { namespace, sendMessage } from 'shared/utils/bridge.js'
 import validateTarget from 'validate-target'
-import TemplateDetail from './templates/detail'
+import TemplateDetail from './templates/detail.js'
 
 export default class Detail extends Component {
 	element: null | HTMLElement

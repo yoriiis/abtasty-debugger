@@ -11,7 +11,7 @@ import getTrafficAllocation from 'shared/utils/get-traffic-allocation'
  * @param {Object} options.testId Test ID
  * @returns {HTMLElement} Generated HTML
  */
-export default function ({
+export default function VariationTemplate({
 	variations,
 	currentVariationId,
 	testId,

@@ -13,7 +13,13 @@ import VariationTemplate from 'shared/variation/assets/scripts/variation'
  * @param {Object} options Template options
  * @returns {HTMLElement} Generated HTML
  */
-export default function ({ testId, identifier, test, result, targetingSorted }: DetailData) {
+export default function DetailTemplate({
+	testId,
+	identifier,
+	test,
+	result,
+	targetingSorted
+}: DetailData) {
 	const hasVariation =
 		!!test.asyncVariationInfoById && Object.keys(test.asyncVariationInfoById).length
 	const hasTracking = !!test.actionTrackings && Object.keys(test.actionTrackings).length

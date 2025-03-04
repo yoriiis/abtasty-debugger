@@ -1,4 +1,4 @@
-module.exports = (api) => {
+export default function babelConfig(api) {
 	api.cache(true)
 
 	const presets = [
@@ -8,7 +8,7 @@ module.exports = (api) => {
 			'@babel/preset-react',
 			{
 				runtime: 'automatic',
-				importSource: 'jsx-dom-cjs'
+				importSource: 'jsx-dom'
 			}
 		]
 	]

@@ -1,9 +1,9 @@
-import type { ChangeInfo, Data } from 'shared/assets/definitions/types'
-import Empty from 'shared/empty/assets/scripts/empty'
-import { isExtensionMode, namespace } from 'shared/utils/bridge'
-import DataManager from 'shared/utils/data-manager'
-import Detail from '../../components/detail/assets/scripts/detail'
-import List from '../../components/list/assets/scripts/list'
+import type { ChangeInfo, Data } from 'shared/assets/definitions/types.js'
+import Empty from 'shared/empty/assets/scripts/empty.js'
+import { isExtensionMode, namespace } from 'shared/utils/bridge.js'
+import DataManager from 'shared/utils/data-manager.js'
+import Detail from '../../components/detail/assets/scripts/detail.js'
+import List from '../../components/list/assets/scripts/list.js'
 
 import { App, navigate } from 'costro'
 

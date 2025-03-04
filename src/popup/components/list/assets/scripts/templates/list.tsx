@@ -10,51 +10,49 @@ import BadgeTemplate from 'shared/badge/assets/scripts/badge'
  * @param {Object} options Template options
  * @returns {HTMLElement} Generated HTML
  */
-export default function ({ testsSortedByStatus, debug }: ListData) {
+export default function ListTemplate({ testsSortedByStatus, debug }: ListData) {
 	return (
-		<>
-			<div className="list">
-				<div className="list-nav">
-					<ul className="list-navList">
-						<li className="list-navItem">
-							<button type="button" className="list-navItemButton clearCookies">
-								<div className="list-navItemButtonIcon" innerHTML={clear} />
-								Clear AB Tasty cookies
-							</button>
-						</li>
-						<li className="list-navItem">
-							<label
-								htmlFor="debugMode"
-								className="list-navItemLabel"
-								title="See DevTools > Console for debug logs">
-								Debug mode
-							</label>
-							<div className="customCheckbox">
-								<input
-									type="checkbox"
-									value={debug ? 'true' : 'false'}
-									className="customCheckbox-input"
-									id="debugMode"
-									name="debug"
-									checked={debug}
-								/>
-								<span className="customCheckbox-round">
-									<div className="customCheckbox-roundIcon" innerHTML={check} />
-								</span>
-							</div>
-						</li>
-					</ul>
-				</div>
-				<ul>
-					{testsSortedByStatus.accepted.map((item: Result) => (
-						<ListItem data={item} />
-					))}
-					{testsSortedByStatus.rejected.map((item: Result) => (
-						<ListItem data={item} />
-					))}
+		<div className="list">
+			<div className="list-nav">
+				<ul className="list-navList">
+					<li className="list-navItem">
+						<button type="button" className="list-navItemButton clearCookies">
+							<div className="list-navItemButtonIcon" innerHTML={clear} />
+							Clear AB Tasty cookies
+						</button>
+					</li>
+					<li className="list-navItem">
+						<label
+							htmlFor="debugMode"
+							className="list-navItemLabel"
+							title="See DevTools > Console for debug logs">
+							Debug mode
+						</label>
+						<div className="customCheckbox">
+							<input
+								type="checkbox"
+								value={debug ? 'true' : 'false'}
+								className="customCheckbox-input"
+								id="debugMode"
+								name="debug"
+								checked={debug}
+							/>
+							<span className="customCheckbox-round">
+								<div className="customCheckbox-roundIcon" innerHTML={check} />
+							</span>
+						</div>
+					</li>
 				</ul>
 			</div>
-		</>
+			<ul>
+				{testsSortedByStatus.accepted.map((item: Result) => (
+					<ListItem data={item} />
+				))}
+				{testsSortedByStatus.rejected.map((item: Result) => (
+					<ListItem data={item} />
+				))}
+			</ul>
+		</div>
 	)
 }
 

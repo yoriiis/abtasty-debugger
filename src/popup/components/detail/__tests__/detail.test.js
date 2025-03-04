@@ -1,7 +1,7 @@
 import { namespace, sendMessage } from 'shared/utils/bridge'
 import validateTarget from 'validate-target'
 import fixturesAbtasty from '../../../../shared/assets/fixtures/abtasty.json'
-import Detail from '../assets/scripts/detail'
+import Detail from '../assets/scripts/detail.js'
 
 const newVariationId = '200002'
 const testId = '100002'

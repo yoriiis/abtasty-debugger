@@ -1,7 +1,7 @@
-const crypto = require('node:crypto')
+import crypto from 'node:crypto'
 const md5 = (string) => crypto.createHash('md5').update(string).digest('hex')
 
-module.exports = (api) => {
+export default function postCssConfig(api) {
 	const isProduction = api.mode === 'production'
 
 	return {
