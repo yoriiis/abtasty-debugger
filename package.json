@@ -15,7 +15,7 @@
 		"build:v2": "rm -rf ./web/ && webpack --mode=production --config=config/webpack.config.js --env manifest=v2",
 		"build:v3": "rm -rf ./web/ && webpack --mode=production --config=config/webpack.config.js --env manifest=v3",
 		"dev": "tsc --watch --noEmit",
-		"dev:unit": "jest --config config/jest.config.js --watchAll --coverage",
+		"dev:unit": "jest --config config/jest.config.cjs --watchAll --coverage",
 		"dev:v2": "rm -rf ./web/ && webpack serve --mode=development --config=config/webpack.config.js --env manifest=v2",
 		"dev:v3": "rm -rf ./web/ && webpack serve --mode=development --config=config/webpack.config.js --env manifest=v3",
 		"inspect": "node --inspect node_modules/webpack/bin/webpack.js --config webpack.config.js --mode=development",
@@ -24,7 +24,7 @@
 		"release:v3": "rm -rf ./web/ && webpack --mode=production --config=config/webpack.config.js --env manifest=v3 --env release=true",
 		"test": "npm run test:unit",
 		"test:ext": "web-ext lint --source-dir web",
-		"test:unit": "jest --config config/jest.config.js --verbose --coverage",
+		"test:unit": "jest --config config/jest.config.cjs --verbose --coverage",
 		"watch:v2": "rm -rf ./web/ && webpack --watch --mode=development --config=config/webpack.config.js --env manifest=v2",
 		"watch:v3": "rm -rf ./web/ && webpack --watch --mode=development --config=config/webpack.config.js --env manifest=v3"
 	},
