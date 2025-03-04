@@ -1,5 +1,5 @@
-import type { Tracking, Trackings } from 'shared/assets/definitions/types'
-import CollapseTemplate from 'shared/collapse/assets/scripts/collapse'
+import type { Tracking, Trackings } from 'shared/assets/definitions/types.js'
+import CollapseTemplate from 'shared/collapse/assets/scripts/collapse.js'
 
 /**
  * Template of trackings list
@@ -7,7 +7,7 @@ import CollapseTemplate from 'shared/collapse/assets/scripts/collapse'
  * @param {String} options.trackings Trackins list
  * @returns {HTMLElement} Generated HTML
  */
-export default function ({ trackings }: { trackings: Trackings }) {
+export default function TrackingTemplate({ trackings }: { trackings: Trackings }) {
 	const content = (
 		<div className="tracking">
 			<ul className="tracking-list">

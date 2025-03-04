@@ -1,4 +1,4 @@
-import type { TrafficAllocation, Variation, Variations } from 'shared/assets/definitions/types'
+import type { TrafficAllocation, Variation, Variations } from 'shared/assets/definitions/types.js'
 
 /**
  * Get traffic allocation between original and untracked variations

@@ -1,21 +1,30 @@
-module.exports = (api) => {
+/**
+ * Generate Babel config
+ * @param {object} api Babel API data
+ * @returns {object} Babel config
+ */
+export default function babelConfig(api) {
 	api.cache(true)
-
-	const presets = [
-		'@babel/preset-env',
-		'@babel/preset-typescript',
-		[
-			'@babel/preset-react',
-			{
-				runtime: 'automatic',
-				importSource: 'jsx-dom-cjs'
-			}
-		]
-	]
-	const plugins = ['babel-plugin-dynamic-import-node', '@babel/proposal-class-properties']
-
 	return {
-		presets,
-		plugins
+		presets: [
+			[
+				'@babel/preset-env',
+				{
+					// Target esmodules browsers instead of browsers list
+					targets: {
+						esmodules: true
+					}
+				}
+			],
+			'@babel/preset-typescript',
+			[
+				'@babel/preset-react',
+				{
+					runtime: 'automatic',
+					importSource: 'jsx-dom-cjs'
+				}
+			]
+		],
+		plugins: ['@babel/plugin-transform-runtime', '@babel/plugin-proposal-class-properties']
 	}
 }

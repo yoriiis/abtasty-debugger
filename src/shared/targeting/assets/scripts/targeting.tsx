@@ -1,7 +1,6 @@
-import type { Condition, FavoriteUrlScope, Targeting } from 'shared/assets/definitions/types'
-import CollapseTemplate from 'shared/collapse/assets/scripts/collapse'
-import wording from 'shared/utils/wording'
-
+import type { Condition, FavoriteUrlScope, Targeting } from 'shared/assets/definitions/types.js'
+import CollapseTemplate from 'shared/collapse/assets/scripts/collapse.js'
+import wording from 'shared/utils/wording.js'
 /**
  * Targeting template
  * @param {Object} options
@@ -10,7 +9,7 @@ import wording from 'shared/utils/wording'
  * @param {Object} options.textarea Use textarea instead of input field
  * @returns {HTMLElement} Generated HTML
  */
-export default function ({
+export default function TargetingTemplate({
 	targeting,
 	headerOnly = false,
 	textarea = false

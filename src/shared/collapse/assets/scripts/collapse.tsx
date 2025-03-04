@@ -1,5 +1,5 @@
 import arrowBottom from 'shared/assets/svgs/arrow-bottom.svg'
-import BadgeTemplate from 'shared/badge/assets/scripts/badge'
+import BadgeTemplate from 'shared/badge/assets/scripts/badge.js'
 
 /**
  * Collapse template

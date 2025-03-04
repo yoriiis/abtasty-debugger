@@ -1,8 +1,8 @@
 {
 	"compilerOptions": {
 		"strict": true,
-		"module": "nodenext",
-		"moduleResolution": "nodenext",
+		"module": "ESNext",
+		"moduleResolution": "bundler",
 		"target": "es2017",
 		"lib": ["es2017", "DOM"],
 		"outDir": "./lib",
@@ -18,9 +18,9 @@
 		"jsxImportSource": "jsx-dom-cjs",
 		"jsxFactory": "",
 		"jsxFragmentFactory": "",
-		"baseUrl": "./src",
+		"baseUrl": "./",
 		"paths": {
-			"shared": ["./shared"]
+			"shared/*": ["./src/shared/*"]
 		}
 	},
 	"include": ["./src/**/*.ts", "./src/**/*.tsx"]

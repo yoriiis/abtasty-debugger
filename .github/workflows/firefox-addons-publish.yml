@@ -8,7 +8,7 @@ jobs:
   firefox:
     uses: yoriiis/actions/.github/workflows/firefox-addons-publish.yml@main
     with:
-      node-version: 20
+      node-version: 22
       source-dir: web
       command-build: npm run release:v2
     secrets:

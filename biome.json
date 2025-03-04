@@ -23,7 +23,7 @@
 			"recommended": true,
 			"complexity": { "noForEach": "off" },
 			"suspicious": { "noExplicitAny": "off" },
-			"correctness": { "useJsxKeyInIterable": "off" }
+			"correctness": { "useJsxKeyInIterable": "off", "useImportExtensions": "error" }
 		}
 	},
 	"css": {

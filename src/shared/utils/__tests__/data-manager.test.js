@@ -1,5 +1,5 @@
 import fixturesAbtasty from '../../assets/fixtures/abtasty.json'
-import DataManager from '../data-manager'
+import DataManager from '../data-manager.js'
 
 let dataManager
 const testsSortedByStatus = {

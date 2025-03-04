@@ -1,18 +1,18 @@
 // import base
-import '../index'
+import '../index.js'
 
 // import CSS
 import './assets/styles/popup.css'
 
 // import JS
-import './assets/scripts/main'
+import './assets/scripts/main.js'
 
 // import popup components
-import './components/list/config'
-import './components/detail/config'
+import './components/list/config.js'
+import './components/detail/config.js'
 
 // import shared components
-import 'shared/empty/config'
+import 'shared/empty/config.js'
 
 // import Images
 import 'globalAssets/images/icon-16x16.png'

@@ -13,7 +13,7 @@ jobs:
   lint:
     uses: yoriiis/actions/.github/workflows/lint.yml@main
     with:
-      node-version: 20
+      node-version: 22
       publint-status: false
       eslint-status: false
       stylelint-status: false
