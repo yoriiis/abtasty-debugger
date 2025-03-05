@@ -76,7 +76,7 @@ export default function ({ testId, identifier, test, result, targetingSorted }: 
 							target="_blank"
 							rel="noreferrer"
 							className="detail-navItemButton">
-							Report
+							Reporting
 						</a>
 					</li>
 				</ul>

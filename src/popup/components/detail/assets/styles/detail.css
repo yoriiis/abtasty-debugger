@@ -1,5 +1,5 @@
 .detail {
-	padding: 50px 15px 15px;
+	padding: 45px 10px 10px;
 
 	&-nav {
 		position: fixed;
@@ -28,7 +28,7 @@
 		align-items: center;
 
 		&.back {
-			.detail-navItemButton {
+			.detail-navItemButtonIcon {
 				transition: transform var(--transition);
 			}
 
@@ -59,7 +59,7 @@
 		font-size: var(--fontSizePrimary);
 		font-weight: 600;
 		line-height: 24px;
-		margin-bottom: 20px;
+		margin-bottom: 12px;
 	}
 
 	&-section {
