@@ -34,38 +34,39 @@ export default function TargetingTemplate({
 		contentTemplate = (
 			<table className="table">
 				<tbody>
-					{(conditions as Condition[]).map((item: Condition) => {
-						let value = item.value
-						if (targeting.key === 'cookie_scope') {
-							value = `${item.name}=${item.value}`
-						} else if (targeting.key === 'favorite_url_scope' && item.favorite_url_id) {
-							const urlScopeRef = (
-								targeting.conditions as FavoriteUrlScope
-							).favoriteUrlScopeConditions.find(
-								(urlScope: Condition) => urlScope.favorite_url_id === item.favorite_url_id
-							)
-							if (urlScopeRef?.url) {
-								value = urlScopeRef.url
+					{Array.isArray(conditions) &&
+						(conditions as Condition[]).map((item: Condition) => {
+							let value = item.value
+							if (targeting.key === 'cookie_scope') {
+								value = `${item.name}=${item.value}`
+							} else if (targeting.key === 'favorite_url_scope' && item.favorite_url_id) {
+								const urlScopeRef = (
+									targeting.conditions as FavoriteUrlScope
+								).favoriteUrlScopeConditions.find(
+									(urlScope: Condition) => urlScope.favorite_url_id === item.favorite_url_id
+								)
+								if (urlScopeRef?.url) {
+									value = urlScopeRef.url
+								}
 							}
-						}
 
-						return (
-							<tr>
-								{typeof item.include !== 'undefined' && (
-									<td>{item.include ? 'Include' : 'Exclude'}</td>
-								)}
-								<td>
-									{textarea ? (
-										<textarea className="textarea" disabled>
-											{value}
-										</textarea>
-									) : (
-										<input className="input" disabled type="text" value={value} />
+							return (
+								<tr>
+									{typeof item.include !== 'undefined' && (
+										<td>{item.include ? 'Include' : 'Exclude'}</td>
 									)}
-								</td>
-							</tr>
-						)
-					})}
+									<td>
+										{textarea ? (
+											<textarea className="textarea" disabled>
+												{value}
+											</textarea>
+										) : (
+											<input className="input" disabled type="text" value={value} />
+										)}
+									</td>
+								</tr>
+							)
+						})}
 				</tbody>
 			</table>
 		)

@@ -43,14 +43,18 @@ export default function DetailTemplate({
 				<TargetingTemplate
 					targeting={item}
 					textarea={item.key === 'code_scope'}
-					headerOnly={['ip_scope', 'segment', 'trigger'].includes(item.key)}
+					headerOnly={['ip_scope', 'segment', 'trigger', 'qa_url_parameter_enabled'].includes(
+						item.key
+					)}
 				/>
 			))}
 			{targetingSorted.accepted.map((item: Targeting) => (
 				<TargetingTemplate
 					targeting={item}
 					textarea={item.key === 'code_scope'}
-					headerOnly={['ip_scope', 'segment', 'trigger'].includes(item.key)}
+					headerOnly={['ip_scope', 'segment', 'trigger', 'qa_url_parameter_enabled'].includes(
+						item.key
+					)}
 				/>
 			))}
 		</>
