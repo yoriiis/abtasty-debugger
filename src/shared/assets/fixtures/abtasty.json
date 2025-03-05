@@ -135,7 +135,7 @@
 					},
 					"qa_url_parameter_enabled": {
 						"conditions": true,
-						"success": false
+						"success": true
 					}
 				},
 				"targetPages": {
