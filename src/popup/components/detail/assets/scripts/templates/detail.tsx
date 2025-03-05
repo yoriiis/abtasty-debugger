@@ -1,7 +1,6 @@
 import { navigate } from 'costro'
 import type { DetailData, Targeting } from 'shared/assets/definitions/types.js'
 import arrowBottom from 'shared/assets/svgs/arrow-bottom.svg'
-import chart from 'shared/assets/svgs/chart.svg'
 import externalLink from 'shared/assets/svgs/external-link.svg'
 import CollapseTemplate from 'shared/collapse/assets/scripts/collapse.js'
 import TargetingTemplate from 'shared/targeting/assets/scripts/targeting.js'
@@ -61,25 +60,37 @@ export default function DetailTemplate({
 	)
 	return (
 		<div className="detail">
-			<ul className="detail-header">
-				<li>
-					<button type="button" onClick={() => navigate('/list')} className="detail-headerBack">
-						<div className="detail-headerLinkIcon" innerHTML={arrowBottom} />
-						Back
-					</button>
-				</li>
-				<li>
-					<a
-						href={`https://app2.abtasty.com/reporting/test/${testId}/report`}
-						target="_blank"
-						rel="noreferrer"
-						className="detail-headerReport">
-						See the report
-						<div className="detail-headerLinkIcon" innerHTML={chart} />
-					</a>
-				</li>
-			</ul>
-
+			<div className="detail-nav">
+				<ul className="detail-navList">
+					<li className="detail-navItem back">
+						<button
+							type="button"
+							onClick={() => navigate('/list')}
+							className="detail-navItemButton">
+							<div className="detail-navItemButtonIcon" innerHTML={arrowBottom} />
+							Back
+						</button>
+					</li>
+					<li className="detail-navItem editor">
+						<a
+							href={`https://app2.abtasty.com/reporting/test/${testId}/editor`}
+							target="_blank"
+							rel="noreferrer"
+							className="detail-navItemButton">
+							Editor
+						</a>
+					</li>
+					<li className="detail-navItem report">
+						<a
+							href={`https://app2.abtasty.com/reporting/test/${testId}/report`}
+							target="_blank"
+							rel="noreferrer"
+							className="detail-navItemButton">
+							Reporting
+						</a>
+					</li>
+				</ul>
+			</div>
 			<h1 className="detail-title">{result.name}</h1>
 			<div className="detail-section">
 				<CollapseTemplate header="General" content={templateGeneral} />

@@ -39,17 +39,12 @@
 		height: 16px;
 		fill: var(--colorTextSecondary);
 		position: relative;
+		transition: fill var(--transition);
 	}
 
 	&-link {
 		padding: 6px;
 		margin-right: 9px;
-
-		&:hover {
-			svg {
-				fill: var(--colorAbtasty);
-			}
-		}
 	}
 
 	&-traffic {
@@ -61,5 +56,17 @@
 		width: 40px;
 		overflow: hidden;
 		text-align: center;
+	}
+}
+
+@media (hover: hover) {
+	.variation {
+		&-link {
+			&:hover {
+				svg {
+					fill: var(--colorAbtasty);
+				}
+			}
+		}
 	}
 }
