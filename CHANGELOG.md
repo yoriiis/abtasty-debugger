@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## 1.4.1
+
+### Fixes
+
+- Fix `qa_url_parameter_enabled` ([d44d13b](https://github.com/yoriiis/abtasty-debugger/commit/d44d13b51817f8d6250b5f55aa0bd09aa168723e), [fee800a](https://github.com/yoriiis/abtasty-debugger/commit/fee800a148d03f3e1a742f47eafc01a178f70ac9), [c1edfa4](https://github.com/yoriiis/abtasty-debugger/commit/c1edfa466f1b428d9bd16118335975734c8b01fe))
+
+### Updates
+
+- Add Sentry for browser monitoring ([ade3dc9](https://github.com/yoriiis/abtasty-debugger/commit/ade3dc988e243f30bf400a0ebb3f4cad76c9b281)
+- Migrate to ESM ([#41](https://github.com/yoriiis/abtasty-debugger/pull/41))
+- Updates Node.js, minimum supported `Node.js` version is `22`
+
 ## 1.4.0
 
 ### Updates
