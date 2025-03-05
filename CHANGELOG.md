@@ -8,7 +8,7 @@
 
 ### Updates
 
-- Add Sentry for browser monitoring ([ade3dc9](https://github.com/yoriiis/abtasty-debugger/commit/ade3dc988e243f30bf400a0ebb3f4cad76c9b281)
+- Add Sentry for browser monitoring ([ade3dc9](https://github.com/yoriiis/abtasty-debugger/commit/ade3dc988e243f30bf400a0ebb3f4cad76c9b281))
 - Migrate to ESM ([#41](https://github.com/yoriiis/abtasty-debugger/pull/41))
 - Updates Node.js, minimum supported `Node.js` version is `22`
 
