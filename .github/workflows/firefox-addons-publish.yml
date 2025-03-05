@@ -1,6 +1,7 @@
 name: Publish Firefox Add-ons
 
 on:
+  workflow_dispatch:
   release:
     types: [published]
 
