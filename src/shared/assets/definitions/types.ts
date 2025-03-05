@@ -13,10 +13,12 @@ export type FavoriteUrlScope = {
 	urlScopes: Condition[]
 }
 
+export type QaUrlParameter = true
+
 export type Targeting = {
 	key: string
 	success: boolean
-	conditions?: Condition[] | FavoriteUrlScope
+	conditions?: Condition[] | FavoriteUrlScope | QaUrlParameter
 	name: string
 }
 
