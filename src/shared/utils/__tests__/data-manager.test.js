@@ -1,5 +1,5 @@
 import fixturesAbtasty from '../../assets/fixtures/abtasty.json'
-import DataManager from '../data-manager'
+import DataManager from '../data-manager.js'
 
 let dataManager
 const testsSortedByStatus = {
@@ -54,6 +54,10 @@ const targetingsSortedByStatus = {
 			{
 				...fixturesAbtasty.results[100002].targetings.qaParameters.ip_scope,
 				...{ key: 'ip_scope' }
+			},
+			{
+				...fixturesAbtasty.results[100002].targetings.qaParameters.qa_url_parameter_enabled,
+				...{ key: 'qa_url_parameter_enabled' }
 			}
 		],
 		rejected: []

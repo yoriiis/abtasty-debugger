@@ -1,4 +1,4 @@
-import type { Wording } from 'shared/assets/definitions/types'
+import type { Wording } from 'shared/assets/definitions/types.js'
 
 /**
  * Correlation table for key
@@ -10,6 +10,7 @@ export default function (key: string): string {
 	const wordings: Wording = {
 		url_scope: 'URL',
 		favorite_url_scope: 'URL',
+		qa_url_parameter_enabled: 'QA URL parameter',
 		code_scope: 'Code',
 		selector_scope: 'Selector',
 		cookie_scope: 'Cookie',

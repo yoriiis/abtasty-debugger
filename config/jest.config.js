@@ -1,4 +1,4 @@
-module.exports = {
+export default {
 	moduleFileExtensions: ['js', 'ts', 'tsx', 'json', 'svg'],
 	modulePaths: ['<rootDir>/src'],
 	preset: 'ts-jest/presets/js-with-babel',
@@ -9,6 +9,9 @@ module.exports = {
 	transform: {
 		'^.+\\.(ts|tsx|js)$': 'ts-jest',
 		'^.+\\.svg$': 'jest-transform-stub'
+	},
+	moduleNameMapper: {
+		'(.+)\\.js': '$1'
 	},
 	testEnvironment: 'jsdom',
 	resetMocks: true,

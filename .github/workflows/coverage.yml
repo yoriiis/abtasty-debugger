@@ -9,4 +9,4 @@ jobs:
   coverage:
     uses: yoriiis/actions/.github/workflows/coverage.yml@main
     with:
-      node-version: 18
+      node-version: 22

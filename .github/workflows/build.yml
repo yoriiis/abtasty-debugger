@@ -12,7 +12,7 @@ jobs:
   build:
     uses: yoriiis/actions/.github/workflows/test-and-build.yml@main
     with:
-      node-version: 20
+      node-version: 22
       command-build: |
         npm run release:v3
         npm run release:v2

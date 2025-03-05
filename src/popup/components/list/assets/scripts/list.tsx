@@ -1,8 +1,8 @@
 import { Component, navigate } from 'costro'
-import type { TestsSortedByStatus } from 'shared/assets/definitions/types'
-import { isExtensionMode, namespace, sendMessage } from 'shared/utils/bridge'
+import type { TestsSortedByStatus } from 'shared/assets/definitions/types.js'
+import { isExtensionMode, namespace, sendMessage } from 'shared/utils/bridge.js'
 import validateTarget from 'validate-target'
-import TemplateList from './templates/list'
+import TemplateList from './templates/list.js'
 
 export default class List extends Component {
 	element: null | HTMLElement

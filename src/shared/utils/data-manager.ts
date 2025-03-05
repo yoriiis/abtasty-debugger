@@ -4,7 +4,7 @@ import type {
 	Targeting,
 	TargetingsSortedByStatus,
 	TestsSortedByStatus
-} from 'shared/assets/definitions/types'
+} from 'shared/assets/definitions/types.js'
 
 /**
  * Data manager for ABTasty data

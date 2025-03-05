@@ -1,18 +1,24 @@
 import { navigate } from 'costro'
-import type { DetailData, Targeting } from 'shared/assets/definitions/types'
+import type { DetailData, Targeting } from 'shared/assets/definitions/types.js'
 import arrowBottom from 'shared/assets/svgs/arrow-bottom.svg'
 import externalLink from 'shared/assets/svgs/external-link.svg'
-import CollapseTemplate from 'shared/collapse/assets/scripts/collapse'
-import TargetingTemplate from 'shared/targeting/assets/scripts/targeting'
-import TrackingTemplate from 'shared/tracking/assets/scripts/tracking'
-import VariationTemplate from 'shared/variation/assets/scripts/variation'
+import CollapseTemplate from 'shared/collapse/assets/scripts/collapse.js'
+import TargetingTemplate from 'shared/targeting/assets/scripts/targeting.js'
+import TrackingTemplate from 'shared/tracking/assets/scripts/tracking.js'
+import VariationTemplate from 'shared/variation/assets/scripts/variation.js'
 
 /**
  * Detail template
  * @param {Object} options Template options
  * @returns {HTMLElement} Generated HTML
  */
-export default function ({ testId, identifier, test, result, targetingSorted }: DetailData) {
+export default function DetailTemplate({
+	testId,
+	identifier,
+	test,
+	result,
+	targetingSorted
+}: DetailData) {
 	const hasVariation =
 		!!test.asyncVariationInfoById && Object.keys(test.asyncVariationInfoById).length
 	const hasTracking = !!test.actionTrackings && Object.keys(test.actionTrackings).length
@@ -36,14 +42,18 @@ export default function ({ testId, identifier, test, result, targetingSorted }: 
 				<TargetingTemplate
 					targeting={item}
 					textarea={item.key === 'code_scope'}
-					headerOnly={['ip_scope', 'segment', 'trigger'].includes(item.key)}
+					headerOnly={['ip_scope', 'segment', 'trigger', 'qa_url_parameter_enabled'].includes(
+						item.key
+					)}
 				/>
 			))}
 			{targetingSorted.accepted.map((item: Targeting) => (
 				<TargetingTemplate
 					targeting={item}
 					textarea={item.key === 'code_scope'}
-					headerOnly={['ip_scope', 'segment', 'trigger'].includes(item.key)}
+					headerOnly={['ip_scope', 'segment', 'trigger', 'qa_url_parameter_enabled'].includes(
+						item.key
+					)}
 				/>
 			))}
 		</>

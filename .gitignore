@@ -3,3 +3,4 @@ web/*
 coverage
 *.zip
 lib
+.env

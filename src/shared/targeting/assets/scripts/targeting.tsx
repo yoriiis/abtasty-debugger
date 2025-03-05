@@ -1,7 +1,6 @@
-import type { Condition, FavoriteUrlScope, Targeting } from 'shared/assets/definitions/types'
-import CollapseTemplate from 'shared/collapse/assets/scripts/collapse'
-import wording from 'shared/utils/wording'
-
+import type { Condition, FavoriteUrlScope, Targeting } from 'shared/assets/definitions/types.js'
+import CollapseTemplate from 'shared/collapse/assets/scripts/collapse.js'
+import wording from 'shared/utils/wording.js'
 /**
  * Targeting template
  * @param {Object} options
@@ -10,7 +9,7 @@ import wording from 'shared/utils/wording'
  * @param {Object} options.textarea Use textarea instead of input field
  * @returns {HTMLElement} Generated HTML
  */
-export default function ({
+export default function TargetingTemplate({
 	targeting,
 	headerOnly = false,
 	textarea = false
@@ -35,38 +34,39 @@ export default function ({
 		contentTemplate = (
 			<table className="table">
 				<tbody>
-					{(conditions as Condition[]).map((item: Condition) => {
-						let value = item.value
-						if (targeting.key === 'cookie_scope') {
-							value = `${item.name}=${item.value}`
-						} else if (targeting.key === 'favorite_url_scope' && item.favorite_url_id) {
-							const urlScopeRef = (
-								targeting.conditions as FavoriteUrlScope
-							).favoriteUrlScopeConditions.find(
-								(urlScope: Condition) => urlScope.favorite_url_id === item.favorite_url_id
-							)
-							if (urlScopeRef?.url) {
-								value = urlScopeRef.url
+					{Array.isArray(conditions) &&
+						(conditions as Condition[]).map((item: Condition) => {
+							let value = item.value
+							if (targeting.key === 'cookie_scope') {
+								value = `${item.name}=${item.value}`
+							} else if (targeting.key === 'favorite_url_scope' && item.favorite_url_id) {
+								const urlScopeRef = (
+									targeting.conditions as FavoriteUrlScope
+								).favoriteUrlScopeConditions.find(
+									(urlScope: Condition) => urlScope.favorite_url_id === item.favorite_url_id
+								)
+								if (urlScopeRef?.url) {
+									value = urlScopeRef.url
+								}
 							}
-						}
 
-						return (
-							<tr>
-								{typeof item.include !== 'undefined' && (
-									<td>{item.include ? 'Include' : 'Exclude'}</td>
-								)}
-								<td>
-									{textarea ? (
-										<textarea className="textarea" disabled>
-											{value}
-										</textarea>
-									) : (
-										<input className="input" disabled type="text" value={value} />
+							return (
+								<tr>
+									{typeof item.include !== 'undefined' && (
+										<td>{item.include ? 'Include' : 'Exclude'}</td>
 									)}
-								</td>
-							</tr>
-						)
-					})}
+									<td>
+										{textarea ? (
+											<textarea className="textarea" disabled>
+												{value}
+											</textarea>
+										) : (
+											<input className="input" disabled type="text" value={value} />
+										)}
+									</td>
+								</tr>
+							)
+						})}
 				</tbody>
 			</table>
 		)

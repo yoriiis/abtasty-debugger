@@ -1,16 +1,24 @@
-const fs = require('node:fs')
-const path = require('node:path')
-const webpack = require('webpack')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const TerserPlugin = require('terser-webpack-plugin')
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const CopyPlugin = require('copy-webpack-plugin')
+import fs from 'node:fs'
+import path from 'node:path'
+import CopyPlugin from 'copy-webpack-plugin'
+import CssMinimizerPlugin from 'css-minimizer-webpack-plugin'
+import dotenv from 'dotenv'
+import HtmlWebpackPlugin from 'html-webpack-plugin'
+import MiniCssExtractPlugin from 'mini-css-extract-plugin'
+import TerserPlugin from 'terser-webpack-plugin'
+import webpack from 'webpack'
 
 const appDirectory = fs.realpathSync(process.cwd())
 const resolveApp = (relativePath) => path.resolve(appDirectory, relativePath)
 
-module.exports = (env, argv) => {
+dotenv.config({ path: resolveApp('.env') })
+
+// TODO: found a solution for reusable workflow
+if (!process.env.GITHUB_ACTION && !process.env.SENTRY_DSN) {
+	throw new Error('Environments variables are missing in .env ("SENTRY_DSN")')
+}
+
+export default function webpackConfig(env, argv) {
 	const manifest = env.manifest
 	const isProduction = argv.mode === 'production'
 	const suffixHash = isProduction ? '.[contenthash]' : ''
@@ -93,6 +101,9 @@ module.exports = (env, argv) => {
 		},
 		resolve: {
 			extensions: ['.js', '.ts', '.tsx', '.css'],
+			extensionAlias: {
+				'.js': ['.ts', '.tsx', '.js']
+			},
 			alias: {
 				shared: resolveApp('src/shared'),
 				globalAssets: resolveApp('assets')
@@ -125,6 +136,9 @@ module.exports = (env, argv) => {
 						to: resolveApp('web/')
 					}
 				]
+			}),
+			new webpack.DefinePlugin({
+				'process.env.SENTRY_DSN': JSON.stringify(process.env.SENTRY_DSN)
 			})
 		],
 		stats: {
@@ -157,7 +171,7 @@ module.exports = (env, argv) => {
 			removeAvailableModules: true,
 			removeEmptyChunks: true,
 			mergeDuplicateChunks: true,
-			providedExports: false,
+			providedExports: true,
 			splitChunks: false
 		}
 	}

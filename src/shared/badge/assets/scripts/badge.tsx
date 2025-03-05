@@ -7,7 +7,7 @@ import cross from 'shared/assets/svgs/cross.svg'
  * @param {Object} options.text Badge text
  * @returns {HTMLElement} Generated HTML
  */
-export default function ({
+export default function BadgeTemplate({
 	text = '',
 	color = 'green',
 	withIcon = false

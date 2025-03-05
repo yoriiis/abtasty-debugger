@@ -1,7 +1,7 @@
-import type { Variation, Variations } from 'shared/assets/definitions/types'
+import type { Variation, Variations } from 'shared/assets/definitions/types.js'
 import externalLink from 'shared/assets/svgs/external-link.svg'
-import CollapseTemplate from 'shared/collapse/assets/scripts/collapse'
-import getTrafficAllocation from 'shared/utils/get-traffic-allocation'
+import CollapseTemplate from 'shared/collapse/assets/scripts/collapse.js'
+import getTrafficAllocation from 'shared/utils/get-traffic-allocation.js'
 
 /**
  * Template of variations list
@@ -11,7 +11,7 @@ import getTrafficAllocation from 'shared/utils/get-traffic-allocation'
  * @param {Object} options.testId Test ID
  * @returns {HTMLElement} Generated HTML
  */
-export default function ({
+export default function VariationTemplate({
 	variations,
 	currentVariationId,
 	testId,
