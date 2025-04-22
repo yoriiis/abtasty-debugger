@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.5.0
+
+### Updates
+
+- Design updates ([#40](https://github.com/yoriiis/abtasty-debugger/pull/40))
+
 ## 1.4.1
 
 ### Fixes

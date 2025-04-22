@@ -1,13 +1,13 @@
 .collapse {
 	&-header {
 		border: 1px solid var(--colorBorderPrimary);
-		border-top-left-radius: var(--radius);
-		border-top-right-radius: var(--radius);
+		border-radius: var(--radius);
 		background-color: var(--colorBgSecondary);
+		transition: border var(--transition);
 	}
 
 	&-headerButton {
-		padding: 15px 45px 15px 15px;
+		padding: 12px 45px 12px 12px;
 		text-align: left;
 		position: relative;
 		width: 100%;
@@ -24,6 +24,7 @@
 	&-name {
 		font-size: var(--fontSizePrimary);
 		font-weight: 600;
+		transition: color var(--transition);
 	}
 
 	&-arrow {
@@ -37,12 +38,12 @@
 			width: 16px;
 			height: 16px;
 			fill: var(--colorTextSecondary);
-			transition: transform var(--transition);
+			transition: transform var(--transition), fill var(--transition);
 		}
 	}
 
 	&-content {
-		padding: 15px;
+		padding: 12px;
 		border: 1px solid var(--colorBorderPrimary);
 		border-bottom-left-radius: var(--radius);
 		border-bottom-right-radius: var(--radius);
@@ -65,11 +66,25 @@
 	}
 
 	&:not(:last-child) {
-		margin-bottom: 15px;
+		margin-bottom: 10px;
 	}
 
 	&.headerOnly &-headerButton {
 		padding-right: 15px;
 		cursor: default;
+	}
+}
+
+@media (hover: hover) {
+	.collapse:hover {
+		border-color: var(--colorAbtasty);
+
+		.collapse-name {
+			color: var(--colorAbtasty);
+		}
+
+		.collapse-arrow svg {
+			fill: var(--colorAbtasty);
+		}
 	}
 }

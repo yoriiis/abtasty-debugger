@@ -18,16 +18,10 @@ export default function ListTemplate({ testsSortedByStatus, debug }: ListData) {
 					<li className="list-navItem">
 						<button type="button" className="list-navItemButton clearCookies">
 							<div className="list-navItemButtonIcon" innerHTML={clear} />
-							Clear AB Tasty cookies
+							Reset cookies
 						</button>
 					</li>
-					<li className="list-navItem">
-						<label
-							htmlFor="debugMode"
-							className="list-navItemLabel"
-							title="See DevTools > Console for debug logs">
-							Debug mode
-						</label>
+					<li className="list-navItem checkbox">
 						<div className="customCheckbox">
 							<input
 								type="checkbox"
@@ -41,6 +35,12 @@ export default function ListTemplate({ testsSortedByStatus, debug }: ListData) {
 								<div className="customCheckbox-roundIcon" innerHTML={check} />
 							</span>
 						</div>
+						<label
+							htmlFor="debugMode"
+							className="list-navItemLabel"
+							title="See DevTools > Console for debug logs">
+							Debug
+						</label>
 					</li>
 				</ul>
 			</div>
