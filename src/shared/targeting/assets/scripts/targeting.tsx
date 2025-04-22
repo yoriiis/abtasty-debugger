@@ -27,15 +27,19 @@ export default function TargetingTemplate({
 	if (!headerOnly && targeting.conditions) {
 		let conditions = targeting.conditions
 
-		// The page builder uses a different structure (FavoriteUrlScope interface)
-		if (!Array.isArray(targeting.conditions) && targeting.key === 'favorite_url_scope') {
+		// The page builder uses a different structure (FavoriteUrlScope interface) and QA URL parameter also
+		if (
+			!Array.isArray(targeting.conditions) &&
+			targeting.key === 'favorite_url_scope' &&
+			typeof targeting.conditions !== 'boolean'
+		) {
 			conditions = targeting.conditions.urlScopes
 		}
 		contentTemplate = (
 			<table className="table">
 				<tbody>
 					{Array.isArray(conditions) &&
-						(conditions as Condition[]).map((item: Condition) => {
+						conditions.map((item: Condition) => {
 							let value = item.value
 							if (targeting.key === 'cookie_scope') {
 								value = `${item.name}=${item.value}`

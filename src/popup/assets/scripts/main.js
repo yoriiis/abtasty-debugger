@@ -3,7 +3,8 @@ import { isExtensionMode, sendMessage } from 'shared/utils/bridge'
 import Popup from './popup.js'
 
 Sentry.init({
-	dsn: process.env.SENTRY_DSN
+	dsn: process.env.SENTRY_DSN,
+	environment: process.env.NODE_ENV
 })
 
 if (isExtensionMode) {
