@@ -3,8 +3,8 @@ import CollapseTemplate from 'shared/collapse/assets/scripts/collapse.js'
 
 /**
  * Template of trackings list
- * @param {Object} options
- * @param {String} options.trackings Trackins list
+ * @param options
+ * @param options.trackings Trackins list
  * @returns {HTMLElement} Generated HTML
  */
 export default function TrackingTemplate({ trackings }: { trackings: Trackings }) {

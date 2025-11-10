@@ -1,6 +1,6 @@
 import * as Sentry from '@sentry/browser'
-import { isExtensionMode, sendMessage } from 'shared/utils/bridge'
-import Popup from './popup.js'
+import { isExtensionMode, sendMessage } from 'shared/utils/bridge.ts'
+import Popup from './popup.tsx'
 
 Sentry.init({
 	dsn: process.env.SENTRY_DSN,

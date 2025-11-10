@@ -9,7 +9,7 @@ jobs:
   chrome:
     uses: yoriiis/actions/.github/workflows/chrome-web-store-publish.yml@main
     with:
-      node-version: 22
+      node-version: 24
       source-dir: web
       command-build: npm run release:v3
     secrets:

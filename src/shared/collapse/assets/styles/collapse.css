@@ -38,7 +38,9 @@
 			width: 16px;
 			height: 16px;
 			fill: var(--colorTextSecondary);
-			transition: transform var(--transition), fill var(--transition);
+			transition:
+				transform var(--transition),
+				fill var(--transition);
 		}
 	}
 

@@ -5,4 +5,4 @@ import './assets/styles/collapse.css'
 import './assets/scripts/collapse.tsx'
 
 // import shared components
-import 'shared/badge/config'
+import 'shared/badge/config.js'

@@ -1,4 +1,5 @@
 import crypto from 'node:crypto'
+
 const md5 = (string) => crypto.createHash('md5').update(string).digest('hex')
 
 export default function postCssConfig(api) {

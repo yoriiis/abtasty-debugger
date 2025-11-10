@@ -5,10 +5,10 @@ import getTrafficAllocation from 'shared/utils/get-traffic-allocation.js'
 
 /**
  * Template of variations list
- * @param {Object} options
- * @param {String} options.variations Test variations
- * @param {Object} options.currentVariationId Current variation ID
- * @param {Object} options.testId Test ID
+ * @param options
+ * @param options.variations Test variations
+ * @param options.currentVariationId Current variation ID
+ * @param options.testId Test ID
  * @returns {HTMLElement} Generated HTML
  */
 export default function VariationTemplate({
@@ -53,10 +53,10 @@ export default function VariationTemplate({
 
 /**
  * Template of a single variation
- * @param {Object} options
- * @param {String} options.variations Test variations
- * @param {Object} options.currentVariationId Current variation ID
- * @param {Object} options.testId Test ID
+ * @param options
+ * @param options.variations Test variations
+ * @param options.currentVariationId Current variation ID
+ * @param options.testId Test ID
  * @returns {HTMLElement} Generated HTML
  */
 const variationListItem = ({
@@ -90,7 +90,7 @@ const variationListItem = ({
 					<a
 						href={`https://try.abtasty.com/${accountId}/${testId}.${
 							variation.id
-						}.json?${new Date().getTime()}`}
+						}.json?${Date.now()}`}
 						target="_blank"
 						rel="noreferrer"
 						className="variation-link">

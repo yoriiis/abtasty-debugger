@@ -1,11 +1,11 @@
 import { App, navigate } from 'costro'
 import fixturesAbtasty from 'shared/assets/fixtures/abtasty.json'
-import Empty from 'shared/empty/assets/scripts/empty.js'
-import { namespace } from 'shared/utils/bridge.js'
-import DataManager from 'shared/utils/data-manager.js'
-import Popup from '../assets/scripts/popup.js'
-import Detail from '../components/detail/assets/scripts/detail.js'
-import List from '../components/list/assets/scripts/list.js'
+import Empty from 'shared/empty/assets/scripts/empty.tsx'
+import { namespace } from 'shared/utils/bridge.ts'
+import DataManager from 'shared/utils/data-manager.ts'
+import Popup from '../assets/scripts/popup.tsx'
+import Detail from '../components/detail/assets/scripts/detail.tsx'
+import List from '../components/list/assets/scripts/list.tsx'
 
 jest.mock('shared/utils/data-manager')
 jest.mock('shared/utils/bridge', () => {

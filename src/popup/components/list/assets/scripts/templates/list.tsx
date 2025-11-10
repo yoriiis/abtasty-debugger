@@ -7,8 +7,8 @@ import BadgeTemplate from 'shared/badge/assets/scripts/badge.js'
 
 /**
  * List template
- * @param {Object} options Template options
- * @returns {HTMLElement} Generated HTML
+ * @param options Template options
+ * @returns Generated HTML
  */
 export default function ListTemplate({ testsSortedByStatus, debug }: ListData) {
 	return (
@@ -58,9 +58,9 @@ export default function ListTemplate({ testsSortedByStatus, debug }: ListData) {
 
 /**
  * List item template
- * @param {Object} options
- * @param {Object} options.data List item data
- * @returns {HTMLElement} Generated HTML
+ * @param options
+ * @param options.data List item data
+ * @returns Generated HTML
  */
 function ListItem({ data }: { data: Result }) {
 	return (

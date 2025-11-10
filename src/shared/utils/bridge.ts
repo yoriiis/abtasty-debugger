@@ -1,5 +1,5 @@
 const namespace =
-	// @ts-ignore
+	// @ts-expect-error
 	typeof browser !== 'undefined' ? browser : typeof chrome !== 'undefined' ? chrome : null
 
 const isExtensionMode = !!namespace?.tabs
@@ -22,10 +22,10 @@ function getTabId(): Promise<number> {
 
 /**
  * Send message to content script with Browser extension API
- * @param {Object} options
- * @param {String} options.action Action name
- * @param {Object} options.data Action data
- * @param {Function} options.callback Action callback function
+ * @param options
+ * @param options.action Action name
+ * @param options.data Action data
+ * @param options.callback Action callback function
  */
 function sendMessage({
 	action,

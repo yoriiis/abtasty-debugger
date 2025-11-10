@@ -38,6 +38,12 @@
 			"*.yaml": "yaml",
 			"*.yml": "yaml"
 		},
+		"[javascript][typescript][css][json]": {
+			"editor.codeActionsOnSave": {
+				"quickfix.biome": "explicit",
+				"source.organizeImports.biome": "explicit"
+			}
+		},
 		"files.trimTrailingWhitespace": true,
 		"search.exclude": {
 			"**/node_modules": true

@@ -1,6 +1,6 @@
 import { Component, navigate } from 'costro'
 import validateTarget from 'validate-target'
-import TemplateEmpty from './templates/empty.js'
+import TemplateEmpty from './templates/empty'
 
 export default class Empty extends Component {
 	element: null | HTMLElement
@@ -47,7 +47,7 @@ export default class Empty extends Component {
 
 	/**
 	 * On click event listener on the element
-	 * @param {Event} e Event data
+	 * @param e Event data
 	 */
 	onClickOnElement(e: Event) {
 		const target = e.target
@@ -64,7 +64,7 @@ export default class Empty extends Component {
 
 	/**
 	 * Retry and reload the popup if no results
-	 * @param {Event} e Event data
+	 * @param e Event data
 	 */
 	retry(e: Event) {
 		e.preventDefault()

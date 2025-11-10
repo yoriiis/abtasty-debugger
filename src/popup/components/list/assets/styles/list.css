@@ -21,7 +21,9 @@
 			width: 20px;
 			height: 20px;
 			fill: var(--colorTextSecondary);
-			transition: transform var(--transition), fill var(--transition);
+			transition:
+				transform var(--transition),
+				fill var(--transition);
 			transform: rotate(-90deg);
 		}
 	}

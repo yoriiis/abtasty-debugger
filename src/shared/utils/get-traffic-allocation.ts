@@ -2,8 +2,8 @@ import type { TrafficAllocation, Variation, Variations } from 'shared/assets/def
 
 /**
  * Get traffic allocation between original and untracked variations
- * @param {Object} variations Test variations
- * @returns {Object} Traffic allocation for the test
+ * @param variations Test variations
+ * @returns Traffic allocation for the test
  */
 export default function getTrafficAllocation(variations: Variations): TrafficAllocation {
 	const listVariationTraffic = Object.entries(variations).map(
