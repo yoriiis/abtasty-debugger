@@ -36,7 +36,7 @@ export default class Detail extends Component {
 
 	/**
 	 * Render the template
-	 * @returns {HTMLElement} Template
+	 * @returns Template
 	 */
 	render() {
 		const targetingsSortedByStatus = this.getStore(

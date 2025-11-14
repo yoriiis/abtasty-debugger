@@ -1,7 +1,7 @@
 import fixturesAbtasty from 'shared/assets/fixtures/abtasty.json'
-import { namespace, sendMessage } from 'shared/utils/bridge.ts'
+import { namespace, sendMessage } from 'shared/utils/bridge.js'
 import validateTarget from 'validate-target'
-import Detail from '../assets/scripts/detail.tsx'
+import Detail from '../assets/scripts/detail.js'
 
 const newVariationId = '200002'
 const testId = '100002'

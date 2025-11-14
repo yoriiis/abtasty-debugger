@@ -37,7 +37,7 @@ export default class List extends Component {
 
 	/**
 	 * Render the template
-	 * @returns {HTMLElement} Template
+	 * @returns Template
 	 */
 	render() {
 		const testsSortedByStatus = this.getStore('testsSortedByStatus') as TestsSortedByStatus

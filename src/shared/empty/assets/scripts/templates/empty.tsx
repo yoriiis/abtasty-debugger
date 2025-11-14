@@ -2,7 +2,7 @@ import notFound from 'shared/assets/svgs/not-found.svg'
 
 /**
  * Empty template
- * @returns {HTMLElement} Generated HTML
+ * @returns Generated HTML
  */
 export default function (): any {
 	return (

@@ -9,7 +9,7 @@ import getTrafficAllocation from 'shared/utils/get-traffic-allocation.js'
  * @param options.variations Test variations
  * @param options.currentVariationId Current variation ID
  * @param options.testId Test ID
- * @returns {HTMLElement} Generated HTML
+ * @returns Generated HTML
  */
 export default function VariationTemplate({
 	variations,
@@ -57,7 +57,7 @@ export default function VariationTemplate({
  * @param options.variations Test variations
  * @param options.currentVariationId Current variation ID
  * @param options.testId Test ID
- * @returns {HTMLElement} Generated HTML
+ * @returns Generated HTML
  */
 const variationListItem = ({
 	variation,

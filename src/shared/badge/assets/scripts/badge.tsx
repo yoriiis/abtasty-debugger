@@ -5,7 +5,7 @@ import cross from 'shared/assets/svgs/cross.svg'
  * Badge template
  * @param options
  * @param options.text Badge text
- * @returns {HTMLElement} Generated HTML
+ * @returns Generated HTML
  */
 export default function BadgeTemplate({
 	text = '',

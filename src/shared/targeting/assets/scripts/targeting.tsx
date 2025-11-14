@@ -7,7 +7,7 @@ import wording from 'shared/utils/wording.js'
  * @param options.targeting Targeting data
  * @param options.headerOnly Display the header only, without content
  * @param options.textarea Use textarea instead of input field
- * @returns {HTMLElement} Generated HTML
+ * @returns Generated HTML
  */
 export default function TargetingTemplate({
 	targeting,

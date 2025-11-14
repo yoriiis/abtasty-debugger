@@ -5,7 +5,7 @@ import CollapseTemplate from 'shared/collapse/assets/scripts/collapse.js'
  * Template of trackings list
  * @param options
  * @param options.trackings Trackins list
- * @returns {HTMLElement} Generated HTML
+ * @returns Generated HTML
  */
 export default function TrackingTemplate({ trackings }: { trackings: Trackings }) {
 	const content = (

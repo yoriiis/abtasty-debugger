@@ -44,6 +44,16 @@
 		}
 	}
 
+	&.active {
+		& > .collapse-header .collapse-arrow svg {
+			transform: rotate(180deg);
+		}
+
+		& > .collapse-content {
+			display: block;
+		}
+	}
+
 	&-content {
 		padding: 12px;
 		border: 1px solid var(--colorBorderPrimary);
@@ -53,16 +63,6 @@
 		display: none;
 
 		&.active {
-			display: block;
-		}
-	}
-
-	&.active {
-		& > .collapse-header .collapse-arrow svg {
-			transform: rotate(180deg);
-		}
-
-		& > .collapse-content {
 			display: block;
 		}
 	}

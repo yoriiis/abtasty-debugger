@@ -8,7 +8,7 @@
 		"editor.defaultFormatter": "biomejs.biome",
 		"editor.tabSize": 4,
 		"editor.rulers": [100],
-		"[javascript][typescript][typescriptreact][postcss][html][markdown][json]": {
+		"[javascript][typescript][typescriptreact][css][html][markdown][json]": {
 			"editor.formatOnSave": true
 		},
 		"[html][markdown]": {
@@ -38,7 +38,7 @@
 			"*.yaml": "yaml",
 			"*.yml": "yaml"
 		},
-		"[javascript][typescript][css][json]": {
+		"[javascript][typescript][typescriptreact][css][json]": {
 			"editor.codeActionsOnSave": {
 				"quickfix.biome": "explicit",
 				"source.organizeImports.biome": "explicit"

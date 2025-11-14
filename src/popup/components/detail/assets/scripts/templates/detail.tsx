@@ -10,7 +10,7 @@ import VariationTemplate from 'shared/variation/assets/scripts/variation.js'
 /**
  * Detail template
  * @param {Object} options Template options
- * @returns {HTMLElement} Generated HTML
+ * @returns Generated HTML
  */
 export default function DetailTemplate({
 	testId,
