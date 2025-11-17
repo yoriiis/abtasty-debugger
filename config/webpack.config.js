@@ -17,6 +17,7 @@ dotenv.config({ path: resolveApp('.env') })
 if (!process.env.SENTRY_DSN) {
 	throw new Error('Environments variables are missing in .env ("SENTRY_DSN")')
 }
+
 console.log(process.env.SENTRY_DSN)
 
 export default function webpackConfig(env, argv) {
