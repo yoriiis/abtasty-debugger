@@ -5,7 +5,7 @@
 ### Updates
 
 - Updates Node.js ([#51](https://github.com/yoriiis/abtasty-debugger/pull/51))
-- Update demo to get data from window object by @yoriiis in ([#52](https://github.com/yoriiis/abtasty-debugger/pull/52))
+- Update demo to get data from window object ([#52](https://github.com/yoriiis/abtasty-debugger/pull/52))
 
 ## 1.5.0
 
