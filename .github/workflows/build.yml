@@ -14,6 +14,6 @@ jobs:
     with:
       node-version: 24
       command-build: |
-        npm run release:v3
-        npm run release:v2
+        npm run build:v3
+        npm run build:v2
         npm run test:ext

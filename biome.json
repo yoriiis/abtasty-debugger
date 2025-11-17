@@ -7,7 +7,7 @@
 	},
 	"files": {
 		"ignoreUnknown": false,
-		"includes": ["**", "!example/dist"]
+		"includes": ["**", "!example/dist", "!src/demo/views/demo.html"]
 	},
 	"formatter": {
 		"enabled": true,
