@@ -1,4 +1,4 @@
-export const ABTASTY_NAME = 'ABTasty'
+const ABTASTY_NAME = 'ABTasty'
 const INTERVAL_IN_MS = 1000
 const TIME_OUT_IN_MS = INTERVAL_IN_MS * 10
 const IGNORE_TEST_IDS = ['global']
