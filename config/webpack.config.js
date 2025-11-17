@@ -14,10 +14,10 @@ const resolveApp = (relativePath) => path.resolve(appDirectory, relativePath)
 
 dotenv.config({ path: resolveApp('.env') })
 
-// TODO: found a solution for reusable workflow
-if (!process.env.GITHUB_ACTION && !process.env.SENTRY_DSN) {
+if (!process.env.SENTRY_DSN) {
 	throw new Error('Environments variables are missing in .env ("SENTRY_DSN")')
 }
+console.log(process.env.SENTRY_DSN)
 
 export default function webpackConfig(env, argv) {
 	const manifest = env.manifest
