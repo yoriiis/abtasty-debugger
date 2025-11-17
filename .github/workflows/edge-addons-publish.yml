@@ -16,3 +16,4 @@ jobs:
       EDGE_PRODUCT_ID: ${{ secrets.EDGE_PRODUCT_ID }}
       EDGE_CLIENT_ID: ${{ secrets.EDGE_CLIENT_ID }}
       EDGE_API_KEY: ${{ secrets.EDGE_API_KEY }}
+      SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
