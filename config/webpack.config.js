@@ -169,7 +169,7 @@ export default function webpackConfig(env, argv) {
 		}
 	}
 
-	if (isProduction) {
+	if (isProduction || !env.WEBPACK_SERVE) {
 		config.plugins.push(
 			new HtmlWebpackPlugin({
 				filename: 'popup.html',
@@ -181,16 +181,14 @@ export default function webpackConfig(env, argv) {
 	} else {
 		config.plugins.push(new webpack.ProgressPlugin())
 
-		if (env.WEBPACK_SERVE) {
-			config.devServer = {
-				static: {
-					directory: resolveApp('web')
-				},
-				historyApiFallback: true,
-				port: 3000,
-				compress: true,
-				hot: true
-			}
+		config.devServer = {
+			static: {
+				directory: resolveApp('web')
+			},
+			historyApiFallback: true,
+			port: 3000,
+			compress: true,
+			hot: true
 		}
 
 		config.entry.demo = resolveApp('src/demo/config')
