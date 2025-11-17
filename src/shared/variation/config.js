@@ -5,4 +5,4 @@ import './assets/styles/variation.css'
 import './assets/scripts/variation.tsx'
 
 // import shared components
-import 'shared/collapse/config'
+import 'shared/collapse/config.js'

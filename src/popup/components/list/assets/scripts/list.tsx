@@ -37,11 +37,11 @@ export default class List extends Component {
 
 	/**
 	 * Render the template
-	 * @returns {HTMLElement} Template
+	 * @returns Template
 	 */
 	render() {
 		const testsSortedByStatus = this.getStore('testsSortedByStatus') as TestsSortedByStatus
-		// @ts-ignore
+		// @ts-expect-error
 		const debug = this.getStore('debug') as boolean
 
 		if (!testsSortedByStatus) {
@@ -74,7 +74,7 @@ export default class List extends Component {
 
 	/**
 	 * On click event listener on the element
-	 * @param {Event} e Event data
+	 * @param e Event data
 	 */
 	onClickOnElement(e: Event) {
 		const target = e.target
@@ -92,7 +92,7 @@ export default class List extends Component {
 
 	/**
 	 * On change event listener on the element
-	 * @param {Event} e Event data
+	 * @param e Event data
 	 */
 	onChangeOnElement(e: Event) {
 		const target = e.target
@@ -110,7 +110,7 @@ export default class List extends Component {
 
 	/**
 	 * Retry and reload the popup if no results
-	 * @param {Event} e Event data
+	 * @param e Event data
 	 */
 	clearCookies(e: Event) {
 		e.preventDefault()
@@ -124,7 +124,7 @@ export default class List extends Component {
 
 	/**
 	 * Toggle debug mode
-	 * @param {Event} e Event data
+	 * @param e Event data
 	 */
 	toggleDebugMode(e: Event) {
 		const target = e.target as HTMLInputElement

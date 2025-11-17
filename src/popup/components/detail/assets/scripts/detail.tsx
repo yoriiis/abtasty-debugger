@@ -36,7 +36,7 @@ export default class Detail extends Component {
 
 	/**
 	 * Render the template
-	 * @returns {HTMLElement} Template
+	 * @returns Template
 	 */
 	render() {
 		const targetingsSortedByStatus = this.getStore(
@@ -125,7 +125,7 @@ export default class Detail extends Component {
 			return
 		}
 
-		// @ts-ignore
+		// @ts-expect-error
 		target.closest('.collapse').classList.toggle('active')
 	}
 
@@ -135,7 +135,7 @@ export default class Detail extends Component {
 	 */
 	switchVariation(e: Event) {
 		const target = e.target as HTMLInputElement
-		const newVariationId = Number.parseInt(target.value)
+		const newVariationId = Number.parseInt(target.value, 10)
 		const testId = target.getAttribute('data-test-id') as string
 
 		sendMessage({

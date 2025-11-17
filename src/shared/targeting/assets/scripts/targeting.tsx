@@ -3,11 +3,11 @@ import CollapseTemplate from 'shared/collapse/assets/scripts/collapse.js'
 import wording from 'shared/utils/wording.js'
 /**
  * Targeting template
- * @param {Object} options
- * @param {Object} options.targeting Targeting data
- * @param {Object} options.headerOnly Display the header only, without content
- * @param {Object} options.textarea Use textarea instead of input field
- * @returns {HTMLElement} Generated HTML
+ * @param options
+ * @param options.targeting Targeting data
+ * @param options.headerOnly Display the header only, without content
+ * @param options.textarea Use textarea instead of input field
+ * @returns Generated HTML
  */
 export default function TargetingTemplate({
 	targeting,

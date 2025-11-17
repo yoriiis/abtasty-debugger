@@ -1,11 +1,10 @@
+import { App, navigate } from 'costro'
 import type { ChangeInfo, Data } from 'shared/assets/definitions/types.js'
 import Empty from 'shared/empty/assets/scripts/empty.js'
 import { isExtensionMode, namespace } from 'shared/utils/bridge.js'
 import DataManager from 'shared/utils/data-manager.js'
 import Detail from '../../components/detail/assets/scripts/detail.js'
 import List from '../../components/list/assets/scripts/list.js'
-
-import { App, navigate } from 'costro'
 
 declare global {
 	interface Window {
@@ -113,7 +112,7 @@ export default class Popup {
 	 * @param {Object} changeInfo Updated data (status)
 	 * @param {Object} tab Tab data
 	 */
-	onTabUpdated(tabId: number, changeInfo: ChangeInfo) {
+	onTabUpdated(_tabId: number, changeInfo: ChangeInfo) {
 		const debugMode = document.querySelector('#debugMode')
 		if (debugMode?.hasAttribute('disabled') && changeInfo.status === 'complete') {
 			debugMode.removeAttribute('disabled')

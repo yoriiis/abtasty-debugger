@@ -5,4 +5,4 @@ import './assets/styles/targeting.css'
 import './assets/scripts/targeting.tsx'
 
 // import shared components
-import 'shared/collapse/config'
+import 'shared/collapse/config.js'

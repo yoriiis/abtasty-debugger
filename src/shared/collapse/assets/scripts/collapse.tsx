@@ -3,11 +3,11 @@ import BadgeTemplate from 'shared/badge/assets/scripts/badge.js'
 
 /**
  * Collapse template
- * @param {Object} options
- * @param {String} options.header Collapse header title
- * @param {Object} options.content Collapse content
- * @param {Object} options.badge Badge options
- * @returns {HTMLElement} Generated HTML
+ * @param options
+ * @param options.header Collapse header title
+ * @param options.content Collapse content
+ * @param options.badge Badge options
+ * @returns Generated HTML
  */
 export default function TemplateCollapse({
 	header,

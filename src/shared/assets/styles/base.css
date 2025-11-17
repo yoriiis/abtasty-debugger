@@ -1,6 +1,7 @@
 body {
-	font-family: -apple-system, blinkmacsystemfont, 'segoe UI', Helvetica, Arial, sans-serif,
-		'Apple Color Emoji', 'Segoe UI Emoji';
+	font-family:
+		-apple-system, blinkmacsystemfont, 'segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji',
+		'Segoe UI Emoji';
 	color: var(--colorTextPrimary);
 	font-size: 16px;
 }

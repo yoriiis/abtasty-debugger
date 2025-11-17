@@ -74,7 +74,7 @@ document.addEventListener('updateBadge', (e) => {
 })
 
 // Listen for messages from the popup
-namespace.runtime.onMessage.addListener((message, sender, response) => {
+namespace.runtime.onMessage.addListener((message, _sender, response) => {
 	document.addEventListener('abtastyDebugger::sendData', (e) => {
 		const abtastyData = e.detail.abtastyData
 

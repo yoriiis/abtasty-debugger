@@ -22,7 +22,7 @@ export default class Empty extends Component {
 
 	/**
 	 * Render the template
-	 * @returns {HTMLElement} Template
+	 * @returns Template
 	 */
 	render() {
 		return <TemplateEmpty />
@@ -47,7 +47,7 @@ export default class Empty extends Component {
 
 	/**
 	 * On click event listener on the element
-	 * @param {Event} e Event data
+	 * @param e Event data
 	 */
 	onClickOnElement(e: Event) {
 		const target = e.target
@@ -64,7 +64,7 @@ export default class Empty extends Component {
 
 	/**
 	 * Retry and reload the popup if no results
-	 * @param {Event} e Event data
+	 * @param e Event data
 	 */
 	retry(e: Event) {
 		e.preventDefault()

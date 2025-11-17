@@ -23,6 +23,17 @@
 		color: var(--colorTextSecondary);
 	}
 
+	&-navItemButtonIcon {
+		margin-right: 5px;
+
+		svg {
+			display: block;
+			width: 16px;
+			height: 16px;
+			fill: var(--colorTextSecondary);
+		}
+	}
+
 	&-navItem {
 		display: flex;
 		align-items: center;
@@ -35,17 +46,6 @@
 			svg {
 				transform: rotate(90deg);
 			}
-		}
-	}
-
-	&-navItemButtonIcon {
-		margin-right: 5px;
-
-		svg {
-			display: block;
-			width: 16px;
-			height: 16px;
-			fill: var(--colorTextSecondary);
 		}
 	}
 

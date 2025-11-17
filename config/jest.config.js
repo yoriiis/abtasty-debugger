@@ -11,7 +11,8 @@ export default {
 		'^.+\\.svg$': 'jest-transform-stub'
 	},
 	moduleNameMapper: {
-		'(.+)\\.js': '$1'
+		'(.+)\\.js': '$1',
+		'^validate-target$': '<rootDir>/__mocks__/validate-target.js'
 	},
 	testEnvironment: 'jsdom',
 	resetMocks: true,
