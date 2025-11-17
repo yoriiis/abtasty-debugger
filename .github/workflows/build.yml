@@ -10,10 +10,27 @@ on:
 
 jobs:
   build:
-    uses: yoriiis/actions/.github/workflows/test-and-build.yml@main
-    with:
-      node-version: 24
-      command-build: |
-        npm run release:v3
-        npm run release:v2
-        npm run test:ext
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v6
+        with:
+          cache: 'npm'
+          cache-dependency-path: ./package-lock.json
+          node-version: 24
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Test
+        run: npm run test
+
+      - name: Build
+        env:
+          SENTRY_DSN: ${{ vars.SENTRY_DSN }}
+        run: |
+          npm run build:v3
+          npm run build:v2
+          npm run test:ext

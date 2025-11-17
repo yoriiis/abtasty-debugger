@@ -7,14 +7,14 @@ import HtmlWebpackPlugin from 'html-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import TerserPlugin from 'terser-webpack-plugin'
 import webpack from 'webpack'
+import fixturesAbtasty from '../src/shared/assets/fixtures/abtasty.json' with { type: 'json' }
 
 const appDirectory = fs.realpathSync(process.cwd())
 const resolveApp = (relativePath) => path.resolve(appDirectory, relativePath)
 
 dotenv.config({ path: resolveApp('.env') })
 
-// TODO: found a solution for reusable workflow
-if (!process.env.GITHUB_ACTION && !process.env.SENTRY_DSN) {
+if (!process.env.SENTRY_DSN) {
 	throw new Error('Environments variables are missing in .env ("SENTRY_DSN")')
 }
 
@@ -22,7 +22,6 @@ export default function webpackConfig(env, argv) {
 	const manifest = env.manifest
 	const isProduction = argv.mode === 'production'
 	const suffixHash = isProduction ? '.[contenthash]' : ''
-	const isReleaseMode = env.release || false
 	const manifestFilename = manifest === 'v3' ? 'manifest-v3.json' : 'manifest-v2.json'
 
 	const config = {
@@ -114,12 +113,6 @@ export default function webpackConfig(env, argv) {
 				filename: `styles/[name]${suffixHash}.css`,
 				chunkFilename: `styles/[name]${suffixHash}.css`
 			}),
-			new HtmlWebpackPlugin({
-				filename: 'popup.html',
-				template: resolveApp('src/popup/views/popup.html'),
-				publicPath: '',
-				chunks: ['popup']
-			}),
 			new webpack.optimize.ModuleConcatenationPlugin(),
 			new CopyPlugin({
 				patterns: [
@@ -176,7 +169,16 @@ export default function webpackConfig(env, argv) {
 		}
 	}
 
-	if (!isProduction) {
+	if (isProduction) {
+		config.plugins.push(
+			new HtmlWebpackPlugin({
+				filename: 'popup.html',
+				template: resolveApp('src/popup/views/popup.html'),
+				publicPath: '',
+				chunks: ['popup']
+			})
+		)
+	} else {
 		config.plugins.push(new webpack.ProgressPlugin())
 
 		if (env.WEBPACK_SERVE) {
@@ -190,17 +192,17 @@ export default function webpackConfig(env, argv) {
 				hot: true
 			}
 		}
-	}
 
-	// On release mode disabled, add the debug entry point and plugin
-	if (!isReleaseMode) {
-		config.entry['popup-debug'] = resolveApp('src/popup-debug/config')
+		config.entry.demo = resolveApp('src/demo/config')
 		config.plugins.push(
 			new HtmlWebpackPlugin({
 				filename: 'index.html',
-				template: resolveApp('src/popup/views/popup.html'),
+				template: resolveApp('src/demo/views/demo.html'),
 				publicPath: '',
-				chunks: ['popup-debug']
+				chunks: ['demo'],
+				templateParameters: {
+					fixturesAbtasty: JSON.stringify(fixturesAbtasty)
+				}
 			})
 		)
 	}

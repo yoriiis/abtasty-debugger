@@ -11,7 +11,7 @@ jobs:
     with:
       node-version: 24
       source-dir: web
-      command-build: npm run release:v3
+      command-build: npm run build:v3
     secrets:
       CHROME_EXTENSION_ID: ${{ secrets.CHROME_EXTENSION_ID }}
       CHROME_CLIENT_ID: ${{ secrets.CHROME_CLIENT_ID }}
