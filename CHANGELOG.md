@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 1.6.0
+
+### Updates
+
+- Updates Node.js ([#51](https://github.com/yoriiis/abtasty-debugger/pull/51))
+- Update demo to get data from window object by @yoriiis in ([#52](https://github.com/yoriiis/abtasty-debugger/pull/52))
+
 ## 1.5.0
 
 ### Updates
