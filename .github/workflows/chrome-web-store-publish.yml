@@ -17,4 +17,4 @@ jobs:
       CHROME_CLIENT_ID: ${{ secrets.CHROME_CLIENT_ID }}
       CHROME_CLIENT_SECRET: ${{ secrets.CHROME_CLIENT_SECRET }}
       CHROME_REFRESH_TOKEN: ${{ secrets.CHROME_REFRESH_TOKEN }}
-      SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
+      EXTRA_SECRETS: ${{ secrets.EXTRA_SECRETS }}

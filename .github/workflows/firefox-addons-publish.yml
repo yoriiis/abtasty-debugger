@@ -15,4 +15,4 @@ jobs:
     secrets:
       FIREFOX_API_KEY: ${{ secrets.FIREFOX_API_KEY }}
       FIREFOX_API_SECRET: ${{ secrets.FIREFOX_API_SECRET }}
-      SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
+      EXTRA_SECRETS: ${{ secrets.EXTRA_SECRETS }}

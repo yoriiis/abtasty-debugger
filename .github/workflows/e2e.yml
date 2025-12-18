@@ -19,8 +19,7 @@ jobs:
       working-directory-demo: sandbox
       command-build: npm run build:v3
       install-demo: false
-      extra-env: |
-        SENTRY_DSN=${{ vars.SENTRY_DSN }}
     secrets:
       NETLIFY_APP_ID: ${{ secrets.NETLIFY_APP_ID }}
       NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+      EXTRA_SECRETS: ${{ secrets.EXTRA_SECRETS }}
