@@ -4,3 +4,5 @@ coverage
 *.zip
 lib
 .env
+playwright-report
+test-results
