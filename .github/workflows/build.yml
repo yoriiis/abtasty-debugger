@@ -13,9 +13,9 @@ jobs:
     uses: yoriiis/actions/.github/workflows/test-and-build.yml@main
     with:
       node-version: 24
-      extra-env: |
-        SENTRY_DSN=${{ vars.SENTRY_DSN }}
       command-build: |
         npm run build:v3
         npm run build:v2
         npm run test:ext
+    secrets:
+      EXTRA_SECRETS: ${{ secrets.EXTRA_SECRETS }}
