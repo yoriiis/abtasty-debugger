@@ -65,7 +65,11 @@ export default function ListTemplate({ testsSortedByStatus, debug }: ListData) {
 function ListItem({ data }: { data: Result }) {
 	return (
 		<li className="list-item">
-			<button type="button" onClick={() => navigate(`/detail/${data.key}`)} className="list-link">
+			<button
+				type="button"
+				data-route={`/detail/${data.key}`}
+				onClick={() => navigate(`/detail/${data.key}`)}
+				className="list-link">
 				<span className="list-name">{data.name}</span>
 				{typeof data.status === 'string' && (
 					<BadgeTemplate text={data.status} color={data.status === 'accepted' ? 'green' : 'red'} />

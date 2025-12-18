@@ -14,6 +14,7 @@ export default {
 		'(.+)\\.js': '$1',
 		'^validate-target$': '<rootDir>/__mocks__/validate-target.js'
 	},
+	testPathIgnorePatterns: ['/node_modules/', '/tests/e2e/'],
 	testEnvironment: 'jsdom',
 	resetMocks: true,
 	clearMocks: true
