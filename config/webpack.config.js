@@ -81,14 +81,6 @@ export default function webpackConfig(env, argv) {
 					]
 				},
 				{
-					test: /\.(jpe?g|png|gif)$/i,
-					include: [resolveApp('assets'), resolveApp('src')],
-					type: 'asset/resource',
-					generator: {
-						filename: 'images/[name][ext]'
-					}
-				},
-				{
 					test: /\.(json|svg)$/i,
 					include: resolveApp('src'),
 					type: 'asset/source',
@@ -127,6 +119,10 @@ export default function webpackConfig(env, argv) {
 					{
 						from: resolveApp('src/shared/assets/background'),
 						to: resolveApp('web/')
+					},
+					{
+						from: resolveApp('src/shared/assets/extension-icons'),
+						to: resolveApp('web/images')
 					}
 				]
 			}),
