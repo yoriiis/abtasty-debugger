@@ -58,7 +58,7 @@ The `AB Tasty Debugger` browser extension is available for:
 
 ---
 
-## Licence
+## License
 
 `AB Tasty Debugger` and its documentation are licensed under the [MIT License](http://opensource.org/licenses/MIT).
 
