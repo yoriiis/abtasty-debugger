@@ -21,8 +21,24 @@ if (!process.env.SENTRY_DSN) {
 export default function webpackConfig(env, argv) {
 	const manifest = env.manifest
 	const isProduction = argv.mode === 'production'
+	const isVercel = process.env.IS_VERCEL === 'true' // Custom env var from Vercel dashboard
 	const suffixHash = isProduction ? '.[contenthash]' : ''
 	const manifestFilename = manifest === 'v3' ? 'manifest-v3.json' : 'manifest-v2.json'
+
+	const addDemoEntryAndHtml = (config) => {
+		config.entry.demo = resolveApp('src/demo/config')
+		config.plugins.push(
+			new HtmlWebpackPlugin({
+				filename: 'index.html',
+				template: resolveApp('src/demo/views/demo.html'),
+				publicPath: '',
+				chunks: ['demo'],
+				templateParameters: {
+					fixturesAbtasty: JSON.stringify(fixturesAbtasty)
+				}
+			})
+		)
+	}
 
 	const config = {
 		entry: {
@@ -174,6 +190,8 @@ export default function webpackConfig(env, argv) {
 				chunks: ['popup']
 			})
 		)
+
+		isVercel && addDemoEntryAndHtml(config)
 	} else {
 		config.plugins.push(new webpack.ProgressPlugin())
 
@@ -187,18 +205,7 @@ export default function webpackConfig(env, argv) {
 			hot: true
 		}
 
-		config.entry.demo = resolveApp('src/demo/config')
-		config.plugins.push(
-			new HtmlWebpackPlugin({
-				filename: 'index.html',
-				template: resolveApp('src/demo/views/demo.html'),
-				publicPath: '',
-				chunks: ['demo'],
-				templateParameters: {
-					fixturesAbtasty: JSON.stringify(fixturesAbtasty)
-				}
-			})
-		)
+		addDemoEntryAndHtml(config)
 	}
 
 	return config
