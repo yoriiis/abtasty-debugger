@@ -64,16 +64,7 @@ beforeEach(() => {
 		</div>
 	)
 
-	Object.defineProperty(window, 'location', {
-		writable: true,
-		value: {
-			reload: jest.fn()
-		}
-	})
-	Object.defineProperty(window, 'close', {
-		writable: true,
-		value: jest.fn()
-	})
+	jest.spyOn(window, 'close').mockImplementation(() => {})
 
 	list = getInstance()
 })
