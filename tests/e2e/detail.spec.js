@@ -135,6 +135,12 @@ test.describe('Detail Page', () => {
 	})
 
 	test('variation links open correct URLs', async ({ page, context }) => {
+		// The external AB Tasty endpoint is no longer available, so intercept it to
+		// keep asserting that clicking the link opens the correct URL.
+		await context.route('**/try.abtasty.com/**', (route) =>
+			route.fulfill({ status: 200, contentType: 'application/json', body: '{}' })
+		)
+
 		const variationHeader = page.locator('.collapse-headerButton:has-text("Variations")')
 		await variationHeader.click() // Open section
 
@@ -148,7 +154,8 @@ test.describe('Detail Page', () => {
 			expect(href).toContain(variation.link)
 
 			const [newPage] = await Promise.all([context.waitForEvent('page'), link.click()])
-			await expect(newPage.url()).toContain(variation.link)
+			await newPage.waitForURL((url) => url.toString().includes(variation.link))
+			expect(newPage.url()).toContain(variation.link)
 			await newPage.close()
 		}
 	})
